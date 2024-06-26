@@ -62,3 +62,54 @@ http://localhost:8080/persona/
   "rmu": 10000
 }
 ```
+
+### AULA
+http://localhost:8080/aula/
+```json
+{
+        "obtencion_titulo":"2025-02-02",
+        "custodio":"luis",
+        "instruccion_formal":"ing",
+        "nombre":"luis",
+        "registro_senesyt":"123456",
+        "descripcion":"titulo"
+}
+```
+### DISCAPACIDAD
+http://localhost:8080/discapacidad/
+```json
+{
+        "numero_carnet":"dos",
+        "porcentaje":15,
+        "tipo_discapacidad":"auditivo"
+}
+```
+### ENFERMEDAD CATASTROFICA
+http://localhost:8080/enfermedadCatastrofica/
+```json
+{
+        "cargo_discapacidad":"madre",
+        "certificado_enfermedad":"salud",
+        "tipo_enfermedad":"cancer"
+}
+```
+### ENTIDAD PUBLICA
+http://localhost:8080/entidadPublica/
+```json
+{
+        "codigo_instituto":"uno",
+        "entidad_publica":"entidad",
+        "familiar_senecsyt":"johan",
+        "horario_senecsyt":"tarde",
+        "nombre_familiar":"alexxnder",
+        "observaciones":"no tiene nada"
+}
+
+```
+### NACIONALIDAD
+http://localhost:8080/nacionalidad/
+```json
+{
+        "nombre":"johan"
+}
+```
