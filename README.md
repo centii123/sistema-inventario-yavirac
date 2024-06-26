@@ -113,3 +113,60 @@ http://localhost:8080/nacionalidad/
         "nombre":"johan"
 }
 ```
+
+### BIENES
+http://localhost:8080/bienes/
+```json
+{
+  "nombre": "Computadora portátil",
+  "codigoDelBien": "CP001",
+  "marca": "Marca X",
+  "modelo": "Modelo A",
+  "custodio": "Juan Pérez",
+  "descripcion": "Computadora portátil de alto rendimiento",
+  "estado": true,
+  "observaciones": "Ninguna"
+}
+```
+
+### Detalles del bien
+http://localhost:8080/detalles-del-bien/
+```json
+{
+  "valor": 1500.00,
+  "valorIva": 1800.00,
+  "serie": "ABC123456"
+}
+```
+
+### Estado civil
+http://localhost:8080/estado-civil/
+```json
+{
+  "nombre": "Soltero/a"
+}
+```
+
+### Fecha ingreso instituto
+http://localhost:8080/fecha-ingreso-instituto/
+```json
+{
+  "cambioOcupacionalEmergencia": "2023-06-15",
+  "primerIngreso": "2022-01-01",
+  "cambioGrupoOcupacionalModalidad": "2024-08-20",
+  "cambioInstitutoFusion": "2023-12-10"
+}
+```
+
+### Roles institucionales
+http://localhost:8080/roles-institucionales/
+```json
+{
+  "descripcion": "Administrador"
+}
+```
+
+
+
+
+
