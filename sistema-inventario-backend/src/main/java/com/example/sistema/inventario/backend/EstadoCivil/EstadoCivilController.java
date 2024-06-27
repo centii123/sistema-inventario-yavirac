@@ -16,6 +16,8 @@ public class EstadoCivilController {
         this.estadoCivilService = estadoCivilService;
     }
 
+    
+
     // GET todos los estados civiles
     @GetMapping("/")
     public List<EstadoCivil> getAllEstadoCivil() {
