@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 
 public class EstadoCivil {
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
