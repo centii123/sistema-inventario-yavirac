@@ -28,6 +28,8 @@ public class CarrerasController {
         return service.getAll();
     }
 
+    
+
     //@Operation(summary = "Obtiene una compania por su id, Requiere compania-getOne")
     //@PreAuthorize("hasAuthority('compania-getOne')")
     @GetMapping("/{id}/")
