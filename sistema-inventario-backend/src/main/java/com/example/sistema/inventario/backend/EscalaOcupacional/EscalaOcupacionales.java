@@ -20,5 +20,4 @@ public class EscalaOcupacionales {
     @Column(length = 50)
     private String servidorpublico4;
 
-
 }

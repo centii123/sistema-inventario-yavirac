@@ -8,10 +8,9 @@ import java.util.List;
 @RestController
 @RequestMapping("bienes")
 public class BienesController {
-
+    @Autowired
     private final BienesService bienesService;
 
-    @Autowired
     public BienesController(BienesService bienesService) {
         this.bienesService = bienesService;
     }

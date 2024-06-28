@@ -10,10 +10,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class BienesService {
-
+    @Autowired
     private final BienesRepository bienesRepository;
 
-    @Autowired
+
     public BienesService(BienesRepository bienesRepository) {
         this.bienesRepository = bienesRepository;
     }

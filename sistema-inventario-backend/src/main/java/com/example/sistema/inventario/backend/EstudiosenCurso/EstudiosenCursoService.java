@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EstudiosenCursoService {
     @Autowired
-    EstudiosenCursosRepository repository;
+    EstudiosenCursoRepository repository;
 
     public ArrayList<EstudiosenCursos> getAll() {
         return (ArrayList<EstudiosenCursos>) this.repository.findAll();

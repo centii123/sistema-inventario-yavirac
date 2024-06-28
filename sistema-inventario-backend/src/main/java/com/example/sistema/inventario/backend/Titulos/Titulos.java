@@ -24,11 +24,11 @@ public class Titulos {
     private String titulosOptenidos;
 
     @Column(length = 50)
-    private String institucion ;
+    private String institucion;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(iso = ISO.DATE_TIME)
-    private String añoDeltitulo ;
+    private String añoDeltitulo;
 
     @Column(length = 75)
     private String intruccionformal;

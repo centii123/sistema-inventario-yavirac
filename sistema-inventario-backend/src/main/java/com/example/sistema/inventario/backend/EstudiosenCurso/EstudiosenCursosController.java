@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("estudios-curso")
 @CrossOrigin({ "*" })
@@ -21,36 +20,39 @@ public class EstudiosenCursosController {
     @Autowired
     EstudiosenCursoService service;
 
-        @GetMapping("/")
-    public List<EstudiosenCursos> getAll(){
+    @GetMapping("/")
+    public List<EstudiosenCursos> getAll() {
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene una compania por su id, Requiere compania-getOne")
-    //@PreAuthorize("hasAuthority('compania-getOne')")
+    // @Operation(summary = "Obtiene una compania por su id, Requiere
+    // compania-getOne")
+    // @PreAuthorize("hasAuthority('compania-getOne')")
     @GetMapping("/{id}/")
-    public EstudiosenCursos findById(@PathVariable long id){
+    public EstudiosenCursos findById(@PathVariable long id) {
         return service.findById(id);
     }
 
-    //@Operation(summary = "Agrega una conpania, Requiere compania-save")
-    //@PreAuthorize("hasAuthority('compania-save')")
+    // @Operation(summary = "Agrega una conpania, Requiere compania-save")
+    // @PreAuthorize("hasAuthority('compania-save')")
     @PostMapping("/")
-    public EstudiosenCursos save (@RequestBody EstudiosenCursos entity){
+    public EstudiosenCursos save(@RequestBody EstudiosenCursos entity) {
         return service.save(entity);
     }
 
-    //@Operation(summary = "Actualizar campo completo de una compania, el id va en la body, Requiere compania-put")
-    //@PreAuthorize("hasAuthority('compania-put')")
+    // @Operation(summary = "Actualizar campo completo de una compania, el id va en
+    // la body, Requiere compania-put")
+    // @PreAuthorize("hasAuthority('compania-put')")
     @PutMapping("/")
-    public EstudiosenCursos update (@RequestBody EstudiosenCursos entity){
+    public EstudiosenCursos update(@RequestBody EstudiosenCursos entity) {
         return service.save(entity);
     }
 
-    //@Operation(summary = "Elimina una compania, el id va en la url, Requiere compania-delete")
-    //@PreAuthorize("hasAuthority('compania-delete')")
+    // @Operation(summary = "Elimina una compania, el id va en la url, Requiere
+    // compania-delete")
+    // @PreAuthorize("hasAuthority('compania-delete')")
     @DeleteMapping("/{id}/")
-    public void deeteById(@PathVariable long id){
+    public void deeteById(@PathVariable long id) {
         service.deleteById(id);
     }
 }

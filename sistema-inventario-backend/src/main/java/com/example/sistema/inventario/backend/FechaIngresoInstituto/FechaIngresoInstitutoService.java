@@ -10,10 +10,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class FechaIngresoInstitutoService {
-
+    @Autowired
     private final FechaIngresoInstitutoRepository fechaIngresoInstitutoRepository;
 
-    @Autowired
+
     public FechaIngresoInstitutoService(FechaIngresoInstitutoRepository fechaIngresoInstitutoRepository) {
         this.fechaIngresoInstitutoRepository = fechaIngresoInstitutoRepository;
     }

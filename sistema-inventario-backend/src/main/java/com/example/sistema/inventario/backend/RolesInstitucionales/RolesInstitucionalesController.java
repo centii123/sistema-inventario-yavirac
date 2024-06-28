@@ -8,10 +8,10 @@ import java.util.List;
 @RestController
 @RequestMapping("roles-institucionales")
 public class RolesInstitucionalesController {
-
+    @Autowired
     private final RolesInstitucionalesService rolesService;
 
-    @Autowired
+
     public RolesInstitucionalesController(RolesInstitucionalesService rolesService) {
         this.rolesService = rolesService;
     }
