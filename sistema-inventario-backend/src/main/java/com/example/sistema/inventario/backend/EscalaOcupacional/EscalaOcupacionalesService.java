@@ -11,14 +11,14 @@ public class EscalaOcupacionalesService {
     EscalaOcupacionalesRepository repository;
 
     public ArrayList<EscalaOcupacionales> getAll() {
-        return (ArrayList <EscalaOcupacionales>) this.repository.findAll();
+        return (ArrayList<EscalaOcupacionales>) this.repository.findAll();
     }
 
-    public EscalaOcupacionales save(EscalaOcupacionales  entity) {
+    public EscalaOcupacionales save(EscalaOcupacionales entity) {
         return repository.save(entity);
     }
-    
-    public void deeteById(long id){
+
+    public void deeteById(long id) {
         repository.deleteById(id);
     }
 

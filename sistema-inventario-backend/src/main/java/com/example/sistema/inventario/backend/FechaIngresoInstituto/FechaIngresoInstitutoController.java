@@ -8,10 +8,10 @@ import java.util.List;
 @RestController
 @RequestMapping("fecha-ingreso-instituto")
 public class FechaIngresoInstitutoController {
-
+    @Autowired
     private final FechaIngresoInstitutoService fechaIngresoInstitutoService;
 
-    @Autowired
+
     public FechaIngresoInstitutoController(FechaIngresoInstitutoService fechaIngresoInstitutoService) {
         this.fechaIngresoInstitutoService = fechaIngresoInstitutoService;
     }

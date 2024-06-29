@@ -4,4 +4,3 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TitulosRepository extends CrudRepository<Titulos, Long> {
 }
-

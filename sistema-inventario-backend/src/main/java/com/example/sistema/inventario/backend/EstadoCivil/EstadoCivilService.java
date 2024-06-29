@@ -10,10 +10,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class EstadoCivilService {
-
+    @Autowired
     private final EstadoCivilRepository estadoCivilRepository;
 
-    @Autowired
+
     public EstadoCivilService(EstadoCivilRepository estadoCivilRepository) {
         this.estadoCivilRepository = estadoCivilRepository;
     }

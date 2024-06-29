@@ -8,10 +8,10 @@ import java.util.List;
 @RestController
 @RequestMapping("estado-civil")
 public class EstadoCivilController {
-
+    @Autowired
     private final EstadoCivilService estadoCivilService;
 
-    @Autowired
+
     public EstadoCivilController(EstadoCivilService estadoCivilService) {
         this.estadoCivilService = estadoCivilService;
     }

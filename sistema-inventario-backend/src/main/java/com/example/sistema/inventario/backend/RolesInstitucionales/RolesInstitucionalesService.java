@@ -10,10 +10,9 @@ import java.util.Optional;
 @Service
 @Transactional
 public class RolesInstitucionalesService {
-
+    @Autowired
     private final RolesInstitucionalesRepository rolesRepository;
 
-    @Autowired
     public RolesInstitucionalesService(RolesInstitucionalesRepository rolesRepository) {
         this.rolesRepository = rolesRepository;
     }

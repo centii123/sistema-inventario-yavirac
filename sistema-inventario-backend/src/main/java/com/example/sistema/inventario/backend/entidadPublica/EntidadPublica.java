@@ -1,6 +1,5 @@
 package com.example.sistema.inventario.backend.entidadPublica;
 
-import java.util.List;
 
 import com.example.sistema.inventario.backend.Persona.Persona;
 
