@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.example.sistema.inventario.backend.Persona.Persona;
+
 import lombok.Data;
 import java.util.Date;
 
@@ -30,4 +32,6 @@ public class FechaIngresoInstituto {
     @DateTimeFormat(iso = ISO.DATE_TIME)
     private Date cambioInstitutoFusion;
 
+    @OneToOne(mappedBy = "fechaIngresoInstituto", cascade = CascadeType.ALL)
+    private Persona persona;
 }

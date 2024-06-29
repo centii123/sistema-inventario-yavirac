@@ -1,9 +1,12 @@
 package com.example.sistema.inventario.backend.Bienes;
 
+import com.example.sistema.inventario.backend.CategoriasBienes.CategoriasBienes;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
 import lombok.Data;
 
@@ -37,5 +40,8 @@ public class Bienes {
 
     @Column(length = 255)
     private String observaciones;
+
+    @ManyToOne
+    private CategoriasBienes categoriaBien;
 
 }

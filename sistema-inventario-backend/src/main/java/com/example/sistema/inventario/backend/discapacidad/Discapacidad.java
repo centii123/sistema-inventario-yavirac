@@ -1,10 +1,14 @@
 package com.example.sistema.inventario.backend.discapacidad;
 
+import com.example.sistema.inventario.backend.Persona.Persona;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -25,4 +29,6 @@ public class Discapacidad {
     @Column (length =  50)
     private String tipoDiscapacidad;
     
+    @OneToOne(mappedBy = "discapacidad", cascade = CascadeType.ALL)
+    private Persona payment;
 }
