@@ -9,20 +9,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
-  declarations: [
-    HomePageComponent,
+    declarations: [
+        HomePageComponent,
 
-  ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FormsModule,
-    SharedModule,
-    BrowserModule, FormsModule, BrowserAnimationsModule
-  ],
-  exports: [
-    HomePageComponent,
+    ],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        FormsModule,
+        SharedModule,
+        BrowserModule, FormsModule, BrowserAnimationsModule
+    ],
+    exports: [
+        HomePageComponent,
 
-  ]
+    ]
 })
 export class HomeModule { }

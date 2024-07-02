@@ -14,22 +14,22 @@ import { InventarioOficinasComponent } from './inventario-oficinas/inventario-of
 
 // Define las rutas
 const routes: Routes = [
-    {
-        path:'',
-        children:
-        [
-            { path: 'docentes', component: DocentesComponent },
-            { path: 'docentes-info', component: DocentesInfoComponent },
-            { path: 'inventario', component: InventarioComponent },
-            { path: 'inventario-aulas', component: InventarioAulasComponent },
-            { path: 'inventario-info-aulas', component: InventarioInfoAulasComponent },
-            { path: 'inventario-info-laboratorio', component: InventarioInfoLaboratorioComponent },
-            { path: 'inventario-info-oficinas', component: InventarioInfoOficinasComponent },
-            { path: 'inventario-laboratorios', component: InventarioLaboratoriosComponent },
-            { path: 'inventario-oficinas', component: InventarioOficinasComponent },
-        ]
-    }
-  
+  {
+    path: '',
+    children:
+      [
+        { path: 'docentes', component: DocentesComponent },
+        { path: 'docentes-info', component: DocentesInfoComponent },
+        { path: 'inventario', component: InventarioComponent },
+        { path: 'inventario-aulas', component: InventarioAulasComponent },
+        { path: 'inventario-info-aulas', component: InventarioInfoAulasComponent },
+        { path: 'inventario-info-laboratorio', component: InventarioInfoLaboratorioComponent },
+        { path: 'inventario-info-oficinas', component: InventarioInfoOficinasComponent },
+        { path: 'inventario-laboratorios', component: InventarioLaboratoriosComponent },
+        { path: 'inventario-oficinas', component: InventarioOficinasComponent },
+      ]
+  }
+
   // Puedes añadir más rutas según necesites
 ];
 
