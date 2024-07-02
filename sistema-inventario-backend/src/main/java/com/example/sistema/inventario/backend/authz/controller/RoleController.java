@@ -63,9 +63,4 @@ public class RoleController {
     public void deleteById(@PathVariable long id) {
         roleService.deleteById(id);
     }
-
-    @GetMapping("/empresa/{pagina}")
-    public List empresRol(@PathVariable long pagina) {
-        return roleService.rolesporempresa(pagina);
-    }
 }

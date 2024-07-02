@@ -15,9 +15,7 @@ public class EscalaOcupacionales {
     private long id;
 
     @Column(length = 50)
-    private String niveljerarquicosuperiror2;
+    private String descripcion;
 
-    @Column(length = 50)
-    private String servidorpublico4;
 
 }

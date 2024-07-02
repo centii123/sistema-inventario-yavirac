@@ -23,12 +23,11 @@ public class Discapacidad {
     @Column (length = 50)
     private String numeroCarnet;
 
-    @Column (length = 50)
-    private Number porcentaje;
+    private Integer porcentaje;
 
     @Column (length =  50)
     private String tipoDiscapacidad;
     
     @OneToOne(mappedBy = "discapacidad", cascade = CascadeType.ALL)
-    private Persona payment;
+    private Persona persona;
 }

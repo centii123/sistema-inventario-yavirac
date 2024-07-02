@@ -1,5 +1,7 @@
 package com.example.sistema.inventario.backend.Titulos;
 
+import java.util.Date;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -31,13 +33,13 @@ public class Titulos {
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(iso = ISO.DATE_TIME)
-    private String añoDeltitulo;
+    private Date anoDelTitulo;
 
     @Column(length = 75)
-    private String intruccionformal;
+    private String intruccionFormal;
 
     @Column(length = 50)
-    private String numeroDeregistrosenesyt;
+    private String numeroDeRegistroSenesyt;
 
     @ManyToOne
     private Persona persona;

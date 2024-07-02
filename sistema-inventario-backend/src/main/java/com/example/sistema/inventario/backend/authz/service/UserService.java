@@ -105,12 +105,4 @@ public class UserService implements UserDetailsService {
     public boolean matchPassword(String passwordIn, String userPassword){
         return encoder.matches(passwordIn, userPassword);
     }
-
-    public List userEmpresa(Long idCompania, Long pagina){
-        return (List) this.userRepository.usuariosPorCompania(idCompania, pagina);
-    }
-
-    public List userprincipal(String user){
-        return (List) this.userRepository.usuarioPrincipal(user);
-    }
 }

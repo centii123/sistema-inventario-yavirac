@@ -20,14 +20,14 @@ public class EntidadPublica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 50)
-    private String entidadPublica;
+    @Column(columnDefinition = "smallint")
+    private Integer entidadPublica;
 
-    @Column(length = 50)
-    private String honorarioSenecsyt;
+    @Column(columnDefinition = "smallint")
+    private Integer honorarioSenecsyt;
 
-    @Column(length = 50)
-    private String familiarSenecsyt;
+    @Column(columnDefinition = "smallint")
+    private Integer familiarSenecsyt;
 
     @Column(length = 50)
     private String nombreFamiliar;

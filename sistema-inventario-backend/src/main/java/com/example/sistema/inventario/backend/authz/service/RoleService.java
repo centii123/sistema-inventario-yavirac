@@ -48,8 +48,4 @@ public class RoleService {
         return authorityNames;
     }
 
-    public List rolesporempresa(long pagina){
-        return roleRepository.rolePorCompania(pagina);
-    }
-
 }

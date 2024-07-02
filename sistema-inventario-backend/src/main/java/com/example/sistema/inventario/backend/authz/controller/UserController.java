@@ -107,14 +107,5 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No access");
     }
-
-    @GetMapping("/empresa/{id}/{pagina}")
-    public List userEmpresa(@PathVariable("id") Long id, @PathVariable long pagina){
-        return userService.userEmpresa(id,pagina);
-    }
-    @GetMapping("/user/{user}")
-    public List userEmpresa(@PathVariable("user") String user){
-        return userService.userprincipal(user);
-    }
 }
 
