@@ -1,2 +1,15 @@
-
-<router-outlet></router-outlet>
+<div *ngIf="!load" class="spinnerLoading">
+    <div class="preloader">
+      <div class="loader">
+        <img src="assets/sppiner.gif" alt="">
+        <p class="loader__label">YAVIRAC</p>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="load">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <!-- Este outlet mostrará el contenido específico de la página que cambia según la navegación -->
+  
