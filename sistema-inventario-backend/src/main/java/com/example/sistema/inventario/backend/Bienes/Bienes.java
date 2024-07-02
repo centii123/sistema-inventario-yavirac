@@ -1,5 +1,7 @@
 package com.example.sistema.inventario.backend.Bienes;
 
+import java.math.BigDecimal;
+
 import com.example.sistema.inventario.backend.CategoriasBienes.CategoriasBienes;
 
 import jakarta.persistence.Column;
@@ -30,8 +32,7 @@ public class Bienes {
     @Column(length = 50)
     private String modelo;
 
-    @Column(length = 100)
-    private String custodio;
+    private Integer custodio;
     
     @Column(length = 255)
     private String descripcion;
@@ -40,6 +41,13 @@ public class Bienes {
 
     @Column(length = 255)
     private String observaciones;
+
+    private BigDecimal valor;
+
+    private BigDecimal valorIva;
+
+    @Column(length = 100)
+    private String serie;
 
     @ManyToOne
     private CategoriasBienes categoriaBien;
