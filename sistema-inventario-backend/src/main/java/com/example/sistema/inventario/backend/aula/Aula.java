@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.example.sistema.inventario.backend.Bienes.Bienes;
 import com.example.sistema.inventario.backend.CategoriasAulas.CategoriasAulas;
 import com.example.sistema.inventario.backend.Persona.Persona;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -56,6 +57,7 @@ public class Aula {
     @ManyToMany
     private List<Bienes> bienes;
 
+    @JsonIgnoreProperties("aula")
     @OneToOne(mappedBy = "aula", cascade = CascadeType.ALL)
     private Persona persona;
 

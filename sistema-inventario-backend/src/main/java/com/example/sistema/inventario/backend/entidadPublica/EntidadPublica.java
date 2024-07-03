@@ -2,6 +2,7 @@ package com.example.sistema.inventario.backend.entidadPublica;
 
 
 import com.example.sistema.inventario.backend.Persona.Persona;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,6 +39,7 @@ public class EntidadPublica {
     @Column(length = 50)
     private String codigoInstituto;
 
+    @JsonIgnoreProperties("entidadPublica")
     @OneToOne(mappedBy = "entidadPublica", cascade = CascadeType.ALL)
     private Persona persona;
 

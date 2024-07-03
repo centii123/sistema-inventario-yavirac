@@ -18,6 +18,7 @@ import com.example.sistema.inventario.backend.discapacidad.Discapacidad;
 import com.example.sistema.inventario.backend.enfermedadCatastrofica.EnfermedadCatastrofica;
 import com.example.sistema.inventario.backend.entidadPublica.EntidadPublica;
 import com.example.sistema.inventario.backend.nacionalidad.Nacionalidad;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -82,18 +83,22 @@ public class Persona {
 
     private Integer rmu;
 
+    @JsonIgnoreProperties("persona")
     @OneToOne
     @JoinColumn(updatable = false, nullable = false)
     private Discapacidad discapacidad;
 
+    @JsonIgnoreProperties("persona")
     @OneToOne
     @JoinColumn(updatable = false, nullable = false)
     private EnfermedadCatastrofica enfermedadCatastrofica;
 
+    @JsonIgnoreProperties("persona")
     @OneToOne
     @JoinColumn(updatable = false, nullable = false)
     private EntidadPublica entidadPublica;
 
+    @JsonIgnoreProperties("persona")
     @OneToOne
     @JoinColumn( updatable = false, nullable = false)
     private FechaIngresoInstituto fechaIngresoInstituto;
@@ -122,6 +127,7 @@ public class Persona {
     @ManyToOne
     private RolesInstitucionales rolesInstitucionales;
 
+    @JsonIgnoreProperties("persona")
     @OneToOne
     @JoinColumn( updatable = false, nullable = false)
     private Aula aula;
