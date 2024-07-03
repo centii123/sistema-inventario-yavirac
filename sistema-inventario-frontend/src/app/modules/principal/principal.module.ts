@@ -7,6 +7,7 @@ import { PrincipalRoutingModule } from './principal-routing.module';
 // Importa todos los componentes que necesitas en este módulo
 import { DocentesComponent } from './docentes/docentes.component';
 import { DocentesInfoComponent } from './docentes-info/docentes-info.component';
+import { DocentesNewComponent } from './docentes-new/docentes-new.component';
 import { InventarioComponent } from './inventario/inventario.component';
 import { InventarioAulasComponent } from './inventario-aulas/inventario-aulas.component';
 import { InventarioInfoAulasComponent } from './inventario-info-aulas/inventario-info-aulas.component';
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     DocentesComponent,
     DocentesInfoComponent,
+    DocentesNewComponent,
     InventarioComponent,
     InventarioAulasComponent,
     InventarioInfoAulasComponent,

@@ -11,6 +11,7 @@ import { InventarioInfoLaboratorioComponent } from './inventario-info-laboratori
 import { InventarioInfoOficinasComponent } from './inventario-info-oficinas/inventario-info-oficinas.component';
 import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inventario-laboratorios.component';
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
+import { DocentesNewComponent } from './docentes-new/docentes-new.component';
 
 
 // Define las rutas
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'docentes', pathMatch: 'full', redirectTo: 'docentes' },
   { path: 'docentes', component: DocentesComponent },
   { path: 'docentes-info', component: DocentesInfoComponent },
+  { path: 'docentes-new', component: DocentesNewComponent },
   { path: 'inventario', component: InventarioComponent },
   { path: 'inventario-aulas', component: InventarioAulasComponent },
   { path: 'inventario-info-aulas', component: InventarioInfoAulasComponent },
