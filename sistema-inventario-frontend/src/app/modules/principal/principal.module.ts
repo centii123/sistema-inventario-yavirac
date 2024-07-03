@@ -14,6 +14,7 @@ import { InventarioInfoLaboratorioComponent } from './inventario-info-laboratori
 import { InventarioInfoOficinasComponent } from './inventario-info-oficinas/inventario-info-oficinas.component';
 import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inventario-laboratorios.component';
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { InventarioOficinasComponent } from './inventario-oficinas/inventario-of
   ],
   imports: [
     CommonModule,
-    PrincipalRoutingModule
+    PrincipalRoutingModule,
+    FormsModule,
     // No es necesario importar BrowserModule, FormsModule, o BrowserAnimationsModule aquí si ya están en AppModule
   ]
 })

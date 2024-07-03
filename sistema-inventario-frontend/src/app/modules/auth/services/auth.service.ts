@@ -10,7 +10,7 @@ import { AuthModel } from '../entities/auth.entity';
 })
 export class AuthService {
 
-  readonly apiUrl: string = 'http://localhost:8093/auth/login';
+  readonly apiUrl: string = 'http://localhost:8080/auth/login';
 
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<String> = new BehaviorSubject<String>("");

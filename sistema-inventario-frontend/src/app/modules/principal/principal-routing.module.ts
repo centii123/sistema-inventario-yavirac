@@ -12,6 +12,7 @@ import { InventarioInfoOficinasComponent } from './inventario-info-oficinas/inve
 import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inventario-laboratorios.component';
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
 
+
 // Define las rutas
 const routes: Routes = [
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'inventario-info-oficinas', component: InventarioInfoOficinasComponent },
   { path: 'inventario-laboratorios', component: InventarioLaboratoriosComponent },
   { path: 'inventario-oficinas', component: InventarioOficinasComponent },
+
 
   // Puedes añadir más rutas según necesites
 ];
