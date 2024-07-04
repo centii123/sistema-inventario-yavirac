@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bienes")
+@RequestMapping("/bienes")
 public class BienesController {
     @Autowired
     private final BienesService bienesService;
@@ -25,6 +25,12 @@ public class BienesController {
     @GetMapping("/{id}")
     public Bienes getBienesById(@PathVariable("id") Long id) {
         return bienesService.getBienesById(id);
+    }
+
+    // GET bienes por nombre
+    @GetMapping("/nombre/{nombre}")
+    public List<Bienes> findByNombre(@PathVariable("nombre") String nombre) {
+        return bienesService.findByNombre(nombre);
     }
 
     // POST crear nuevo bien

@@ -3,7 +3,6 @@ package com.example.sistema.inventario.backend.Bienes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import java.util.Optional;
 public class BienesService {
     @Autowired
     private final BienesRepository bienesRepository;
-
 
     public BienesService(BienesRepository bienesRepository) {
         this.bienesRepository = bienesRepository;
@@ -46,5 +44,10 @@ public class BienesService {
     // Eliminar bien por ID
     public void deleteBienes(Long id) {
         bienesRepository.deleteById(id);
+    }
+
+    // Buscar bienes por nombre
+    public List<Bienes> findByNombre(String nombre) {
+        return bienesRepository.findByNombre(nombre);
     }
 }

@@ -35,6 +35,11 @@ public class PersonaController {
         return service.findById(id);
     }
 
+    @GetMapping("/dni/{dni}/")
+    public Persona findByDni(@PathVariable String dni){
+        return service.findByDni(dni);
+    }
+
     //@Operation(summary = "Agrega una conpania, Requiere compania-save")
     //@PreAuthorize("hasAuthority('compania-save')")
     @PostMapping("/")
