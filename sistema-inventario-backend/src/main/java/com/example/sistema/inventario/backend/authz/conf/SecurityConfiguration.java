@@ -39,7 +39,7 @@ public class SecurityConfiguration{
 				.requestMatchers("/v3/api-docs").permitAll()
 				.requestMatchers("/v3/api-docs/*").permitAll()
 				.requestMatchers("/v3/*").permitAll()
-				.anyRequest().authenticated()
+				.anyRequest().permitAll()
 		);
 		http.addFilterBefore(new JWTAuthenticationFilter(userService), BasicAuthenticationFilter.class);
 		http.addFilterAfter(new JWTAuthorizationFilter(userService),BasicAuthenticationFilter.class);
