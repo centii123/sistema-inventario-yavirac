@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { LoginRequest } from '../request/loginRequest';
-import { TokenService } from '../services/token.service';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 
 
@@ -41,8 +38,8 @@ export class LoginComponent implements OnInit {
       this.loginError = "";
       console.log(this.loginForm.value.password)
       this.api.login(this.loginForm.value.username!,this.loginForm.value.password!)
-      /*this.router.navigateByUrl('/user-home');
-          this.loginForm.reset();*/
+      this.router.navigateByUrl('/home');
+          this.loginForm.reset();
 
     }
     else {
