@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("fecha-ingreso-instituto")
 @Tag(name = "Controlador Fecha Ingreso Instituto", description = "Tabla Fecha Ingreso Instituto")
+@CrossOrigin({"*"})
 public class FechaIngresoInstitutoController {
     @Autowired
     private final FechaIngresoInstitutoService fechaIngresoInstitutoService;

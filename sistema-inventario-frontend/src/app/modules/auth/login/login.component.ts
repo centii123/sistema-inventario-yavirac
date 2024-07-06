@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../request/loginRequest';
 import { TokenService } from '../services/token.service';
+import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 
 
 
@@ -21,15 +22,8 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   })
 
-  formCheck() {
-    if (this.loginForm.valid) {
-      console.log('Formulario válido, datos:', this.loginForm.value);
-    } else {
-      alert('Por favor, completa el formulario correctamente antes de enviarlo.');
-    }
-  }
 
-  constructor(private authService: AuthService, private router: Router, private tokenService: TokenService) { }
+  constructor(private router: Router, private api:ApiService) { }
 
   ngOnInit(): void {
   }
@@ -42,23 +36,13 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls.password;
   }
 
-  submit(data: any) {
+  submit() {
     if (this.loginForm.valid) {
       this.loginError = "";
-      this.authService.login(this.loginForm.value as LoginRequest).subscribe({
-        next: (userData) => {
-          console.log(userData);
-        },
-        error: (errorData) => {
-          console.error(errorData);
-          this.loginError = errorData;
-        },
-        complete: () => {
-          console.info("Login completo");
-          this.router.navigateByUrl('/user-home');
-          this.loginForm.reset();
-        }
-      })
+      console.log(this.loginForm.value.password)
+      this.api.login(this.loginForm.value.username!,this.loginForm.value.password!)
+      /*this.router.navigateByUrl('/user-home');
+          this.loginForm.reset();*/
 
     }
     else {

@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("estado-civil")
 @Tag(name = "Controlador Estado Civil", description = "Tabla Estado Civil")
+@CrossOrigin({"*"})
 public class EstadoCivilController {
     @Autowired
     private final EstadoCivilService estadoCivilService;

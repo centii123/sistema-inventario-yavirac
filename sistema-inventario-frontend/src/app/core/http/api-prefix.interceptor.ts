@@ -14,7 +14,7 @@ import { Observable } from "rxjs";
   
     }
   
-    get(ruta:string): Observable<any[]> {
+    /*get(ruta:string): Observable<any[]> {
       if(localStorage.getItem('token')){
         const headers = new HttpHeaders({
           'Authorization': `${localStorage.getItem('token')}`
@@ -22,17 +22,10 @@ import { Observable } from "rxjs";
         return this.http.get<any[]>(`${this.apiUrl}/${ruta}`,{headers});
       }
       return this.http.get<any[]>(`${this.apiUrl}/${ruta}`);
-    }
-  
-    getUserName(username:string,token:string){
-      const headers = new HttpHeaders({
-        'Authorization': `${token}`
-      });
-      console.log(headers)
-      return this.http.post<any[]>(`${this.apiUrl}/api/user/user/`,{username:username}, { headers });
-    }
+    }*/
   
     async login(username: string, password: string) {
+
       const fecher = async (url: string, token: string) => {
         return await fetch(url, {
           method: 'POST',
@@ -41,13 +34,21 @@ import { Observable } from "rxjs";
           }
         })
       }
+
       const token = 'Basic ' + btoa(`${username}:${password}`);
+
       const response = await fecher(this.apiUrl + '/login', token);
+
       if (response.ok) {
+
         let bearerToken = response.headers.get("Authorization") || "";
-        localStorage.setItem("token",bearerToken)
+
+        localStorage.setItem("token",bearerToken);
+
         const decoded = jwtDecode(bearerToken);
-        //console.log(decoded)
+
+        console.log(decoded)
+        
       }
     }
 }

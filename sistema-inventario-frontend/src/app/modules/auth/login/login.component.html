@@ -16,12 +16,13 @@
                 </h4>
               </div>
 
-              <form>
+              <form (ngSubmit)="submit()" [formGroup]="loginForm">
                 <p class="text-white">Inicie sesión en su cuenta</p>
 
                 <div class="form-outline">
                   <i class="fas fa-user form-icon"></i>
                   <input
+                    formControlName="username"
                     type="email"
                     id="form2Example11"
                     class="form-control"
@@ -33,6 +34,7 @@
                 <div class="form-outline">
                   <i class="fas fa-lock form-icon"></i>
                   <input
+                  formControlName="password"
                     type="password"
                     id="form2Example22"
                     class="form-control"
@@ -44,7 +46,7 @@
                 <div class="text-center pt-1 mt-4">
                   <button
                     class="btn btn-primary btn-block fa-lg mb-3"
-                    type="button"
+                    type="submit"
                   >
                     Inicia tu sesion
                   </button>

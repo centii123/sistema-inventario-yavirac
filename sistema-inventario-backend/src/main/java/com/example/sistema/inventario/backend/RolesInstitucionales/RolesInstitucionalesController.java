@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("roles-institucionales")
 @Tag(name = "Controlador Roles Institucionales", description = "Tabla Roles Institucionales")
+@CrossOrigin({"*"})
 public class RolesInstitucionalesController {
     @Autowired
     private final RolesInstitucionalesService rolesService;

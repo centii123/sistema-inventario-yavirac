@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/bienes")
 @Tag(name = "Controlador Bienes", description = "Tabla bienes")
+@CrossOrigin({"*"})
 public class BienesController {
     @Autowired
     private final BienesService bienesService;
