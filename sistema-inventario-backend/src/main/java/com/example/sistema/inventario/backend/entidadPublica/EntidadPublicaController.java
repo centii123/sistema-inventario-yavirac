@@ -13,34 +13,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/entidadPublica") // Agregar "/" al inicio del mapeo
+@Tag(name = "Controlador Entidad Publica", description = "Tabla Entidad Publica")
 @CrossOrigin({"*"})
 public class EntidadPublicaController {
 
     @Autowired
     private EntidadPublicaService service; // Inyectar el servicio en lugar de la entidad
 
+    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    //@PreAuthorize("hasAuthority('compania-getAll')")
     @GetMapping("/")
     public List<EntidadPublica> getAll(){
         return service.getAll();
     }
 
+    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    //@PreAuthorize("hasAuthority('compania-getAll')")
     @GetMapping("/{id}/")
     public EntidadPublica findById(@PathVariable long id){
         return service.findById(id);
     }
 
+    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    //@PreAuthorize("hasAuthority('compania-getAll')")
     @PostMapping("/")
     public EntidadPublica save(@RequestBody EntidadPublica entity){
         return service.save(entity);
     }
 
+    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    //@PreAuthorize("hasAuthority('compania-getAll')")
     @PutMapping("/")
     public EntidadPublica update(@RequestBody EntidadPublica entity){
         return service.save(entity);
     }
 
+    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    //@PreAuthorize("hasAuthority('compania-getAll')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id){
         service.deleteById(id);

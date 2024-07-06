@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("persona")
+@Tag(name = "Controlador Persona", description = "Tabla Persona")
 @CrossOrigin({"*"})
 public class PersonaController {
 
@@ -35,6 +38,8 @@ public class PersonaController {
         return service.findById(id);
     }
 
+    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    //@PreAuthorize("hasAuthority('compania-getAll')")
     @GetMapping("/dni/{dni}/")
     public Persona findByDni(@PathVariable String dni){
         return service.findByDni(dni);
