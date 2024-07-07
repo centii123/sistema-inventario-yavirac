@@ -3,6 +3,7 @@ package com.example.sistema.inventario.backend.entidadPublica;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,35 +26,35 @@ public class EntidadPublicaController {
     private EntidadPublicaService service; // Inyectar el servicio en lugar de la entidad
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('entidad-publica-obtener')")
     @GetMapping("/")
     public List<EntidadPublica> getAll(){
         return service.getAll();
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('entidad-publica-obtener-id')")
     @GetMapping("/{id}/")
     public EntidadPublica findById(@PathVariable long id){
         return service.findById(id);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('entidad-publica-agregar')")
     @PostMapping("/")
     public EntidadPublica save(@RequestBody EntidadPublica entity){
         return service.save(entity);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('entidad-publica-editar')")
     @PutMapping("/")
     public EntidadPublica update(@RequestBody EntidadPublica entity){
         return service.save(entity);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('entidad-publica-eliminar')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id){
         service.deleteById(id);

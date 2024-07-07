@@ -1,6 +1,7 @@
 package com.example.sistema.inventario.backend.nacionalidad;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,35 +18,35 @@ public class NacionalidadController {
     private NacionalidadService service;
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('nacionalidad-obtener')")
     @GetMapping("/")
     public List<Nacionalidad> getAll() {
         return service.getAll();
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('nacionalidad-obtener-id')")
     @GetMapping("/{id}/")
     public Nacionalidad findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('nacionalidad-agregar')")
     @PostMapping("/")
     public Nacionalidad save(@RequestBody Nacionalidad nacionalidad) {
         return service.save(nacionalidad);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('nacionalidad-editar')")
     @PutMapping("/")
     public Nacionalidad update(@RequestBody Nacionalidad nacionalidad) {
         return service.save(nacionalidad);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('nacionalidad-eliminar')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id) {
         service.deleteById(id);

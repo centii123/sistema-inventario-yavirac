@@ -3,6 +3,7 @@ package com.example.sistema.inventario.backend.EscalaOcupacional;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,35 +26,35 @@ public class EscalaOcupacionalesController {
     EscalaOcupacionalesService service;
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('escala-ocupacional-obtener')")
     @GetMapping("/")
     public List<EscalaOcupacionales> getAll() {
         return service.getAll();
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('escala-ocupacional-obtener-id')")
     @GetMapping("/{id}/")
     public EscalaOcupacionales findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('escala-ocupacional-agregar')")
     @PostMapping("/")
     public EscalaOcupacionales save(@RequestBody EscalaOcupacionales enntity) {
         return service.save(enntity);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('escala-ocupacional-editar')")
     @PutMapping("/")
     public EscalaOcupacionales update(@RequestBody EscalaOcupacionales entity) {
         return service.save(entity);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('escala-ocupacional-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id) {
         service.deeteById(id);

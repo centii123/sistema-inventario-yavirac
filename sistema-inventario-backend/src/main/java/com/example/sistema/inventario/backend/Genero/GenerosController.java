@@ -3,6 +3,7 @@ package com.example.sistema.inventario.backend.Genero;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class GenerosController {
     GenerosService service;
 
     // @Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    // @PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('generos-obtener')")
     @GetMapping("/")
     public List<Generos> getAll() {
         return service.getAll();
@@ -33,14 +34,14 @@ public class GenerosController {
 
     // @Operation(summary = "Obtiene una compania por su id, Requiere
     // compania-getOne")
-    // @PreAuthorize("hasAuthority('compania-getOne')")
+    @PreAuthorize("hasAuthority('generos-obtener-id')")
     @GetMapping("/{id}/")
     public Generos findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     // @Operation(summary = "Agrega una conpania, Requiere compania-save")
-    // @PreAuthorize("hasAuthority('compania-save')")
+    @PreAuthorize("hasAuthority('generos-agregar')")
     @PostMapping("/")
     public Generos save(@RequestBody Generos entity) {
         return service.save(entity);
@@ -48,7 +49,7 @@ public class GenerosController {
 
     // @Operation(summary = "Actualizar campo completo de una compania, el id va en
     // la body, Requiere compania-put")
-    // @PreAuthorize("hasAuthority('compania-put')")
+    @PreAuthorize("hasAuthority('generos-editar')")
     @PutMapping("/")
     public Generos update(@RequestBody Generos entity) {
         return service.save(entity);
@@ -56,7 +57,7 @@ public class GenerosController {
 
     // @Operation(summary = "Elimina una compania, el id va en la url, Requiere
     // compania-delete")
-    // @PreAuthorize("hasAuthority('compania-delete')")
+    @PreAuthorize("hasAuthority('generos-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id) {
         service.deleteById(id);

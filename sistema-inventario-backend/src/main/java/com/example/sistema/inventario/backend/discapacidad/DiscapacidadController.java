@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,35 +29,35 @@ public class DiscapacidadController {
     DiscapacidadService service;
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('discapacidad-obtener')")
     @GetMapping("/")
     public List<Discapacidad> getAll(){
         return service.getAll();
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('discapacidad-obtener-id')")
     @GetMapping("/{id}/")
     public Discapacidad findById(@PathVariable long id){
         return service.findByid(id);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('discapacidad-agregar')")
     @PostMapping("/")
     public Discapacidad save(@RequestBody Discapacidad entity){
         return service.save(entity);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('discapacidad-editar')")
     @PutMapping("/")
     public Discapacidad update(@RequestBody Discapacidad entity){
         return service.save(entity);
     }
 
     //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @PreAuthorize("hasAuthority('discapacidad-eliminar')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id){
         service.deleteById(id);

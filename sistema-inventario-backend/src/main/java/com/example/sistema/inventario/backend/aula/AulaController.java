@@ -29,14 +29,14 @@ public class AulaController {
     AulaService service;
 
     @Operation(summary = "Obtiene todas las aulas, Requiere aula-optener")
-    @PreAuthorize("hasAuthority('aula-optener')")
+    @PreAuthorize("hasAuthority('aula-obtener')")
     @GetMapping("/")
     public List<Aula> getAll(){
         return service.getAll();
     }
 
     @Operation(summary = "Obtiene una aula, Requiere aula-optener")
-    @PreAuthorize("hasAuthority('aula-optener')")
+    @PreAuthorize("hasAuthority('aula-obtener-id')")
     @GetMapping("/{id}/")
     public Aula findById(@PathVariable long id){
         return service.findById(id);
