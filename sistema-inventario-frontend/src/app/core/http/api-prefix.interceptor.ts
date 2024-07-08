@@ -43,7 +43,7 @@ import { Observable } from "rxjs";
 
         let bearerToken = response.headers.get("Authorization") || "";
 
-        localStorage.setItem("token",bearerToken);
+        sessionStorage.setItem("token",bearerToken);
 
         const decoded = jwtDecode(bearerToken);
 

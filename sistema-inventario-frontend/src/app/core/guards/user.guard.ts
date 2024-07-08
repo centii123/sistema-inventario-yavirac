@@ -10,7 +10,7 @@ export class UserGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const userString = localStorage.getItem('token');
+    const userString = sessionStorage.getItem('token');
     if (userString) {
       console.log(userString)
     const decoded = jwtDecode<UserJWTModel>(userString!);
