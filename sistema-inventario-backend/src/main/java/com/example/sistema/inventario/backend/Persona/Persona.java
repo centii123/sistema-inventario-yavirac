@@ -14,6 +14,7 @@ import com.example.sistema.inventario.backend.Institutos.Institutos;
 import com.example.sistema.inventario.backend.Provincias.Provincias;
 import com.example.sistema.inventario.backend.RolesInstitucionales.RolesInstitucionales;
 import com.example.sistema.inventario.backend.aula.Aula;
+import com.example.sistema.inventario.backend.authz.entity.User;
 import com.example.sistema.inventario.backend.discapacidad.Discapacidad;
 import com.example.sistema.inventario.backend.enfermedadCatastrofica.EnfermedadCatastrofica;
 import com.example.sistema.inventario.backend.entidadPublica.EntidadPublica;
@@ -131,4 +132,9 @@ public class Persona {
     @OneToOne
     @JoinColumn( updatable = false, nullable = false)
     private Aula aula;
+
+    @JsonIgnoreProperties("persona")
+    @OneToOne
+    @JoinColumn( updatable = false, nullable = false)
+    private User user;
 }
