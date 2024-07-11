@@ -16,6 +16,7 @@ import { InventarioInfoOficinasComponent } from './inventario-info-oficinas/inve
 import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inventario-laboratorios.component';
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     PrincipalRoutingModule,
     FormsModule,
-    // No es necesario importar BrowserModule, FormsModule, o BrowserAnimationsModule aquí si ya están en AppModule
-  ]
+    SharedModule
+]
 })
 export class PrincipalModule { }
