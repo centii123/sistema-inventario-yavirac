@@ -171,8 +171,8 @@ INSERT INTO roles_authorities (role_id, authority_id) (select (SELECT id FROM ro
 
 
 /*datos usuario*/
-INSERT INTO users (name, username, password, looked, expired, enabled) VALUES ('Amparo Lopez', 'amparito', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', false, false, true);
-INSERT INTO users (name, username, password, looked, expired, enabled) VALUES ('Apoyo', 'user_apoyo', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', false, false, true);
+INSERT INTO users ( username, password, looked, expired, enabled) VALUES ( 'amparito', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', false, false, true);
+INSERT INTO users ( username, password, looked, expired, enabled) VALUES ( 'user_apoyo', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', false, false, true);
 
 /*datos usuario roles*/
 INSERT INTO users_roles (user_id, role_id) VALUES ((SELECT id FROM users where username = 'amparito'), (SELECT id FROM roles where name = 'ROLE_ADMIN'));
