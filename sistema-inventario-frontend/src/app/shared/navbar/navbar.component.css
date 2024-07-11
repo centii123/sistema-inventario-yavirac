@@ -1,95 +1,52 @@
-/* General styles */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0B3C61;
+  font-family:'Times New Roman', Times, serif
 }
 
-/* Navbar styles */
 nav {
-  background: #0B3C61;
-  color: #fff;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px; /* Adjust padding for the container */
+  background-color: #0B3C61;
+  padding: 10px 20px;
+  color: white;
 }
 
-.navbar-logo {
+.logo img {
+  height: 50px;
+}
+
+.nav-links {
   display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.navbar-logo-img {
-  height: 70px;
-  width: 70px;
-}
-
-.navbar-menu {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-}
-
-.navbar-icons {
-  display: flex;
-  align-items: center;
-  margin-left: 20px; /* Add margin to separate from the navbar menu */
-}
-
-nav ul {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  margin: 0;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-nav ul li {
-  margin: 0 15px;
+.nav-links li {
+  margin: 0 20px;
 }
 
-nav ul li a {
-  color: #fff;
+.nav-links a {
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
-  padding: 5px;
+  color: white;
+  font-size: 18px;
   display: flex;
   align-items: center;
 }
 
-nav ul li a i {
-  margin-right: 10px;
+.nav-links a i {
+  margin-right: 8px;
 }
 
-nav ul li a:hover {
-  border-bottom: 2px solid rgb(213, 219, 224);
+.logout a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
 }
 
-.pointer{
-  cursor: pointer;
+.logout a i {
+  margin-right: 8px;
 }
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .navbar-menu {
-      display: none;
-  }
-
-  .navbar-icons {
-      margin-left: auto;
-  }
-}
-
-

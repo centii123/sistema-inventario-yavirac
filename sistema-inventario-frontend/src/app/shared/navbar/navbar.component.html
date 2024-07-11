@@ -1,45 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbar-container">
-        <a href="#" class="navbar-logo">
-          <img src="/assets/img/log.jpeg" alt="Logo" class="navbar-logo-img" />
-          <span class="navbar-logo-text"></span>
-        </a>
-        <ul class="navbar-menu">
-          <li>
-            <a href="/home"><i class="fas fa-home"></i> Inicio</a>
-          </li>
-          <li>
-            <a href="/inventario"
-              ><i class="fas fa-warehouse"></i> Inventario</a
-            >
-          </li>
-          <li>
-            <a href="/docentes"
-              ><i class="fas fa-chalkboard-teacher"></i> Docentes</a
-            >
-          </li>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="/assets/img/log.jpeg" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="/inventario"><i class="fas fa-box"></i> Inventario</a></li>
+            <li><a href="/docentes"><i class="fas fa-chalkboard-teacher"></i> Docentes</a></li>
         </ul>
-        <ul class="navbar-icons">
-          <li>
-            <a (click)="cerrarSesion()" class="pointer"
-              ><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a
-            >
-          </li>
-        </ul>
-      </div>
+        <div class="logout">
+            <a href="#logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
     </nav>
-  </body>
+</body>
 </html>
