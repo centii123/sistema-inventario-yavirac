@@ -12,6 +12,7 @@ import { InventarioInfoOficinasComponent } from './inventario-info-oficinas/inve
 import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inventario-laboratorios.component';
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
 import { DocentesNewComponent } from './docentes-new/docentes-new.component';
+import { FormComponent } from './componentes/nacionalidad/form/form.component';
 
 
 // Define las rutas
@@ -28,6 +29,8 @@ const routes: Routes = [
   { path: 'inventario-info-oficinas', component: InventarioInfoOficinasComponent },
   { path: 'inventario-laboratorios', component: InventarioLaboratoriosComponent },
   { path: 'inventario-oficinas', component: InventarioOficinasComponent },
+  { path: 'nacionalidad-table', component: InventarioLaboratoriosComponent },
+  { path: 'nacionalidad', component: FormComponent },
 
 
   // Puedes añadir más rutas según necesites

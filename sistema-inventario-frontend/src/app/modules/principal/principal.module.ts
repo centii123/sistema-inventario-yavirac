@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// Importa el módulo de rutas que creaste
 import { PrincipalRoutingModule } from './principal-routing.module';
-
-// Importa todos los componentes que necesitas en este módulo
 import { DocentesComponent } from './docentes/docentes.component';
 import { DocentesInfoComponent } from './docentes-info/docentes-info.component';
 import { DocentesNewComponent } from './docentes-new/docentes-new.component';
@@ -15,7 +11,21 @@ import { InventarioInfoLaboratorioComponent } from './inventario-info-laboratori
 import { InventarioInfoOficinasComponent } from './inventario-info-oficinas/inventario-info-oficinas.component';
 import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inventario-laboratorios.component';
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// Importaciones de PrimeNG
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
+import { TableModule } from 'primeng/table';
+import { TableComponent } from './componentes/nacionalidad/table/table.component';
+import { FormComponent } from './componentes/nacionalidad/form/form.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +38,29 @@ import { FormsModule } from '@angular/forms';
     InventarioInfoLaboratorioComponent,
     InventarioInfoOficinasComponent,
     InventarioLaboratoriosComponent,
-    InventarioOficinasComponent
-    // Asegúrate de listar todos los componentes aquí
+    InventarioOficinasComponent,
+    TableComponent,
+    FormComponent
+
   ],
   imports: [
     CommonModule,
     PrincipalRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    
+     // Importaciones de PrimeNG
+     ConfirmDialogModule,
+     DialogModule,
+     InputTextModule,
+     InputSwitchModule,
+     InputTextareaModule,
+     ToolbarModule,
+     ButtonModule,
+     TooltipModule,
+     CardModule,
+     DividerModule,
+     TableModule,
     // No es necesario importar BrowserModule, FormsModule, o BrowserAnimationsModule aquí si ya están en AppModule
   ]
 })
