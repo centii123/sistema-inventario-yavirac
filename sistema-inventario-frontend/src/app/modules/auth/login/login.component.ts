@@ -19,10 +19,13 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   })
 
+  loginComprobacion!:boolean;
+
 
   constructor(private router: Router, private api:ApiService) { }
 
   ngOnInit(): void {
+    this.comprobarLogin()
   }
 
   get username() {
@@ -31,6 +34,19 @@ export class LoginComponent implements OnInit {
 
   get password() {
     return this.loginForm.controls.password;
+  }
+
+  comprobarLogin(){
+    if(sessionStorage.getItem('token')){
+      this.loginComprobacion = true;
+    }else{
+      this.loginComprobacion = false;
+    }
+
+    if(this.loginComprobacion == true){
+      this.router.navigate(['/home']);
+    }
+    
   }
 
   async submit() {

@@ -77,6 +77,10 @@ nav ul li a:hover {
   border-bottom: 2px solid rgb(213, 219, 224);
 }
 
+.pointer{
+  cursor: pointer;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .navbar-menu {
@@ -87,3 +91,5 @@ nav ul li a:hover {
       margin-left: auto;
   }
 }
+
+
