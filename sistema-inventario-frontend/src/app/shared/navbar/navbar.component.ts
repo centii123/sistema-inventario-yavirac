@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  constructor(private router: Router){}
   header = false;
 
   dropdownHandler() {
@@ -42,5 +44,11 @@ export class NavbarComponent {
       (document.querySelector("#dropdownNotification") as HTMLElement).classList.add("hidden");
       this.noti = false;
     }
+  }
+
+  async cerrarSesion(){
+    sessionStorage.removeItem('token')
+
+    await this.router.navigate(['/']);
   }
 }

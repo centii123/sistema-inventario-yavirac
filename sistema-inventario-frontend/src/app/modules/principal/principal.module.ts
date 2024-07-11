@@ -12,6 +12,7 @@ import { InventarioInfoOficinasComponent } from './inventario-info-oficinas/inve
 import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inventario-laboratorios.component';
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from "../../shared/shared.module";
 // Importaciones de PrimeNG
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
@@ -48,7 +49,7 @@ import { FormComponent } from './componentes/nacionalidad/form/form.component';
     PrincipalRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    
+    SharedModule,
      // Importaciones de PrimeNG
      ConfirmDialogModule,
      DialogModule,
@@ -61,7 +62,9 @@ import { FormComponent } from './componentes/nacionalidad/form/form.component';
      CardModule,
      DividerModule,
      TableModule,
+
     // No es necesario importar BrowserModule, FormsModule, o BrowserAnimationsModule aquí si ya están en AppModule
   ]
+
 })
 export class PrincipalModule { }
