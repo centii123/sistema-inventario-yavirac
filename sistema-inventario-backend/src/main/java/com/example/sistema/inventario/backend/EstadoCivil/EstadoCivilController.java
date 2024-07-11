@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class EstadoCivilController {
     }
 
     // GET todos los estados civiles
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas los Estados Civiles, Requiere estado-civil-obtener")
     @PreAuthorize("hasAuthority('estado-civil-obtener')")
     @GetMapping("/")
     public List<EstadoCivil> getAllEstadoCivil() {
@@ -30,7 +31,7 @@ public class EstadoCivilController {
     }
 
     // GET estado civil por ID
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene un Estado Civil, Requiere estado-civil-obtener-id")
     @PreAuthorize("hasAuthority('estado-civil-obtener-id')")
     @GetMapping("/{id}")
     public EstadoCivil getEstadoCivilById(@PathVariable("id") Long id) {
@@ -38,7 +39,7 @@ public class EstadoCivilController {
     }
 
     // POST crear nuevo estado civil
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Agrega un Estado Civil, Requiere estado-civil-agregar")
     @PreAuthorize("hasAuthority('estado-civil-agregar')")
     @PostMapping("/")
     public EstadoCivil createEstadoCivil(@RequestBody EstadoCivil estadoCivil) {
@@ -46,7 +47,7 @@ public class EstadoCivilController {
     }
 
     // PUT actualizar estado civil existente
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Edita un Estado Civil, Requiere estado-civil-editar")
     @PreAuthorize("hasAuthority('estado-civil-editar')")
     @PutMapping("/{id}")
     public EstadoCivil updateEstadoCivil(@PathVariable("id") Long id, @RequestBody EstadoCivil estadoCivil) {
@@ -54,7 +55,7 @@ public class EstadoCivilController {
     }
 
     // DELETE estado civil por ID
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Elimina un Estado Civil, Requiere estado-civil-eliminar")
     @PreAuthorize("hasAuthority('estado-civil-eliminar')")
     @DeleteMapping("/{id}")
     public void deleteEstadoCivil(@PathVariable("id") Long id) {

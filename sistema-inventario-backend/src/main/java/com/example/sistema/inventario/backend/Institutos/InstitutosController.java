@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
@@ -26,35 +27,35 @@ public class InstitutosController {
     @Autowired
     InstitutosService service;
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas los institutos, Requiere institutos-obtener")
     @PreAuthorize("hasAuthority('institutos-obtener')")
     @GetMapping("/")
     public List<Institutos> getAll(){
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene una compania por su id, Requiere compania-getOne")
+    @Operation(summary = "Obtiene un instituto, Requiere institutos-obtener-id")
     @PreAuthorize("hasAuthority('institutos-obtener-id')")
     @GetMapping("/{id}/")
     public Institutos findById(@PathVariable long id){
         return service.findById(id);
     }
 
-    //@Operation(summary = "Agrega una conpania, Requiere compania-save")
+    @Operation(summary = "Agrega un instituto, Requiere institutos-agregar")
     @PreAuthorize("hasAuthority('institutos-agregar')")
     @PostMapping("/")
     public Institutos save (@RequestBody Institutos entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Actualizar campo completo de una compania, el id va en la body, Requiere compania-put")
+    @Operation(summary = "Edita un instituto, Requiere institutos-editar")
     @PreAuthorize("hasAuthority('institutos-editar')")
     @PutMapping("/")
     public Institutos update (@RequestBody Institutos entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Elimina una compania, el id va en la url, Requiere compania-delete")
+    @Operation(summary = "Elimina un instituto, Requiere institutos-eliminar")
     @PreAuthorize("hasAuthority('institutos-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id){

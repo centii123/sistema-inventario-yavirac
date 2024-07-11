@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -25,35 +26,35 @@ public class EntidadPublicaController {
     @Autowired
     private EntidadPublicaService service; // Inyectar el servicio en lugar de la entidad
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas las Entidades Publicas, Requiere entidad-publica-obtener'")
     @PreAuthorize("hasAuthority('entidad-publica-obtener')")
     @GetMapping("/")
     public List<EntidadPublica> getAll(){
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene una Entidad Publica, Requiere entidad-publica-obtener-id")
     @PreAuthorize("hasAuthority('entidad-publica-obtener-id')")
     @GetMapping("/{id}/")
     public EntidadPublica findById(@PathVariable long id){
         return service.findById(id);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Agrega una Entidad Publica, Requiere entidad-publica-agregar")
     @PreAuthorize("hasAuthority('entidad-publica-agregar')")
     @PostMapping("/")
     public EntidadPublica save(@RequestBody EntidadPublica entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Edita una Entidad Publica, Requiere entidad-publica-editar")
     @PreAuthorize("hasAuthority('entidad-publica-editar')")
     @PutMapping("/")
     public EntidadPublica update(@RequestBody EntidadPublica entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Elimina una Entidad Publica, Requiere entidad-publica-eliminar")
     @PreAuthorize("hasAuthority('entidad-publica-eliminar')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id){

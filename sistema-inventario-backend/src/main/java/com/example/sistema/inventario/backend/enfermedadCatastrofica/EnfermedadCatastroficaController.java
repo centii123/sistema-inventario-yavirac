@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,35 +27,35 @@ public class EnfermedadCatastroficaController {
     @Autowired
     EnfermedadCatastroficaService service;
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas las enfermedades catastroficas, Requiere enfermedad-catastrofica-obtener")
     @PreAuthorize("hasAuthority('enfermedad-catastrofica-obtener')")
     @GetMapping("/")
     public List<EnfermedadCatastrofica> getAll() {
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene una enfermedad catastrofica, Requiere enfermedad-catastrofica-obtener-id")
     @PreAuthorize("hasAuthority('enfermedad-catastrofica-obtener-id')")
     @GetMapping("/{id}/")
     public EnfermedadCatastrofica findById(@PathVariable long id) {
         return service.findById(id);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Agregar una enfermedad catastrofica, Requiere enfermedad-catastrofica-agregar")
     @PreAuthorize("hasAuthority('enfermedad-catastrofica-agregar')")
     @PostMapping("/")
     public EnfermedadCatastrofica save(@RequestBody EnfermedadCatastrofica entity) {
         return service.save(entity);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Editar una enfermedad catastrofica, Requiere enfermedad-catastrofica-editar")
     @PreAuthorize("hasAuthority('enfermedad-catastrofica-editar')")
     @PutMapping("/")
     public EnfermedadCatastrofica update(@RequestBody EnfermedadCatastrofica entity) {
         return service.save(entity);
     }
     
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Eliminar una enfermedad catastrofica, Requiere enfermedad-catastrofica-eliminar")
     @PreAuthorize("hasAuthority('enfermedad-catastrofica-eliminar')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id) {

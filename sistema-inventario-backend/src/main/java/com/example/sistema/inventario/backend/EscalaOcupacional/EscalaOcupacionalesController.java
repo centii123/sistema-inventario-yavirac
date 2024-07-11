@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -25,35 +26,35 @@ public class EscalaOcupacionalesController {
     @Autowired
     EscalaOcupacionalesService service;
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas las Escalas Ocupacionales, Requiere escala-ocupacional-obtener")
     @PreAuthorize("hasAuthority('escala-ocupacional-obtener')")
     @GetMapping("/")
     public List<EscalaOcupacionales> getAll() {
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene una Escala Ocupacional, Requiere escala-ocupacional-obtener-id")
     @PreAuthorize("hasAuthority('escala-ocupacional-obtener-id')")
     @GetMapping("/{id}/")
     public EscalaOcupacionales findById(@PathVariable long id) {
         return service.findById(id);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Agrega una Escala Ocupacional, Requiere escala-ocupacional-agregar")
     @PreAuthorize("hasAuthority('escala-ocupacional-agregar')")
     @PostMapping("/")
     public EscalaOcupacionales save(@RequestBody EscalaOcupacionales enntity) {
         return service.save(enntity);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Edita una Escala Ocupacional, Requiere escala-ocupacional-editar")
     @PreAuthorize("hasAuthority('escala-ocupacional-editar')")
     @PutMapping("/")
     public EscalaOcupacionales update(@RequestBody EscalaOcupacionales entity) {
         return service.save(entity);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Elimina una Escala Ocupacional, Requiere escala-ocupacional-eliminar")
     @PreAuthorize("hasAuthority('escala-ocupacional-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id) {

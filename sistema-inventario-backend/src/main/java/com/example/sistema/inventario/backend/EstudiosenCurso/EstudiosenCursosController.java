@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -24,37 +25,35 @@ public class EstudiosenCursosController {
     @Autowired
     EstudiosenCursoService service;
 
+    @Operation(summary = "Obtiene todas los Estudios en Curso, Requiere estudios-curso-obtener")
     @PreAuthorize("hasAuthority('estudios-curso-obtener')")
     @GetMapping("/")
     public List<EstudiosenCursos> getAll() {
         return service.getAll();
     }
 
-    // @Operation(summary = "Obtiene una compania por su id, Requiere
-    // compania-getOne")
+    @Operation(summary = "Obtiene un Estudio en Curso, Requiere estudios-curso-obtener-id")
     @PreAuthorize("hasAuthority('estudios-curso-obtener-id')")
     @GetMapping("/{id}/")
     public EstudiosenCursos findById(@PathVariable long id) {
         return service.findById(id);
     }
 
-    // @Operation(summary = "Agrega una conpania, Requiere compania-save")
+    @Operation(summary = "Agrega un Estudio en Curso, Requiere estudios-curso-agregar")
     @PreAuthorize("hasAuthority('estudios-curso-agregar')")
     @PostMapping("/")
     public EstudiosenCursos save(@RequestBody EstudiosenCursos entity) {
         return service.save(entity);
     }
 
-    // @Operation(summary = "Actualizar campo completo de una compania, el id va en
-    // la body, Requiere compania-put")
+    @Operation(summary = "Edita un Estudio en Curso, Requiere estudios-curso-editar")
     @PreAuthorize("hasAuthority('estudios-curso-editar')")
     @PutMapping("/")
     public EstudiosenCursos update(@RequestBody EstudiosenCursos entity) {
         return service.save(entity);
     }
 
-    // @Operation(summary = "Elimina una compania, el id va en la url, Requiere
-    // compania-delete")
+    @Operation(summary = "Elimina un Estudio en Curso, Requiere estudios-curso-eliminar")
     @PreAuthorize("hasAuthority('estudios-curso-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id) {

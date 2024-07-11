@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class BienesController {
     }
 
     // GET todos los bienes
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas los bienes, Requiere bienes-obtener")
     @PreAuthorize("hasAuthority('bienes-obtener')")
     @GetMapping("/")
     public List<Bienes> getAllBienes() {
@@ -29,8 +30,7 @@ public class BienesController {
     }
 
     // GET bien por ID
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @Operation(summary = "Obtiene una aula, Requiere bienes-obtener-id")
     @PreAuthorize("hasAuthority('bienes-obtener-id')")
     @GetMapping("/{id}")
     public Bienes getBienesById(@PathVariable("id") Long id) {
@@ -38,7 +38,7 @@ public class BienesController {
     }
 
     // GET bienes por nombre
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene una bien por el nombre, Requiere bienes-obtener-nombre")
     @PreAuthorize("hasAuthority('bienes-obtener-nombre')")
     @GetMapping("/nombre/{nombre}")
     public List<Bienes> findByNombre(@PathVariable("nombre") String nombre) {
@@ -46,7 +46,7 @@ public class BienesController {
     }
 
     // POST crear nuevo bien
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Agrega un bien, Requiere bienes-agregar")
     @PreAuthorize("hasAuthority('bienes-agregar')")
     @PostMapping("/")
     public Bienes createBienes(@RequestBody Bienes bienes) {
@@ -54,8 +54,7 @@ public class BienesController {
     }
 
     // PUT actualizar bien existente
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
-    //@PreAuthorize("hasAuthority('compania-getAll')")
+    @Operation(summary = "Edita un bien, Requiere aula-editar")
     @PreAuthorize("hasAuthority('bienes-editar')")
     @PutMapping("/{id}")
     public Bienes updateBienes(@PathVariable("id") Long id, @RequestBody Bienes bienes) {
@@ -63,7 +62,7 @@ public class BienesController {
     }
 
     // DELETE bien por ID
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Elimina un bien, Requiere bienes-eliminar")
     @PreAuthorize("hasAuthority('bienes-eliminar')")
     @DeleteMapping("/{id}")
     public void deleteBienes(@PathVariable("id") Long id) {

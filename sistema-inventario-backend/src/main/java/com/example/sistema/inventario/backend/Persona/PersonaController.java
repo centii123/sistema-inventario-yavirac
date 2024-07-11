@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -25,42 +26,42 @@ public class PersonaController {
     @Autowired
     PersonaService service;
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas las personas, Requiere persona-obtener")
     @PreAuthorize("hasAuthority('persona-obtener')")
     @GetMapping("/")
     public List<Persona> getAll(){
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene una compania por su id, Requiere compania-getOne")
+    @Operation(summary = "Obtiene una persona por id, Requiere persona-obtener-id")
     @PreAuthorize("hasAuthority('persona-obtener-id')")
     @GetMapping("/{id}/")
     public Persona findById(@PathVariable long id){
         return service.findById(id);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene una persona por dni, Requiere persona-obtener-dni")
     @PreAuthorize("hasAuthority('persona-obtener-dni')")
     @GetMapping("/dni/{dni}/")
     public Persona findByDni(@PathVariable String dni){
         return service.findByDni(dni);
     }
 
-    //@Operation(summary = "Agrega una conpania, Requiere compania-save")
+    @Operation(summary = "Agrega una persona, Requiere persona-agregar")
     @PreAuthorize("hasAuthority('persona-agregar')")
     @PostMapping("/")
     public Persona save (@RequestBody Persona entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Actualizar campo completo de una compania, el id va en la body, Requiere compania-put")
+    @Operation(summary = "Edita una persona, Requiere persona-editar")
     @PreAuthorize("hasAuthority('persona-editar')")
     @PutMapping("/")
     public Persona update (@RequestBody Persona entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Elimina una compania, el id va en la url, Requiere compania-delete")
+    @Operation(summary = "Elimina una persona, Requiere persona-eliminar")
     @PreAuthorize("hasAuthority('persona-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id){

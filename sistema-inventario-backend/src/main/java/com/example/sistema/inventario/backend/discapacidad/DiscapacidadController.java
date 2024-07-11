@@ -2,6 +2,7 @@ package com.example.sistema.inventario.backend.discapacidad;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
@@ -28,35 +29,35 @@ public class DiscapacidadController {
     @Autowired
     DiscapacidadService service;
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas las discapacidades, Requiere discapacidad-obtener")
     @PreAuthorize("hasAuthority('discapacidad-obtener')")
     @GetMapping("/")
     public List<Discapacidad> getAll(){
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene una discapacidad, Requiere discapacidad-obtener-id")
     @PreAuthorize("hasAuthority('discapacidad-obtener-id')")
     @GetMapping("/{id}/")
     public Discapacidad findById(@PathVariable long id){
         return service.findByid(id);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Agrega una discapacidad, Requiere discapacidad-agregar")
     @PreAuthorize("hasAuthority('discapacidad-agregar')")
     @PostMapping("/")
     public Discapacidad save(@RequestBody Discapacidad entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Edita una discapacidad, Requiere discapacidad-editar")
     @PreAuthorize("hasAuthority('discapacidad-editar')")
     @PutMapping("/")
     public Discapacidad update(@RequestBody Discapacidad entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Elimina una discapacidad, Requiere discapacidad-eliminar")
     @PreAuthorize("hasAuthority('discapacidad-eliminar')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id){

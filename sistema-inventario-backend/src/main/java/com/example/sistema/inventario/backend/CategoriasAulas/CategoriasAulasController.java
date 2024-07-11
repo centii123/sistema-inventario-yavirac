@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
@@ -25,35 +26,35 @@ public class CategoriasAulasController {
     @Autowired
     CategoriasAulasService service;
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas las categorias de aulas, Requiere categorias-aulas-obtener")
     @PreAuthorize("hasAuthority('categorias-aulas-obtener')")
     @GetMapping("/")
     public List<CategoriasAulas> getAll(){
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene una compania por su id, Requiere compania-getOne")
+    @Operation(summary = "Obtiene una categoria de aula, Requiere categorias-aulas-obtener-id")
     @PreAuthorize("hasAuthority('categorias-aulas-obtener-id')")
     @GetMapping("/{id}/")
     public CategoriasAulas findById(@PathVariable long id){
         return service.findById(id);
     }
 
-    //@Operation(summary = "Agrega una conpania, Requiere compania-save")
+    @Operation(summary = "Agrega una categoria de aula, Requiere categorias-aulas-agregar")
     @PreAuthorize("hasAuthority('categorias-aulas-agregar')")
     @PostMapping("/")
     public CategoriasAulas save (@RequestBody CategoriasAulas entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Actualizar campo completo de una compania, el id va en la body, Requiere compania-put")
+    @Operation(summary = "Edita una categoria de aula, Requiere categorias-aulas-editar")
     @PreAuthorize("hasAuthority('categorias-aulas-editar')")
     @PutMapping("/")
     public CategoriasAulas update (@RequestBody CategoriasAulas entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Elimina una compania, el id va en la url, Requiere compania-delete")
+    @Operation(summary = "Elimina una categoria de aula, Requiere categorias-aulas-eliminar")
     @PreAuthorize("hasAuthority('categorias-aulas-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id){

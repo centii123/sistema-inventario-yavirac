@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -25,35 +26,35 @@ public class CarrerasController {
     @Autowired
     CarrerasService service;
 
-    //@Operation(summary = "Obtiene todas los compania, Requiere compania-getAll")
+    @Operation(summary = "Obtiene todas las carreras, Requiere carreras-obtener")
     @PreAuthorize("hasAuthority('carreras-obtener')")
     @GetMapping("/")
     public List<Carreras> getAll(){
         return service.getAll();
     }
 
-    //@Operation(summary = "Obtiene una compania por su id, Requiere compania-getOne")
+    @Operation(summary = "Obtiene una carrera, Requiere carreras-obtener-id")
     @PreAuthorize("hasAuthority('carreras-obtener-id')")
     @GetMapping("/{id}/")
     public Carreras findById(@PathVariable long id){
         return service.findById(id);
     }
 
-    //@Operation(summary = "Agrega una conpania, Requiere compania-save")
+    @Operation(summary = "Agrega una carrera, Requiere carreras-agregar")
     @PreAuthorize("hasAuthority('carreras-agregar')")
     @PostMapping("/")
     public Carreras save (@RequestBody Carreras entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Actualizar campo completo de una compania, el id va en la body, Requiere compania-put")
+    @Operation(summary = "Edita una carrera, Requiere carreras-editar")
     @PreAuthorize("hasAuthority('carreras-editar')")
     @PutMapping("/")
     public Carreras update (@RequestBody Carreras entity){
         return service.save(entity);
     }
 
-    //@Operation(summary = "Elimina una compania, el id va en la url, Requiere compania-delete")
+    @Operation(summary = "Elimina una carrera, Requiere carreras-eliminar")
     @PreAuthorize("hasAuthority('carreras-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id){
