@@ -50,3 +50,7 @@ nav {
 .logout a i {
   margin-right: 8px;
 }
+
+.pointer-botton{
+  cursor: pointer;
+}
