@@ -32,7 +32,6 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String password;
-    private String name;
     
     @Column(unique = true)
     private String username;
