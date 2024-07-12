@@ -9,4 +9,4 @@ public class SistemaInventarioBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaInventarioBackendApplication.class, args);
 	}
-}
+} 
