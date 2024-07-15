@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
   async submit() {
     if (this.loginForm.valid) {
       this.loginError = "";
-      console.log(this.loginForm.value.password)
       await this.api.login(this.loginForm.value.username!,this.loginForm.value.password!)
       this.router.navigateByUrl('/home');
           this.loginForm.reset();
