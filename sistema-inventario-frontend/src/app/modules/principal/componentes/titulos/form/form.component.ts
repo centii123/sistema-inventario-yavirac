@@ -11,11 +11,10 @@ import { Titulos } from '../../model/titulos';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
+  loadingSpiner!: boolean;
   form: FormGroup;
   list: Titulos[] = [];
   modal: boolean = false;
-  loading: boolean = false;
   selected: Titulos | null = null;
   message: string | null = null;
 
@@ -55,15 +54,15 @@ export class FormComponent implements OnInit {
 }
 
   load() {
-    this.loading = true;
+    this.loadingSpiner = true;
     this.crudService.getAll().subscribe({
       next: (data: Titulos[]) => {
         this.list = data;
-        this.loading = false;
+        this.loadingSpiner = false;
       },
       error: error => {
         this.message = `Error: ${error.message}`;
-        this.loading = false;
+        this.loadingSpiner = false;
       }
     });
   }

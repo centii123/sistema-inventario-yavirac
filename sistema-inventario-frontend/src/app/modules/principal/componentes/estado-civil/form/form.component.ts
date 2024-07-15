@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Nacionalidad } from '../../model/nacionalidad';
-import { NacionalidadService } from '../../service/nacionalidad.service';
 import { CrudService } from '../../service/crud.service';
 import { EstadoCivil } from '../../model/estado-civil';
 
@@ -12,11 +10,10 @@ import { EstadoCivil } from '../../model/estado-civil';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
+  loadingSpiner!: boolean;
   form: FormGroup;
   list: EstadoCivil[] = [];
   modal: boolean = false;
-  loading: boolean = false;
   selected: EstadoCivil | null = null;
   message: string | null = null;
 
@@ -43,17 +40,17 @@ export class FormComponent implements OnInit {
   }
 
   load() {
-    this.loading = true;
-    this.crudService.getAll().subscribe({
-      next: (data: EstadoCivil[]) => {
-        this.list = data;
-        this.loading = false;
-      },
-      error: error => {
-        this.message = `Error: ${error.message}`;
-        this.loading = false;
-      }
-    });
+    this.loadingSpiner=true
+      this.crudService.getAll().subscribe({
+        next: (data: EstadoCivil[]) => {
+          this.list = data;
+          this.loadingSpiner=false
+        },
+        error: error => {
+          this.message = `Error: ${error.message}`;
+          this.loadingSpiner=false
+        }
+      });
   }
 
   setSeleccionado(registro: EstadoCivil) {
