@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.sistema.inventario.backend.aula.Aula;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -33,7 +35,7 @@ public class EstadoCivilController {
     // GET estado civil por ID
     @Operation(summary = "Obtiene un Estado Civil, Requiere estado-civil-obtener-id")
     @PreAuthorize("hasAuthority('estado-civil-obtener-id')")
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/")
     public EstadoCivil getEstadoCivilById(@PathVariable("id") Long id) {
         return estadoCivilService.getEstadoCivilById(id);
     }
@@ -49,15 +51,15 @@ public class EstadoCivilController {
     // PUT actualizar estado civil existente
     @Operation(summary = "Edita un Estado Civil, Requiere estado-civil-editar")
     @PreAuthorize("hasAuthority('estado-civil-editar')")
-    @PutMapping("/{id}")
-    public EstadoCivil updateEstadoCivil(@PathVariable("id") Long id, @RequestBody EstadoCivil estadoCivil) {
-        return estadoCivilService.updateEstadoCivil(id, estadoCivil);
+    @PutMapping("/")
+    public EstadoCivil update(@RequestBody EstadoCivil entity){
+        return estadoCivilService.createEstadoCivil(entity);
     }
 
     // DELETE estado civil por ID
     @Operation(summary = "Elimina un Estado Civil, Requiere estado-civil-eliminar")
     @PreAuthorize("hasAuthority('estado-civil-eliminar')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/")
     public void deleteEstadoCivil(@PathVariable("id") Long id) {
         estadoCivilService.deleteEstadoCivil(id);
     }

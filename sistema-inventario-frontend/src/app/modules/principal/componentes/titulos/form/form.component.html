@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+
+<div class="nacionalidad-container">
+    <div class="custom-card-header">
+        <h4>Estado Civil</h4>
+    </div>
+    <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
+
+    <p-dialog class="custom-dialog bg-blue-900" header="Estado Civil" [(visible)]="modal" [modal]="true"
+        (onHide)="closeModal()" [draggable]="true" [resizable]="true">
+
+        <br>
+        <form [formGroup]="form" class="custom-form">
+            <div class="p-fluid p-formgrid grid custom-form-grid">
+                <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                    <span class="p-float-label mt-4">
+                        <input pInputText id="ftxt-titulosOptenidos" type="text" formControlName="titulosOptenidos" required>
+                        <label for="ftxt-titulosOptenidos">* Titulos Optenidos</label>
+                    </span>
+                    <span class="p-float-label mt-4">
+                        <input pInputText id="ftxt-institucion" type="text" formControlName="institucion" required>
+                        <label for="ftxt-institucion">* Institucion</label>
+                    </span>
+                    <span class="p-float-label mt-4">
+                        <small>* Año Del Titulo</small>
+                        <input pInputText id="ftxt-anoDelTitulo" type="date" formControlName="anoDelTitulo" required>
+                        
+                    </span>
+                    <span class="p-float-label mt-4">
+                        <input pInputText id="ftxt-intruccionFormal" type="text" formControlName="intruccionFormal" required>
+                        <label for="ftxt-intruccionFormal">* Intruccion Formal</label>
+                    </span>
+                    <span class="p-float-label mt-4">
+                        <input pInputText id="ftxt-numeroDeRegistroSenesyt" type="text" formControlName="numeroDeRegistroSenesyt" required>
+                        <label for="ftxt-numeroDeRegistroSenesyt">* Numero De Registro Senesyt</label>
+                    </span>
+                </div>
+            </div><br>
+            <div class="central custom-toolbar">
+                <div class="p-toolbar-group-center">
+                    <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                        type="submit" (click)="save()" pTooltip="Guardar" tooltipPosition="right"></button>
+
+                    <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                        icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar" tooltipPosition="right"></button>
+                </div>
+            </div>
+        </form>
+
+    </p-dialog>
+
+    <p-card class="custom-card">
+        <div class="caja-boton-principal custom-button-box">
+            <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
+                tooltipPosition="right"></button>
+        </div>
+
+        <p-divider class="custom-divider"></p-divider>
+
+        <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
+        </app-table>
+    </p-card>
+</div>
+<br>

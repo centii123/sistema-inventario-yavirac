@@ -7,8 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
+import { LoginComponent } from './modules/auth/login/login.component';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
 
 
@@ -16,7 +20,8 @@ import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +30,10 @@ import { ConfirmationService } from 'primeng/api';
     SharedModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    RouterLink,
     
   ],
   providers: [

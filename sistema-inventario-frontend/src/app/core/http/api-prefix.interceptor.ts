@@ -58,8 +58,6 @@ export class ApiService {
     if (response.ok) {
       let bearerToken = response.headers.get("Authorization") || "";
       sessionStorage.setItem("token", bearerToken);
-      const decoded = jwtDecode(bearerToken);
-      console.log(decoded);
     }
   }
 

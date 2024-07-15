@@ -1,5 +1,8 @@
 package com.example.sistema.inventario.backend;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class authenticateContoller {
     
     @GetMapping("/")
-    public ResponseEntity<String> getAll() {  // Changed void to ResponseEntity<String>
-        return ResponseEntity.ok("status: ok");  // Return a ResponseEntity with OK status and a message
+    public ResponseEntity<Object> getAll() { 
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("status", "ok");
+        return ResponseEntity.ok(respuesta);
     }
 }
