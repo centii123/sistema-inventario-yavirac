@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'home', canActivate:[UserGuard], loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: 'estado-civil', canActivate:[UserGuard], loadChildren: () => import('./modules/principal/componentes/estado-civil/estado-civil.module').then(m => m.EstadoCivilModule) },
   { path: 'categoria-aula', canActivate:[UserGuard], loadChildren: () => import('./modules/principal/componentes/categorias-aula/categorias-aula.module').then(m => m.CategoriasAulaModule) },
+  { path: 'bienes', canActivate:[UserGuard], loadChildren: () => import('./modules/principal/componentes/bienes/bienes.module').then(m => m.BienesModule) },
   { path: 'titulos', canActivate:[UserGuard], loadChildren: () => import('./modules/principal/componentes/titulos/titulos.module').then(m => m.TitulosModule) },
   { path: '', loadChildren: () => import('./modules/principal/principal.module').then(m => m.PrincipalModule) },
   { path: '**', loadChildren: () => import('./modules/not-found/not-found.module').then(m => m.NotFoundModule) },
