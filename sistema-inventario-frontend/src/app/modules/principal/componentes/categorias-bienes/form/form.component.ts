@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
   initForm(): FormGroup {
     return this.formBuilder.group({
       id: new FormControl(null),
-      descripcion: new FormControl('', [Validators.required])
+      nombre: new FormControl('', [Validators.required])
     });
   }
 
@@ -74,7 +74,7 @@ export class FormComponent implements OnInit {
 
       this.crudService.update(registro).subscribe({
         next: () => {
-          this.message = 'Nacionalidad actualizada correctamente';
+          this.message = 'Categorias de bienes actualizada correctamente';
           this.resetForm();
           this.load();
         },
@@ -86,7 +86,7 @@ export class FormComponent implements OnInit {
   
       this.crudService.add(registro).subscribe({
         next: () => {
-          this.message = 'Nacionalidad creada correctamente';
+          this.message = 'Categoria de bienes creada correctamente';
           this.resetForm();
           this.load();
         },
@@ -102,7 +102,7 @@ export class FormComponent implements OnInit {
   delete(id: number) {
     this.crudService.delete(id).subscribe({
       next: () => {
-        this.message = 'Nacionalidad eliminada correctamente';
+        this.message = 'Categorias de bienes eliminada correctamente';
         this.load();
       },
       error: error => {

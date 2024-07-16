@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="card">
       <p-table #dt [value]="list" [rows]="5" [paginator]="true" [loading]="loading"
-        [globalFilterFields]="['id', 'descripcion']" responsiveLayout="scroll" [(selection)]="selectedAllRegister"
+        [globalFilterFields]="['id', 'nombre']" responsiveLayout="scroll" [(selection)]="selectedAllRegister"
         [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10, 15]">
 
@@ -42,7 +42,7 @@
               </div>
             </th>
             <th pSortableColumn="nombre">
-              <div class="flex justify-content-between align-items-center">descripcion
+              <div class="flex justify-content-between align-items-center">Nombre
                 <p-sortIcon field="nombre"></p-sortIcon>
                 <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
               </div>
@@ -51,20 +51,20 @@
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-nacionalidad let-rowIndex="rowIndex">
+        <ng-template pTemplate="body" let-categoriasBienes let-rowIndex="rowIndex">
           <tr>
             <td>
-              <p-tableCheckbox [value]="nacionalidad"></p-tableCheckbox>
+              <p-tableCheckbox [value]="categoriasBienes"></p-tableCheckbox>
             </td>
             <td>{{rowIndex + 1}}</td>
-            <td>{{nacionalidad.descripcion}}</td>
+            <td>{{categoriasBienes.nombre}}</td>
             <td>
               <button pButton pRipple icon="pi pi-pencil"
                 class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
-                (click)="edit(nacionalidad)" pTooltip="Editar" tooltipPosition="left"></button>
+                (click)="edit(categoriasBienes)" pTooltip="Editar" tooltipPosition="left"></button>
               <button pButton pRipple icon="pi pi-trash"
                 class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                (click)="deleteRegister(nacionalidad.id)" pTooltip="Eliminar" tooltipPosition="left"></button>
+                (click)="deleteRegister(categoriasBienes.id)" pTooltip="Eliminar" tooltipPosition="left"></button>
             </td>
           </tr>
         </ng-template>

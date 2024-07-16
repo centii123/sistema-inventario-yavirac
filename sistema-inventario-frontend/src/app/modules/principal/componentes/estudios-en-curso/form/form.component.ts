@@ -78,7 +78,7 @@ export class FormComponent implements OnInit {
 
       this.crudService.update(registro).subscribe({
         next: () => {
-          this.message = 'Nacionalidad actualizada correctamente';
+          this.message = 'Estudios en curso actualizada correctamente';
           this.resetForm();
           this.load();
         },
@@ -90,7 +90,7 @@ export class FormComponent implements OnInit {
   
       this.crudService.add(registro).subscribe({
         next: () => {
-          this.message = 'Nacionalidad creada correctamente';
+          this.message = 'Estudios en curos creada correctamente';
           this.resetForm();
           this.load();
         },
@@ -106,7 +106,7 @@ export class FormComponent implements OnInit {
   delete(id: number) {
     this.crudService.delete(id).subscribe({
       next: () => {
-        this.message = 'Nacionalidad eliminada correctamente';
+        this.message = 'Estudios en curso eliminada correctamente';
         this.load();
       },
       error: error => {

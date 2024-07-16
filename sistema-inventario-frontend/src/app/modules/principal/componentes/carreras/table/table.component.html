@@ -51,20 +51,20 @@
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-nacionalidad let-rowIndex="rowIndex">
+        <ng-template pTemplate="body" let-carrera let-rowIndex="rowIndex">
           <tr>
             <td>
-              <p-tableCheckbox [value]="nacionalidad"></p-tableCheckbox>
+              <p-tableCheckbox [value]="carrera"></p-tableCheckbox>
             </td>
             <td>{{rowIndex + 1}}</td>
-            <td>{{nacionalidad.descripcion}}</td>
+            <td>{{carrera.descripcion}}</td>
             <td>
               <button pButton pRipple icon="pi pi-pencil"
                 class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
-                (click)="edit(nacionalidad)" pTooltip="Editar" tooltipPosition="left"></button>
+                (click)="edit(carrera)" pTooltip="Editar" tooltipPosition="left"></button>
               <button pButton pRipple icon="pi pi-trash"
                 class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                (click)="deleteRegister(nacionalidad.id)" pTooltip="Eliminar" tooltipPosition="left"></button>
+                (click)="deleteRegister(carrera.id)" pTooltip="Eliminar" tooltipPosition="left"></button>
             </td>
           </tr>
         </ng-template>

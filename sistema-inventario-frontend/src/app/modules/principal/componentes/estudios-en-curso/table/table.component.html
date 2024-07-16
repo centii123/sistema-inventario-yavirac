@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="card">
       <p-table #dt [value]="list" [rows]="5" [paginator]="true" [loading]="loading"
-        [globalFilterFields]="['id', 'descripcion']" responsiveLayout="scroll" [(selection)]="selectedAllRegister"
+        [globalFilterFields]="['id', 'tipo_de_titulo', 'fecha_de_inicio', 'fecha_de_fin', 'nombre', 'numero_de_horas']" responsiveLayout="scroll" [(selection)]="selectedAllRegister"
         [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10, 15]">
 
@@ -41,30 +41,58 @@
                 <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
               </div>
             </th>
+            <th pSortableColumn="tipo_de_titulo">
+              <div class="flex justify-content-between align-items-center">Tipo de Título
+                <p-sortIcon field="tipo_de_titulo"></p-sortIcon>
+                <p-columnFilter type="text" field="tipo_de_titulo" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="fecha_de_inicio">
+              <div class="flex justify-content-between align-items-center">Fecha de Inicio
+                <p-sortIcon field="fecha_de_inicio"></p-sortIcon>
+                <p-columnFilter type="date" field="fecha_de_inicio" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="fecha_de_fin">
+              <div class="flex justify-content-between align-items-center">Fecha de Fin
+                <p-sortIcon field="fecha_de_fin"></p-sortIcon>
+                <p-columnFilter type="date" field="fecha_de_fin" display="menu"></p-columnFilter>
+              </div>
+            </th>
             <th pSortableColumn="nombre">
-              <div class="flex justify-content-between align-items-center">descripcion
+              <div class="flex justify-content-between align-items-center">Nombre
                 <p-sortIcon field="nombre"></p-sortIcon>
                 <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="numero_de_horas">
+              <div class="flex justify-content-between align-items-center">Número de Horas
+                <p-sortIcon field="numero_de_horas"></p-sortIcon>
+                <p-columnFilter type="number" field="numero_de_horas" display="menu"></p-columnFilter>
               </div>
             </th>
             <th>Acciones</th>
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-nacionalidad let-rowIndex="rowIndex">
+        <ng-template pTemplate="body" let-estudiosEnCurso let-rowIndex="rowIndex">
           <tr>
             <td>
-              <p-tableCheckbox [value]="nacionalidad"></p-tableCheckbox>
+              <p-tableCheckbox [value]="estudiosEnCurso"></p-tableCheckbox>
             </td>
             <td>{{rowIndex + 1}}</td>
-            <td>{{nacionalidad.descripcion}}</td>
+            <td>{{estudiosEnCurso.tipo_de_titulo}}</td>
+            <td>{{estudiosEnCurso.fecha_de_inicio}}</td>
+            <td>{{estudiosEnCurso.fecha_de_fin}}</td>
+            <td>{{estudiosEnCurso.nombre}}</td>
+            <td>{{estudiosEnCurso.numero_de_horas}}</td>
             <td>
               <button pButton pRipple icon="pi pi-pencil"
                 class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
-                (click)="edit(nacionalidad)" pTooltip="Editar" tooltipPosition="left"></button>
+                (click)="edit(estudiosEnCurso)" pTooltip="Editar" tooltipPosition="left"></button>
               <button pButton pRipple icon="pi pi-trash"
                 class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                (click)="deleteRegister(nacionalidad.id)" pTooltip="Eliminar" tooltipPosition="left"></button>
+                (click)="deleteRegister(estudiosEnCurso.id)" pTooltip="Eliminar" tooltipPosition="left"></button>
             </td>
           </tr>
         </ng-template>

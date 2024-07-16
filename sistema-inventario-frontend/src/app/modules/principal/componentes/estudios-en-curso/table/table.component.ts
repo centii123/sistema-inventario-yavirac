@@ -30,7 +30,7 @@ export class TableComponent implements OnInit {
         this.loading = false;
       },
       (error) => {
-        console.error('Error fetching nacionalidades:', error);
+        console.error('Error fetching estudiosEnCursos:', error);
         this.loading = false;
       }
     );
@@ -38,7 +38,7 @@ export class TableComponent implements OnInit {
 
   exportExcel(): void {
     if (this.list.length > 0) {
-      this.apiService.exportExcel(this.list, 'Nacionalidades');
+      this.apiService.exportExcel(this.list, 'EstudiosEnCursos');
     } else {
       console.warn('No hay datos para exportar');
     }
@@ -46,7 +46,7 @@ export class TableComponent implements OnInit {
 
   exportPdf(): void {
     if (this.list.length > 0) {
-      this.apiService.exportPdf(this.list, 'Nacionalidades');
+      this.apiService.exportPdf(this.list, 'EstudiosEnCursos');
     } else {
       console.warn('No hay datos para exportar');
     }
@@ -62,7 +62,7 @@ export class TableComponent implements OnInit {
         this.list = this.list.filter(n => n.id !== id);
       },
       (error) => {
-        console.error('Error deleting nacionalidad:', error);
+        console.error('Error deleting estudiosEnCuros:', error);
       }
     );
   }
@@ -80,7 +80,7 @@ export class TableComponent implements OnInit {
         this.selectedAllRegister = [];
       },
       (error) => {
-        console.error('Error deleting nacionalidades:', error);
+        console.error('Error deleting estudiosEnCursos:', error);
       }
     );
   }
