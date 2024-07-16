@@ -1,34 +1,18 @@
 <div class="contenedor-imagen-yavirac d-block">
-  <header>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <nav>
-      <div class="logo">
-        <img src="/assets/img/log.jpeg" alt="Logo" />
-      </div>
-      <ul>
-        <li>
-          <a href="/home"><i class="fas fa-home"></i> Inicio</a>
-        </li>
-        <li>
-          <a href="/inventario"><i class="fas fa-warehouse"></i> Inventario</a>
-        </li>
-        <li>
-          <a href="/docentes"
-            ><i class="fas fa-chalkboard-teacher"></i> Docentes</a
-          >
-        </li>
-        <li class="logout">
-          <a href="/login">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Cerrar sesión</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <nav>
+    <div class="logo">
+      <img src="/assets/img/log.jpeg" alt="Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+      <li><a href="/inventario"><i class="fas fa-box"></i> Inventario</a></li>
+      <li><a href="/docentes"><i class="fas fa-chalkboard-teacher"></i> Docentes</a></li>
+    </ul>
+    <div class="logout">
+      <a (click)="cerrarSesion()" class="pointer-botton"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+    </div>
+  </nav>
 
   <main>
     <section id="inventario">
@@ -46,11 +30,5 @@
       </div>
     </section>
   </main>
-  <br /><br /><br /><br />
-  <footer>
-    <p>
-      &copy; 2024 | Instituto Superior Tecnológico de Turismo y Patrimonio
-      Yavirac | Quito | Todos los derechos reservados.
-    </p>
-  </footer>
+  <app-footer></app-footer>
 </div>
