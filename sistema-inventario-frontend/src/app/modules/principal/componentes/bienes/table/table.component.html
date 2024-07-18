@@ -38,7 +38,6 @@
               <div class="flex justify-content-between align-items-center">
                 <span style="font-weight: bold;">&#8470;</span>
                 <p-sortIcon field="id"></p-sortIcon>
-                <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
               </div>
             </th>
             <th pSortableColumn="codigoDelBien">
@@ -61,53 +60,18 @@
             </th>
             <th pSortableColumn="modelo">
               <div class="flex justify-content-between align-items-center">modelo
-                <p-sortIcon field="modelo"></p-sortIcon>
-                <p-columnFilter type="text" field="modelo" display="menu"></p-columnFilter>
               </div>
             </th>
             <th pSortableColumn="custodio">
               <div class="flex justify-content-between align-items-center">custodio
-                <p-sortIcon field="custodio"></p-sortIcon>
-                <p-columnFilter type="text" field="custodio" display="menu"></p-columnFilter>
               </div>
             </th>
             <th pSortableColumn="estado">
               <div class="flex justify-content-between align-items-center">estado
-                <p-sortIcon field="estado"></p-sortIcon>
-                <p-columnFilter type="text" field="estado" display="menu"></p-columnFilter>
               </div>
             </th>
-            <th pSortableColumn="observaciones">
-              <div class="flex justify-content-between align-items-center">observaciones
-                <p-sortIcon field="observaciones"></p-sortIcon>
-                <p-columnFilter type="text" field="observaciones" display="menu"></p-columnFilter>
-              </div>
-            </th>
-            <th pSortableColumn="valor">
-              <div class="flex justify-content-between align-items-center">valor
-                <p-sortIcon field="valor"></p-sortIcon>
-                <p-columnFilter type="text" field="valor" display="menu"></p-columnFilter>
-              </div>
-            </th>
-            <th pSortableColumn="valorIva">
-              <div class="flex justify-content-between align-items-center">valorIva
-                <p-sortIcon field="valorIva"></p-sortIcon>
-                <p-columnFilter type="text" field="valorIva" display="menu"></p-columnFilter>
-              </div>
-            </th>
-            <th pSortableColumn="serie">
-              <div class="flex justify-content-between align-items-center">serie
-                <p-sortIcon field="serie"></p-sortIcon>
-                <p-columnFilter type="text" field="serie" display="menu"></p-columnFilter>
-              </div>
-            </th>
-            <th pSortableColumn="descripcion">
-              <div class="flex justify-content-between align-items-center">descripcion
-                <p-sortIcon field="descripcion"></p-sortIcon>
-                <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
-              </div>
-            </th>
-            <th>Acciones</th>
+            
+            <th class="text-center" style="width: 176px;">Acciones</th>
           </tr>
         </ng-template>
 
@@ -121,13 +85,9 @@
             <td>{{nacionalidad.nombre}}</td>
             <td>{{nacionalidad.marca}}</td>
             <td>{{nacionalidad.modelo}}</td>
-            <td>{{nacionalidad.custodio}}</td>
+            <td>{{nacionalidad.custodio | json}}</td>
             <td>{{nacionalidad.estado}}</td>
-            <td>{{nacionalidad.observaciones}}</td>
-            <td>{{nacionalidad.valor}}</td>
-            <td>{{nacionalidad.valorIva}}</td>
-            <td>{{nacionalidad.serie}}</td>
-            <td>{{nacionalidad.descripcion}}</td>
+            
             <td>
               <button pButton pRipple icon="pi pi-eye"
                 class="p-button-rounded p-button-info p-button-text p-button-sm"
@@ -153,13 +113,47 @@
     </div>
   </div>
 </section>
-
-<p-dialog class="custom-dialog bg-blue-900" [(visible)]="modalEye" [modal]="true"
+<p-dialog header="Mas Información" class="custom-dialog bg-blue-900" [(visible)]="modalEye" [modal]="true"
             (onHide)="closeModal()" [draggable]="true" [resizable]="true" >
-            <br>
             <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
-              <tr>
-              <p>{{ selectedData.nombre }}</p>
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Valor:</div>
+                    <p>{{selectedData.valor}}</p>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Valor Con Iva:</div>
+                    <p>{{selectedData.valorIva}}</p>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Serie:</div>
+                    <p>{{selectedData.serie}}</p>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Descripcion:</div>
+                    <p>{{selectedData.descripcion}}</p>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Observaciones:</div>
+                    <p>{{selectedData.observaciones}}</p>
+                  </div>
+                </li>
+              </ul>
             </ng-template>
     
 </p-dialog>

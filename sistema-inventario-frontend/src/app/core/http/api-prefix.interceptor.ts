@@ -22,6 +22,11 @@ export class ApiService {
     });
   }
 
+  getOne(ruta: string,id:number): Observable<any> {
+    const headers = this.headers();
+    return this.http.get<any[]>(`${this.apiUrl}/${ruta}/${id}/`, { headers });
+  }
+
   get(ruta: string): Observable<any[]> {
     const headers = this.headers();
     return this.http.get<any[]>(`${this.apiUrl}/${ruta}`, { headers });

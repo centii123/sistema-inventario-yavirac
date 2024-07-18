@@ -5,7 +5,7 @@ export interface Bienes {
     codigoDelBien: string,
     marca: string,
     modelo: string,
-    custodio: number,
+    custodio: string,
     estado: boolean,
     observaciones: string,
     valor: number,

@@ -5,6 +5,12 @@ import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
 
+interface Person {
+  nombres: string;
+  apellidos:string;
+  [key: string]: any; // Permite otras propiedades desconocidas
+}
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -24,11 +30,22 @@ export class TableComponent implements OnInit {
     this.getAllRegister();
   }
 
+  getPerson(id:any,index:number){
+    this.crudService.getPerson(id).subscribe(
+      (e:Person)=>{
+        this.list[index].custodio=`${e.nombres} ${e.apellidos}`
+      }
+    )
+  }
+
   getAllRegister(): void {
     this.loading = true;
     this.crudService.getAll().subscribe(
       (data: Bienes[]) => {
         this.list = data;
+        this.list.forEach((e,index) => {
+          this.getPerson(e.custodio,index)
+        });
         this.loading = false;
       },
       (error) => {

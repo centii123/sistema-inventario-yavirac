@@ -13,6 +13,10 @@ export class CrudService {
         this.apiUrl=apiUrl
     }
 
+    getPerson(id:any){
+        return this.http.getOne('persona',id);
+    }
+
     getAll() {
         return this.http.get(this.apiUrl);
     }
