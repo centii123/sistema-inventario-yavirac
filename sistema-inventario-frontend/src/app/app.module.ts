@@ -20,8 +20,7 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

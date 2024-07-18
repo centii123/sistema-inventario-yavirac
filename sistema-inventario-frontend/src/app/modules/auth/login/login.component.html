@@ -1,57 +1,60 @@
 <div class="contenedor-imagen-yavirac">
   <section class="h-100 gradient-form">
-    <div class="container py-5">
-      <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-lg-10">
-          <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                <img
-                  src="https://fdje.org/wp-content/uploads/2022/06/yavirac.png"
-                  alt="logo"
-                  class="logo"
-                />
-                <h4 class="mt-1 mb-5 pb-1">
-                  INSTITUTO SUPERIOR TECNOLÓGICO DE TURISMO Y PATRIMONIO YAVIRAC
-                </h4>
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-3 mx-md-4">
+  
+                  <div class="text-center">
+                    <img src="/assets/img/logo_login.png"
+                      style="width: 185px;" alt="logo">
+                  </div>
+  
+                  <form (ngSubmit)="submit()" [formGroup]="loginForm">
+
+                    <div class="input-group mb-4">
+                      <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                      <div class="form-floating">
+                        <input 
+                        formControlName="username"
+                        type="text"
+                        id="form2Example11"
+                        class="form-control"
+                        placeholder="Ingresa tu usuario o correo electronico*"
+                        >
+                        <label for="floatingInputGroup1">Usuario</label>
+                      </div>
+                    </div>
+
+                    <div class="input-group mb-4">
+                      <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                      <div class="form-floating">
+                        <input 
+                        formControlName="password"
+                        type="password"
+                        id="form2Example22"
+                        class="form-control"
+                        placeholder="Contraseña*"
+                        >
+                        <label for="floatingInputGroup1">Contraseña</label>
+                      </div>
+                    </div>
+  
+                    <div class="text-center pt-1 mb-5 pb-1">
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary btn-block fa-lg mb-3" type="submit">Inicia tu sesion</button>
+                    </div>
+                  </form>
+                </div>
               </div>
-
-              <form (ngSubmit)="submit()" [formGroup]="loginForm">
-                <p class="text-white">Inicie sesión en su cuenta</p>
-
-                <div class="form-outline">
-                  <i class="fas fa-user form-icon"></i>
-                  <input
-                    formControlName="username"
-                    type="email"
-                    id="form2Example11"
-                    class="form-control"
-                    placeholder="Ingresa tu correo electrónico"
-                  />
-                  
+              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">Somos mas que un instituto</h4>
+                  <p class="small mb-0">Formamos profesionales de excelencia de nivel Técnico y Tecnológico que promuevan, integren y apliquen sus conocimientos con la sociedad.</p>
                 </div>
-                
-                <div class="form-outline">
-                  <i class="fas fa-lock form-icon"></i>
-                  <input
-                  formControlName="password"
-                    type="password"
-                    id="form2Example22"
-                    class="form-control"
-                    placeholder="Ingresa tu contraseña"
-                  />
-                  
-                </div>
-                  <br><br>
-                <div class="text-center pt-1 mt-4">
-                  <button
-                    class="btn btn-primary btn-block fa-lg mb-3"
-                    type="submit"
-                  >
-                    Inicia tu sesion
-                  </button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -59,4 +62,5 @@
     </div>
   </section>
 </div>
+
 
