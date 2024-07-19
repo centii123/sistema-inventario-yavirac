@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
+import { DropdownFilterOptions } from 'primeng/dropdown';
 
 
 @Component({
@@ -16,6 +17,9 @@ export class FormComponent implements OnInit {
   modal: boolean = false;
   selected: Bienes | null = null;
   message: string | null = null;
+  dataDrop!: any[];
+  loadingSpinerForm!: boolean;
+  formSelectData!:any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -143,11 +147,34 @@ export class FormComponent implements OnInit {
   }
 
   openModal() {
+    this.loadingSpinerForm=true
+    this.crudService.getAll('persona/').subscribe(
+      e=>{
+        this.formSelectData=e
+        this.loadingSpinerForm=false
+      },
+      error=>{
+        console.error(error)
+        this.loadingSpinerForm=false
+      }
+    )
     this.modal = true;
   }
 
   closeModal() {
     this.modal = false;
   }
+
+  get selectedCustodio() {
+    return this.form.get('custodio')?.value;
+  }
+
+  getOptionLabel(data: any): string {
+    return `${data.dni} - ${data.nombres}`;
+  }
+
+
+
+
 
 }

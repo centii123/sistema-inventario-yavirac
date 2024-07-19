@@ -6,50 +6,124 @@
             <h4>Bienes</h4>
         </div>
         <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
-    
-        <p-dialog class="custom-dialog bg-blue-900" header="Categorias De Aulas" [(visible)]="modal" [modal]="true"
-            (onHide)="closeModal()" [draggable]="true" [resizable]="true">
+
+
+        <p-dialog class="custom-dialog bg-blue-900" header="Bienes" [(visible)]="modal" [modal]="true"
+            (onHide)="closeModal()" [style]="{ width: '60rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+            [maximizable]="true">
             <br>
+
             <form [formGroup]="form" class="custom-form">
-                <div class="p-fluid p-formgrid grid custom-form-grid">
-                    <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
-                        <span class="p-float-label">
-                            <input pInputText id="ftxt-descripcion" type="text" formControlName="descripcion" required>
-                            <label for="ftxt-descripcion">* nombre</label>
-                            <label for="ftxt-descripcion">* codigoDelBien</label>
-                            <label for="ftxt-descripcion">* marca</label>
-                            <label for="ftxt-descripcion">* modelo</label>
-                            <label for="ftxt-descripcion">* custodio</label>
-                            <label for="ftxt-descripcion">* estado</label>
-                            <label for="ftxt-descripcion">* observaciones</label>
-                            <label for="ftxt-descripcion">* valor</label>
-                            <label for="ftxt-descripcion">* valorIva</label>
-                            <label for="ftxt-descripcion">* serie</label>
-                            <label for="ftxt-descripcion">* descripcion</label>
-                        </span>
+                <app-spinner [load]="loadingSpinerForm">
+                    <div class="p-fluid p-formgrid grid custom-form-grid">
+                        <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                            <div class="d-flex">
+                                <div class="col me-3">
+                                    <span class="p-float-label mb-4">
+                                        <p-dropdown formControlName="custodio" placeholder="* Custodio"
+                                            [options]="formSelectData" [filter]="true" filterBy="dni,nombres"
+                                            [showClear]="true" optionLabel="dni">
+                                            <ng-template let-data pTemplate="item">
+                                                <div class="flex align-items-center gap-2">
+                                                    <div>{{ data.dni }} - {{ data.nombres }} {{ data.apellidos }}</div>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="selectedItem">
+                                                <div>{{ getOptionLabel(selectedCustodio) }}</div>
+                                            </ng-template>
+                                        </p-dropdown>
+                                        <label for="ftxt-custodio">* Custodio</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-nombre" type="text" formControlName="nombre"
+                                            required>
+                                        <label for="ftxt-nombre">* Nombre</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-codigoDelBien" type="text"
+                                            formControlName="codigoDelBien" required>
+                                        <label for="ftxt-codigoDelBien">* Codigo Del Bien</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-marca" type="text" formControlName="marca" required>
+                                        <label for="ftxt-marca">* Marca</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-modelo" type="text" formControlName="modelo"
+                                            required>
+                                        <label for="ftxt-modelo">* Modelo</label>
+                                    </span>
+
+
+
+                                    <!--<span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-custodio" type="text" formControlName="custodio" required>
+                                        <label for="ftxt-custodio">* Custodio</label>
+                                    </span>-->
+                                </div>
+                                <div class="col">
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-estado" type="text" formControlName="estado"
+                                            required>
+                                        <label for="ftxt-estado">* Estado</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-valor" type="text" formControlName="valor" required>
+                                        <label for="ftxt-valor">* Valor</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-valorIva" type="text" formControlName="valorIva"
+                                            required>
+                                        <label for="ftxt-valorIva">* Valor Iva</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-serie" type="text" formControlName="serie" required>
+                                        <label for="ftxt-serie">* Serie</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-descripcion" type="text"
+                                            formControlName="descripcion" required>
+                                        <label for="ftxt-descripcion">* Descripcion</label>
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <span class="p-float-label mb-4">
+                                <input pInputText id="ftxt-observaciones" type="text" formControlName="observaciones"
+                                    required>
+                                <label for="ftxt-observaciones">* Observaciones</label>
+                            </span>
+                        </div>
+                    </div><br>
+                    <div class="custom-toolbar d-flex justify-content-center">
+                        <div class="p-toolbar-group-center">
+                            <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
+                                icon="pi pi-send" type="submit" (click)="save()" pTooltip="Guardar"
+                                tooltipPosition="right"></button>
+
+                            <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                                icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                                tooltipPosition="right"></button>
+                        </div>
                     </div>
-                </div><br>
-                <div class="central custom-toolbar">
-                    <div class="p-toolbar-group-center">
-                        <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
-                            type="submit" (click)="save()" pTooltip="Guardar" tooltipPosition="right"></button>
-    
-                        <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                            icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar" tooltipPosition="right"></button>
-                    </div>
-                </div>
+                </app-spinner>
+
             </form>
-    
+
         </p-dialog>
-    
+
+
+
         <p-card class="custom-card">
             <div class="caja-boton-principal custom-button-box">
                 <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
                     tooltipPosition="right"></button>
             </div>
-    
+
             <p-divider class="custom-divider"></p-divider>
-    
+
             <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
             </app-table>
         </p-card>
