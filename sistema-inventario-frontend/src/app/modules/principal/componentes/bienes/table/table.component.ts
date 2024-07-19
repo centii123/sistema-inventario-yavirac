@@ -6,6 +6,7 @@ import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
 
 interface Person {
+  id:number;
   nombres: string;
   apellidos:string;
   [key: string]: any; // Permite otras propiedades desconocidas
@@ -33,7 +34,7 @@ export class TableComponent implements OnInit {
   getPerson(id:any,index:number){
     this.crudService.getPerson(id).subscribe(
       (e:Person)=>{
-        this.list[index].custodio=`${e.nombres} ${e.apellidos}`
+        this.list[index].custodio={nombre:`${e.nombres} ${e.apellidos}`,id:e}
       }
     )
   }

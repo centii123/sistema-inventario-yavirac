@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
+import { DropdownFilterOptions } from 'primeng/dropdown';
 
 
 @Component({
@@ -16,6 +17,9 @@ export class FormComponent implements OnInit {
   modal: boolean = false;
   selected: Bienes | null = null;
   message: string | null = null;
+  dataDrop!: any[];
+  loadingSpinerForm!: boolean;
+  formSelectData!:any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,6 +69,7 @@ export class FormComponent implements OnInit {
 
   setSeleccionado(registro: Bienes) {
     this.selected = registro;
+    this.openModal()
     this.form.setValue({
       id: registro.id,
       descripcion: registro.descripcion,
@@ -72,14 +77,16 @@ export class FormComponent implements OnInit {
       codigoDelBien: registro.codigoDelBien,
       marca: registro.marca,
       modelo: registro.modelo,
-      custodio: registro.custodio,
+      custodio: registro.custodio['id'],
       estado: registro.estado,
       observaciones: registro.observaciones,
       valor: registro.valor,
       valorIva: registro.valorIva,
       serie: registro.serie,
     });
-    this.modal = true;
+
+    console.log(this.form.value)
+    
   }
 
   save() {
@@ -103,10 +110,12 @@ export class FormComponent implements OnInit {
         }
       });
     } else {
-  
+      registro.custodio={
+        "id":registro.custodio.id
+      }
       this.crudService.add(registro).subscribe({
         next: () => {
-          this.message = 'Nacionalidad creada correctamente';
+          this.message = 'Bien creado correctamente';
           this.resetForm();
           this.load();
         },
@@ -114,6 +123,8 @@ export class FormComponent implements OnInit {
           this.message = `Error: ${error.message}`;
         }
       });
+      
+      console.log(registro)
     }
 
     this.modal = false;
@@ -143,11 +154,35 @@ export class FormComponent implements OnInit {
   }
 
   openModal() {
+    this.loadingSpinerForm=true
+    this.crudService.getAll('persona/').subscribe(
+      e=>{
+        this.formSelectData=e
+        this.loadingSpinerForm=false
+      },
+      error=>{
+        console.error(error)
+        this.loadingSpinerForm=false
+      }
+    )
     this.modal = true;
   }
 
   closeModal() {
+    this.resetForm();
     this.modal = false;
   }
+
+  get selectedCustodio() {
+    return this.form.get('custodio')?.value;
+  }
+
+  getOptionLabel(data: any): string {
+    return `${data.dni} - ${data.nombres}`;
+  }
+
+
+
+
 
 }
