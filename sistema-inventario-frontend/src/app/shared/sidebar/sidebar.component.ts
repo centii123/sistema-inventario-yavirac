@@ -1,22 +1,39 @@
-import { Component } from '@angular/core';
+// sidebar.component.ts
+import { Component, OnInit } from '@angular/core';
+import { SidebarService } from './sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   side = false;
+  content = 'docentes';
+
+  constructor(private sidebarService: SidebarService) {}
+
+  ngOnInit() {
+    this.sidebarService.sidebarContent$.subscribe(content => {
+      this.content = content;
+    });
+  }
 
   openSidebar() {
-    (document.querySelector("#sidebar") as HTMLElement).classList.remove("hidden");
-    (document.querySelector("#sidebar") as HTMLElement).classList.add("flex");
-    this.side = true;
+    const sidebar = document.querySelector("#sidebar") as HTMLElement;
+    if (sidebar) {
+      sidebar.classList.remove("hidden");
+      sidebar.classList.add("flex");
+      this.side = true;
+    }
   }
 
   closeSidebar() {
-    (document.querySelector("#sidebar") as HTMLElement).classList.add("hidden");
-    (document.querySelector("#sidebar") as HTMLElement).classList.remove("flex");
-    this.side = false;
+    const sidebar = document.querySelector("#sidebar") as HTMLElement;
+    if (sidebar) {
+      sidebar.classList.add("hidden");
+      sidebar.classList.remove("flex");
+      this.side = false;
+    }
   }
 }

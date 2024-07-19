@@ -1,0 +1,23 @@
+<div id="sidebar" class="sidebar hidden">
+    <ng-container *ngIf="content === 'docentes'; else inventario">
+      <h4>Docentes</h4>
+      <ul>
+        <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="/nacionalidad"><i class="fas fa-globe"></i> Nacionalidad</a></li>
+        <li><a href="/carreras"><i class="fas fa-graduation-cap"></i> Carreras</a></li>
+        <li><a href="/estado-civil"><i class="fas fa-heart"></i> Estado Civil</a></li>
+        <li><a href="/titulos"><i class="fas fa-certificate"></i> Titulos</a></li>
+        <li><a (click)="closeSidebar()"><i class="fas fa-times"></i> Cerrar</a></li>
+      </ul>
+    </ng-container>
+    <ng-template #inventario>
+      <h4>Inventario</h4>
+    <ul>
+      <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+      <li><a href="/bienes"><i class="fas fa-boxes"></i> Bienes</a></li>
+      <li><a href="/categoria-aula"><i class="fas fa-chalkboard"></i> Categoria Aula</a></li>
+      <li><a href="/categoria-bien"><i class="fas fa-tags"></i> Categoria Del Bien</a></li>
+      <li><a (click)="closeSidebar()"><i class="fas fa-times"></i> Cerrar</a></li>
+    </ul>
+    </ng-template>
+  </div>

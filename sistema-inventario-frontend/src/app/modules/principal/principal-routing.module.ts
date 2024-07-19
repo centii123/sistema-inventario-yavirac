@@ -13,6 +13,7 @@ import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inven
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
 import { DocentesNewComponent } from './docentes-new/docentes-new.component';
 import { FormComponent } from './componentes/nacionalidad/form/form.component';
+import { UserGuard } from 'src/app/core/guards/user.guard';
 
 
 // Define las rutas
@@ -22,15 +23,15 @@ const routes: Routes = [
   { path: 'docentes', component: DocentesComponent },
   { path: 'docentes-info', component: DocentesInfoComponent },
   { path: 'docentes-new', component: DocentesNewComponent },
-  { path: 'inventario', component: InventarioComponent },
-  { path: 'inventario-aulas', component: InventarioAulasComponent },
-  { path: 'inventario-info-aulas', component: InventarioInfoAulasComponent },
-  { path: 'inventario-info-laboratorio', component: InventarioInfoLaboratorioComponent },
-  { path: 'inventario-info-oficinas', component: InventarioInfoOficinasComponent },
-  { path: 'inventario-laboratorios', component: InventarioLaboratoriosComponent },
-  { path: 'inventario-oficinas', component: InventarioOficinasComponent },
+  { path: 'inventario', component: InventarioComponent, data: { sidebarContent: 'inventario' } },
+  { path: 'inventario-aulas', component: InventarioAulasComponent, data: { sidebarContent: 'inventario' } },
+  { path: 'inventario-info-aulas', component: InventarioInfoAulasComponent, data: { sidebarContent: 'inventario' } },
+  { path: 'inventario-info-laboratorio', component: InventarioInfoLaboratorioComponent, data: { sidebarContent: 'inventario' } },
+  { path: 'inventario-info-oficinas', component: InventarioInfoOficinasComponent, data: { sidebarContent: 'inventario' } },
+  { path: 'inventario-laboratorios', component: InventarioLaboratoriosComponent, data: { sidebarContent: 'inventario' } },
+  { path: 'inventario-oficinas', component: InventarioOficinasComponent, data: { sidebarContent: 'inventario' } },
   { path: 'nacionalidad-table', component: InventarioLaboratoriosComponent },
-  { path: 'nacionalidad', component: FormComponent },
+  { path: 'nacionalidad', canActivate:[UserGuard], component: FormComponent },
 
 
   // Puedes añadir más rutas según necesites
