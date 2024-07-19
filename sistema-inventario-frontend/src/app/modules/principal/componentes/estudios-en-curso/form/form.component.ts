@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CrudService } from '../../service/crud.service';
 import { EstudiosEnCurso } from '../../model/estudios-en-curso';
 
-
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -21,7 +20,7 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private crudService: CrudService
   ) {
-    this.form= this.initForm();
+    this.form = this.initForm();
   }
 
   ngOnInit(): void {
@@ -35,7 +34,11 @@ export class FormComponent implements OnInit {
   initForm(): FormGroup {
     return this.formBuilder.group({
       id: new FormControl(null),
-      descripcion: new FormControl('', [Validators.required])
+      tipo_de_titulo: new FormControl('', [Validators.required]),
+      fecha_de_inicio: new FormControl('', [Validators.required]),
+      fecha_de_fin: new FormControl('', [Validators.required]),
+      nombre: new FormControl('', [Validators.required]),
+      numero_de_horas: new FormControl('', [Validators.required])
     });
   }
 
@@ -58,8 +61,8 @@ export class FormComponent implements OnInit {
     this.form.setValue({
       id: registro.id,
       tipo_de_titulo: registro.tipo_de_titulo,
-      fecha_de_fin: registro.fecha_de_fin,
       fecha_de_inicio: registro.fecha_de_inicio,
+      fecha_de_fin: registro.fecha_de_fin,
       nombre: registro.nombre,
       numero_de_horas: registro.numero_de_horas
     });
@@ -75,7 +78,6 @@ export class FormComponent implements OnInit {
     const registro: EstudiosEnCurso = this.form.value;
 
     if (registro.id) {
-
       this.crudService.update(registro).subscribe({
         next: () => {
           this.message = 'Estudios en curso actualizada correctamente';
@@ -87,10 +89,9 @@ export class FormComponent implements OnInit {
         }
       });
     } else {
-  
       this.crudService.add(registro).subscribe({
         next: () => {
-          this.message = 'Estudios en curos creada correctamente';
+          this.message = 'Estudios en curso creada correctamente';
           this.resetForm();
           this.load();
         },
@@ -133,5 +134,4 @@ export class FormComponent implements OnInit {
   closeModal() {
     this.modal = false;
   }
-
 }

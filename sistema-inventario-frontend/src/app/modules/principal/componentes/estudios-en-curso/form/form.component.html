@@ -1,74 +1,73 @@
 <app-spinner [load]="loadingSpiner">
     <app-navbar></app-navbar>
-
+  
     <div class="estudiosEnCurso-container">
-        <div class="custom-card-header">
-            <h4>Estudios en Curso</h4>
-        </div>
-        <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
-    
-        <p-dialog class="custom-dialog bg-blue-900" header="Estudios en Curso" [(visible)]="modal" [modal]="true"
-            (onHide)="closeModal()" [draggable]="true" [resizable]="true">
-    
-            <br>
-            <form [formGroup]="form" (ngSubmit)="save()" class="custom-form">
-                <div class="p-fluid p-formgrid grid custom-form-grid">
-                    <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
-                        <span class="p-float-label">
-                            <input pInputText id="ftxt-tipo_de_titulo" type="text" formControlName="tipo_de_titulo" required>
-                            <label for="ftxt-tipo_de_titulo">* Tipo de Título</label>
-                        </span>
-                    </div>
-                    <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
-                        <span class="p-float-label">
-                            <input pInputText id="ftxt-fecha_de_inicio" type="date" formControlName="fecha_de_inicio" required>
-                            <label for="ftxt-fecha_de_inicio">* Fecha de Inicio</label>
-                        </span>
-                    </div>
-                    <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
-                        <span class="p-float-label">
-                            <input pInputText id="ftxt-fecha_de_fin" type="date" formControlName="fecha_de_fin" required>
-                            <label for="ftxt-fecha_de_fin">* Fecha de Fin</label>
-                        </span>
-                    </div>
-                    <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
-                        <span class="p-float-label">
-                            <input pInputText id="ftxt-nombre" type="text" formControlName="nombre" required>
-                            <label for="ftxt-nombre">* Nombre</label>
-                        </span>
-                    </div>
-                    <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
-                        <span class="p-float-label">
-                            <input pInputText id="ftxt-numero_de_horas" type="number" formControlName="numero_de_horas" required>
-                            <label for="ftxt-numero_de_horas">* Número de Horas</label>
-                        </span>
-                    </div>
-                </div><br>
-                <div class="central custom-toolbar">
-                    <div class="p-toolbar-group-center">
-                        <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
-                            type="submit" pTooltip="Guardar" tooltipPosition="right"></button>
-    
-                        <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                            icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar" tooltipPosition="right"></button>
-                    </div>
-                </div>
-            </form>
-    
-        </p-dialog>
-    
-        <p-card class="custom-card">
-            <div class="caja-boton-principal custom-button-box">
-                <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
-                    tooltipPosition="right"></button>
+      <div class="custom-card-header">
+        <h4>Estudios en Curso</h4>
+      </div>
+      <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
+  
+      <p-dialog class="custom-dialog bg-blue-900" header="Estudios en Curso" [(visible)]="modal" [modal]="true"
+        (onHide)="closeModal()" [draggable]="true" [resizable]="true">
+        <br>
+        <form [formGroup]="form" (ngSubmit)="save()" class="custom-form">
+          <div class="p-fluid p-formgrid grid custom-form-grid">
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+              <span class="p-float-label">
+                <input pInputText id="ftxt-tipo_de_titulo" type="text" formControlName="tipo_de_titulo" required>
+                <label for="ftxt-tipo_de_titulo">* Tipo de Título</label>
+              </span>
             </div>
-    
-            <p-divider class="custom-divider"></p-divider>
-    
-            <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
-            </app-table>
-        </p-card>
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+              <span class="p-float-label">
+                <input pInputText id="ftxt-fecha_de_inicio" type="date" formControlName="fecha_de_inicio" required>
+                <label for="ftxt-fecha_de_inicio">* Fecha de Inicio</label>
+              </span>
+            </div>
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+              <span class="p-float-label">
+                <input pInputText id="ftxt-fecha_de_fin" type="date" formControlName="fecha_de_fin" required>
+                <label for="ftxt-fecha_de_fin">* Fecha de Fin</label>
+              </span>
+            </div>
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+              <span class="p-float-label">
+                <input pInputText id="ftxt-nombre" type="text" formControlName="nombre" required>
+                <label for="ftxt-nombre">* Nombre</label>
+              </span>
+            </div>
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+              <span class="p-float-label">
+                <input pInputText id="ftxt-numero_de_horas" type="number" formControlName="numero_de_horas" required>
+                <label for="ftxt-numero_de_horas">* Número de Horas</label>
+              </span>
+            </div>
+          </div><br>
+          <div class="central custom-toolbar">
+            <div class="p-toolbar-group-center">
+              <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                type="submit" pTooltip="Guardar" tooltipPosition="right"></button>
+  
+              <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar" tooltipPosition="right"></button>
+            </div>
+          </div>
+        </form>
+      </p-dialog>
+  
+      <p-card class="custom-card">
+        <div class="caja-boton-principal custom-button-box">
+          <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
+            tooltipPosition="right"></button>
+        </div>
+  
+        <p-divider class="custom-divider"></p-divider>
+  
+        <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
+        </app-table>
+      </p-card>
     </div>
     <br>
     <app-footer></app-footer>
-</app-spinner>
+  </app-spinner>
+  

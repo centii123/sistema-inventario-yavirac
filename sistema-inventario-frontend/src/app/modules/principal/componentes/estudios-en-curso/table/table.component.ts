@@ -62,7 +62,7 @@ export class TableComponent implements OnInit {
         this.list = this.list.filter(n => n.id !== id);
       },
       (error) => {
-        console.error('Error deleting estudiosEnCuros:', error);
+        console.error('Error deleting estudiosEnCurso:', error);
       }
     );
   }
