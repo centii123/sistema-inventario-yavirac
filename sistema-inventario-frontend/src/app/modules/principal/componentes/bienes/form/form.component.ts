@@ -69,6 +69,7 @@ export class FormComponent implements OnInit {
 
   setSeleccionado(registro: Bienes) {
     this.selected = registro;
+    this.openModal()
     this.form.setValue({
       id: registro.id,
       descripcion: registro.descripcion,
@@ -76,14 +77,16 @@ export class FormComponent implements OnInit {
       codigoDelBien: registro.codigoDelBien,
       marca: registro.marca,
       modelo: registro.modelo,
-      custodio: registro.custodio,
+      custodio: registro.custodio['id'],
       estado: registro.estado,
       observaciones: registro.observaciones,
       valor: registro.valor,
       valorIva: registro.valorIva,
       serie: registro.serie,
     });
-    this.modal = true;
+
+    console.log(this.form.value)
+    
   }
 
   save() {
@@ -107,10 +110,12 @@ export class FormComponent implements OnInit {
         }
       });
     } else {
-  
+      registro.custodio={
+        "id":registro.custodio.id
+      }
       this.crudService.add(registro).subscribe({
         next: () => {
-          this.message = 'Nacionalidad creada correctamente';
+          this.message = 'Bien creado correctamente';
           this.resetForm();
           this.load();
         },
@@ -118,6 +123,8 @@ export class FormComponent implements OnInit {
           this.message = `Error: ${error.message}`;
         }
       });
+      
+      console.log(registro)
     }
 
     this.modal = false;
@@ -162,6 +169,7 @@ export class FormComponent implements OnInit {
   }
 
   closeModal() {
+    this.resetForm();
     this.modal = false;
   }
 
