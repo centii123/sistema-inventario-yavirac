@@ -1,17 +1,3 @@
-<div *ngIf="!load" class="spinnerLoading">
-    <div class="preloader">
-      <div class="loader">
-        <img src="" alt="">
-        <p class="loader__label">INTITUTO YAVIRAC</p>
-      </div>
-    </div>
-  </div>
-  
-  <div *ngIf="load">
-    
-  </div>
-  
-  
+<app-spinner></app-spinner>
   <router-outlet></router-outlet>
-  
   <!-- Este outlet mostrará el contenido específico de la página que cambia según la navegación -->

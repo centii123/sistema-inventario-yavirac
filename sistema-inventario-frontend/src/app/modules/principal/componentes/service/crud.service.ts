@@ -17,25 +17,25 @@ export class CrudService {
         return this.http.getOne('persona',id);
     }
 
-    getAll() {
-        return this.http.get(this.apiUrl);
-    }
-
-    getOne(id: number) {
-        const url = `${this.apiUrl}${id}/`;
+    getAll(url=this.apiUrl) {
         return this.http.get(url);
     }
 
-    add(nacionalidad: any) {
-        return this.http.post(this.apiUrl, nacionalidad);
+    getOne(id: number,urlData=this.apiUrl) {
+        const url = `${urlData}${id}/`;
+        return this.http.get(url);
     }
 
-    update(nacionalidad: any) {
-        return this.http.put(this.apiUrl, nacionalidad);
+    add(nacionalidad: any,url=this.apiUrl) {
+        return this.http.post(url, nacionalidad);
     }
 
-    delete(id: number): Observable<void> {
-        const url = `${this.apiUrl}${id}/`;
+    update(nacionalidad: any,url=this.apiUrl) {
+        return this.http.put(url, nacionalidad);
+    }
+
+    delete(id: number,urlData=this.apiUrl): Observable<void> {
+        const url = `${urlData}${id}/`;
         return this.http.delete(url);
     }
 

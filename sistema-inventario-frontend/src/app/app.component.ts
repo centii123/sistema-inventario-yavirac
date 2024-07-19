@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { SpinnerService } from './core/services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -6,32 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'front-end';
+  @ViewChild(SpinnerComponent) spinner!: SpinnerComponent;
 
-  side = false;
+  constructor(private spinnerService: SpinnerService){}
 
-  dropdownSidebar() {
-    if (!this.side) {
-      (document.querySelector("#sidebar") as HTMLElement).classList.remove("hidden");
-      (document.querySelector("#sidebar") as HTMLElement).classList.add("flex");
-      this.side = true;
-    } else {
-      (document.querySelector("#sidebar") as HTMLElement).classList.add("hidden");
-      (document.querySelector("#sidebar") as HTMLElement).classList.remove("flex");
-      this.side = false;
-    }
+  ngAfterViewInit() {
+    this.spinnerService.registerSpinner(this.spinner);
   }
-
-  closeSidebar() {
-    (document.querySelector("#sidebar") as HTMLElement).classList.add("hidden");
-      this.side = false;
-  }
-
-  public load: Boolean= false;
   ngOnInit(): void {
-      setTimeout(()=>{
-        this.load= true;
-      },1000)
   }
 
 }
