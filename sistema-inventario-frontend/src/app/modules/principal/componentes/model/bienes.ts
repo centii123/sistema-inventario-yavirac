@@ -1,4 +1,7 @@
-export interface Bienes {
+import { globalModels } from "src/app/core/models/globalModels";
+import { CategoriaBienes } from "./categorias-bienes";
+
+export interface Bienes extends globalModels {
     id: number;
     descripcion: string;
     nombre: string,
@@ -11,4 +14,5 @@ export interface Bienes {
     valor: number,
     valorIva: number,
     serie: string,
+    categoriaBien:CategoriaBienes
 }

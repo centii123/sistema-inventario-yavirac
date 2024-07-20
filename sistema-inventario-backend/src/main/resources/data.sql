@@ -263,11 +263,11 @@ INSERT INTO estudiosen_cursos ( nombre, tipo_de_titulo, fecha_de_inicio, fecha_d
 INSERT INTO categorias_bienes ( nombre ) VALUES ('CPU');
 
 /**/
-INSERT INTO bienes (codigo_del_bien, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id)
+INSERT INTO bienes (codigo_del_bien,created_at, updated_at, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id)
 VALUES
-  ('wwwputow7w7gf', 1, 'nueva', true, 'hp', 'm7x', 'laptop', 'sin observaciones', '12345abc', 15.1, 11, 1),
-  ('abcde12345', 2, 'antiguo', false, 'dell', 'xps13', 'ordenador', 'requiere mantenimiento', '67890def', 20.5, 16, 1),
-  ('fghij67890', 3, 'nuevo', true, 'acer', 'swift3', 'laptop', 'sin detalles', '54321ghi', 25.0, 21, 1);
+  ('wwwputow7w7gf','2023-07-20 10:00:00', '2023-07-20 10:00:00', 1, 'nueva', true, 'hp', 'm7x', 'laptop', 'sin observaciones', '12345abc', 15.1, 11, 1),
+  ('abcde12345','2023-07-20 10:00:00', '2023-07-20 10:00:00', 2, 'antiguo', false, 'dell', 'xps13', 'ordenador', 'requiere mantenimiento', '67890def', 20.5, 16, 1),
+  ('fghij67890','2023-07-20 10:00:00', '2023-07-20 10:00:00', 3, 'nuevo', true, 'acer', 'swift3', 'laptop', 'sin detalles', '54321ghi', 25.0, 21, 1);
 
 
 /**/

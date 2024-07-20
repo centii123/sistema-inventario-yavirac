@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
-import { DropdownFilterOptions } from 'primeng/dropdown';
 
+interface Person {
+  id:number;
+  nombres: string;
+  apellidos:string;
+  [key: string]: any; // Permite otras propiedades desconocidas
+}
 
 @Component({
   selector: 'app-form',
@@ -20,6 +25,23 @@ export class FormComponent implements OnInit {
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
   formSelectData!:any[];
+  formSelectDataCategoria!:any[];
+
+  getPerson(id:any,index:number){
+    if(typeof id == 'number'){
+      this.crudService.getPerson(id).subscribe(
+        (e:Person)=>{
+          this.list[index].custodio={nombre:`${e.nombres} ${e.apellidos}`,id:e}
+        },
+        err=>{
+          this.list[index].custodio={nombre:'sin custodio',id:null}
+        }
+      )
+    }else{
+      this.list[index].custodio={nombre:'sin custorio',id:null}
+    }
+    
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,12 +66,13 @@ export class FormComponent implements OnInit {
       codigoDelBien: new FormControl('', [Validators.required]),
       marca: new FormControl('', [Validators.required]),
       modelo: new FormControl('', [Validators.required]),
-      custodio: new FormControl('', [Validators.required]),
+      custodio: new FormControl(null) ,
       estado: new FormControl('', [Validators.required]),
       observaciones: new FormControl('', [Validators.required]),
       valor: new FormControl('', [Validators.required]),
       valorIva: new FormControl('', [Validators.required]),
       serie: new FormControl('', [Validators.required]),
+      categoriaBien:new FormControl('', [Validators.required]),
     });
   }
 
@@ -58,8 +81,15 @@ export class FormComponent implements OnInit {
     this.crudService.getAll().subscribe({
       next: (data: Bienes[]) => {
         this.list = data;
+        this.list.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+        this.list.forEach((e,index) => {
+          this.getPerson(e.custodio,index)
+        });
+        
         this.loadingSpiner = false;
+
       },
+      
       error: error => {
         this.message = `Error: ${error.message}`;
         this.loadingSpiner = false;
@@ -77,15 +107,14 @@ export class FormComponent implements OnInit {
       codigoDelBien: registro.codigoDelBien,
       marca: registro.marca,
       modelo: registro.modelo,
-      custodio: registro.custodio['id'],
-      estado: registro.estado,
+      custodio: registro.custodio['id'] || null,
+      estado: String(registro.estado),
       observaciones: registro.observaciones,
       valor: registro.valor,
       valorIva: registro.valorIva,
       serie: registro.serie,
+      categoriaBien: registro.categoriaBien
     });
-
-    console.log(this.form.value)
     
   }
 
@@ -96,6 +125,11 @@ export class FormComponent implements OnInit {
     }
 
     const registro: Bienes = this.form.value;
+    registro.custodio=registro.custodio?.id ?? null
+      registro.estado=Boolean(registro.estado)
+      registro.categoriaBien={
+        'id':registro.categoriaBien.id
+      }
 
     if (registro.id) {
 
@@ -110,9 +144,7 @@ export class FormComponent implements OnInit {
         }
       });
     } else {
-      registro.custodio={
-        "id":registro.custodio.id
-      }
+      
       this.crudService.add(registro).subscribe({
         next: () => {
           this.message = 'Bien creado correctamente';
@@ -124,7 +156,6 @@ export class FormComponent implements OnInit {
         }
       });
       
-      console.log(registro)
     }
 
     this.modal = false;
@@ -155,9 +186,18 @@ export class FormComponent implements OnInit {
 
   openModal() {
     this.loadingSpinerForm=true
+    this.resetForm();
     this.crudService.getAll('persona/').subscribe(
       e=>{
         this.formSelectData=e
+      },
+      error=>{
+        console.error(error)
+      }
+    )
+    this.crudService.getAll('categorias-bienes/').subscribe(
+      e=>{
+        this.formSelectDataCategoria=e
         this.loadingSpinerForm=false
       },
       error=>{
@@ -180,6 +220,7 @@ export class FormComponent implements OnInit {
   getOptionLabel(data: any): string {
     return `${data.dni} - ${data.nombres}`;
   }
+
 
 
 

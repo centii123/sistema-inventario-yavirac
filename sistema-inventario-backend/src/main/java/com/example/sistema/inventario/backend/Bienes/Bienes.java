@@ -2,6 +2,7 @@ package com.example.sistema.inventario.backend.Bienes;
 
 import java.math.BigDecimal;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.CategoriasBienes.CategoriasBienes;
 
 import jakarta.persistence.Column;
@@ -14,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Bienes {
+public class Bienes extends GlobalEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

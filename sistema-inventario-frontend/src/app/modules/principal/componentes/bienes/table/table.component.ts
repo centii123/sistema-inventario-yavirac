@@ -5,12 +5,7 @@ import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
 
-interface Person {
-  id:number;
-  nombres: string;
-  apellidos:string;
-  [key: string]: any; // Permite otras propiedades desconocidas
-}
+
 
 @Component({
   selector: 'app-table',
@@ -28,18 +23,18 @@ export class TableComponent implements OnInit {
   constructor(private crudService: CrudService, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.getAllRegister();
+    //this.getAllRegister();
   }
 
-  getPerson(id:any,index:number){
+  /*getPerson(id:any,index:number){
     this.crudService.getPerson(id).subscribe(
       (e:Person)=>{
         this.list[index].custodio={nombre:`${e.nombres} ${e.apellidos}`,id:e}
       }
     )
-  }
+  }*/
 
-  getAllRegister(): void {
+  /*getAllRegister(): void {
     this.loading = true;
     this.crudService.getAll().subscribe(
       (data: Bienes[]) => {
@@ -54,7 +49,7 @@ export class TableComponent implements OnInit {
         this.loading = false;
       }
     );
-  }
+  }*/
 
   exportExcel(): void {
     if (this.list.length > 0) {
@@ -121,7 +116,6 @@ export class TableComponent implements OnInit {
 
   openModal(data: Bienes) {
     this.selectedData = data;
-    console.log(this.selectedData)
     this.modalEye = true;
   }
 

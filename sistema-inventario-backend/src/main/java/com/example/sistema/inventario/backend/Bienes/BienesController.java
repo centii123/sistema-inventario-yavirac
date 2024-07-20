@@ -56,15 +56,15 @@ public class BienesController {
     // PUT actualizar bien existente
     @Operation(summary = "Edita un bien, Requiere aula-editar")
     @PreAuthorize("hasAuthority('bienes-editar')")
-    @PutMapping("/{id}")
-    public Bienes updateBienes(@PathVariable("id") Long id, @RequestBody Bienes bienes) {
-        return bienesService.updateBienes(id, bienes);
+    @PutMapping("/")
+    public Bienes update(@RequestBody Bienes entity){
+        return bienesService.createBienes(entity);
     }
 
     // DELETE bien por ID
     @Operation(summary = "Elimina un bien, Requiere bienes-eliminar")
     @PreAuthorize("hasAuthority('bienes-eliminar')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/")
     public void deleteBienes(@PathVariable("id") Long id) {
         bienesService.deleteBienes(id);
     }
