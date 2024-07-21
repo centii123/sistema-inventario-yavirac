@@ -1,9 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
+import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -19,8 +22,10 @@ export class TableComponent implements OnInit {
   @Output() selectedOneRegister = new EventEmitter<Bienes>();
   selectedAllRegister: Bienes[] = [];
   loading: boolean = false;
+  @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
+  mensagge:any;
 
-  constructor(private crudService: CrudService, private apiService: ApiService) {}
+  constructor(private crudService: CrudService, private apiService: ApiService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     //this.getAllRegister();
@@ -72,14 +77,28 @@ export class TableComponent implements OnInit {
   }
 
   deleteRegister(id: number): void {
-    this.crudService.delete(id).subscribe(
-      () => {
-        this.list = this.list.filter(n => n.id !== id);
-      },
-      (error) => {
-        console.error('Error deleting nacionalidad:', error);
-      }
-    );
+    this.mensagge={
+      message:'¿Esta seguro que desea eliminar este registro?',
+      messageError: { severity: 'warn', summary: 'Cancelado', detail: 'Acción de eliminado Cancelado' }
+    }
+    this.confirmDialog?.confirm1(() => {
+      this.crudService.delete(id).subscribe(
+        () => {
+          this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
+          this.list = this.list.filter(n => n.id !== id);
+        },
+        (error:HttpErrorResponse) => {
+          if(error.error.message="could not execute statement [ERROR: update o delete en «bienes» viola la llave foránea «fk5h9ayqb867epxqthk2551qr99» en la tabla «aula_bienes»"){
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar porque ahy un recurso utilizando este registro' });
+          }else{
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
+          }
+          
+          console.error('Error deleting nacionalidad:', error);
+        }
+      );
+    },this.mensagge);
+    /**/
   }
 
   deleteSelected(): void {

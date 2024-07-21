@@ -6,7 +6,8 @@ import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { CrudService } from '../service/crud.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
-
+import { GlobalConfirmDialogModule } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.module';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     BienesRoutingModule,
     ...CrudModules,
     DropdownModule,
-    InputNumberModule
+    InputNumberModule,
+    GlobalConfirmDialogModule
   ],
   providers:[
     CrudService,{provide:'url', useValue:'bienes/'}

@@ -54,11 +54,10 @@ nav {
 main {
   padding: 20px;
   text-align: center;
-  height: calc(41vh + 23px);
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 }
 
 section {
@@ -88,6 +87,7 @@ section {
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   text-decoration: none;
   color: #333;
+  min-height: 340px;
 }
 
 .card:hover {

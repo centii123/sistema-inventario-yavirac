@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { Bienes } from '../../model/bienes';
+import { MessageService } from 'primeng/api';
 
 interface Person {
   id:number;
@@ -45,7 +46,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private crudService: CrudService
+    private crudService: CrudService,
+    private messageService: MessageService
   ) {
     this.form= this.initForm();
   }
@@ -138,6 +140,7 @@ export class FormComponent implements OnInit {
           this.message = 'Nacionalidad actualizada correctamente';
           this.resetForm();
           this.load();
+          this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Registro actualizado exitosamente!' });
         },
         error: error => {
           this.message = `Error: ${error.message}`;
@@ -150,6 +153,7 @@ export class FormComponent implements OnInit {
           this.message = 'Bien creado correctamente';
           this.resetForm();
           this.load();
+          this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
         },
         error: error => {
           this.message = `Error: ${error.message}`;
