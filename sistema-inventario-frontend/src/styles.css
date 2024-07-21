@@ -14,7 +14,20 @@
     justify-content: center;
     align-items: center;
 }
+.contenedor-imagen-logo-yavirac {
+    margin: 0;
+    padding: 0;
+    background-image: URL("/assets/img/logo_login.png");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center ;
+    background-attachment: fixed;
+}
 
 body.p-overflow-hidden {
     overflow: auto !important;
   }
+
+background-transparent-bg{
+    background-color: rgb(255, 0, 0) !important;
+}
