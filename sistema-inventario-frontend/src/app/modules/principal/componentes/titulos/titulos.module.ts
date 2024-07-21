@@ -4,6 +4,8 @@ import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { TitulosRoutingModule } from './titulos-routing.module';
+import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -12,10 +14,12 @@ import { TitulosRoutingModule } from './titulos-routing.module';
   ],
   imports: [
     TitulosRoutingModule,
+    CalendarModule,
     ...CrudModules
   ],
   providers:[
-    CrudService,{provide:'url', useValue:'titulos/'}
+    CrudService,{provide:'url', useValue:'titulos/'},
+    CrudFuncionalidadFormService
   ]
 
 })

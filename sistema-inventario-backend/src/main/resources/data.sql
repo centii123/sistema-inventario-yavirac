@@ -186,11 +186,11 @@ VALUES
   ('dygsddd');
 
 /**/
-INSERT INTO estado_civil (nombre)
+INSERT INTO estado_civil (nombre,created_at, updated_at)
 VALUES
-  ('casado'),
-  ('soltero'),
-  ('divorciado');
+  ('casado','2023-07-20 10:00:00', '2023-07-20 10:00:00'),
+  ('soltero','2023-07-20 10:00:00', '2023-07-20 10:00:00'),
+  ('divorciado','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
 INSERT INTO fecha_ingreso_instituto (cambio_grupo_ocupacional_modalidad, cambio_instituto_fusion, cambio_ocupacional_emergencia, primer_ingreso)
@@ -218,8 +218,8 @@ VALUES ('Quito', 'Zona Norte', 'Av. Amazonas y Naciones Unidas', 'Colegio Simón
 
 
 /**/
-INSERT INTO categorias_aulas(descripcion)
-VALUES ('oficina'),('aula'),('laboratorio');
+INSERT INTO categorias_aulas(descripcion,created_at, updated_at)
+VALUES ('oficina','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('aula','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('laboratorio','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
 INSERT INTO enfermedad_catastrofica (cargo_discapacidad, certificado_enfermedad, tipo_enfermedad)
@@ -249,8 +249,8 @@ INSERT INTO escala_ocupacionales (descripcion) VALUES
 ('rector'), ('docente');
 
 /**/
-INSERT INTO titulos (titulos_optenidos ,institucion, ano_del_titulo, intruccion_formal,numero_de_registro_senesyt) 
-VALUES ('ing. mecánico', 'U. central', '2002-05-10', 'tercer nivel', '4646465144');
+INSERT INTO titulos (titulos_optenidos,created_at, updated_at ,institucion, ano_del_titulo, intruccion_formal,numero_de_registro_senesyt) 
+VALUES ('ing. mecánico','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'U. central', '2002-05-10', 'tercer nivel', '4646465144');
 
 /**/
 INSERT INTO generos ( nombre ) VALUES ('masculino');

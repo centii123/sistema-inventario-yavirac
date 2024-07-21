@@ -4,6 +4,7 @@ import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { EstadoCivilRoutingModule } from './estado-civil-routing.module';
+import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { EstadoCivilRoutingModule } from './estado-civil-routing.module';
     ...CrudModules
   ],
   providers:[
-    CrudService,{provide:'url', useValue:'estado-civil/'}
+    CrudService,{provide:'url', useValue:'estado-civil/'},
+    CrudFuncionalidadFormService
   ]
 
 })

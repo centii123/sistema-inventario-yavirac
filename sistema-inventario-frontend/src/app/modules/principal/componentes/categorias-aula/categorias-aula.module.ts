@@ -4,6 +4,7 @@ import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { CategoriasAulaRoutingModule } from './categorias-aula-routing.module';
+import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CategoriasAulaRoutingModule } from './categorias-aula-routing.module';
     ...CrudModules
   ],
   providers:[
-    CrudService,{provide:'url', useValue:'categorias-aulas/'}
+    CrudService,{provide:'url', useValue:'categorias-aulas/'},
+    CrudFuncionalidadFormService
   ]
 
 })

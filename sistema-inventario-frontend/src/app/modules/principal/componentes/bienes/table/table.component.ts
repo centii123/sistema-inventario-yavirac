@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
@@ -15,7 +15,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent{
   modalEye: boolean = false;
   selectedData!: Bienes | any;
   @Input() list: Bienes[] = [];
@@ -27,34 +27,6 @@ export class TableComponent implements OnInit {
 
   constructor(private crudService: CrudService, private apiService: ApiService, private messageService: MessageService) {}
 
-  ngOnInit(): void {
-    //this.getAllRegister();
-  }
-
-  /*getPerson(id:any,index:number){
-    this.crudService.getPerson(id).subscribe(
-      (e:Person)=>{
-        this.list[index].custodio={nombre:`${e.nombres} ${e.apellidos}`,id:e}
-      }
-    )
-  }*/
-
-  /*getAllRegister(): void {
-    this.loading = true;
-    this.crudService.getAll().subscribe(
-      (data: Bienes[]) => {
-        this.list = data;
-        this.list.forEach((e,index) => {
-          this.getPerson(e.custodio,index)
-        });
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error fetching nacionalidades:', error);
-        this.loading = false;
-      }
-    );
-  }*/
 
   exportExcel(): void {
     if (this.list.length > 0) {
@@ -93,8 +65,6 @@ export class TableComponent implements OnInit {
           }else{
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
           }
-          
-          console.error('Error deleting nacionalidad:', error);
         }
       );
     },this.mensagge);
@@ -108,15 +78,18 @@ export class TableComponent implements OnInit {
     }
 
     const deleteObservables = idsToDelete.map(id => this.crudService.delete(id));
-    forkJoin(deleteObservables).subscribe(
-      () => {
-        this.list = this.list.filter(n => !idsToDelete.includes(n.id));
-        this.selectedAllRegister = [];
-      },
-      (error) => {
-        console.error('Error deleting nacionalidades:', error);
-      }
-    );
+    deleteObservables.forEach(e=>{
+      e.subscribe(
+        () => {
+          this.list = this.list.filter(n => !idsToDelete.includes(n.id));
+          this.selectedAllRegister = [];
+        },
+        (error) => {
+          console.error('Error deleting nacionalidades:', error);
+        }
+      );
+    })
+    //forkJoin(deleteObservables)
   }
 
   clear(table: Table) {

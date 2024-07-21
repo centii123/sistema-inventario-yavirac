@@ -1,4 +1,6 @@
-export interface Titulos {
+import { globalModels } from "src/app/core/models/globalModels";
+
+export interface Titulos extends globalModels {
     id:number;
     titulosOptenidos:string;
     institucion:string;

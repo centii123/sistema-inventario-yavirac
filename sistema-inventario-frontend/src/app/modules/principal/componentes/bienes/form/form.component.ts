@@ -8,13 +8,13 @@ interface Person {
   id:number;
   nombres: string;
   apellidos:string;
-  [key: string]: any; // Permite otras propiedades desconocidas
+  [key: string]: any;
 }
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./../../../../../core/styles/crudGlobal.css']
 })
 export class FormComponent implements OnInit {
   loadingSpiner!: boolean;
@@ -22,7 +22,6 @@ export class FormComponent implements OnInit {
   list: Bienes[] = [];
   modal: boolean = false;
   selected: Bienes | null = null;
-  message: string | null = null;
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
   formSelectData!:any[];
@@ -93,7 +92,6 @@ export class FormComponent implements OnInit {
       },
       
       error: error => {
-        this.message = `Error: ${error.message}`;
         this.loadingSpiner = false;
       }
     });
@@ -122,7 +120,6 @@ export class FormComponent implements OnInit {
 
   save() {
     if (this.form.invalid) {
-      this.message = 'Verificar los Datos a Ingresar';
       return;
     }
 
@@ -137,44 +134,28 @@ export class FormComponent implements OnInit {
 
       this.crudService.update(registro).subscribe({
         next: () => {
-          this.message = 'Nacionalidad actualizada correctamente';
           this.resetForm();
           this.load();
           this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Registro actualizado exitosamente!' });
         },
         error: error => {
-          this.message = `Error: ${error.message}`;
         }
       });
     } else {
       
       this.crudService.add(registro).subscribe({
         next: () => {
-          this.message = 'Bien creado correctamente';
           this.resetForm();
           this.load();
           this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
         },
         error: error => {
-          this.message = `Error: ${error.message}`;
         }
       });
       
     }
 
     this.modal = false;
-  }
-
-  delete(id: number) {
-    this.crudService.delete(id).subscribe({
-      next: () => {
-        this.message = 'Nacionalidad eliminada correctamente';
-        this.load();
-      },
-      error: error => {
-        this.message = `Error: ${error.message}`;
-      }
-    });
   }
 
   resetForm() {
@@ -185,7 +166,6 @@ export class FormComponent implements OnInit {
   cancel() {
     this.resetForm();
     this.modal = false;
-    this.message = 'Acción Cancelada';
   }
 
   openModal() {
@@ -224,10 +204,4 @@ export class FormComponent implements OnInit {
   getOptionLabel(data: any): string {
     return `${data.dni} - ${data.nombres}`;
   }
-
-
-
-
-
-
 }
