@@ -4,11 +4,14 @@ import java.math.BigDecimal;
 
 import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.CategoriasBienes.CategoriasBienes;
+import com.example.sistema.inventario.backend.aula.Aula;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
 import lombok.Data;
@@ -52,5 +55,10 @@ public class Bienes extends GlobalEntity {
 
     @ManyToOne
     private CategoriasBienes categoriaBien;
+
+    @ManyToOne
+    @JoinColumn(name = "aula_id")
+    @JsonIgnoreProperties("bienes")
+    private Aula aula;
 
 }
