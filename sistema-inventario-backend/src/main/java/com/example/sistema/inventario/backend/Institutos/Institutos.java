@@ -1,5 +1,6 @@
 package com.example.sistema.inventario.backend.Institutos;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Provincias.Provincias;
 
 import jakarta.persistence.Column;
@@ -12,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Institutos {
+public class Institutos extends GlobalEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

@@ -1,5 +1,7 @@
 package com.example.sistema.inventario.backend.Genero;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 
-public class Generos {
+public class Generos extends GlobalEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

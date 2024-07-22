@@ -1,5 +1,6 @@
 package com.example.sistema.inventario.backend.enfermedadCatastrofica;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Persona.Persona;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,7 +16,7 @@ import lombok.Data;
 @Data
 @Entity
 
-public class EnfermedadCatastrofica {
+public class EnfermedadCatastrofica extends GlobalEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

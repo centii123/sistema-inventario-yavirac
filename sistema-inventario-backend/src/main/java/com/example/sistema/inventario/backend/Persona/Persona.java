@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.EscalaOcupacional.EscalaOcupacionales;
 import com.example.sistema.inventario.backend.EstadoCivil.EstadoCivil;
 import com.example.sistema.inventario.backend.EstudiosenCurso.EstudiosenCursos;
@@ -35,7 +36,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Persona {
+public class Persona extends GlobalEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

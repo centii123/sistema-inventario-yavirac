@@ -1,5 +1,7 @@
 package com.example.sistema.inventario.backend.RolesInstitucionales;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class RolesInstitucionales {
+public class RolesInstitucionales extends GlobalEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

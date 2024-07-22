@@ -179,11 +179,11 @@ INSERT INTO users_roles (user_id, role_id) VALUES ((SELECT id FROM users where u
 INSERT INTO users_roles (user_id, role_id) VALUES ((SELECT id FROM users where username = 'user_apoyo'), (SELECT id FROM roles where name = 'ROLE_USUARIO_DE_APOYO'));
 
 /**/
-INSERT INTO roles_institucionales (descripcion)
+INSERT INTO roles_institucionales (descripcion,created_at, updated_at)
 VALUES
-  ('kaka' ),
-  ('sugyd'),
-  ('dygsddd');
+  ('kaka','2023-07-20 10:00:00', '2023-07-20 10:00:00' ),
+  ('sugyd','2023-07-20 10:00:00', '2023-07-20 10:00:00'),
+  ('dygsddd','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
 INSERT INTO estado_civil (nombre,created_at, updated_at)
@@ -193,26 +193,26 @@ VALUES
   ('divorciado','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
-INSERT INTO fecha_ingreso_instituto (cambio_grupo_ocupacional_modalidad, cambio_instituto_fusion, cambio_ocupacional_emergencia, primer_ingreso)
+INSERT INTO fecha_ingreso_instituto (cambio_grupo_ocupacional_modalidad,created_at, updated_at, cambio_instituto_fusion, cambio_ocupacional_emergencia, primer_ingreso)
 VALUES
-  ('2023-06-01 08:00:00', '2024-01-15 09:30:00', '2022-11-20 14:45:00', '2021-03-05 07:15:00'),
-  ('2022-05-10 10:20:00', '2023-07-25 11:45:00', '2023-03-15 12:30:00', '2020-02-10 08:50:00'),
-  ('2021-04-22 15:00:00', '2022-12-30 16:30:00', '2021-09-05 17:45:00', '2019-01-20 09:15:00');
+  ('2023-06-01 08:00:00','2023-07-20 10:00:00', '2023-07-20 10:00:00', '2024-01-15 09:30:00', '2022-11-20 14:45:00', '2021-03-05 07:15:00'),
+  ('2022-05-10 10:20:00','2023-07-20 10:00:00', '2023-07-20 10:00:00', '2023-07-25 11:45:00', '2023-03-15 12:30:00', '2020-02-10 08:50:00'),
+  ('2021-04-22 15:00:00','2023-07-20 10:00:00', '2023-07-20 10:00:00', '2022-12-30 16:30:00', '2021-09-05 17:45:00', '2019-01-20 09:15:00');
 
 /**/
-INSERT INTO carreras(descripcion)
-VALUES ('desarrollo de software'),('marketing'),('diseño de modas');
+INSERT INTO carreras(descripcion,created_at, updated_at)
+VALUES ('desarrollo de software','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('marketing','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('diseño de modas','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
 
-INSERT INTO provincias(descripcion)
-VALUES ('pichincha'),('Guayas'),('Azuay');
+INSERT INTO provincias(descripcion,created_at, updated_at)
+VALUES ('pichincha','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('Guayas','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('Azuay','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 /**/
 INSERT INTO institutos
-(canton, coordinacion_zonal, direccion_instituto, nombre, regimen_laboral, provincias_id)
-VALUES ('Quito', 'Zona Norte', 'Av. Amazonas y Naciones Unidas', 'Colegio Simón Bolívar', 'Contrato temporal', 1),
-('Guayaquil', 'Zona Sur', 'Av. Kennedy y Benjamín Carrión', 'Colegio Juan Montalvo', 'Contrato indefinido', 2),
-('Cuenca', 'Zona Centro', 'Av. de las Américas y Huayna Cápac', 'Escuela 9 de Octubre', 'Contrato a plazo fijo', 1);
+(canton,created_at, updated_at, coordinacion_zonal, direccion_instituto, nombre, regimen_laboral, provincias_id)
+VALUES ('Quito','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'Zona Norte', 'Av. Amazonas y Naciones Unidas', 'Colegio Simón Bolívar', 'Contrato temporal', 1),
+('Guayaquil','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'Zona Sur', 'Av. Kennedy y Benjamín Carrión', 'Colegio Juan Montalvo', 'Contrato indefinido', 2),
+('Cuenca','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'Zona Centro', 'Av. de las Américas y Huayna Cápac', 'Escuela 9 de Octubre', 'Contrato a plazo fijo', 1);
 
 
 
@@ -222,45 +222,45 @@ INSERT INTO categorias_aulas(descripcion,created_at, updated_at)
 VALUES ('oficina','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('aula','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('laboratorio','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
-INSERT INTO enfermedad_catastrofica (cargo_discapacidad, certificado_enfermedad, tipo_enfermedad)
-VALUES (2, 'ministerio_salud', 'insuficiencia renal'), (2, 'iess','cancer');
+INSERT INTO enfermedad_catastrofica (cargo_discapacidad,created_at, updated_at, certificado_enfermedad, tipo_enfermedad)
+VALUES (2,'2023-07-20 10:00:00', '2023-07-20 10:00:00', 'ministerio_salud', 'insuficiencia renal'), (2,'2023-07-20 10:00:00', '2023-07-20 10:00:00', 'iess','cancer');
 
 /**/
-INSERT INTO aula (custodio, descripcion, instruccion_formal, nombre, obtencion_titulo, registro_senesyt)
-VALUES ('johan', 'mesa', 'docente', 'johan', '2024-07-01',1425),
-('maria', 'silla', 'administrativa', 'maria', '2023-05-15',9876);
+INSERT INTO aula (custodio,created_at, updated_at, descripcion, instruccion_formal, nombre, obtencion_titulo, registro_senesyt)
+VALUES ('johan','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'mesa', 'docente', 'johan', '2024-07-01',1425),
+('maria','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'silla', 'administrativa', 'maria', '2023-05-15',9876);
 
 /**/
-INSERT INTO nacionalidad (nombre)
-VALUES ('ecuatoriano');
+INSERT INTO nacionalidad (nombre,created_at, updated_at)
+VALUES ('ecuatoriano','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
-INSERT INTO entidad_publica(codigo_instituto, entidad_publica, familiar_senecsyt, honorario_senecsyt, nombre_familiar, observaciones)
-VALUES ('15',1,1, 1, 'Johan', 'nuevo empleado' ),
-('20',2,1, 0, 'Maria', 'empleado transferido' );
+INSERT INTO entidad_publica(codigo_instituto,created_at, updated_at, entidad_publica, familiar_senecsyt, honorario_senecsyt, nombre_familiar, observaciones)
+VALUES ('15','2023-07-20 10:00:00', '2023-07-20 10:00:00',1,1, 1, 'Johan', 'nuevo empleado' ),
+('20','2023-07-20 10:00:00', '2023-07-20 10:00:00',2,1, 0, 'Maria', 'empleado transferido' );
 
 /**/
-INSERT INTO discapacidad (numero_carnet, porcentaje, tipo_discapacidad)
-VALUES ('123456', 15, 'discapacidad física'),
-('789012', 30, 'discapacidad sensorial');
+INSERT INTO discapacidad (numero_carnet,created_at, updated_at, porcentaje, tipo_discapacidad)
+VALUES ('123456','2023-07-20 10:00:00', '2023-07-20 10:00:00', 15, 'discapacidad física'),
+('789012','2023-07-20 10:00:00', '2023-07-20 10:00:00', 30, 'discapacidad sensorial');
 
 /**/
-INSERT INTO escala_ocupacionales (descripcion) VALUES
-('rector'), ('docente');
+INSERT INTO escala_ocupacionales (descripcion,created_at, updated_at) VALUES
+('rector','2023-07-20 10:00:00', '2023-07-20 10:00:00'), ('docente','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
 INSERT INTO titulos (titulos_optenidos,created_at, updated_at ,institucion, ano_del_titulo, intruccion_formal,numero_de_registro_senesyt) 
 VALUES ('ing. mecánico','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'U. central', '2002-05-10', 'tercer nivel', '4646465144');
 
 /**/
-INSERT INTO generos ( nombre ) VALUES ('masculino');
+INSERT INTO generos ( nombre,created_at, updated_at ) VALUES ('masculino','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
-INSERT INTO estudiosen_cursos ( nombre, tipo_de_titulo, fecha_de_inicio, fecha_de_fin, numero_de_horas) VALUES
-('masterado en mecanica', 'phd', '2024-06-05', '2025-09-07', 523);
+INSERT INTO estudiosen_cursos ( nombre,created_at, updated_at, tipo_de_titulo, fecha_de_inicio, fecha_de_fin, numero_de_horas) VALUES
+('masterado en mecanica','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'phd', '2024-06-05', '2025-09-07', 523);
 
 /**/
-INSERT INTO categorias_bienes ( nombre ) VALUES ('CPU');
+INSERT INTO categorias_bienes ( nombre,created_at, updated_at ) VALUES ('CPU','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
 INSERT INTO bienes (codigo_del_bien,created_at, updated_at, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id)
@@ -272,7 +272,7 @@ VALUES
 
 /**/
 INSERT INTO persona
-(apellidos, correo_personal, direccion_domiciliaria, dni, etnia, 
+(apellidos,created_at, updated_at, correo_personal, direccion_domiciliaria, dni, etnia, 
 fecha_de_nacimiento, horario_trabajo, materias_imparte, modalidad_jornada, 
 modalidad_laboral, nombres, rmu, telefono, telefono_domicilio, tipo_de_sangre, 
 aula_id, discapacidad_id, enfermedad_catastrofica_id, entidad_publica_id, 
@@ -280,11 +280,11 @@ escala_ocupacionales_id, estado_civil_id, estudiosen_cursos_id,
 fecha_ingreso_instituto_id, genero_id, institutos_id, nacionalidad_id, 
 provincia_id, roles_institucionales_id, user_id)
 VALUES 
-('Gómez', 'gomez@example.com', 'Av. Principal 123', '1234567890', 'Mestizo', 
+('Gómez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'gomez@example.com', 'Av. Principal 123', '1234567890', 'Mestizo', 
 '1990-05-15', '08:00-17:00', 'Matemáticas, Física', 1, 
 'Tiempo completo', 'Juan', 1500.50, '0987654321', '022345678', 'O+', 
 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1),
-('Pérez', 'perez@example.com', 'Calle Secundaria 456', '0987654321', 'Indígena', 
+('Pérez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'perez@example.com', 'Calle Secundaria 456', '0987654321', 'Indígena', 
 '1985-10-20', '07:00-16:00', 'Historia, Literatura', 1, 
 'Medio tiempo', 'María', 1200.75, '0998765432', '033456789', 'A-', 
 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,2);

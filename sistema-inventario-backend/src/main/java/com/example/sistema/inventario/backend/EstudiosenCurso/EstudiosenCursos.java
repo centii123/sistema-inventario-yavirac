@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class EstudiosenCursos {
+public class EstudiosenCursos extends GlobalEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

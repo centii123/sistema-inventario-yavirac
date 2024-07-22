@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Persona.Persona;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 
 @Data
 @Entity
-public class FechaIngresoInstituto {
+public class FechaIngresoInstituto extends GlobalEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
