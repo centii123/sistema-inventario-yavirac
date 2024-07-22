@@ -111,7 +111,7 @@ http://localhost:8080/generos/
 
 ### ESTUDIOS EN CURSO
 
-http://localhost:8080/categorias-bienes/
+http://localhost:8080/estudios-curso/
 
 ```json
 {
