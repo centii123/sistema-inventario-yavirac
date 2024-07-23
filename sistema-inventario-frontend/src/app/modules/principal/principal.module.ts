@@ -27,6 +27,7 @@ import { DividerModule } from 'primeng/divider';
 import { TableModule } from 'primeng/table';
 import { TableComponent } from './componentes/nacionalidad/table/table.component';
 import { FormComponent } from './componentes/nacionalidad/form/form.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { FormComponent } from './componentes/nacionalidad/form/form.component';
      CardModule,
      DividerModule,
      TableModule,
+     InputNumberModule
 
     // No es necesario importar BrowserModule, FormsModule, o BrowserAnimationsModule aquí si ya están en AppModule
   ]

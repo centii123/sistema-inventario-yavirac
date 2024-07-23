@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'estado-civil', loadChildren: () => import('./componentes/estado-civil/estado-civil.module').then(m => m.EstadoCivilModule) },
   { path: 'categoria-aula', loadChildren: () => import('./componentes/categorias-aula/categorias-aula.module').then(m => m.CategoriasAulaModule), data: { sidebarContent: 'inventario' } },
   { path: 'bienes', loadChildren: () => import('./componentes/bienes/bienes.module').then(m => m.BienesModule), data: { sidebarContent: 'inventario' } },
+  { path: 'persona', loadChildren: () => import('./componentes/persona/persona.module').then(m => m.PersonaModule), },
   { path: 'categoria-bien', loadChildren: () => import('./componentes/categorias-bienes/categorias-bienes.module').then(m => m.CategoriasBienesModule), data: { sidebarContent: 'inventario' } },
   { path: 'estudios-en-curso', loadChildren: () => import('./componentes/estudios-en-curso/estudios-en-curso.module').then(m => m.EstudiosEnCursoModule) },
   { path: 'carreras', loadChildren: () => import('./componentes/carreras/carreras.module').then(m => m.CarrerasModule) },
@@ -38,7 +39,6 @@ const routes: Routes = [
   { path: 'inventario-oficinas', component: InventarioOficinasComponent, data: { sidebarContent: 'inventario' } },
   { path: 'nacionalidad-table', component: InventarioLaboratoriosComponent },
   { path: 'nacionalidad', component: FormComponent },
-
 
   // Puedes añadir más rutas según necesites
 ];
