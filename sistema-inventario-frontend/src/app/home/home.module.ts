@@ -7,6 +7,8 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { CardModule } from '../shared/card/card.module';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { SharedModule } from '../shared/shared.module';
     HomeRoutingModule,
     FormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    CardModule
   ],
   exports: [
     HomePageComponent,

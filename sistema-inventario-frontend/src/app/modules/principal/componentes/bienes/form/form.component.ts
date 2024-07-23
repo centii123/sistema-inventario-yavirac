@@ -11,6 +11,12 @@ interface Person {
   [key: string]: any;
 }
 
+interface formSelectData{
+  persona:any[],
+    categoria:any[],
+    aula:any[]
+}
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -24,8 +30,11 @@ export class FormComponent implements OnInit {
   selected: Bienes | null = null;
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
-  formSelectData!:any[];
-  formSelectDataCategoria!:any[];
+  formSelectData:formSelectData={
+    persona:[],
+    categoria:[],
+    aula:[]
+  };
 
   getPerson(id:any,index:number){
     if(typeof id == 'number'){
@@ -74,6 +83,7 @@ export class FormComponent implements OnInit {
       valorIva: new FormControl('', [Validators.required]),
       serie: new FormControl('', [Validators.required]),
       categoriaBien:new FormControl('', [Validators.required]),
+      aula:new FormControl(null),
     });
   }
 
@@ -113,7 +123,8 @@ export class FormComponent implements OnInit {
       valor: registro.valor,
       valorIva: registro.valorIva,
       serie: registro.serie,
-      categoriaBien: registro.categoriaBien
+      categoriaBien: registro.categoriaBien,
+      aula:registro.aula ? registro.aula.id : null
     });
     
   }
@@ -128,6 +139,14 @@ export class FormComponent implements OnInit {
       registro.estado=Boolean(registro.estado)
       registro.categoriaBien={
         'id':registro.categoriaBien.id
+      }
+      console.log(registro)
+      if(typeof registro.aula === 'number'){
+        registro.aula={
+          id:registro.aula
+        }
+      }else{
+        registro.aula=null
       }
 
     if (registro.id) {
@@ -173,7 +192,7 @@ export class FormComponent implements OnInit {
     this.resetForm();
     this.crudService.getAll('persona/').subscribe(
       e=>{
-        this.formSelectData=e
+        this.formSelectData.persona=e
       },
       error=>{
         console.error(error)
@@ -181,7 +200,17 @@ export class FormComponent implements OnInit {
     )
     this.crudService.getAll('categorias-bienes/').subscribe(
       e=>{
-        this.formSelectDataCategoria=e
+        this.formSelectData.categoria=e
+        this.loadingSpinerForm=false
+      },
+      error=>{
+        console.error(error)
+        this.loadingSpinerForm=false
+      }
+    )
+    this.crudService.getAll('aula/').subscribe(
+      e=>{
+        this.formSelectData.aula=e
         this.loadingSpinerForm=false
       },
       error=>{

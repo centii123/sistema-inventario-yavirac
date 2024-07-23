@@ -20,8 +20,8 @@
                             <div class="d-flex">
                                 <div class="col me-3">
                                     <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="custodio" placeholder="* Custodio"
-                                            [options]="formSelectData" [filter]="true" filterBy="dni,nombres"
+                                        <p-dropdown formControlName="custodio" placeholder="Custodio"
+                                            [options]="formSelectData.persona" [filter]="true" filterBy="dni,nombres"
                                             [showClear]="true" optionLabel="id">
                                             <ng-template let-data pTemplate="item">
                                                 <div class="flex align-items-center gap-2">
@@ -32,7 +32,7 @@
                                                 <div>{{ getOptionLabel(selectedCustodio) }}</div>
                                             </ng-template>
                                         </p-dropdown>
-                                        <label for="ftxt-custodio">* Custodio</label>
+                                        <label for="ftxt-custodio">Custodio</label>
                                     </span>
                                     <span class="p-float-label mb-4">
                                         <input pInputText id="ftxt-nombre" type="text" formControlName="nombre"
@@ -63,10 +63,17 @@
                                 <div class="col">
                                     <span class="p-float-label mb-4">
                                         <p-dropdown formControlName="categoriaBien" placeholder="* Categoria Del Bien"
-                                            [options]="formSelectDataCategoria" [filter]="true" filterBy="nombre"
+                                            [options]="formSelectData.categoria" [filter]="true" filterBy="nombre"
                                             [showClear]="true" optionLabel="nombre">
                                         </p-dropdown>
                                         <label for="ftxt-custodio">* Categoria</label>
+                                    </span>
+                                    <span class="p-float-label mb-4">
+                                        <p-dropdown formControlName="aula" placeholder="Aula"
+                                            [options]="formSelectData.aula" [filter]="true" filterBy="nombre"
+                                            [showClear]="true" optionLabel="nombre" optionValue="id">
+                                        </p-dropdown>
+                                        <label for="ftxt-custodio">Aula</label>
                                     </span>
                                     <span class="p-float-label mb-4">
                                         <p-dropdown formControlName="estado" [options]="['true','false']"
