@@ -1,4 +1,4 @@
-<app-spinner [load]="loadingSpiner">
+<app-spinner [load]="funcionalidad.loadingSpiner">
     <app-navbar></app-navbar>
   
     <div class="estudiosEnCurso-container">
@@ -7,10 +7,12 @@
       </div>
       <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
   
-      <p-dialog class="custom-dialog bg-blue-900" header="Estudios en Curso" [(visible)]="modal" [modal]="true"
-        (onHide)="closeModal()" [draggable]="true" [resizable]="true">
+      <p-dialog class="custom-dialog bg-blue-900" header="Estudios en Curso" [(visible)]="funcionalidad.modal" [modal]="true"
+        (onHide)="funcionalidad.closeModal()" [draggable]="true" [resizable]="true">
+        
         <br>
-        <form [formGroup]="form" (ngSubmit)="save()" class="custom-form">
+        <form [formGroup]="funcionalidad.form"  class="custom-form">
+          <app-spinner [load]="funcionalidad.loadingSpinerForm">    
           <div class="p-fluid p-formgrid grid custom-form-grid">
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
               <span class="p-float-label">
@@ -46,24 +48,26 @@
           <div class="central custom-toolbar">
             <div class="p-toolbar-group-center">
               <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
-                type="submit" pTooltip="Guardar" tooltipPosition="right"></button>
+                type="submit"(click)="funcionalidad.save()" pTooltip="Guardar" tooltipPosition="right"></button>
   
               <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar" tooltipPosition="right"></button>
+                icon="pi pi-times" (click)="funcionalidad.cancel()" pTooltip="Cancelar" tooltipPosition="right"></button>
             </div>
           </div>
+        </app-spinner>
+
         </form>
       </p-dialog>
   
       <p-card class="custom-card">
         <div class="caja-boton-principal custom-button-box">
-          <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
+          <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="funcionalidad.openModal()"
             tooltipPosition="right"></button>
         </div>
   
         <p-divider class="custom-divider"></p-divider>
   
-        <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
+        <app-table [list]="funcionalidad.list" (selectedOneRegister)="setSeleccionado($event)">
         </app-table>
       </p-card>
     </div>

@@ -4,6 +4,7 @@ import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { EstudiosEnCursoRoutingModule } from './estudios-en-curso-routing.module';
+import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { EstudiosEnCursoRoutingModule } from './estudios-en-curso-routing.module
     ...CrudModules
   ],
   providers:[
-    CrudService,{provide:'url', useValue:'estudios-curso/'}
+    CrudService,{provide:'url', useValue:'estudios-curso/'},
+    CrudFuncionalidadFormService
   ]
 
 })

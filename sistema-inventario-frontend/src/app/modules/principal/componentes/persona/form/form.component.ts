@@ -141,7 +141,7 @@ export class FormComponent implements OnInit {
     this.crudService.getAll().subscribe({
       next: (data: Persona[]) => {
         this.list = data;
-        this.list.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+        this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
         this.list.forEach((e,index) => {
          
         });
