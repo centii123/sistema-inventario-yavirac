@@ -1,9 +1,13 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
 import { Titulos } from '../../model/titulos';
+import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
+import { CrudFuncionalidadTableService } from '../../service/crud-funcionalidad-table.service';
+import { MessageService } from 'primeng/api';
+import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
 
 
 @Component({
@@ -11,55 +15,20 @@ import { Titulos } from '../../model/titulos';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent{
+  FechaOptener=(fecha: any)=>obtenerFecha(fecha)
   @Input() list: Titulos[] = [];
   @Output() selectedOneRegister = new EventEmitter<Titulos>();
   selectedAllRegister: Titulos[] = [];
   loading: boolean = false;
+  @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
+  mensagge: any;
+  tablaFuncionalidad:CrudFuncionalidadTableService<Titulos>
 
-  constructor(private crudService: CrudService, private apiService: ApiService) {}
+  constructor(private crudService: CrudService, private CrudFuncionalidadTableService:CrudFuncionalidadTableService<Titulos>,private messageService: MessageService
 
-  ngOnInit(): void {
-    this.getAllRegister();
-  }
-
-  obtenerFecha(fechaISO: any): string {
-    const indiceT = fechaISO.indexOf('T');
-    if (indiceT !== -1) {
-        return fechaISO.substring(0, indiceT);
-    } else {
-        return fechaISO;
-    }
-}
-
-  getAllRegister(): void {
-    this.loading = true;
-    this.crudService.getAll().subscribe(
-      (data: Titulos[]) => {
-        this.list = data;
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error fetching nacionalidades:', error);
-        this.loading = false;
-      }
-    );
-  }
-
-  exportExcel(): void {
-    if (this.list.length > 0) {
-      this.apiService.exportExcel(this.list, 'Nacionalidades');
-    } else {
-      console.warn('No hay datos para exportar');
-    }
-  }
-
-  exportPdf(): void {
-    if (this.list.length > 0) {
-      this.apiService.exportPdf(this.list, 'Nacionalidades');
-    } else {
-      console.warn('No hay datos para exportar');
-    }
+  ) {
+    this.tablaFuncionalidad=CrudFuncionalidadTableService
   }
 
   edit(register: Titulos): void {
@@ -67,15 +36,27 @@ export class TableComponent implements OnInit {
   }
 
   deleteRegister(id: number): void {
-    this.crudService.delete(id).subscribe(
-      () => {
-        this.list = this.list.filter(n => n.id !== id);
-      },
-      (error) => {
-        console.error('Error deleting nacionalidad:', error);
-      }
-    );
-  }
+    this.mensagge = {
+        message: '¿Esta seguro que desea eliminar este registro?',
+        messageError: { severity: 'warn', summary: 'Cancelado', detail: 'Acción de eliminado Cancelado' }
+    }
+    this.confirmDialog?.confirm1(() => {
+        this.crudService.delete(id).subscribe(
+            () => {
+                this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
+                this.list = this.list.filter(n => n.id !== id);
+            },
+            (error) => {
+                if (error.error.message = "could not execute statement [ERROR: update o delete en ") {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar porque ahy un recurso utilizando este registro' });
+                } else {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
+                }
+            }
+        );
+    }, this.mensagge);
+
+}
 
   deleteSelected(): void {
     const idsToDelete = this.selectedAllRegister.map(n => n.id);
@@ -93,14 +74,5 @@ export class TableComponent implements OnInit {
         console.error('Error deleting nacionalidades:', error);
       }
     );
-  }
-
-  clear(table: Table) {
-    table.clear();
-  }
-
-  applyFilter(event: Event, table: Table): void {
-    const inputElement = event.target as HTMLInputElement;
-    table.filterGlobal(inputElement.value, 'contains');
   }
 }

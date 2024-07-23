@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'carreras', loadChildren: () => import('./componentes/carreras/carreras.module').then(m => m.CarrerasModule) },
   { path: 'enfermedad-catastrofica', loadChildren: () => import('./componentes/enfermedad-catastrofica/enfermedad-catastrofica.module').then(m => m.EnfermdadCatastroficaModule) },
   { path: 'titulos', loadChildren: () => import('./componentes/titulos/titulos.module').then(m => m.TitulosModule) },
+  { path: 'generos', loadChildren: () => import('./componentes/genero/genero.module').then(m => m.GeneroModule) },
   { path: 'docentes', pathMatch: 'full', redirectTo: 'docentes' },
   { path: 'docentes', component: DocentesComponent },
   { path: 'docentes-info', component: DocentesInfoComponent },

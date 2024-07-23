@@ -9,21 +9,21 @@
         <ng-template pTemplate="caption">
           <div class="botones">
             <div>
-              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="tablaFuncionalidad.exportExcel('titulos',list)"
                 class="p-button-sm p-button-outlined p-button-success p-mr-2 m-1" pTooltip="Exportar a Excel"
                 tooltipPosition="bottom"></button>
-              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="tablaFuncionalidad.exportPdf('titulos',list)"
                 class="p-button-sm p-button-outlined p-button-danger p-mr-2 m-1" pTooltip="Exportar a PDF"
                 tooltipPosition="bottom"></button>
               <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger p-button-sm m-1"
                 (click)="deleteSelected()" pTooltip="Eliminar Seleccionados" tooltipPosition="right"
                 [disabled]="!selectedAllRegister || !selectedAllRegister.length"></button>
               <button pButton label="Limpiar" class="p-button-outlined p-button-sm m-1" icon="pi pi-filter-slash"
-                (click)="clear(dt)" pTooltip="Quitar Filtros" tooltipPosition="right"></button>
+                (click)="tablaFuncionalidad.clear(dt)" pTooltip="Quitar Filtros" tooltipPosition="right"></button>
             </div>
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input pInputText type="text" class="p-inputtext-sm" (input)="applyFilter($event, dt)"
+              <input pInputText type="text" class="p-inputtext-sm" (input)="tablaFuncionalidad.applyFilter($event, dt)"
                 placeholder="Busqueda General" />
             </span>
           </div>
@@ -77,7 +77,7 @@
             <td>{{rowIndex + 1}}</td>
             <td>{{nacionalidad.titulosOptenidos}}</td>
             <td>{{nacionalidad.institucion}}</td>
-            <td>{{obtenerFecha(nacionalidad.anoDelTitulo)}}</td>
+            <td>{{FechaOptener(nacionalidad.anoDelTitulo)}}</td>
             <td>{{nacionalidad.intruccionFormal}}</td>
             <td>{{nacionalidad.numeroDeRegistroSenesyt}}</td>
             <td>
