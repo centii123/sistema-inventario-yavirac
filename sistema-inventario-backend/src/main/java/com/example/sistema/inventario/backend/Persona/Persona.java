@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.example.sistema.inventario.backend.GlobalEntity;
+import com.example.sistema.inventario.backend.Carreras.Carreras;
 import com.example.sistema.inventario.backend.EscalaOcupacional.EscalaOcupacionales;
 import com.example.sistema.inventario.backend.EstadoCivil.EstadoCivil;
 import com.example.sistema.inventario.backend.EstudiosenCurso.EstudiosenCursos;
@@ -122,6 +123,9 @@ public class Persona extends GlobalEntity{
 
     @ManyToOne
     private Nacionalidad nacionalidad;
+
+    @ManyToOne
+    private Carreras carreras;
 
     @ManyToOne
     private Provincias provincia;

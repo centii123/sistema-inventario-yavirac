@@ -276,7 +276,7 @@ INSERT INTO persona
 (apellidos,created_at, updated_at, correo_personal, direccion_domiciliaria, dni, etnia, 
 fecha_de_nacimiento, horario_trabajo, materias_imparte, modalidad_jornada, 
 modalidad_laboral, nombres, rmu, telefono, telefono_domicilio, tipo_de_sangre, 
-aula_id, discapacidad_id, enfermedad_catastrofica_id, entidad_publica_id, 
+aula_id, carreras_id, discapacidad_id, enfermedad_catastrofica_id, entidad_publica_id, 
 escala_ocupacionales_id, estado_civil_id, estudiosen_cursos_id, 
 fecha_ingreso_instituto_id, genero_id, institutos_id, nacionalidad_id, 
 provincia_id, roles_institucionales_id, user_id)
@@ -284,11 +284,11 @@ VALUES
 ('Gómez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'gomez@example.com', 'Av. Principal 123', '1234567890', 'Mestizo', 
 '1990-05-15', '08:00-17:00', 'Matemáticas, Física', 1, 
 'Tiempo completo', 'Juan', 1500.50, '0987654321', '022345678', 'O+', 
-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1),
+1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1),
 ('Pérez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'perez@example.com', 'Calle Secundaria 456', '0987654321', 'Indígena', 
 '1985-10-20', '07:00-16:00', 'Historia, Literatura', 1, 
 'Medio tiempo', 'María', 1200.75, '0998765432', '033456789', 'A-', 
-2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,2);
+2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,2);
 
 /*INSERT INTO aula_bienes(
 	aula_id, bienes_id)
