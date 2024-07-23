@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { CrudService } from '../../service/crud.service';
-import { EstadoCivil } from '../../model/estado-civil';
 import { MessageService } from 'primeng/api';
 import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
 import { CrudFuncionalidadTableService } from '../../service/crud-funcionalidad-table.service';
+import { Genero } from '../../model/genero';
 
 @Component({
   selector: 'app-table',
@@ -12,20 +12,20 @@ import { CrudFuncionalidadTableService } from '../../service/crud-funcionalidad-
   styleUrls: ['./table.component.css']
 })
 export class TableComponent {
-  @Input() list: EstadoCivil[] = [];
-  @Output() selectedOneRegister = new EventEmitter<EstadoCivil>();
-  selectedAllRegister: EstadoCivil[] = [];
+  @Input() list: Genero[] = [];
+  @Output() selectedOneRegister = new EventEmitter<Genero>();
+  selectedAllRegister: Genero[] = [];
   loading: boolean = false;
   @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
   mensagge: any;
-  tablaFuncionalidad:CrudFuncionalidadTableService<EstadoCivil>
+  tablaFuncionalidad:CrudFuncionalidadTableService<Genero>
 
-  constructor(private crudService: CrudService, private CrudFuncionalidadTableService: CrudFuncionalidadTableService<EstadoCivil>, private messageService: MessageService) {
+  constructor(private crudService: CrudService, private CrudFuncionalidadTableService: CrudFuncionalidadTableService<Genero>, private messageService: MessageService) {
     this.tablaFuncionalidad=CrudFuncionalidadTableService
   }
 
 
-  edit(register: EstadoCivil): void {
+  edit(register: Genero): void {
     this.selectedOneRegister.emit(register);
   }
 

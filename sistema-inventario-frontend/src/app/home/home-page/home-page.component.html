@@ -16,16 +16,18 @@
 
   <main >
       <div class="container ">
-        <a href="/docentes" class="card">
-          <img src="/assets/img/profe.jpeg" alt="Docentes" />
-          <h3>DOCENTES</h3>
-          <p>Información sobre tus docentes.</p>
-        </a>
-        <a href="/inventario" class="card">
-          <img src="/assets/img/inve.jpeg" alt="Laboratorios" />
-          <h3>INVENTARIOS</h3>
-          <p>Información sobre los laboratorios, aulas y oficinas.</p>
-        </a>
+        <app-card 
+        ruta="/docentes" 
+        rutaImg="/assets/img/profe.jpeg"
+        titulo="DOCENTES"
+        descripcion="Información sobre tus docentes."
+        ></app-card>
+        <app-card 
+        ruta="/inventario" 
+        rutaImg="/assets/img/inve.jpeg"
+        titulo="INVENTARIOS"
+        descripcion="Información sobre los laboratorios, aulas y oficinas."
+        ></app-card>
       </div>
   </main>
   <app-footer></app-footer>

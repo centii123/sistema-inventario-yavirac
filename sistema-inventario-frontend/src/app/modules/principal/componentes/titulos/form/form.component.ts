@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CrudService } from '../../service/crud.service';
+import {FormControl,Validators } from '@angular/forms';
 import { Titulos } from '../../model/titulos';
 import { CrudFuncionalidadFormService } from '../../service/crud-funcionalidad-Form.service';
+import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
 
 
 
@@ -39,20 +39,12 @@ export class FormComponent implements OnInit {
       id: registro.id,
       titulosOptenidos:registro.titulosOptenidos,
       institucion:registro.institucion,
-      anoDelTitulo:this.obtenerFecha(registro.anoDelTitulo),
+      anoDelTitulo:obtenerFecha(registro.anoDelTitulo),
       intruccionFormal:registro.intruccionFormal,
       numeroDeRegistroSenesyt:registro.numeroDeRegistroSenesyt,
     });
     this.funcionalidad.modal = true;
   }
-  obtenerFecha(fechaISO: any): string {
-    const indiceT = fechaISO.indexOf('T');
-    if (indiceT !== -1) {
-        return fechaISO.substring(0, indiceT);
-    } else {
-        return fechaISO;
-    }
-}
 
 
 

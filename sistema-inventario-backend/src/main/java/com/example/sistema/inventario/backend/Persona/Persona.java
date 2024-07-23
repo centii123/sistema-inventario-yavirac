@@ -23,6 +23,7 @@ import com.example.sistema.inventario.backend.entidadPublica.EntidadPublica;
 import com.example.sistema.inventario.backend.nacionalidad.Nacionalidad;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -134,8 +135,7 @@ public class Persona extends GlobalEntity{
     private RolesInstitucionales rolesInstitucionales;
 
     @JsonIgnoreProperties("persona")
-    @OneToOne
-    @JoinColumn( updatable = false, nullable = false)
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
     private Aula aula;
 
     @JsonIgnoreProperties("persona")

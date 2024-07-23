@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CrudService } from '../../service/crud.service';
-import { CategoriaBienes } from '../../model/categorias-bienes';
 import { CrudFuncionalidadFormService } from '../../service/crud-funcionalidad-Form.service';
+import { FormControl, Validators } from '@angular/forms';
+import { Genero } from '../../model/genero';
 
 
 @Component({
@@ -11,23 +10,22 @@ import { CrudFuncionalidadFormService } from '../../service/crud-funcionalidad-F
   styleUrls: ['./../../../../../core/styles/crudGlobal.css']
 })
 export class FormComponent implements OnInit {
-
-  funcionalidad: CrudFuncionalidadFormService<CategoriaBienes>;
+  funcionalidad: CrudFuncionalidadFormService<Genero>;
 
   constructor(
-    funcionalidad: CrudFuncionalidadFormService<CategoriaBienes>
+    funcionalidad: CrudFuncionalidadFormService<Genero>
   ) {
     this.funcionalidad = funcionalidad
     this.funcionalidad.form = this.funcionalidad.initForm({
       id: new FormControl(null),
       nombre: new FormControl('', [Validators.required])
-    });
+  });
   }
 
   ngOnInit(): void {
     this.funcionalidad.load();
   }
-  setSeleccionado(registro: CategoriaBienes) {
+  setSeleccionado(registro: Genero) {
     this.funcionalidad.selected = registro;
     this.funcionalidad.form.setValue({
       id: registro.id,
@@ -35,6 +33,7 @@ export class FormComponent implements OnInit {
     });
     this.funcionalidad.modal = true;
   }
+
 
 
 }

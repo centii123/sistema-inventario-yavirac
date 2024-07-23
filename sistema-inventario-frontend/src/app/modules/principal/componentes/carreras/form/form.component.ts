@@ -7,7 +7,7 @@ import { Carreras } from '../../model/carreras';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./../../../../../core/styles/crudGlobal.css']
 })
 export class FormComponent implements OnInit {
   loadingSpiner!: boolean;

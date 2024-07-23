@@ -225,11 +225,7 @@ VALUES ('oficina','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('aula','2023-07
 INSERT INTO enfermedad_catastrofica (cargo_discapacidad,created_at, updated_at, certificado_enfermedad, tipo_enfermedad)
 VALUES (2,'2023-07-20 10:00:00', '2023-07-20 10:00:00', 'ministerio_salud', 'insuficiencia renal'), (2,'2023-07-20 10:00:00', '2023-07-20 10:00:00', 'iess','cancer');
 
-/**/
-INSERT INTO aula (custodio,created_at, updated_at, descripcion, instruccion_formal, nombre, obtencion_titulo, registro_senesyt)
-VALUES ('johan','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'mesa', 'docente', 'johan', '2024-07-01',1425),
-('maria','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'silla', 'administrativa', 'maria', '2023-05-15',9876),
-('maria','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'silla', 'administrativa', 'maria', '2023-05-15',9876);
+
 
 /**/
 INSERT INTO nacionalidad (nombre,created_at, updated_at)
@@ -263,32 +259,24 @@ INSERT INTO estudiosen_cursos ( nombre,created_at, updated_at, tipo_de_titulo, f
 /**/
 INSERT INTO categorias_bienes ( nombre,created_at, updated_at ) VALUES ('CPU','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
-/**/
-INSERT INTO bienes (codigo_del_bien,created_at, updated_at, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id,aula_id)
-VALUES
-  ('wwwputow7w7gf','2023-07-20 10:00:00', '2023-07-20 10:00:00', 1, 'nueva', true, 'hp', 'm7x', 'laptop', 'sin observaciones', '12345abc', 15.1, 11, 1,1),
-  ('abcde12345','2023-07-20 10:00:00', '2023-07-20 10:00:00', 2, 'antiguo', false, 'dell', 'xps13', 'ordenador', 'requiere mantenimiento', '67890def', 20.5, 16, 1,2),
-  ('fghij67890','2023-07-20 10:00:00', '2023-07-20 10:00:00', 3, 'nuevo', true, 'acer', 'swift3', 'laptop', 'sin detalles', '54321ghi', 25.0, 21, 1,3);
+
 
 
 /**/
 INSERT INTO persona
 (apellidos,created_at, updated_at, correo_personal, direccion_domiciliaria, dni, etnia, 
 fecha_de_nacimiento, horario_trabajo, materias_imparte, modalidad_jornada, 
-modalidad_laboral, nombres, rmu, telefono, telefono_domicilio, tipo_de_sangre, 
-aula_id, carreras_id, discapacidad_id, enfermedad_catastrofica_id, entidad_publica_id, 
+modalidad_laboral, nombres, rmu, telefono, telefono_domicilio, tipo_de_sangre, carreras_id, discapacidad_id, enfermedad_catastrofica_id, entidad_publica_id, 
 escala_ocupacionales_id, estado_civil_id, estudiosen_cursos_id, 
 fecha_ingreso_instituto_id, genero_id, institutos_id, nacionalidad_id, 
 provincia_id, roles_institucionales_id, user_id)
 VALUES 
 ('Gómez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'gomez@example.com', 'Av. Principal 123', '1234567890', 'Mestizo', 
 '1990-05-15', '08:00-17:00', 'Matemáticas, Física', 1, 
-'Tiempo completo', 'Juan', 1500.50, '0987654321', '022345678', 'O+', 
-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1),
+'Tiempo completo', 'Juan', 1500.50, '0987654321', '022345678', 'O+', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1),
 ('Pérez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'perez@example.com', 'Calle Secundaria 456', '0987654321', 'Indígena', 
 '1985-10-20', '07:00-16:00', 'Historia, Literatura', 1, 
-'Medio tiempo', 'María', 1200.75, '0998765432', '033456789', 'A-', 
-2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,2);
+'Medio tiempo', 'María', 1200.75, '0998765432', '033456789', 'A-', 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,2);
 
 /*INSERT INTO aula_bienes(
 	aula_id, bienes_id)

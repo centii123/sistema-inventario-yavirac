@@ -1,6 +1,6 @@
 import { globalModels } from "src/app/core/models/globalModels";
 
-export interface CategoriaBienes  extends globalModels{
+export interface Genero extends globalModels {
     id: number;
-    nombre?: string;
+    nombre: string;
 }

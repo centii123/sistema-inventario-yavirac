@@ -4,7 +4,7 @@ import { CrudService } from './crud.service';
 import { MessageService } from 'primeng/api';
 
 interface WithUpdatedAt {
-    updatedAt: string;
+    updatedAt?: string;
 }
 
 @Injectable({
@@ -38,7 +38,7 @@ export class CrudFuncionalidadFormService<tipo extends WithUpdatedAt> {
         this.crudService.getAll().subscribe({
             next: (data: tipo[]) => {
                 this.list = data;
-                this.list.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+                this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
                 this.loadingSpiner = false
             },
             error: error => {

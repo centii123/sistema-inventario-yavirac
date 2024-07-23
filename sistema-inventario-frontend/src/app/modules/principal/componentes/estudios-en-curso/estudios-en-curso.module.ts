@@ -15,7 +15,7 @@ import { EstudiosEnCursoRoutingModule } from './estudios-en-curso-routing.module
     ...CrudModules
   ],
   providers:[
-    CrudService,{provide:'url', useValue:'estudios-en-curso/'}
+    CrudService,{provide:'url', useValue:'estudios-curso/'}
   ]
 
 })

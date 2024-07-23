@@ -3,7 +3,9 @@ import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
+//import { CategoriaAula } from '../../model/categoria-aula';
 import { CategoriaBienes } from '../../model/categorias-bienes';
+import { CategoriaAula } from '../../model/categoria-aula';
 
 @Component({
   selector: 'app-table',
@@ -15,7 +17,6 @@ export class TableComponent implements OnInit {
   @Output() selectedOneRegister = new EventEmitter<CategoriaBienes>();
   selectedAllRegister: CategoriaBienes[] = [];
   loading: boolean = false;
-categoriaBienes: any;
 
   constructor(private crudService: CrudService, private apiService: ApiService) {}
 
@@ -31,7 +32,7 @@ categoriaBienes: any;
         this.loading = false;
       },
       (error) => {
-        console.error('Error fetching categoriasBienes:', error);
+        console.error('Error fetching nacionalidades:', error);
         this.loading = false;
       }
     );
@@ -39,7 +40,7 @@ categoriaBienes: any;
 
   exportExcel(): void {
     if (this.list.length > 0) {
-      this.apiService.exportExcel(this.list, 'CategoriasBienes');
+      this.apiService.exportExcel(this.list, 'Nacionalidades');
     } else {
       console.warn('No hay datos para exportar');
     }
@@ -47,13 +48,13 @@ categoriaBienes: any;
 
   exportPdf(): void {
     if (this.list.length > 0) {
-      this.apiService.exportPdf(this.list, 'CategoriasBienes');
+      this.apiService.exportPdf(this.list, 'Nacionalidades');
     } else {
       console.warn('No hay datos para exportar');
     }
   }
 
-  edit(register: CategoriaBienes): void {
+  edit(register: CategoriaAula): void {
     this.selectedOneRegister.emit(register);
   }
 
@@ -63,7 +64,7 @@ categoriaBienes: any;
         this.list = this.list.filter(n => n.id !== id);
       },
       (error) => {
-        console.error('Error deleting categoriaBienes:', error);
+        console.error('Error deleting nacionalidad:', error);
       }
     );
   }
@@ -81,7 +82,7 @@ categoriaBienes: any;
         this.selectedAllRegister = [];
       },
       (error) => {
-        console.error('Error deleting categoriasBienes:', error);
+        console.error('Error deleting nacionalidades:', error);
       }
     );
   }

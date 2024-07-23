@@ -3,9 +3,9 @@ import { FormComponent } from './form/form.component';
 import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
-import { EstadoCivilRoutingModule } from './estado-civil-routing.module';
 import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
 import { CrudFuncionalidadTableService } from '../service/crud-funcionalidad-table.service';
+import { GeneroRoutingModule } from './genero-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,13 +13,13 @@ import { CrudFuncionalidadTableService } from '../service/crud-funcionalidad-tab
     TableComponent,
   ],
   imports: [
-    EstadoCivilRoutingModule,
+    GeneroRoutingModule,
     ...CrudModules
   ],
   providers:[
-    CrudService,{provide:'url', useValue:'estado-civil/'},
+    CrudService,{provide:'url', useValue:'generos/'},
     CrudFuncionalidadFormService,CrudFuncionalidadTableService
   ]
 
 })
-export class EstadoCivilModule { }
+export class GeneroModule { }
