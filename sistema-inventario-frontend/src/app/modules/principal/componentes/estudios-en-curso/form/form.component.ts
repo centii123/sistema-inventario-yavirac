@@ -6,7 +6,7 @@ import { EstudiosEnCurso } from '../../model/estudios-en-curso';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./../../../../../core/styles/crudGlobal.css']
 })
 export class FormComponent implements OnInit {
   loadingSpiner!: boolean;
@@ -34,11 +34,11 @@ export class FormComponent implements OnInit {
   initForm(): FormGroup {
     return this.formBuilder.group({
       id: new FormControl(null),
-      tipo_de_titulo: new FormControl('', [Validators.required]),
-      fecha_de_inicio: new FormControl('', [Validators.required]),
-      fecha_de_fin: new FormControl('', [Validators.required]),
+      tipoDeTitulo: new FormControl('', [Validators.required]),
+      fechaDeInicio: new FormControl('', [Validators.required]),
+      fechaDeFin: new FormControl('', [Validators.required]),
       nombre: new FormControl('', [Validators.required]),
-      numero_de_horas: new FormControl('', [Validators.required])
+      numeroDeHoras: new FormControl('', [Validators.required])
     });
   }
 
@@ -60,11 +60,11 @@ export class FormComponent implements OnInit {
     this.selected = registro;
     this.form.setValue({
       id: registro.id,
-      tipo_de_titulo: registro.tipo_de_titulo,
-      fecha_de_inicio: registro.fecha_de_inicio,
-      fecha_de_fin: registro.fecha_de_fin,
+      tipoDeTitulo: registro.tipoDeTitulo,
+      fechaDeInicio: registro.fechaDeInicio,
+      fechaDeFin: registro.fechaDeFin,
       nombre: registro.nombre,
-      numero_de_horas: registro.numero_de_horas
+      numeroDeHoras: registro.numeroDeHoras
     });
     this.modal = true;
   }

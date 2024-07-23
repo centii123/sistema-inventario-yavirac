@@ -41,22 +41,22 @@
                 <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
               </div>
             </th>
-            <th pSortableColumn="tipo_de_titulo">
+            <th pSortableColumn="tipoDeTitulo">
               <div class="flex justify-content-between align-items-center">Tipo de Título
-                <p-sortIcon field="tipo_de_titulo"></p-sortIcon>
-                <p-columnFilter type="text" field="tipo_de_titulo" display="menu"></p-columnFilter>
+                <p-sortIcon field="tipoDeTitulo"></p-sortIcon>
+                <p-columnFilter type="text" field="tipoDeTitulo" display="menu"></p-columnFilter>
               </div>
             </th>
-            <th pSortableColumn="fecha_de_inicio">
+            <th pSortableColumn="fechaDeInicio">
               <div class="flex justify-content-between align-items-center">Fecha de Inicio
-                <p-sortIcon field="fecha_de_inicio"></p-sortIcon>
-                <p-columnFilter type="date" field="fecha_de_inicio" display="menu"></p-columnFilter>
+                <p-sortIcon field="fechaDeInicio"></p-sortIcon>
+                <p-columnFilter type="date" field="fechaDeInicio" display="menu"></p-columnFilter>
               </div>
             </th>
-            <th pSortableColumn="fecha_de_fin">
+            <th pSortableColumn="fechaDeFin">
               <div class="flex justify-content-between align-items-center">Fecha de Fin
-                <p-sortIcon field="fecha_de_fin"></p-sortIcon>
-                <p-columnFilter type="date" field="fecha_de_fin" display="menu"></p-columnFilter>
+                <p-sortIcon field="fechaDeFin"></p-sortIcon>
+                <p-columnFilter type="date" field="fechaDeFin" display="menu"></p-columnFilter>
               </div>
             </th>
             <th pSortableColumn="nombre">
@@ -65,10 +65,10 @@
                 <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
               </div>
             </th>
-            <th pSortableColumn="numero_de_horas">
+            <th pSortableColumn="numeroDeHoras">
               <div class="flex justify-content-between align-items-center">Número de Horas
-                <p-sortIcon field="numero_de_horas"></p-sortIcon>
-                <p-columnFilter type="number" field="numero_de_horas" display="menu"></p-columnFilter>
+                <p-sortIcon field="numeroDeHoras"></p-sortIcon>
+                <p-columnFilter type="number" field="numeroDeHoras" display="menu"></p-columnFilter>
               </div>
             </th>
             <th>Acciones</th>
@@ -81,11 +81,11 @@
               <p-tableCheckbox [value]="estudiosEnCurso"></p-tableCheckbox>
             </td>
             <td>{{rowIndex + 1}}</td>
-            <td>{{estudiosEnCurso.tipo_de_titulo}}</td>
-            <td>{{estudiosEnCurso.fecha_de_inicio}}</td>
-            <td>{{estudiosEnCurso.fecha_de_fin}}</td>
+            <td>{{estudiosEnCurso.tipoDeTitulo}}</td>
+            <td>{{estudiosEnCurso.fechaDeInicio}}</td>
+            <td>{{estudiosEnCurso.fechaDeFin}}</td>
             <td>{{estudiosEnCurso.nombre}}</td>
-            <td>{{estudiosEnCurso.numero_de_horas}}</td>
+            <td>{{estudiosEnCurso.numeroDeHoras}}</td>
             <td>
               <button pButton pRipple icon="pi pi-pencil"
                 class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"

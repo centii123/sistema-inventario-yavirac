@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'categoria-aula', loadChildren: () => import('./componentes/categorias-aula/categorias-aula.module').then(m => m.CategoriasAulaModule), data: { sidebarContent: 'inventario' } },
   { path: 'bienes', loadChildren: () => import('./componentes/bienes/bienes.module').then(m => m.BienesModule), data: { sidebarContent: 'inventario' } },
   { path: 'categoria-bien', loadChildren: () => import('./componentes/categorias-bienes/categorias-bienes.module').then(m => m.CategoriasBienesModule), data: { sidebarContent: 'inventario' } },
-  { path: 'estudios-en-curso', loadChildren: () => import('./componentes/estudios-en-curso/estudios-en-curso.module').then(m => m.EstudiosEnCursoModule) },
+  { path: 'estudios-curso', loadChildren: () => import('./componentes/estudios-en-curso/estudios-en-curso.module').then(m => m.EstudiosEnCursoModule) },
   { path: 'carreras', loadChildren: () => import('./componentes/carreras/carreras.module').then(m => m.CarrerasModule) },
   { path: 'enfermedad-catastrofica', loadChildren: () => import('./componentes/enfermedad-catastrofica/enfermedad-catastrofica.module').then(m => m.EnfermdadCatastroficaModule) },
   { path: 'titulos', loadChildren: () => import('./componentes/titulos/titulos.module').then(m => m.TitulosModule) },

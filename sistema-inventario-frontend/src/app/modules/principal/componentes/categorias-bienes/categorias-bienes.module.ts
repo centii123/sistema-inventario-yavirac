@@ -4,6 +4,7 @@ import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { CategoriasBienesRoutingModule } from './categorias-bienes-routing.module';
+import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
 
 @NgModule({
   declarations: [
@@ -15,8 +16,8 @@ import { CategoriasBienesRoutingModule } from './categorias-bienes-routing.modul
     ...CrudModules
   ],
   providers:[
-    CrudService,{provide:'url', useValue:'categorias-bienes/'}
+    CrudService, {provide: 'url', useValue: 'categorias-bienes/'},
+    CrudFuncionalidadFormService
   ]
-
 })
 export class CategoriasBienesModule { }
