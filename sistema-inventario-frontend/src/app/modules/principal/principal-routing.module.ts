@@ -13,19 +13,18 @@ import { InventarioLaboratoriosComponent } from './inventario-laboratorios/inven
 import { InventarioOficinasComponent } from './inventario-oficinas/inventario-oficinas.component';
 import { DocentesNewComponent } from './docentes-new/docentes-new.component';
 import { FormComponent } from './componentes/nacionalidad/form/form.component';
-import { UserGuard } from 'src/app/core/guards/user.guard';
 
 
 // Define las rutas
 const routes: Routes = [
-  { path: 'estado-civil', canActivate:[UserGuard], loadChildren: () => import('./componentes/estado-civil/estado-civil.module').then(m => m.EstadoCivilModule) },
-  { path: 'categoria-aula', canActivate:[UserGuard], loadChildren: () => import('./componentes/categorias-aula/categorias-aula.module').then(m => m.CategoriasAulaModule), data: { sidebarContent: 'inventario' } },
-  { path: 'bienes', canActivate:[UserGuard], loadChildren: () => import('./componentes/bienes/bienes.module').then(m => m.BienesModule), data: { sidebarContent: 'inventario' } },
-  { path: 'categoria-bien', canActivate:[UserGuard], loadChildren: () => import('./componentes/categorias-bienes/categorias-bienes.module').then(m => m.CategoriasBienesModule), data: { sidebarContent: 'inventario' } },
-  { path: 'estudios-en-curso', canActivate:[UserGuard], loadChildren:() => import('./componentes/estudios-en-curso/estudios-en-curso.module').then(m => m.EstudiosEnCursoModule) },
-  { path: 'carreras', canActivate:[UserGuard], loadChildren:() => import('./componentes/carreras/carreras.module').then(m => m.CarrerasModule) },
-  { path: 'enfermedad-catastrofica', canActivate:[UserGuard], loadChildren:() => import('./componentes/enfermedad-catastrofica/enfermedad-catastrofica.module').then(m => m.EnfermdadCatastroficaModule) },
-  { path: 'titulos', canActivate:[UserGuard], loadChildren: () => import('./componentes/titulos/titulos.module').then(m => m.TitulosModule) },
+  { path: 'estado-civil', loadChildren: () => import('./componentes/estado-civil/estado-civil.module').then(m => m.EstadoCivilModule) },
+  { path: 'categoria-aula', loadChildren: () => import('./componentes/categorias-aula/categorias-aula.module').then(m => m.CategoriasAulaModule), data: { sidebarContent: 'inventario' } },
+  { path: 'bienes', loadChildren: () => import('./componentes/bienes/bienes.module').then(m => m.BienesModule), data: { sidebarContent: 'inventario' } },
+  { path: 'categoria-bien', loadChildren: () => import('./componentes/categorias-bienes/categorias-bienes.module').then(m => m.CategoriasBienesModule), data: { sidebarContent: 'inventario' } },
+  { path: 'estudios-en-curso', loadChildren: () => import('./componentes/estudios-en-curso/estudios-en-curso.module').then(m => m.EstudiosEnCursoModule) },
+  { path: 'carreras', loadChildren: () => import('./componentes/carreras/carreras.module').then(m => m.CarrerasModule) },
+  { path: 'enfermedad-catastrofica', loadChildren: () => import('./componentes/enfermedad-catastrofica/enfermedad-catastrofica.module').then(m => m.EnfermdadCatastroficaModule) },
+  { path: 'titulos', loadChildren: () => import('./componentes/titulos/titulos.module').then(m => m.TitulosModule) },
   { path: 'docentes', pathMatch: 'full', redirectTo: 'docentes' },
   { path: 'docentes', component: DocentesComponent },
   { path: 'docentes-info', component: DocentesInfoComponent },
