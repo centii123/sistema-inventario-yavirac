@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.sistema.inventario.backend.aula.Aula;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -33,7 +35,7 @@ public class RolesInstitucionalesController {
     // GET rol institucional por ID
     @Operation(summary = "Obtiene un rol-institucional, Requiere roles-institucionales-obtener-id")
     @PreAuthorize("hasAuthority('roles-institucionales-obtener-id')")
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/")
     public RolesInstitucionales getRolesInstitucionalesById(@PathVariable("id") Long id) {
         return rolesService.getRolesInstitucionalesById(id);
     }
@@ -49,15 +51,15 @@ public class RolesInstitucionalesController {
     // PUT actualizar rol institucional existente
     @Operation(summary = "Edita un rol-institucional, Requiere roles-institucionales-editar")
     @PreAuthorize("hasAuthority('roles-institucionales-editar')")
-    @PutMapping("/{id}")
-    public RolesInstitucionales updateRolesInstitucionales(@PathVariable("id") Long id, @RequestBody RolesInstitucionales rolesInstitucionales) {
-        return rolesService.updateRolesInstitucionales(id, rolesInstitucionales);
+    @PutMapping("/")
+    public RolesInstitucionales update(@RequestBody RolesInstitucionales entity){
+        return rolesService.createRolesInstitucionales(entity);
     }
 
     // DELETE rol institucional por ID
     @Operation(summary = "Elimina un rol-institucional, Requiere roles-institucionales-eliminar")
     @PreAuthorize("hasAuthority('roles-institucionales-eliminar')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/")
     public void deleteRolesInstitucionales(@PathVariable("id") Long id) {
         rolesService.deleteRolesInstitucionales(id);
     }
