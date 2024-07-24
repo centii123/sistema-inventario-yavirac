@@ -94,10 +94,12 @@ export class CrudFuncionalidadFormService<tipo extends WithUpdatedAt> {
     }
 
     openModal() {
+        this.resetForm();
         this.modal = true;
     }
 
     closeModal() {
+        this.resetForm();
         this.modal = false;
     }
 }
