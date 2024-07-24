@@ -278,6 +278,19 @@ VALUES
 '1985-10-20', '07:00-16:00', 'Historia, Literatura', 1, 
 'Medio tiempo', 'María', 1200.75, '0998765432', '033456789', 'A-', 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,2);
 
+
+/**/
+INSERT INTO aula (created_at, updated_at, descripcion, instruccion_formal, nombre, obtencion_titulo, registro_senesyt, categoria_aula_id, persona_id)
+VALUES ('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'mesa', 'docente', 'johan', '2024-07-01',1425,1,1),
+('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'silla', 'administrativa', 'maria', '2023-05-15',9876,2,2);
+
+/**/
+INSERT INTO bienes (codigo_del_bien,created_at, updated_at, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id,aula_id)
+VALUES
+  ('wwwputow7w7gf','2023-07-20 10:00:00', '2023-07-20 10:00:00', 1, 'nueva', true, 'hp', 'm7x', 'laptop', 'sin observaciones', '12345abc', 15.1, 11, 1,1),
+  ('abcde12345','2023-07-20 10:00:00', '2023-07-20 10:00:00', 2, 'antiguo', false, 'dell', 'xps13', 'ordenador', 'requiere mantenimiento', '67890def', 20.5, 16, 1,2),
+  ('fghij67890','2023-07-20 10:00:00', '2023-07-20 10:00:00', 3, 'nuevo', true, 'acer', 'swift3', 'laptop', 'sin detalles', '54321ghi', 25.0, 21, 1,2);
+
 /*INSERT INTO aula_bienes(
 	aula_id, bienes_id)
 	VALUES (1, 1), (1, 2), (1, 3);*/

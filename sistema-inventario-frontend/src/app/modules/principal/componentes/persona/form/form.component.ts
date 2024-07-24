@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { MessageService } from 'primeng/api';
-import { Aula, Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInstituto, Persona, User } from '../../model/persona';
+import { Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInstituto, Persona, User } from '../../model/persona';
 
 
 
@@ -141,7 +141,7 @@ export class FormComponent implements OnInit {
     this.crudService.getAll().subscribe({
       next: (data: Persona[]) => {
         this.list = data;
-        this.list.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+        this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
         this.list.forEach((e,index) => {
          
         });
@@ -190,7 +190,7 @@ export class FormComponent implements OnInit {
   }
 
   save() {
-    if (this.form.invalid || this.discapacidadForm.invalid || this.enfermedadForm.invalid || this.entidadPublicaForm.invalid || this.fechaIngresoForm.invalid || this.aulaForm.invalid || this.userForm.invalid) {
+    if (this.form.invalid || this.discapacidadForm.invalid || this.enfermedadForm.invalid || this.entidadPublicaForm.invalid || this.fechaIngresoForm.invalid || this.userForm.invalid) {
       return;
     }
   
@@ -198,7 +198,6 @@ export class FormComponent implements OnInit {
     const enfermedadCatastrofica: EnfermedadCatastrofica = this.enfermedadForm.value;
     const entidadPublica: EntidadPublica = this.entidadPublicaForm.value;
     const fechaIngresoInstituto: FechaIngresoInstituto = this.fechaIngresoForm.value;
-    const aula: Aula = this.aulaForm.value;
     const user: User = this.userForm.value;
   
     this.crudService.add(discapacidad, 'discapacidad/').subscribe({
@@ -209,59 +208,51 @@ export class FormComponent implements OnInit {
               next: (respEntidad) => {
                 this.crudService.add(fechaIngresoInstituto, 'fechaIngresoInstituto/').subscribe({
                   next: (respFechaIngreso) => {
-                    this.crudService.add(aula, 'aula/').subscribe({
-                      next: (respAula) => {
-                        this.crudService.add(user, 'user/').subscribe({
-                          next: (respUser) => {
-                            const persona: Persona = this.form.value;
-                            
-                            //ids recien creados XD
-                            persona.discapacidad = { ...discapacidad, id: respDiscapacidad.id };
-                            persona.enfermedadCatastrofica = { ...enfermedadCatastrofica, id: respEnfermedad.id };
-                            persona.entidadPublica = { ...entidadPublica, id: respEntidad.id };
-                            persona.fechaIngresoInstituto = { ...fechaIngresoInstituto, id: respFechaIngreso.id };
-                            persona.aula = { ...aula, id: respAula.id };
-                            persona.user = { ...user, id: respUser.id };
+                    this.crudService.add(user, 'user/').subscribe({
+                      next: (respUser) => {
+                        const persona: Persona = this.form.value;
+                        
+                        // ids recien creados XD
+                        persona.discapacidad = { ...discapacidad, id: respDiscapacidad.id };
+                        persona.enfermedadCatastrofica = { ...enfermedadCatastrofica, id: respEnfermedad.id };
+                        persona.entidadPublica = { ...entidadPublica, id: respEntidad.id };
+                        persona.fechaIngresoInstituto = { ...fechaIngresoInstituto, id: respFechaIngreso.id };
+                        persona.user = { ...user, id: respUser.id };
   
-                            // FK
-                            persona.escalaOcupacionales = { id: persona.escalaOcupacionales.id };
-                            persona.estadoCivil = { id: persona.estadoCivil.id };
-                            persona.estudiosenCursos = { id: persona.estudiosenCursos.id };
-                            persona.genero = { id: persona.genero.id };
-                            persona.institutos = { id: persona.institutos.id };
-                            persona.nacionalidad = { id: persona.nacionalidad.id };
-                            persona.carreras = { id: persona.carreras.id };
-                            persona.provincia = { id: persona.provincia.id };
-                            persona.rolesInstitucionales = { id: persona.rolesInstitucionales.id };
+                        // FK
+                        persona.escalaOcupacionales = { id: persona.escalaOcupacionales.id };
+                        persona.estadoCivil = { id: persona.estadoCivil.id };
+                        persona.estudiosenCursos = { id: persona.estudiosenCursos.id };
+                        persona.genero = { id: persona.genero.id };
+                        persona.institutos = { id: persona.institutos.id };
+                        persona.nacionalidad = { id: persona.nacionalidad.id };
+                        persona.carreras = { id: persona.carreras.id };
+                        persona.provincia = { id: persona.provincia.id };
+                        persona.rolesInstitucionales = { id: persona.rolesInstitucionales.id };
   
-                            if (persona.id) {
-                              this.crudService.update(persona).subscribe({
-                                next: () => {
-                                  this.resetForm();
-                                  this.load();
-                                  this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Registro actualizado exitosamente!' });
-                                },
-                                error: error => {
-                                  // Manejar error
-                                }
-                              });
-                            } else {
-                              this.crudService.add(persona).subscribe({
-                                next: () => {
-                                  this.resetForm();
-                                  this.load();
-                                  this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
-                                },
-                                error: error => {
-                                  // Manejar error
-                                }
-                              });
+                        if (persona.id) {
+                          this.crudService.update(persona).subscribe({
+                            next: () => {
+                              this.resetForm();
+                              this.load();
+                              this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Registro actualizado exitosamente!' });
+                            },
+                            error: error => {
+                              // Manejar error
                             }
-                          },
-                          error: error => {
-                            // Manejar error
-                          }
-                        });
+                          });
+                        } else {
+                          this.crudService.add(persona).subscribe({
+                            next: () => {
+                              this.resetForm();
+                              this.load();
+                              this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
+                            },
+                            error: error => {
+                              // Manejar error
+                            }
+                          });
+                        }
                       },
                       error: error => {
                         // Manejar error
@@ -290,6 +281,7 @@ export class FormComponent implements OnInit {
   
     this.modal = false;
   }
+  
   
   
 

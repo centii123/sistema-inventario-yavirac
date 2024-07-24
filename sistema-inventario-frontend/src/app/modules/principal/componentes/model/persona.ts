@@ -26,11 +26,6 @@ export interface FechaIngresoInstituto {
   primerIngreso: Date;
 }
 
-export interface Aula {
-  id: number;
-  nombre: string;
-}
-
 export interface User {
   id: number;
   username: string;
@@ -71,6 +66,5 @@ export interface Persona extends globalModels {
   enfermedadCatastrofica: EnfermedadCatastrofica;
   entidadPublica: EntidadPublica;
   fechaIngresoInstituto: FechaIngresoInstituto;
-  aula: Aula;
   user: User;
 }

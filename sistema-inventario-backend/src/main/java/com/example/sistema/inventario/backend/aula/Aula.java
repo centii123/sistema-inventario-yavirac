@@ -50,9 +50,6 @@ public class Aula extends GlobalEntity{
     @Column(length = 50)
     private String registroSenesyt;
 
-    @Column(length = 50)
-    private String custodio;
-
     @ManyToOne
     private CategoriasAulas categoriaAula;
 
