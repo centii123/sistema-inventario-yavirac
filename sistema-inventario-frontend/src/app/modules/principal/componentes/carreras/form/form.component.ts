@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { Carreras } from '../../model/carreras';
+import { CrudFuncionalidadFormService } from '../../service/crud-funcionalidad-Form.service';
 
 
 @Component({
@@ -10,124 +11,30 @@ import { Carreras } from '../../model/carreras';
   styleUrls: ['./../../../../../core/styles/crudGlobal.css']
 })
 export class FormComponent implements OnInit {
-  loadingSpiner!: boolean;
-  form: FormGroup;
-  list: Carreras[] = [];
-  modal: boolean = false;
-  selected: Carreras | null = null;
-  message: string | null = null;
+
+  funcionalidad: CrudFuncionalidadFormService<Carreras>;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private crudService: CrudService
+    funcionalidad: CrudFuncionalidadFormService<Carreras>
   ) {
-    this.form= this.initForm();
-  }
-
-  ngOnInit(): void {
-    this.load();
-  }
-
-  get f() {
-    return this.form.controls;
-  }
-
-  initForm(): FormGroup {
-    return this.formBuilder.group({
+    this.funcionalidad = funcionalidad
+    this.funcionalidad.form = this.funcionalidad.initForm({
       id: new FormControl(null),
       descripcion: new FormControl('', [Validators.required])
     });
   }
 
-  load() {
-    this.loadingSpiner = true;
-    this.crudService.getAll().subscribe({
-      next: (data: Carreras[]) => {
-        this.list = data;
-        this.loadingSpiner = false;
-      },
-      error: error => {
-        this.message = `Error: ${error.message}`;
-        this.loadingSpiner = false;
-      }
-    });
+  ngOnInit(): void {
+    this.funcionalidad.load();
   }
-
   setSeleccionado(registro: Carreras) {
-    this.selected = registro;
-    this.form.setValue({
+    this.funcionalidad.selected = registro;
+    this.funcionalidad.form.setValue({
       id: registro.id,
       descripcion: registro.descripcion
     });
-    this.modal = true;
+    this.funcionalidad.modal = true;
   }
 
-  save() {
-    if (this.form.invalid) {
-      this.message = 'Verificar los Datos a Ingresar';
-      return;
-    }
-
-    const registro: Carreras = this.form.value;
-
-    if (registro.id) {
-
-      this.crudService.update(registro).subscribe({
-        next: () => {
-          this.message = 'Carreras actualizado correctamente';
-          this.resetForm();
-          this.load();
-        },
-        error: error => {
-          this.message = `Error: ${error.message}`;
-        }
-      });
-    } else {
-  
-      this.crudService.add(registro).subscribe({
-        next: () => {
-          this.message = 'Carreras creada correctamente';
-          this.resetForm();
-          this.load();
-        },
-        error: error => {
-          this.message = `Error: ${error.message}`;
-        }
-      });
-    }
-
-    this.modal = false;
-  }
-
-  delete(id: number) {
-    this.crudService.delete(id).subscribe({
-      next: () => {
-        this.message = 'Carrreras eliminada correctamente';
-        this.load();
-      },
-      error: error => {
-        this.message = `Error: ${error.message}`;
-      }
-    });
-  }
-
-  resetForm() {
-    this.form.reset();
-    this.selected = null;
-  }
-
-  cancel() {
-    this.resetForm();
-    this.modal = false;
-    this.message = 'Acción Cancelada';
-  }
-
-  openModal() {
-    this.modal = true;
-  }
-
-  closeModal() {
-    this.modal = false;
-  }
 
 }
