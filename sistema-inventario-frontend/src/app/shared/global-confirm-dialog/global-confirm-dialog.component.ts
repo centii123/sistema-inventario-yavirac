@@ -26,6 +26,7 @@ export class GlobalConfirmDialogComponent {
       this.confirmationService.confirm({
           message: messages.message,
           icon: 'pi pi-exclamation-triangle',
+          
           accept: () => {
             funtionConfirm();
             this.confirmed.emit();
