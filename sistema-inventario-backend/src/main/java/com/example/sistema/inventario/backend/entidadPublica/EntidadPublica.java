@@ -13,9 +13,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class EntidadPublica extends GlobalEntity{
 
     @Id

@@ -17,9 +17,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class Titulos extends GlobalEntity{
 
     @Id

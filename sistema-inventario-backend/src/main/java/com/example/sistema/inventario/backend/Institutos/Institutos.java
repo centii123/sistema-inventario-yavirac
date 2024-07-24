@@ -10,9 +10,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class Institutos extends GlobalEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,9 +25,11 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class Aula extends GlobalEntity{
 
     @Id

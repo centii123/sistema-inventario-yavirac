@@ -8,10 +8,13 @@ import com.example.sistema.inventario.backend.Persona.Persona;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.util.Date;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class FechaIngresoInstituto extends GlobalEntity{
 
     @Id

@@ -15,9 +15,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class EstudiosenCursos extends GlobalEntity{
 
     @Id
