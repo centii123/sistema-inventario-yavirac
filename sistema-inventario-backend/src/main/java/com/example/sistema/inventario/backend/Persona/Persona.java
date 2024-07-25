@@ -91,22 +91,22 @@ public class Persona extends GlobalEntity{
 
     @JsonIgnoreProperties("persona")
     @OneToOne
-    @JoinColumn(updatable = false, nullable = false)
+    @JoinColumn(updatable = false, nullable = true)
     private Discapacidad discapacidad;
 
     @JsonIgnoreProperties("persona")
     @OneToOne
-    @JoinColumn(updatable = false, nullable = false)
+    @JoinColumn(updatable = false, nullable = true)
     private EnfermedadCatastrofica enfermedadCatastrofica;
 
     @JsonIgnoreProperties("persona")
     @OneToOne
-    @JoinColumn(updatable = false, nullable = false)
+    @JoinColumn(updatable = false, nullable = true)
     private EntidadPublica entidadPublica;
 
     @JsonIgnoreProperties("persona")
     @OneToOne
-    @JoinColumn( updatable = false, nullable = false)
+    @JoinColumn( updatable = false, nullable = true)
     private FechaIngresoInstituto fechaIngresoInstituto;
 
     @ManyToOne
@@ -142,6 +142,6 @@ public class Persona extends GlobalEntity{
 
     @JsonIgnoreProperties("persona")
     @OneToOne
-    @JoinColumn( updatable = false, nullable = false)
+    @JoinColumn( updatable = false, nullable = true)
     private User user;
 }
