@@ -9,21 +9,27 @@ export interface Discapacidad {
 
 export interface EnfermedadCatastrofica {
   id: number;
+  cargoDiscapacidad: string;
   certificadoEnfermedad: string;
   tipoEnfermedad: string;
 }
 
 export interface EntidadPublica {
   id: number;
-  nombre: string;
+  entidadPublica: number;
+  honorarioSenecsyt: number;
+  familiarSenecsyt:number;
+  nombreFamiliar: string;
+  observaciones: string;
+  codigoInstituto: string;
 }
 
 export interface FechaIngresoInstituto {
   id: number;
   cambioGrupoOcupacionalModalidad: Date;
+  primerIngreso: Date;
   cambioInstitutoFusion: Date;
   cambioOcupacionalEmergencia: Date;
-  primerIngreso: Date;
 }
 
 export interface User {
@@ -48,7 +54,7 @@ export interface Persona extends globalModels {
   modalidadJornada: number;
   horarioTrabajo: string;
   materiasImparte: string;
-  rmu: string;
+  rmu: number;
 
   // FK
   escalaOcupacionales: any;

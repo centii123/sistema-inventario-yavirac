@@ -6,8 +6,6 @@
             <h4>Docentes</h4>
         </div>
         <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
-
-
         <p-dialog class="custom-dialog bg-blue-900" header="Docentes" [(visible)]="modal" [modal]="true"
             (onHide)="closeModal()" [style]="{ width: '60rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
             [maximizable]="true">
@@ -19,178 +17,313 @@
                         <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                             <div class="d-flex">
                                 <div class="col me-3">
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-nombres" type="text" formControlName="nombres"
-                                            required>
-                                        <label for="ftxt-nombres">* Nombre</label>
-                                    </span>
+                                    <!-- Subformularios de uno a uno -->
 
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-apellidos" type="text" formControlName="apellidos"
-                                            required>
-                                        <label for="ftxt-apellidos">* Apellido</label>
-                                    </span>
+                                    <!-- Discapacidad Form -->
+                                    <div formGroupName="discapacidadForm">
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-numeroCarnet" type="text"
+                                                formControlName="numeroCarnet" required>
+                                            <label for="ftxt-numeroCarnet">* Número de Carnet</label>
+                                        </span>
 
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-etnia" type="text" formControlName="etnia" required>
-                                        <label for="ftxt-etnia">* Etnia</label>
-                                    </span>
+                                        <div class="p-float-label mb-4">
+                                            <p-inputNumber formControlName="porcentaje" [showButtons]="true"
+                                                inputId="porcentaje"></p-inputNumber>
+                                            <label for="ftxt-porcentaje">* Porcentaje</label>
+                                        </div>
 
-                                    <!-- <span class="p-float-label mb-4">
-                                        <p-calendar id="ftxt-fechaDeNacimiento" formControlName="fechaDeNacimiento"
-                                            required dateFormat="yy-mm-dd"></p-calendar>
-                                        <label for="ftxt-fechaDeNacimiento">* Fecha de Nacimiento</label>
-                                    </span> -->
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-tipoDiscapacidad" type="text"
+                                                formControlName="tipoDiscapacidad" required>
+                                            <label for="ftxt-tipoDiscapacidad">* Tipo de Discapacidad</label>
+                                        </span>
+                                    </div>
 
-                                    <span class="p-float-label mb-4">
-                                              <input pInputText id="ftxt-fechaDeNacimiento" type="date" formControlName="fechaDeNacimiento" required>
-                                              <label for="ftxt-fecha_de_inicio">* Fecha de Nacimiento</label>
-                                    </span>
+                                    <!-- Enfermedad Form -->
+                                    <div formGroupName="enfermedadForm">
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-cargoDiscapacidad" type="text"
+                                                formControlName="cargoDiscapacidad" required>
+                                            <label for="ftxt-cargoDiscapacidad">* Cargo discapacidad</label>
+                                        </span>
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-certificadoEnfermedad" type="text"
+                                                formControlName="certificadoEnfermedad" required>
+                                            <label for="ftxt-certificadoEnfermedad">* Certificado de Enfermedad</label>
+                                        </span>
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-tipoEnfermedad" type="text"
+                                                formControlName="tipoEnfermedad" required>
+                                            <label for="ftxt-tipoEnfermedad">* Tipo de Enfermedad</label>
+                                        </span>
+                                    </div>
+
+                                    <!-- Entidad Pública Form -->
+                                    <div formGroupName="entidadPublicaForm">
+                                        
+                                        <span class="p-float-label mb-4">
+                                            <p-dropdown formControlName="entidadPublica"
+                                                        placeholder="* Entidad Publica" [options]="entidadPublicaOptions"
+                                                        [filter]="true" [showClear]="true" optionLabel="label" optionValue="value">
+                                            </p-dropdown>
+                                            <label for="ftxt-entidadPublica">* Labora entidad publica</label>
+                                        </span>
+                                        
+                                        <span class="p-float-label mb-4">
+                                            <p-dropdown formControlName="honorarioSenecsyt"
+                                                        placeholder="* Horario Senecsyt" [options]="honorarioSenecsytOptions"
+                                                        [filter]="true" [showClear]="true" optionLabel="label" optionValue="value">
+                                            </p-dropdown>
+                                            <label for="ftxt-honorarioSenecsyt">* Horario Senecsyt</label>
+                                        </span>
+                                        
+                                        <span class="p-float-label mb-4">
+                                            <p-dropdown formControlName="familiarSenecsyt"
+                                                        placeholder="* Familiar Senecsyt" [options]="familiarSenecsytOptions"
+                                                        [filter]="true" [showClear]="true" optionLabel="label" optionValue="value">
+                                            </p-dropdown>
+                                            <label for="ftxt-familiarSenecsyt">* Familiar Senecsyt</label>
+                                        </span>
+                                        
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-nombreFamiliar" type="text"
+                                                formControlName="nombreFamiliar" required>
+                                            <label for="ftxt-nombreFamiliar">* Nombre del Familiar</label>
+                                        </span>
+
+                                        <span class="p-float-label mb-4">
+                                            <textarea id="float-observaciones" formControlName="observaciones"  rows="3" cols="30" pInputTextarea ></textarea>
+                                            <label for="float-observaciones">* Observaciones</label>
+                                        </span>
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-codigoInstituto" type="text"
+                                                formControlName="codigoInstituto" required>
+                                            <label for="ftxt-codigoInstituto">* Codigo Instituto</label>
+                                        </span>
+
+                                    </div>
+
+                                    <!-- Fecha Ingreso Form -->
+                                    <div formGroupName="fechaIngresoForm">
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-cambioOcupacionalEmergencia" type="date"
+                                                formControlName="cambioOcupacionalEmergencia" required>
+                                            <label for="ftxt-cambioOcupacionalEmergencia">* Cambio Ocupacional
+                                                Emergencia</label>
+                                        </span>
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-primerIngreso" type="date"
+                                                formControlName="primerIngreso" required>
+                                            <label for="ftxt-primerIngreso">* Primer Ingreso</label>
+                                        </span>
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-cambioGrupoOcupacionalModalidad" type="date"
+                                                formControlName="cambioGrupoOcupacionalModalidad" required>
+                                            <label for="ftxt-cambioGrupoOcupacionalModalidad">* Cambio Grupo Ocupacional
+                                                Modalidad</label>
+                                        </span>
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-cambioInstitutoFusion" type="date"
+                                                formControlName="cambioInstitutoFusion" required>
+                                            <label for="ftxt-cambioInstitutoFusion">* Cambio Instituto Fusión</label>
+                                        </span>
+                                    </div>
+
+                                    <!-- User Form -->
+                                    <div formGroupName="userForm">
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-username" type="text" formControlName="username"
+                                                required>
+                                            <label for="ftxt-username">* Username</label>
+                                        </span>
+
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-password" type="password"
+                                                formControlName="password" required>
+                                            <label for="ftxt-password">* Password</label>
+                                        </span>
+                                    </div>
+
+                                    <!--Persona-->
+                                    <div formGroupName="personaForm">
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-nombres" type="text" formControlName="nombres"
+                                                required>
+                                            <label for="ftxt-nombres">* Nombre</label>
+                                        </span>
+    
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-apellidos" type="text" formControlName="apellidos"
+                                                required>
+                                            <label for="ftxt-apellidos">* Apellido</label>
+                                        </span>
+    
+                                        <span class="p-float-label mb-4">
+                                            <input pInputText id="ftxt-etnia" type="text" formControlName="etnia" required>
+                                            <label for="ftxt-etnia">* Etnia</label>
+                                        </span>
+                                        <div class="col">
+    
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-fechaDeNacimiento" type="date"
+                                                    formControlName="fechaDeNacimiento" required>
+                                                <label for="ftxt-fecha_de_inicio">* Fecha de Nacimiento</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-dni" type="text" formControlName="dni" required>
+                                                <label for="ftxt-dni">* Dni</label>
+                                            </span>
+        
+                                            <div class="p-float-label mb-4">
+                                                <p-inputNumber formControlName="telefono" [showButtons]="true"
+                                                    inputId="telefono"> </p-inputNumber>
+                                                <label for="ftxt-telefono">* Telefono</label>
+                                            </div>
+        
+                                            <div class="p-float-label mb-4">
+                                                <p-inputNumber formControlName="telefonoDomicilio" [showButtons]="true"
+                                                    inputId="telefonoDomicilio"> </p-inputNumber>
+                                                <label for="ftxt-telefonoDomicilio">* Telefono Domicilio</label>
+                                            </div>
+        
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-correoPersonal" type="text"
+                                                    formControlName="correoPersonal" required>
+                                                <label for="ftxt-correoPersonal">* Correo Personal</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-tipoDeSangre" type="text"
+                                                    formControlName="tipoDeSangre" required>
+                                                <label for="ftxt-tipoDeSangre">* Tipo de sangre</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-direccionDomiciliaria" type="text"
+                                                    formControlName="direccionDomiciliaria" required>
+                                                <label for="ftxt-direccionDomiciliaria">* Direccion Domiciliaria</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-modalidadLaboral" type="text"
+                                                    formControlName="modalidadLaboral" required>
+                                                <label for="ftxt-modalidadLaboral">* Modalidad Laboral</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="modalidadJornada" placeholder="* Modalidad Jornada"
+                                                    [options]="modalidadJornadaOptions" [filter]="true" [showClear]="true"
+                                                    optionLabel="label">
+                                                </p-dropdown>
+                                                <label for="ftxt-modalidadJornada">* Modalidad Jornada</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-horarioTrabajo" type="text"
+                                                    formControlName="horarioTrabajo" required>
+                                                <label for="ftxt-horarioTrabajo">* Horario de trabajo</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-materiasImparte" type="text"
+                                                    formControlName="materiasImparte" required>
+                                                <label for="ftxt-materiasImparte">* Materias que Imparte</label>
+                                            </span>
+
+                                            <div class="p-float-label mb-4">
+                                                <p-inputNumber formControlName="rmu" [showButtons]="true" inputId="valor" mode="currency" currency="USD"  > </p-inputNumber>
+                                                <label for="ftxt-rmu">* RMU</label>
+                                            </div>
+        
+                                            <!--FKS-->
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="escalaOcupacionales"
+                                                    placeholder="* Escala Ocupacional"
+                                                    [options]="formSelectDataEscalaOcupacionales" [filter]="true"
+                                                    filterBy="descripcion" [showClear]="true" optionLabel="descripcion">
+                                                </p-dropdown>
+                                                <label for="ftxt-escalaOcupacionales">* Escala Ocupacional</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="estadoCivil" placeholder="* Estado Civil"
+                                                    [options]="formSelectDataEstadoCivil" [filter]="true" filterBy="nombre"
+                                                    [showClear]="true" optionLabel="nombre">
+                                                </p-dropdown>
+                                                <label for="ftxt-estadoCivil">* Estado Civil</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="estudiosenCursos" placeholder="* Estudios en Curso"
+                                                    [options]="formSelectDataEstudiosenCursos" [filter]="true" filterBy="nombre"
+                                                    [showClear]="true" optionLabel="nombre">
+                                                </p-dropdown>
+                                                <label for="ftxt-estudiosenCursos">* Estudios en Curso</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="genero" placeholder="* Genero"
+                                                    [options]="formSelectDataGenero" [filter]="true" filterBy="nombre"
+                                                    [showClear]="true" optionLabel="nombre">
+                                                </p-dropdown>
+                                                <label for="ftxt-genero">* Genero</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="institutos" placeholder="* Institutos"
+                                                    [options]="formSelectDataInstitutos" [filter]="true" filterBy="nombre"
+                                                    [showClear]="true" optionLabel="nombre">
+                                                </p-dropdown>
+                                                <label for="ftxt-institutos">* Institutos</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="nacionalidad" placeholder="* Nacionalidad"
+                                                    [options]="formSelectDataNacionalidad" [filter]="true" filterBy="nombre"
+                                                    [showClear]="true" optionLabel="nombre">
+                                                </p-dropdown>
+                                                <label for="ftxt-nacionalidad">* Nacionalidad</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="carreras" placeholder="* Carreras"
+                                                    [options]="formSelectDataCarreras" [filter]="true" filterBy="descripcion"
+                                                    [showClear]="true" optionLabel="descripcion">
+                                                </p-dropdown>
+                                                <label for="ftxt-carreras">* Carreras</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="provincia" placeholder="* Provincias"
+                                                    [options]="formSelectDataProvincia" [filter]="true" filterBy="descripcion"
+                                                    [showClear]="true" optionLabel="descripcion">
+                                                </p-dropdown>
+                                                <label for="ftxt-provincia">* Provincias</label>
+                                            </span>
+        
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="rolesInstitucionales"
+                                                    placeholder="* Roles Institucionales"
+                                                    [options]="formSelectDataRolesInstitucionales" [filter]="true"
+                                                    filterBy="descripcion" [showClear]="true" optionLabel="descripcion">
+                                                </p-dropdown>
+                                                <label for="ftxt-rolesInstitucionales">* Roles Institucionales</label>
+                                            </span>
+                                        </div>
+    
+                                    </div>
                                     
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-dni" type="text" formControlName="dni" required>
-                                        <label for="ftxt-dni">* Dni</label>
-                                    </span>
-
-                                    <div class="p-float-label mb-4">
-                                        <p-inputNumber formControlName="telefono" [showButtons]="true"
-                                            inputId="telefono"> </p-inputNumber>
-                                        <label for="ftxt-telefono">* Telefono</label>
-                                    </div>
-
-                                    <div class="p-float-label mb-4">
-                                        <p-inputNumber formControlName="telefonoDomicilio" [showButtons]="true"
-                                            inputId="telefonoDomicilio"> </p-inputNumber>
-                                        <label for="ftxt-telefonoDomicilio">* Telefono Domicilio</label>
-                                    </div>
-
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-correoPersonal" type="text"
-                                            formControlName="correoPersonal" required>
-                                        <label for="ftxt-correoPersonal">* Correo Personal</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-tipoDeSangre" type="text"
-                                            formControlName="tipoDeSangre" required>
-                                        <label for="ftxt-tipoDeSangre">* Tipo de sangre</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-direccionDomiciliaria" type="text"
-                                            formControlName="direccionDomiciliaria" required>
-                                        <label for="ftxt-direccionDomiciliaria">* Direccion Domiciliaria</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-modalidadLaboral" type="text"
-                                            formControlName="modalidadLaboral" required>
-                                        <label for="ftxt-modalidadLaboral">* Modalidad Laboral</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="modalidadJornada" placeholder="* Modalidad Jornada"
-                                            [options]="modalidadJornadaOptions" [filter]="true" [showClear]="true"
-                                            optionLabel="label">
-                                        </p-dropdown>
-                                        <label for="ftxt-modalidadJornada">* Modalidad Jornada</label>
-                                    </span>
-                                </div>
-                                <div class="col">
-
-
-
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-horarioTrabajo" type="text"
-                                            formControlName="horarioTrabajo" required>
-                                        <label for="ftxt-horarioTrabajo">* Horario de trabajo</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-materiasImparte" type="text"
-                                            formControlName="materiasImparte" required>
-                                        <label for="ftxt-materiasImparte">* Materias que Imparte</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-rmu" type="text" formControlName="rmu" required>
-                                        <label for="ftxt-rmu">* RMU</label>
-                                    </span>
-
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="escalaOcupacionales"
-                                            placeholder="* Escala Ocupacional"
-                                            [options]="formSelectDataEscalaOcupacionales" [filter]="true"
-                                            filterBy="descripcion" [showClear]="true" optionLabel="descripcion">
-                                        </p-dropdown>
-                                        <label for="ftxt-escalaOcupacionales">* Escala Ocupacional</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="estadoCivil" placeholder="* Estado Civil"
-                                            [options]="formSelectDataEstadoCivil" [filter]="true" filterBy="nombre"
-                                            [showClear]="true" optionLabel="nombre">
-                                        </p-dropdown>
-                                        <label for="ftxt-estadoCivil">* Estado Civil</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="estudiosenCursos" placeholder="* Estudios en Curso"
-                                            [options]="formSelectDataEstudiosenCursos" [filter]="true" filterBy="nombre"
-                                            [showClear]="true" optionLabel="nombre">
-                                        </p-dropdown>
-                                        <label for="ftxt-estudiosenCursos">* Estudios en Curso</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="genero" placeholder="* Genero"
-                                            [options]="formSelectDataGenero" [filter]="true" filterBy="nombre"
-                                            [showClear]="true" optionLabel="nombre">
-                                        </p-dropdown>
-                                        <label for="ftxt-genero">* Genero</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="institutos" placeholder="* Institutos"
-                                            [options]="formSelectDataInstitutos" [filter]="true" filterBy="nombre"
-                                            [showClear]="true" optionLabel="nombre">
-                                        </p-dropdown>
-                                        <label for="ftxt-institutos">* Institutos</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="nacionalidad" placeholder="* Nacionalidad"
-                                            [options]="formSelectDataNacionalidad" [filter]="true" filterBy="nombre"
-                                            [showClear]="true" optionLabel="nombre">
-                                        </p-dropdown>
-                                        <label for="ftxt-nacionalidad">* Nacionalidad</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="carreras" placeholder="* Carreras"
-                                            [options]="formSelectDataCarreras" [filter]="true" filterBy="descripcion"
-                                            [showClear]="true" optionLabel="descripcion">
-                                        </p-dropdown>
-                                        <label for="ftxt-carreras">* Carreras</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="provincia" placeholder="* Provincias"
-                                            [options]="formSelectDataProvincia" [filter]="true" filterBy="descripcion"
-                                            [showClear]="true" optionLabel="descripcion">
-                                        </p-dropdown>
-                                        <label for="ftxt-provincia">* Provincias</label>
-                                    </span>
-
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="rolesInstitucionales"
-                                            placeholder="* Roles Institucionales"
-                                            [options]="formSelectDataRolesInstitucionales" [filter]="true"
-                                            filterBy="descripcion" [showClear]="true" optionLabel="descripcion">
-                                        </p-dropdown>
-                                        <label for="ftxt-rolesInstitucionales">* Roles Institucionales</label>
-                                    </span>
+                                    
 
                                 </div>
                             </div>
