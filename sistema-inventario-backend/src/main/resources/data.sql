@@ -72,11 +72,11 @@ INSERT INTO authorities (name, endpoint) values ('enfermedad-catastrofica-editar
 INSERT INTO authorities (name, endpoint) values ('enfermedad-catastrofica-eliminar', 'DELETE:/enfermedadCatastrofica/{id}/');
 
 /*permiso para entidad publica*/
-INSERT INTO authorities (name, endpoint) values ('aulaentidad-publica-obtener', 'GET:/entidadPublica/');
-INSERT INTO authorities (name, endpoint) values ('aulaentidad-publica-obtener-id', 'GET:/entidadPublica/{id}/');
-INSERT INTO authorities (name, endpoint) values ('aulaentidad-publica-agregar', 'POST:/entidadPublica/');
-INSERT INTO authorities (name, endpoint) values ('aulaentidad-publica-editar', 'PUT:/entidadPublica/{id}/');
-INSERT INTO authorities (name, endpoint) values ('aulaentidad-publica-eliminar', 'DELETE:/entidadPublica/{id}/');
+INSERT INTO authorities (name, endpoint) values ('entidad-publica-obtener', 'GET:/entidadPublica/');
+INSERT INTO authorities (name, endpoint) values ('entidad-publica-obtener-id', 'GET:/entidadPublica/{id}/');
+INSERT INTO authorities (name, endpoint) values ('entidad-publica-agregar', 'POST:/entidadPublica/');
+INSERT INTO authorities (name, endpoint) values ('entidad-publica-editar', 'PUT:/entidadPublica/{id}/');
+INSERT INTO authorities (name, endpoint) values ('entidad-publica-eliminar', 'DELETE:/entidadPublica/{id}/');
 
 /*permiso para escala ocupacional*/
 INSERT INTO authorities (name, endpoint) values ('escala-ocupacional-obtener', 'GET:/escala-ocupacional/');
@@ -280,9 +280,9 @@ VALUES
 
 
 /**/
-INSERT INTO aula (created_at, updated_at, descripcion, instruccion_formal, nombre, obtencion_titulo, registro_senesyt, categoria_aula_id, persona_id)
-VALUES ('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'mesa', 'docente', 'johan', '2024-07-01',1425,1,1),
-('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'silla', 'administrativa', 'maria', '2023-05-15',9876,2,2);
+INSERT INTO aula (created_at, updated_at, descripcion, nombre, categoria_aula_id, persona_id)
+VALUES ('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'cyan', 'piso 2',1,1),
+('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'pachica', 'piso 1',2,2);
 
 /**/
 INSERT INTO bienes (codigo_del_bien,created_at, updated_at, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id,aula_id)

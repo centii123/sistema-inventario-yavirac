@@ -1,0 +1,158 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <p-table #dt [value]="list" [rows]="5" [paginator]="true" [loading]="loading"
+        [globalFilterFields]="['id', 'descripcion', 'nombre','obtencionTitulo','instruccionFormal','registroSenesyt','custodio']" responsiveLayout="scroll" [(selection)]="selectedAllRegister"
+        [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10, 15]">
+
+        <ng-template pTemplate="caption">
+          <div class="botones">
+            <div>
+              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-sm p-button-outlined p-button-success p-mr-2 m-1" pTooltip="Exportar a Excel"
+                tooltipPosition="bottom"></button>
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                class="p-button-sm p-button-outlined p-button-danger p-mr-2 m-1" pTooltip="Exportar a PDF"
+                tooltipPosition="bottom"></button>
+              <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger p-button-sm m-1"
+                (click)="deleteSelected()" pTooltip="Eliminar Seleccionados" tooltipPosition="right"
+                [disabled]="!selectedAllRegister || !selectedAllRegister.length"></button>
+              <button pButton label="Limpiar" class="p-button-outlined p-button-sm m-1" icon="pi pi-filter-slash"
+                (click)="clear(dt)" pTooltip="Quitar Filtros" tooltipPosition="right"></button>
+            </div>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" class="p-inputtext-sm" (input)="applyFilter($event, dt)"
+                placeholder="Busqueda General" />
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id">
+              <div class="flex justify-content-between align-items-center">
+                <span style="font-weight: bold;">&#8470;</span>
+                <p-sortIcon field="id"></p-sortIcon>
+                <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="nombre">
+              <div class="flex justify-content-between align-items-center">Nombre
+                <p-sortIcon field="nombre"></p-sortIcon>
+                <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="descripcion">
+              <div class="flex justify-content-between align-items-center">descripcion
+                <p-sortIcon field="descripcion"></p-sortIcon>
+                <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="custodio">
+              <div class="flex justify-content-between align-items-center">Custodio
+              </div>
+            </th>
+            
+            
+            <th class="text-center" style="width: 176px;">Acciones</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="data"></p-tableCheckbox>
+            </td>
+            <td>{{rowIndex + 1}}</td>
+            <td>{{data.nombre}}</td>
+            <td>{{data.descripcion}}</td>
+            <td>{{data.persona?.nombres + ' ' + data.persona?.apellidos || 'sin custodio'}}</td>
+            <td>
+              <button pButton pRipple icon="pi pi-eye"
+                class="p-button-rounded p-button-info p-button-text p-button-sm"
+                (click)="openModal(data)" tooltipPosition="left"></button>
+              <button pButton pRipple icon="pi pi-pencil"
+                class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
+                (click)="edit(data)" pTooltip="Editar" tooltipPosition="left"></button>
+              <button pButton pRipple icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text p-button-sm"
+                (click)="deleteRegister(data.id)" pTooltip="Eliminar" tooltipPosition="left"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            Registros Totales: {{list ? list.length : 0}}.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</section>
+<p-dialog header="Mas Información" class="custom-dialog bg-blue-900" [(visible)]="modalEye" [modal]="true"
+            (onHide)="closeModal()" [draggable]="true" [resizable]="true" >
+            <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Valor:</div>
+                    <p>{{selectedData.valor}}</p>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Valor Con Iva:</div>
+                    <p>{{selectedData.valorIva}}</p>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Serie:</div>
+                    <p>{{selectedData.serie}}</p>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Descripcion:</div>
+                    <p>{{selectedData.descripcion}}</p>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Modelo:</div>
+                    <p>{{selectedData.modelo}}</p>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Marca:</div>
+                    <p>{{selectedData.marca}}</p>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Observaciones:</div>
+                    <p>{{selectedData.observaciones}}</p>
+                  </div>
+                </li>
+              </ul>
+              <!--categoriaBien-->
+            </ng-template>
+    
+</p-dialog>
+<app-global-confirm-dialog></app-global-confirm-dialog>
