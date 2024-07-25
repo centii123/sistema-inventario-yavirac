@@ -89,24 +89,25 @@ public class Persona extends GlobalEntity{
 
     private Integer rmu;
 
-    @JsonIgnoreProperties("persona")
+    @JsonIgnoreProperties(value="persona", allowSetters = true)
+    //@JsonIgnoreProperties("persona")
     @OneToOne
-    @JoinColumn(updatable = false, nullable = true)
+    @JoinColumn(updatable = false, nullable = false)
     private Discapacidad discapacidad;
 
-    @JsonIgnoreProperties("persona")
+    @JsonIgnoreProperties(value="persona", allowSetters = true)
     @OneToOne
-    @JoinColumn(updatable = false, nullable = true)
+    @JoinColumn(updatable = false, nullable = false)
     private EnfermedadCatastrofica enfermedadCatastrofica;
 
-    @JsonIgnoreProperties("persona")
+    @JsonIgnoreProperties(value="persona", allowSetters = true)
     @OneToOne
-    @JoinColumn(updatable = false, nullable = true)
+    @JoinColumn(updatable = false, nullable = false)
     private EntidadPublica entidadPublica;
 
-    @JsonIgnoreProperties("persona")
+    @JsonIgnoreProperties(value="persona", allowSetters = true)
     @OneToOne
-    @JoinColumn( updatable = false, nullable = true)
+    @JoinColumn( updatable = false, nullable = false)
     private FechaIngresoInstituto fechaIngresoInstituto;
 
     @ManyToOne
@@ -140,8 +141,8 @@ public class Persona extends GlobalEntity{
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
     private Aula aula;
 
-    @JsonIgnoreProperties("persona")
+    @JsonIgnoreProperties(value="persona", allowSetters = true)
     @OneToOne
-    @JoinColumn( updatable = false, nullable = true)
+    @JoinColumn( updatable = false, nullable = false)
     private User user;
 }
