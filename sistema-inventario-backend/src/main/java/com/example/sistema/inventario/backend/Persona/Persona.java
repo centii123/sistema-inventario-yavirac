@@ -35,9 +35,11 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class Persona extends GlobalEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

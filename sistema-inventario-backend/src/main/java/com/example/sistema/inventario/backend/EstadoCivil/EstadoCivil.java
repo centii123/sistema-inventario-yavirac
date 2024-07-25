@@ -8,10 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-
+@EqualsAndHashCode(callSuper = false)
 public class EstadoCivil extends GlobalEntity{
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
