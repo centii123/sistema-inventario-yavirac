@@ -1,18 +1,32 @@
 <div id="sidebar" class="sidebar hidden">
-    <ng-container *ngIf="content === 'docentes'; else inventario">
-      <h4>Docentes</h4>
-      <ul>
-        <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="/persona"><i class="bi bi-person"></i> Docentes</a></li>
-        <li><a href="/nacionalidad"><i class="fas fa-globe"></i> Nacionalidad</a></li>
-        <li><a href="/carreras"><i class="fas fa-graduation-cap"></i> Carreras</a></li>
-        <li><a href="/estado-civil"><i class="fas fa-heart"></i> Estado Civil</a></li>
-        <li><a href="/titulos"><i class="fas fa-certificate"></i> Titulos</a></li>
-        <li><a (click)="closeSidebar()"><i class="fas fa-times"></i> Cerrar</a></li>
-      </ul>
-    </ng-container>
-    <ng-template #inventario>
-      <h4>Inventario</h4>
+  <ng-container *ngIf="content === 'docentes'; else inventario">
+
+    <h4>Docentes</h4>
+    <ul id="sidebar-menu">
+      <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+      <li><a href="/persona"><i class="bi bi-person"></i> Docentes</a></li>
+      <li><a href="/nacionalidad"><i class="fas fa-globe"></i> Nacionalidad</a></li>
+      <li><a href="/estado-civil"><i class="fas fa-heart"></i> Estado Civil</a></li>
+      <li><a href="/carreras"><i class="fas fa-graduation-cap"></i> Carreras</a></li>
+      <li><a href="/titulos"><i class="fas fa-certificate"></i> Titulos</a></li>
+      <li><button (click)="toggleOptions()"><i class="fas fa-ellipsis-h"></i> más opciones</button></li>
+      <li><a (click)="closeSidebar()"><i class="fas fa-times"></i> Cerrar</a></li>
+    </ul>
+
+    <ul id="additional-options" class="hidden">
+      <li><a href="/provincia"><i class="fas fa-certificate"></i>Provincia</a></li>
+      <li><a href="/estudios-curso"><i class="fas fa-book"></i>Estudios en Curso</a></li>
+      <li><a href="/generos"><i class="fas fa-venus-mars"></i>Genero</a></li>
+      <li><a href="/instituto"><i class="fas fa-university"></i>Institutos</a></li>
+      <li><a href="/rol-institucional"><i class="fas fa-user-tie"></i>Rol institucional</a></li>
+      <li><a href="/escala-ocupacional"><i class="fas fa-sitemap"></i>Escala ocupacional</a></li>
+      <li><button (click)="toggleOptions()"><i class="fas fa-arrow-left"></i> Atrás</button></li>
+      <li><a (click)="closeSidebar()"><i class="fas fa-times"></i> Cerrar</a></li>
+    </ul>
+
+  </ng-container>
+  <ng-template #inventario>
+    <h4>Inventario</h4>
     <ul>
       <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
       <li><a href="/bienes"><i class="fas fa-boxes"></i> Bienes</a></li>
@@ -20,5 +34,5 @@
       <li><a href="/categoria-bien"><i class="fas fa-tags"></i> Categoria Del Bien</a></li>
       <li><a (click)="closeSidebar()"><i class="fas fa-times"></i> Cerrar</a></li>
     </ul>
-    </ng-template>
-  </div>
+  </ng-template>
+</div>

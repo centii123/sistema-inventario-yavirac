@@ -1,4 +1,3 @@
-// sidebar.component.ts
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from './sidebar.service';
 
@@ -34,6 +33,16 @@ export class SidebarComponent implements OnInit {
       sidebar.classList.add("hidden");
       sidebar.classList.remove("flex");
       this.side = false;
+    }
+  }
+
+  toggleOptions() {
+    const mainMenu = document.getElementById('sidebar-menu') as HTMLElement;
+    const additionalOptions = document.getElementById('additional-options') as HTMLElement;
+    
+    if (mainMenu && additionalOptions) {
+      mainMenu.classList.toggle('hidden');
+      additionalOptions.classList.toggle('hidden');
     }
   }
 }

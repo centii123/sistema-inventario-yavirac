@@ -21,16 +21,21 @@
   flex-direction: column;
 }
 
-.sidebar a {
+.sidebar a, .sidebar button {
   padding: 10px 15px;
   text-decoration: none;
   font-size: 18px;
   color: white;
   display: block;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
   transition: 0.3s;
 }
 
-.sidebar a:hover {
+.sidebar a:hover, .sidebar button:hover {
   background-color: #104786;
 }
 
@@ -44,4 +49,8 @@ h4 {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.hidden {
+  display: none;
 }
