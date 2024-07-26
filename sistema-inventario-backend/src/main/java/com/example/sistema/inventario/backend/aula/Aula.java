@@ -41,7 +41,7 @@ public class Aula extends GlobalEntity{
 
     @JsonIgnoreProperties("aula")
     @OneToOne
-    @JoinColumn( updatable = false, nullable = true)
+    @JoinColumn( nullable = true) //error
     private Persona persona;
 
     @JsonIgnoreProperties("aula")
