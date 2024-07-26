@@ -5,7 +5,7 @@ import { FormComponent } from './from/form.component';
 
 // Define las rutas
 const routes: Routes = [
-  { path: '', component: FormComponent}
+  { path: '', component: FormComponent }
 ];
 
 @NgModule({

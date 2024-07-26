@@ -15,8 +15,8 @@ import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form
     RolesInstitucionalesRoutingModule,
     ...CrudModules
   ],
-  providers:[
-    CrudService,{provide:'url', useValue:'roles-institucionales/'},
+  providers: [
+    CrudService, { provide: 'url', useValue: 'roles-institucionales/' },
     CrudFuncionalidadFormService
 
   ]

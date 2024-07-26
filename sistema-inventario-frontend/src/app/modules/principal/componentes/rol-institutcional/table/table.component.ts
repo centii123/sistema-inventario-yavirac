@@ -16,7 +16,7 @@ export class TableComponent implements OnInit {
   selectedAllRegister: RolesInstitucionales[] = [];
   loading: boolean = false;
 
-  constructor(private crudService: CrudService, private apiService: ApiService) {}
+  constructor(private crudService: CrudService, private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.getAllRegister();

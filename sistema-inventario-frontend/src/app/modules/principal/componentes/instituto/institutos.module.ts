@@ -4,7 +4,6 @@ import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { InstitutosRoutingModule } from './institutos-routing.module';
-import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 
@@ -19,8 +18,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     DropdownModule,
     InputNumberModule
   ],
-  providers:[
-    CrudService,{provide:'url', useValue:'institutos/'},
+  providers: [
+    CrudService, { provide: 'url', useValue: 'institutos/' },
 
   ]
 

@@ -51,19 +51,19 @@ import { InputNumberModule } from 'primeng/inputnumber';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-     // Importaciones de PrimeNG
-     ConfirmDialogModule,
-     DialogModule,
-     InputTextModule,
-     InputSwitchModule,
-     InputTextareaModule,
-     ToolbarModule,
-     ButtonModule,
-     TooltipModule,
-     CardModule,
-     DividerModule,
-     TableModule,
-     InputNumberModule
+    // Importaciones de PrimeNG
+    ConfirmDialogModule,
+    DialogModule,
+    InputTextModule,
+    InputSwitchModule,
+    InputTextareaModule,
+    ToolbarModule,
+    ButtonModule,
+    TooltipModule,
+    CardModule,
+    DividerModule,
+    TableModule,
+    InputNumberModule
 
     // No es necesario importar BrowserModule, FormsModule, o BrowserAnimationsModule aquí si ya están en AppModule
   ]

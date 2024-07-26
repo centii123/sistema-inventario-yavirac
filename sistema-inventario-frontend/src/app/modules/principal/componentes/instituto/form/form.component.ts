@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
-import { Institutos} from '../../model/instituto';
+import { Institutos } from '../../model/instituto';
 import { MessageService } from 'primeng/api';
 
 interface Provincia {
-  id:number;
+  id: number;
   descripcion: string;
-  [key :string]: any;
+  [key: string]: any;
 }
 
-interface formSelectData{
-  provincia:any[],
+interface formSelectData {
+  provincia: any[],
 }
 
 
@@ -29,8 +29,8 @@ export class FormComponent implements OnInit {
   selected: Institutos | null = null;
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
-  formSelectData:formSelectData={
-    provincia:[],
+  formSelectData: formSelectData = {
+    provincia: [],
 
   };
 
@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
     private crudService: CrudService,
     private messageService: MessageService
   ) {
-    this.form= this.initForm();
+    this.form = this.initForm();
   }
 
   ngOnInit(): void {
@@ -69,10 +69,10 @@ export class FormComponent implements OnInit {
       next: (data: Institutos[]) => {
         this.list = data;
         this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
-        
+
         this.loadingSpiner = false;
       },
-      
+
       error: error => {
         this.loadingSpiner = false;
       }
@@ -91,7 +91,7 @@ export class FormComponent implements OnInit {
       regimenLaboral: registro.regimenLaboral,
       provincias: registro.provincias,
     });
-    
+
   }
 
   save() {
@@ -100,9 +100,9 @@ export class FormComponent implements OnInit {
     }
 
     const registro: Institutos = this.form.value;
-      registro.provincias={
-        'id':registro.provincias.id
-      }
+    registro.provincias = {
+      'id': registro.provincias.id
+    }
 
     if (registro.id) {
 
@@ -116,7 +116,7 @@ export class FormComponent implements OnInit {
         }
       });
     } else {
-      
+
       this.crudService.add(registro).subscribe({
         next: () => {
           this.resetForm();
@@ -126,7 +126,7 @@ export class FormComponent implements OnInit {
         error: error => {
         }
       });
-      
+
     }
 
     this.modal = false;
@@ -143,19 +143,19 @@ export class FormComponent implements OnInit {
   }
 
   openModal() {
-    this.loadingSpinerForm=true
+    this.loadingSpinerForm = true
     this.resetForm();
     this.crudService.getAll('provincias/').subscribe(
-      e=>{
-        this.formSelectData.provincia=e
-        this.loadingSpinerForm=false
+      e => {
+        this.formSelectData.provincia = e
+        this.loadingSpinerForm = false
       },
-      error=>{
+      error => {
         console.error(error)
-        this.loadingSpinerForm=false
+        this.loadingSpinerForm = false
       }
     )
-   
+
     this.modal = true;
   }
 
@@ -163,6 +163,6 @@ export class FormComponent implements OnInit {
     this.resetForm();
     this.modal = false;
   }
-  
+
 }
 // obtencionTitulo: this.obtenerFecha(registro.obtencionTitulo),

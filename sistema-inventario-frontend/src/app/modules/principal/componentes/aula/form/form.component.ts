@@ -4,8 +4,8 @@ import { CrudService } from '../../service/crud.service';
 import { Aulas } from '../../model/aula';
 import { MessageService } from 'primeng/api';
 
-interface formSelectData{
-  persona:any[],
+interface formSelectData {
+  persona: any[],
 }
 
 
@@ -23,8 +23,8 @@ export class FormComponent implements OnInit {
   selected: Aulas | null = null;
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
-  formSelectData:formSelectData={
-    persona:[],
+  formSelectData: formSelectData = {
+    persona: [],
 
   };
 
@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
     private crudService: CrudService,
     private messageService: MessageService
   ) {
-    this.form= this.initForm();
+    this.form = this.initForm();
   }
 
   ngOnInit(): void {
@@ -62,7 +62,7 @@ export class FormComponent implements OnInit {
         this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
         this.loadingSpiner = false;
       },
-      
+
       error: error => {
         this.loadingSpiner = false;
       }
@@ -79,7 +79,7 @@ export class FormComponent implements OnInit {
       //categoriaAula:registro.categoriaAula,
       persona: registro.persona,
     });
-    
+
   }
 
   save() {
@@ -89,10 +89,10 @@ export class FormComponent implements OnInit {
     }
 
     const registro: Aulas = this.form.value;
-      /*registro.persona={
-        'id':registro.persona.id
-      }*/
-      console.log(this.form.value)
+    /*registro.persona={
+      'id':registro.persona.id
+    }*/
+    console.log(this.form.value)
 
     if (registro.id) {
 
@@ -106,7 +106,7 @@ export class FormComponent implements OnInit {
         }
       });
     } else {
-      
+
       this.crudService.add(registro).subscribe({
         next: () => {
           this.resetForm();
@@ -116,7 +116,7 @@ export class FormComponent implements OnInit {
         error: error => {
         }
       });
-      
+
     }
 
     this.modal = false;
@@ -133,19 +133,19 @@ export class FormComponent implements OnInit {
   }
 
   openModal() {
-    this.loadingSpinerForm=true
+    this.loadingSpinerForm = true
     this.resetForm();
     this.crudService.getAll('persona/').subscribe(
-      e=>{
-        this.formSelectData.persona=e
-        this.loadingSpinerForm=false
+      e => {
+        this.formSelectData.persona = e
+        this.loadingSpinerForm = false
       },
-      error=>{
+      error => {
         console.error(error)
-        this.loadingSpinerForm=false
+        this.loadingSpinerForm = false
       }
     )
-   
+
     this.modal = true;
   }
 

@@ -15,8 +15,8 @@ import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form
     ProvinciasRoutingModule,
     ...CrudModules
   ],
-  providers:[
-    CrudService,{provide:'url', useValue:'provincias/'},
+  providers: [
+    CrudService, { provide: 'url', useValue: 'provincias/' },
     CrudFuncionalidadFormService
 
   ]

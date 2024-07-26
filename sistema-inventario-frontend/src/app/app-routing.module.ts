@@ -5,11 +5,11 @@ import { UserGuard } from './core/guards/user.guard';
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
   {
-    path: '', canActivate:[UserGuard] , children:[
-      { path: 'home', canActivate:[UserGuard], loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+    path: '', canActivate: [UserGuard], children: [
+      { path: 'home', canActivate: [UserGuard], loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
       { path: '', loadChildren: () => import('./modules/principal/principal.module').then(m => m.PrincipalModule) },
     ]
   },

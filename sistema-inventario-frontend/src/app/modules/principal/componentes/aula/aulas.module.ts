@@ -15,13 +15,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
     TableComponent,
   ],
   imports: [
-  AulasRoutingModule,
+    AulasRoutingModule,
     ...CrudModules,
     DropdownModule,
     InputNumberModule
   ],
-  providers:[
-    CrudService,{provide:'url', useValue:'aula/'},
+  providers: [
+    CrudService, { provide: 'url', useValue: 'aula/' },
 
   ]
 

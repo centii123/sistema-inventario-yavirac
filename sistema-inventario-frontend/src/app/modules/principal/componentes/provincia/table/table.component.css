@@ -2,8 +2,8 @@
     font-weight: bold;
 }
 
-.botones{
-    display: flex; 
-    justify-content: space-between; 
+.botones {
+    display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
