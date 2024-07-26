@@ -3,6 +3,7 @@ package com.example.sistema.inventario.backend.aula;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +26,14 @@ public class AulaService {
 
     public Aula findById(long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Async
+    public void delete(long id) {
+        Aula aula=this.findById(id);
+        aula.setPersona(null);
+        aula.setBienes(null);
+        this.save(aula);
+        this.deleteById(id);
     }
 }

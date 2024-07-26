@@ -57,42 +57,25 @@ export class TableComponent {
     this.selectedOneRegister.emit(register);
   }
 
-  deleteRegister(data: any): void {
+  deleteRegister(id: number): void {
     this.mensagge = {
       message: '¿Esta seguro que desea eliminar este registro?',
       messageError: { severity: 'warn', summary: 'Cancelado', detail: 'Acción de eliminado Cancelado' }
     }
-    if(data.categoriaAula != null){
-      data.categoriaAula={
-        id: data.categoriaAula.id
-      }
-    }
-    
-    data.bienes=null
-    data.persona=null
-    console.log(data)
     this.confirmDialog?.confirm1(() => {
-      this.crudService.update(data).subscribe(
-        ()=>{
-          this.crudService.delete(data.id).subscribe(
-            (e) => {
-              console.log(e)
-              this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
-              this.list = this.list.filter(n => n.id !== data.id);
-            },
-            (error: HttpErrorResponse) => {
-              if (error.error.message = "could not execute statement [ERROR: update o delete en «bienes» viola la llave foránea «fk5h9ayqb867epxqthk2551qr99» en la tabla «aula_bienes»") {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar porque ahy un recurso utilizando este registro' });
-              } else {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
-              }
-            }
-          );
+      this.crudService.delete(id).subscribe(
+        (e) => {
+          console.log(e)
+          this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
+          this.list = this.list.filter(n => n.id !== id);
         },
-        ()=>{
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
-        }
-      )
+        (error: HttpErrorResponse) => {
+          if (error.error.message = "could not execute statement [ERROR: update o delete en «bienes» viola la llave foránea «fk5h9ayqb867epxqthk2551qr99» en la tabla «aula_bienes»") {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar porque ahy un recurso utilizando este registro' });
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
+          }
+        })
       
     }, this.mensagge);
     /**/
