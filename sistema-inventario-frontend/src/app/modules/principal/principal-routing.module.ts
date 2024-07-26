@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'persona', loadChildren: () => import('./componentes/persona/persona.module').then(m => m.PersonaModule), },
   { path: 'categoria-bien', loadChildren: () => import('./componentes/categorias-bienes/categorias-bienes.module').then(m => m.CategoriasBienesModule), data: { sidebarContent: 'inventario' } },
   { path: 'estudios-curso', loadChildren: () => import('./componentes/estudios-en-curso/estudios-en-curso.module').then(m => m.EstudiosEnCursoModule) },
-  { path: 'aula', loadChildren: () => import('./componentes/aula/aulas.module').then(m => m.AulasModule) },
+  { path: 'aula', loadChildren: () => import('./componentes/aula/aulas.module').then(m => m.AulasModule), data: { sidebarContent: 'inventario' } },
   { path: 'instituto', loadChildren: () => import('./componentes/instituto/institutos.module').then(m => m.InstitutosModule) },
   { path: 'provincia', loadChildren: () => import('./componentes/provincia/provincias.module').then(m => m.ProvinciasModule) },
   { path: 'rol-institucional', loadChildren: () => import('./componentes/rol-institutcional/roles_institucionales.module').then(m => m.RolesInstitucionalesModule) },
