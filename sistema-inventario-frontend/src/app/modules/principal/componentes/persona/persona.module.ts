@@ -7,6 +7,7 @@ import { CrudService } from '../service/crud.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PersonaRoutingModule } from './persona-routing.module';
+import { TabViewModule } from 'primeng/tabview';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PersonaRoutingModule } from './persona-routing.module';
     PersonaRoutingModule,
     ...CrudModules,
     DropdownModule,
-    InputNumberModule
+    InputNumberModule,
+    TabViewModule
   ],
   providers:[
     CrudService,{provide:'url', useValue:'persona/'}
