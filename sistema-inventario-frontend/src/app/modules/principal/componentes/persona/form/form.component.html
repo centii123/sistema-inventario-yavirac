@@ -7,7 +7,7 @@
         </div>
 
         <p-dialog class="custom-dialog bg-blue-900" header="Docentes" [(visible)]="modal" [modal]="true"
-            (onHide)="closeModal()" [style]="{ width: '60rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+            (onHide)="closeModal()" [style]="{ width: '60rem', minHeight: '90vh'}" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
             [maximizable]="true">
             <br>
 
@@ -368,8 +368,8 @@
 
             <p-divider class="custom-divider"></p-divider>
 
-            <!-- <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
-            </app-table> -->
+            <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
+            </app-table> 
         </p-card>
     </div>
     <br>

@@ -9,11 +9,11 @@
 }
 
 .ancho-list{
-    width: 250px;
+    width: 30vw;
 }
 
 .ancho-list-spanded{
-    width: 500px;
+    width: 60vw;
 }
 .text-wrap{
     word-wrap: break-word;

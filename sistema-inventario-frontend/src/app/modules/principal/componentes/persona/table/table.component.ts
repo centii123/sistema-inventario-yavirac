@@ -3,10 +3,11 @@ import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
-import { Bienes } from '../../model/bienes';
 import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { Persona } from '../../model/persona';
+import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
 
 
  
@@ -16,11 +17,12 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent{
+  FechaOptener=(fecha: any)=>obtenerFecha(fecha)
   modalEye: boolean = false;
-  selectedData!: Bienes | any;
-  @Input() list: Bienes[] = [];
-  @Output() selectedOneRegister = new EventEmitter<Bienes>();
-  selectedAllRegister: Bienes[] = [];
+  selectedData!: Persona | any;
+  @Input() list: Persona[] = [];
+  @Output() selectedOneRegister = new EventEmitter<Persona>();
+  selectedAllRegister: Persona[] = [];
   loading: boolean = false;
   @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
   mensagge:any;
@@ -44,7 +46,7 @@ export class TableComponent{
     }
   }
 
-  edit(register: Bienes): void {
+  edit(register: Persona): void {
     this.selectedOneRegister.emit(register);
   }
 
@@ -60,7 +62,7 @@ export class TableComponent{
           this.list = this.list.filter(n => n.id !== id);
         },
         (error:HttpErrorResponse) => {
-          if(error.error.message="could not execute statement [ERROR: update o delete en «bienes» viola la llave foránea «fk5h9ayqb867epxqthk2551qr99» en la tabla «aula_bienes»"){
+          if(error.error.message="could not execute statement [ERROR: update o delete en «Persona» viola la llave foránea «fk5h9ayqb867epxqthk2551qr99» en la tabla «aula_Persona»"){
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar porque ahy un recurso utilizando este registro' });
           }else{
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
@@ -106,7 +108,7 @@ export class TableComponent{
     this.selectedData = null; 
   }
 
-  openModal(data: Bienes) {
+  openModal(data: Persona) {
     this.selectedData = data;
     this.modalEye = true;
   }

@@ -217,6 +217,7 @@ export class FormComponent implements OnInit {
     this.loadingSpiner = true;
     this.crudService.getAll().subscribe({
       next: (data: Persona[]) => {
+        console.log(data)
         this.list = data;
         this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
         this.loadingSpiner = false;
@@ -228,9 +229,10 @@ export class FormComponent implements OnInit {
   }
 
   setSeleccionado(registro: Persona) {
-    console.log('Registro seleccionado:', registro);
+    
     this.selected = registro;
     this.openModal();
+    console.log('Registro seleccionado:', this.form);
     this.form.patchValue({
       id: registro.id,
       nombres: registro.nombres,
