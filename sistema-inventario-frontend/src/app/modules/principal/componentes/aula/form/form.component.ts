@@ -3,9 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CrudService } from '../../service/crud.service';
 import { Aulas } from '../../model/aula';
 import { MessageService } from 'primeng/api';
+import { Persona } from '../../model/persona';
 
 interface formSelectData {
-  persona: any[],
+  persona: Persona[],
 }
 
 
@@ -89,10 +90,10 @@ export class FormComponent implements OnInit {
     }
 
     const registro: Aulas = this.form.value;
-    /*registro.persona={
+    registro.persona={
       'id':registro.persona.id
-    }*/
-    console.log(this.form.value)
+    }
+    console.log(registro)
 
     if (registro.id) {
 
@@ -136,8 +137,9 @@ export class FormComponent implements OnInit {
     this.loadingSpinerForm = true
     this.resetForm();
     this.crudService.getAll('persona/').subscribe(
-      e => {
+      (e:Persona[]) => {
         this.formSelectData.persona = e
+        this.formSelectData.persona = e.filter((n:Persona) => n.aula == null)
         this.loadingSpinerForm = false
       },
       error => {

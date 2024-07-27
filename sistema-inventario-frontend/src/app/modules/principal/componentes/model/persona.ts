@@ -39,6 +39,7 @@ export interface User {
 }
 
 export interface Persona extends globalModels {
+  aula: any;
   id: number;
   nombres: string;
   apellidos: string;

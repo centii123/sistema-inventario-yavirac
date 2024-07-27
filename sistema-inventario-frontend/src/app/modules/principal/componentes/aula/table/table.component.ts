@@ -64,7 +64,8 @@ export class TableComponent {
     }
     this.confirmDialog?.confirm1(() => {
       this.crudService.delete(id).subscribe(
-        () => {
+        (e) => {
+          console.log(e)
           this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
           this.list = this.list.filter(n => n.id !== id);
         },
@@ -74,8 +75,8 @@ export class TableComponent {
           } else {
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
           }
-        }
-      );
+        })
+      
     }, this.mensagge);
     /**/
   }
