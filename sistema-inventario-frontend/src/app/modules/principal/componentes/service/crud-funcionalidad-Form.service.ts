@@ -16,6 +16,7 @@ export class CrudFuncionalidadFormService<tipo extends WithUpdatedAt> {
     list: tipo[] = [];
     modal: boolean = false;
     selected: tipo | null = null;
+    estadoFormSave?:any;
 
     //otras variables
     dataDrop!: any[];
@@ -50,7 +51,9 @@ export class CrudFuncionalidadFormService<tipo extends WithUpdatedAt> {
 
 
     save() {
+        const data:any=this.form
         if (this.form.invalid) {
+            this.estadoFormSave=data.controls
             return;
         }
 
@@ -86,6 +89,7 @@ export class CrudFuncionalidadFormService<tipo extends WithUpdatedAt> {
     resetForm() {
         this.form.reset();
         this.selected = null;
+        this.estadoFormSave=null;
     }
 
     cancel() {

@@ -16,7 +16,13 @@
                     <div class="p-fluid p-formgrid grid custom-form-grid">
                         <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                             <span class="p-float-label">
-                                <input pInputText id="ftxt-descripcion" type="text" formControlName="descripcion" required>
+                                <input 
+                                pInputText 
+                                id="ftxt-descripcion" 
+                                [class.ng-invalid]="funcionalidad.estadoFormSave?.descripcion?.errors"
+                                [class.ng-dirty]="funcionalidad.estadoFormSave?.descripcion?.errors"
+                                type="text" 
+                                formControlName="descripcion" required>
                                 <label for="ftxt-descripcion">* descripcion</label>
                             </span>
                         </div>
