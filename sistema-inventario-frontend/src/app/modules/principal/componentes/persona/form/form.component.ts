@@ -12,12 +12,12 @@ import { Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInsti
 export class FormComponent implements OnInit {
   loadingSpiner!: boolean;
   form: FormGroup;
-  discapacidadForm: FormGroup;
+  /*discapacidadForm: FormGroup;
   enfermedadForm: FormGroup;
   entidadPublicaForm: FormGroup;
   fechaIngresoForm: FormGroup;
   userForm: FormGroup;
-  personaForm: FormGroup;
+  personaForm: FormGroup;*/
   list: Persona[] = [];
   modal: boolean = false;
   selected: Persona | null = null;
@@ -55,12 +55,12 @@ export class FormComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.form = this.initForm();
-    this.discapacidadForm = this.initDiscapacidadForm();
+    /*this.discapacidadForm = this.initDiscapacidadForm();
     this.enfermedadForm = this.initEnfermedadForm();
     this.entidadPublicaForm = this.initEntidadPublicaForm();
     this.fechaIngresoForm = this.initFechaIngresoForm();
     this.userForm = this.initUserForm();
-    this.personaForm = this.initPersonaForm();
+    this.personaForm = this.initPersonaForm();*/
   }
 
   ngOnInit(): void {
@@ -138,7 +138,7 @@ export class FormComponent implements OnInit {
 
     });
   }
-
+/*
   initDiscapacidadForm(): FormGroup {
     return this.fb.group({
       numeroCarnet: new FormControl('', [Validators.required]),
@@ -211,7 +211,7 @@ export class FormComponent implements OnInit {
         provincia: new FormControl('', [Validators.required]),
         rolesInstitucionales: new FormControl('', [Validators.required]),
     })
-  }
+  }*/
 
   load() {
     this.loadingSpiner = true;
@@ -261,11 +261,11 @@ export class FormComponent implements OnInit {
       rolesInstitucionales: registro.rolesInstitucionales,
     });
 
-    this.discapacidadForm.patchValue(registro.discapacidad);
+    /*this.discapacidadForm.patchValue(registro.discapacidad);
     this.enfermedadForm.patchValue(registro.enfermedadCatastrofica);
     this.entidadPublicaForm.patchValue(registro.entidadPublica);
     this.fechaIngresoForm.patchValue(registro.fechaIngresoInstituto);
-    this.userForm.patchValue(registro.user);
+    this.userForm.patchValue(registro.user);*/
   }
 
   save() {
@@ -408,11 +408,11 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
-    this.discapacidadForm.reset();
+    /*this.discapacidadForm.reset();
     this.enfermedadForm.reset();
     this.entidadPublicaForm.reset();
     this.fechaIngresoForm.reset();
-    this.userForm.reset();
+    this.userForm.reset();*/
   }
 
   cancel() {
