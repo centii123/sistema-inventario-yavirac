@@ -232,7 +232,7 @@ export class FormComponent implements OnInit {
     
     this.selected = registro;
     this.openModal();
-    console.log('Registro seleccionado:', this.form);
+    console.log('Registro seleccionado:', registro);
     this.form.patchValue({
       id: registro.id,
       nombres: registro.nombres,
