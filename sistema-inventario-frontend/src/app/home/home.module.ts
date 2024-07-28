@@ -4,10 +4,10 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ServicePageComponent } from './service-page/service-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
-import { ContactPageComponent } from './contact-page/contact-page.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { CardModule } from '../shared/card/card.module';
+import { DocentesPageComponent } from './docentes-page/docentes-page.component';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { CardModule } from '../shared/card/card.module';
     HomePageComponent,
     ServicePageComponent,
     AboutPageComponent,
-    ContactPageComponent
+    DocentesPageComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +29,7 @@ import { CardModule } from '../shared/card/card.module';
     HomePageComponent,
     ServicePageComponent,
     AboutPageComponent,
-    ContactPageComponent
+    DocentesPageComponent
   ]
 })
 export class HomeModule { }
