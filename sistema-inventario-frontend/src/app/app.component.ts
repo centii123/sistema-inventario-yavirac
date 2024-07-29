@@ -7,15 +7,4 @@ import { SpinnerService } from './core/services/spinner.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  @ViewChild(SpinnerComponent) spinner!: SpinnerComponent;
-
-  constructor(private spinnerService: SpinnerService) { }
-
-  ngAfterViewInit() {
-    this.spinnerService.registerSpinner(this.spinner);
-  }
-  ngOnInit(): void {
-  }
-
-}
+export class AppComponent {}
