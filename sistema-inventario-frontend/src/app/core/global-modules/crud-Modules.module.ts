@@ -9,6 +9,7 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { TableModule } from "primeng/table";
 import { SharedModule } from "src/app/shared/shared.module";
 import { GlobalConfirmDialogModule } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.module';
+import { TooltipModule } from "primeng/tooltip";
 
 export const CrudModules = [
     CommonModule,
@@ -21,5 +22,6 @@ export const CrudModules = [
     ConfirmDialogModule,
     InputTextModule,
     InputTextareaModule,
-    GlobalConfirmDialogModule
+    GlobalConfirmDialogModule,
+    TooltipModule
 ]
