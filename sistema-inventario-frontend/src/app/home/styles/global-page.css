@@ -54,7 +54,7 @@ nav {
 main {
     padding: 20px;
     text-align: center;
-    min-height: 70vh;
+    min-height: 65vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -94,10 +94,27 @@ app-card {
     width: 250px;
 }
 
-.titulo-header{
-    color: #0B3C61;
+.container-page{
+    margin-top: 30px;
+    width: 95%;
+    margin-left: 2.5%;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px #a1a1a1;
 }
-.linea{
-    background-color: #0B3C61;
-    height: 5px;
+.custom-card-header{
+    background-color: #0D3C61;
+    border-radius: 5px 5px 0 0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+.line{
+    padding-top: 3px;
+    padding-left: 80vw;
+    background-color: white;
 }
