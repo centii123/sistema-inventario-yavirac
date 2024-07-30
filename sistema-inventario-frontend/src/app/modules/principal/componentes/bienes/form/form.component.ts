@@ -40,7 +40,11 @@ export class FormComponent implements OnInit {
     if(typeof id == 'number'){
       this.crudService.getPerson(id).subscribe(
         (e:Person)=>{
-          this.list[index].custodio={nombre:`${e.nombres} ${e.apellidos}`,id:e}
+          if (e && e.nombres && e.apellidos) {
+            this.list[index].custodio = { nombre: `${e.nombres} ${e.apellidos}`, id: e };
+          } else {
+            this.list[index].custodio = { nombre: 'sin custodio', id: null };
+          }
         },
         err=>{
           this.list[index].custodio={nombre:'sin custodio',id:null}
@@ -150,6 +154,7 @@ export class FormComponent implements OnInit {
       }
 
     if (registro.id) {
+      console.log(registro)
 
       this.crudService.update(registro).subscribe({
         next: () => {

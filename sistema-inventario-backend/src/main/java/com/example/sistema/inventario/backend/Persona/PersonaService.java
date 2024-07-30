@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.example.sistema.inventario.backend.aula.Aula;
-
 @Service
 public class PersonaService {
     @Autowired
@@ -41,6 +39,7 @@ public class PersonaService {
         persona.setEntidadPublica(null);
         persona.setFechaIngresoInstituto(null);
         persona.setUser(null);
+        persona.setAula(null);
         this.save(persona);
         this.deleteById(id);
     }
