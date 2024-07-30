@@ -12,12 +12,6 @@ import { Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInsti
 export class FormComponent implements OnInit {
   loadingSpiner!: boolean;
   form: FormGroup;
-  /*discapacidadForm: FormGroup;
-  enfermedadForm: FormGroup;
-  entidadPublicaForm: FormGroup;
-  fechaIngresoForm: FormGroup;
-  userForm: FormGroup;
-  personaForm: FormGroup;*/
   list: Persona[] = [];
   modal: boolean = false;
   selected: Persona | null = null;
@@ -55,12 +49,6 @@ export class FormComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.form = this.initForm();
-    /*this.discapacidadForm = this.initDiscapacidadForm();
-    this.enfermedadForm = this.initEnfermedadForm();
-    this.entidadPublicaForm = this.initEntidadPublicaForm();
-    this.fechaIngresoForm = this.initFechaIngresoForm();
-    this.userForm = this.initUserForm();
-    this.personaForm = this.initPersonaForm();*/
   }
 
   ngOnInit(): void {
@@ -138,80 +126,6 @@ export class FormComponent implements OnInit {
 
     });
   }
-/*
-  initDiscapacidadForm(): FormGroup {
-    return this.fb.group({
-      numeroCarnet: new FormControl('', [Validators.required]),
-      porcentaje: new FormControl('', [Validators.required]),
-      tipoDiscapacidad: new FormControl('', [Validators.required])
-    });
-  }
-
-  initEnfermedadForm(): FormGroup {
-    return this.fb.group({
-      cargoDiscapacidad: new FormControl('', [Validators.required]),
-      certificadoEnfermedad: new FormControl('', [Validators.required]),
-      tipoEnfermedad: new FormControl('', [Validators.required])
-    });
-  }
-
-  initEntidadPublicaForm(): FormGroup {
-    return this.fb.group({
-      entidadPublica: new FormControl('', [Validators.required]),
-      honorarioSenecsyt: new FormControl('', [Validators.required]),
-      familiarSenecsyt: new FormControl('', [Validators.required]),
-      nombreFamiliar: new FormControl('', [Validators.required]),
-      observaciones: new FormControl('', [Validators.required]),
-      codigoInstituto: new FormControl('', [Validators.required]),
-    });
-  }
-
-  initFechaIngresoForm(): FormGroup {
-    return this.fb.group({
-      cambioGrupoOcupacionalModalidad: new FormControl('', [Validators.required]),
-      cambioInstitutoFusion: new FormControl('', [Validators.required]),
-      cambioOcupacionalEmergencia: new FormControl('', [Validators.required]),
-      primerIngreso: new FormControl('', [Validators.required])
-    });
-  }
-
-  initUserForm(): FormGroup {
-    return this.fb.group({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
-    });
-  }
-
-  initPersonaForm(): FormGroup {
-    return this.fb.group({
-      id: new FormControl(null),
-        nombres: new FormControl('', [Validators.required]),
-        apellidos: new FormControl('', [Validators.required]),
-        etnia: new FormControl('', [Validators.required]),
-        fechaDeNacimiento: new FormControl('', [Validators.required]),
-        dni: new FormControl('', [Validators.required]),
-        telefono: new FormControl('', [Validators.required]),
-        telefonoDomicilio: new FormControl('', [Validators.required]),
-        correoPersonal: new FormControl('', [Validators.required]),
-        tipoDeSangre: new FormControl('', [Validators.required]),
-        direccionDomiciliaria: new FormControl('', [Validators.required]),
-        modalidadLaboral: new FormControl('', [Validators.required]),
-        modalidadJornada: new FormControl('', [Validators.required]),
-        horarioTrabajo: new FormControl('', [Validators.required]),
-        materiasImparte: new FormControl('', [Validators.required]),
-        rmu: new FormControl('', [Validators.required]),
-        //muchos a uno
-        escalaOcupacionales: new FormControl('', [Validators.required]),
-        estadoCivil: new FormControl('', [Validators.required]),
-        estudiosenCursos: new FormControl('', [Validators.required]),
-        genero: new FormControl('', [Validators.required]),
-        institutos: new FormControl('', [Validators.required]),
-        nacionalidad: new FormControl('', [Validators.required]),
-        carreras: new FormControl('', [Validators.required]),
-        provincia: new FormControl('', [Validators.required]),
-        rolesInstitucionales: new FormControl('', [Validators.required]),
-    })
-  }*/
 
   load() {
     this.loadingSpiner = true;
@@ -229,49 +143,52 @@ export class FormComponent implements OnInit {
   }
 
   setSeleccionado(registro: Persona) {
-    
     this.selected = registro;
     this.openModal();
     console.log('Registro seleccionado:', registro);
-    this.form.patchValue({
-      id: registro.id,
-      nombres: registro.nombres,
-      apellidos: registro.apellidos,
-      etnia: registro.etnia,
-      fechaDeNacimiento: registro.fechaDeNacimiento,
-      dni: registro.dni,
-      telefono: parseInt(registro.telefono),
-      telefonoDomicilio: parseInt(registro.telefonoDomicilio),
-      correoPersonal: registro.correoPersonal,
-      tipoDeSangre: registro.tipoDeSangre,
-      direccionDomiciliaria: registro.direccionDomiciliaria,
-      modalidadLaboral: registro.modalidadLaboral,
-      modalidadJornada: registro.modalidadJornada,
-      horarioTrabajo: registro.horarioTrabajo,
-      materiasImparte: registro.materiasImparte,
-      rmu: registro.rmu,
-      escalaOcupacionales: registro.escalaOcupacionales,
-      estadoCivil: registro.estadoCivil,
-      estudiosenCursos: registro.estudiosenCursos,
-      genero: registro.genero,
-      institutos: registro.institutos,
-      nacionalidad: registro.nacionalidad,
-      carreras: registro.carreras,
-      provincia: registro.provincia,
-      rolesInstitucionales: registro.rolesInstitucionales,
-    });
 
-    /*this.discapacidadForm.patchValue(registro.discapacidad);
-    this.enfermedadForm.patchValue(registro.enfermedadCatastrofica);
-    this.entidadPublicaForm.patchValue(registro.entidadPublica);
-    this.fechaIngresoForm.patchValue(registro.fechaIngresoInstituto);
-    this.userForm.patchValue(registro.user);*/
+    // Asignación de valores al formulario principal
+    this.form.patchValue({
+      personaForm: {
+        id: registro.id,
+        nombres: registro.nombres,
+        apellidos: registro.apellidos,
+        etnia: registro.etnia,
+        fechaDeNacimiento: registro.fechaDeNacimiento,
+        dni: registro.dni,
+        telefono: parseInt(registro.telefono),
+        telefonoDomicilio: parseInt(registro.telefonoDomicilio),
+        correoPersonal: registro.correoPersonal,
+        tipoDeSangre: registro.tipoDeSangre,
+        direccionDomiciliaria: registro.direccionDomiciliaria,
+        modalidadLaboral: registro.modalidadLaboral,
+        modalidadJornada: registro.modalidadJornada,
+        horarioTrabajo: registro.horarioTrabajo,
+        materiasImparte: registro.materiasImparte,
+        rmu: registro.rmu,
+        escalaOcupacionales: registro.escalaOcupacionales,
+        estadoCivil: registro.estadoCivil,
+        estudiosenCursos: registro.estudiosenCursos,
+        genero: registro.genero,
+        institutos: registro.institutos,
+        nacionalidad: registro.nacionalidad,
+        carreras: registro.carreras,
+        provincia: registro.provincia,
+        rolesInstitucionales: registro.rolesInstitucionales
+      },
+      discapacidadForm: registro.discapacidad,
+      enfermedadForm: registro.enfermedadCatastrofica,
+      entidadPublicaForm: registro.entidadPublica,
+      fechaIngresoForm: registro.fechaIngresoInstituto,
+      userForm: registro.user
+    });
   }
+
 
   save() {
     console.log('la data es:', this.form);
 
-    const personaForm:any = this.form.value.personaForm;
+    const personaForm: any = this.form.value.personaForm;
     const discapacidad: Discapacidad = this.form.value.discapacidadForm;
     const enfermedadCatastrofica: EnfermedadCatastrofica = this.form.value.enfermedadForm;
     const entidadPublicaFormValue = this.form.value.entidadPublicaForm;
@@ -283,6 +200,7 @@ export class FormComponent implements OnInit {
       honorarioSenecsyt: entidadPublicaFormValue.honorarioSenecsyt?.value || entidadPublicaFormValue.honorarioSenecsyt,
       familiarSenecsyt: entidadPublicaFormValue.familiarSenecsyt?.value || entidadPublicaFormValue.familiarSenecsyt,
     };
+
 
     const fechaIngresoInstituto: FechaIngresoInstituto = this.form.value.fechaIngresoForm;
     const user: User = this.form.value.userForm;
@@ -339,9 +257,16 @@ export class FormComponent implements OnInit {
 
 
                         };
-                        persona.modalidadJornada=persona.modalidadJornada.value
-                        persona.telefono=String(persona.telefono)
-                        persona.telefonoDomicilio=String(persona.telefonoDomicilio)
+
+                        const modalidadJornadaValue = this.form.value.personaForm;
+
+                        const modalidadJornada: Persona = {
+                          ...modalidadJornadaValue,
+                          modalidadJornada: modalidadJornadaValue.modalidadJornada?.value || modalidadJornadaValue.modalidadJornada
+                        }
+
+                        persona.telefono = String(persona.telefono)
+                        persona.telefonoDomicilio = String(persona.telefonoDomicilio)
 
                         console.log('data a enviar', persona)
 
@@ -402,17 +327,9 @@ export class FormComponent implements OnInit {
   }
 
 
-
-
-
   resetForm() {
     this.form.reset();
     this.selected = null;
-    /*this.discapacidadForm.reset();
-    this.enfermedadForm.reset();
-    this.entidadPublicaForm.reset();
-    this.fechaIngresoForm.reset();
-    this.userForm.reset();*/
   }
 
   cancel() {

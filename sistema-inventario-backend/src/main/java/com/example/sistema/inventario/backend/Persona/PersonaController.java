@@ -65,7 +65,7 @@ public class PersonaController {
     @PreAuthorize("hasAuthority('persona-eliminar')")
     @DeleteMapping("/{id}/")
     public void deeteById(@PathVariable long id){
-        service.deleteById(id);
+        service.delete(id);
     }
     
 }
