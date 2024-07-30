@@ -124,6 +124,11 @@
                 Custodio
               </div>
             </th>
+            <th pSortableColumn="categoriaAula">
+              <div class="flex justify-content-between align-items-center">
+                Categoria del Aula
+              </div>
+            </th>
 
             <th class="text-center" style="width: 176px">Acciones</th>
           </tr>
@@ -143,6 +148,7 @@
                   "sin custodio"
               }}
             </td>
+            <td>{{ data.categoriaAula?.descripcion}}</td>
             <td>
               <button
                 pButton
@@ -198,27 +204,8 @@
         class="list-group-item d-flex justify-content-between align-items-start ancho-list"
       >
         <div class="me-auto overflow-hidden text-wrap">
-          <div class="fw-bold">Valor:</div>
-          <p>{{ selectedData.valor }}</p>
-        </div>
-      </li>
-      <li
-        class="list-group-item d-flex justify-content-between align-items-start ancho-list"
-      >
-        <div class="me-auto overflow-hidden text-wrap">
-          <div class="fw-bold">Valor Con Iva:</div>
-          <p>{{ selectedData.valorIva }}</p>
-        </div>
-      </li>
-    </ul>
-
-    <ul class="list-group list-group-horizontal">
-      <li
-        class="list-group-item d-flex justify-content-between align-items-start ancho-list"
-      >
-        <div class="me-auto overflow-hidden text-wrap">
-          <div class="fw-bold">Serie:</div>
-          <p>{{ selectedData.serie }}</p>
+          <div class="fw-bold">Nombre:</div>
+          <p>{{ selectedData.nombre}}</p>
         </div>
       </li>
       <li
@@ -236,27 +223,16 @@
         class="list-group-item d-flex justify-content-between align-items-start ancho-list"
       >
         <div class="me-auto overflow-hidden text-wrap">
-          <div class="fw-bold">Modelo:</div>
-          <p>{{ selectedData.modelo }}</p>
+          <div class="fw-bold">persona:</div>
+          <p>{{ selectedData.persona.nombres }}</p>
         </div>
       </li>
       <li
         class="list-group-item d-flex justify-content-between align-items-start ancho-list"
       >
         <div class="me-auto overflow-hidden text-wrap">
-          <div class="fw-bold">Marca:</div>
-          <p>{{ selectedData.marca }}</p>
-        </div>
-      </li>
-    </ul>
-
-    <ul class="list-group">
-      <li
-        class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded"
-      >
-        <div class="me-auto overflow-hidden text-wrap">
-          <div class="fw-bold">Observaciones:</div>
-          <p>{{ selectedData.observaciones }}</p>
+          <div class="fw-bold">categoriaAula:</div>
+          <p>{{ selectedData.categoriaAula.descripcion }}</p>
         </div>
       </li>
     </ul>

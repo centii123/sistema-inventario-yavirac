@@ -7,6 +7,7 @@ import { Persona } from '../../model/persona';
 
 interface formSelectData {
   persona: Persona[],
+  categoria:any[],
 }
 
 
@@ -26,7 +27,7 @@ export class FormComponent implements OnInit {
   loadingSpinerForm!: boolean;
   formSelectData: formSelectData = {
     persona: [],
-
+    categoria:[],
   };
 
   constructor(
@@ -51,7 +52,7 @@ export class FormComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
       persona: new FormControl(null),
-      //categoriaAula: new FormControl(1, [Validators.required])
+      categoriaAula: new FormControl(1, [Validators.required])
     });
   }
 
@@ -77,7 +78,7 @@ export class FormComponent implements OnInit {
       id: registro.id,
       nombre: registro.nombre,
       descripcion: registro.descripcion,
-      //categoriaAula:registro.categoriaAula,
+      categoriaAula:registro.categoriaAula,
       persona: registro.persona,
     });
 
@@ -139,12 +140,24 @@ export class FormComponent implements OnInit {
     this.crudService.getAll('persona/').subscribe(
       (e:Persona[]) => {
         this.formSelectData.persona = e
+        this.formSelectData.persona = e.filter((n:Persona) => n.aula == null),
         this.formSelectData.persona = e.filter((n:Persona) => n.aula == null)
         this.loadingSpinerForm = false
       },
       error => {
         console.error(error)
         this.loadingSpinerForm = false
+      }
+    ),
+
+    this.crudService.getAll('categorias-aulas/').subscribe(
+      e=>{
+        this.formSelectData.categoria=e
+        this.loadingSpinerForm=false
+      },
+      error=>{
+        console.error(error)
+        this.loadingSpinerForm=false
       }
     )
 

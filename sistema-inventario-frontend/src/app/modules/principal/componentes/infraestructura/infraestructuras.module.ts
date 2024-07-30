@@ -3,7 +3,7 @@ import { FormComponent } from './form/form.component';
 import { TableComponent } from './table/table.component';
 import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
-import { AulasRoutingModule } from './aulas-routing.module';
+import { InfraestructurasRoutingModule } from './infraestructuras-routing.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 
@@ -15,7 +15,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     TableComponent,
   ],
   imports: [
-    AulasRoutingModule,
+    InfraestructurasRoutingModule,
     ...CrudModules,
     DropdownModule,
     InputNumberModule
@@ -26,4 +26,4 @@ import { InputNumberModule } from 'primeng/inputnumber';
   ]
 
 })
-export class AulasModule { }
+export class InfraestructurasModule { }
