@@ -3,13 +3,13 @@
 
   <div class="nacionalidad-container">
     <div class="custom-card-header">
-      <h4>Aulas</h4>
+      <h4>Infraestructura</h4>
     </div>
     <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
 
     <p-dialog
       class="custom-dialog bg-blue-900"
-      header="Aulas"
+      header="Tu Infraestructura"
       [(visible)]="modal"
       [modal]="true"
       (onHide)="closeModal()"
@@ -20,7 +20,10 @@
       <br />
       <form [formGroup]="form" class="custom-form">
         <app-spinner [load]="loadingSpinerForm">
-          <div class="p-fluid p-formgrid grid custom-form-grid" style="height: 56vh;">
+          <div
+            class="p-fluid p-formgrid grid custom-form-grid"
+            style="height: 56vh"
+          >
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
               <div class="d-flex">
                 <div class="col me-3">
@@ -36,14 +39,17 @@
                   </span>
 
                   <span class="p-float-label mb-4">
-                    <input
-                      pInputText
-                      id="ftxt-descripcion"
-                      type="text"
-                      formControlName="descripcion"
-                      required
-                    />
-                    <label for="ftxt-descripcion">* Descripcion</label>
+                    <p-dropdown
+                      formControlName="categoriaAula"
+                      placeholder="categoriaAula"
+                      [options]="formSelectData.categoria"
+                      [filter]="true"
+                      filterBy="descripcion"
+                      [showClear]="true"
+                      optionLabel="descripcion"
+                    >
+                    </p-dropdown>
+                    <label for="ftxt-categoriaAula">Categoria de la Aula</label>
                   </span>
                 </div>
                 <div class="col">
@@ -70,6 +76,17 @@
                       </ng-template>
                     </p-dropdown>
                     <label for="ftxt-persona">Custodio</label>
+                  </span>
+
+                  <span class="p-float-label mb-4">
+                    <input
+                      pInputText
+                      id="ftxt-descripcion"
+                      type="text"
+                      formControlName="descripcion"
+                      required
+                    />
+                    <label for="ftxt-descripcion">* Descripcion</label>
                   </span>
                 </div>
               </div>
