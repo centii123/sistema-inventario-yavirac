@@ -1,0 +1,92 @@
+<app-spinner [load]="funcionalidad.loadingSpiner">
+  <app-navbar></app-navbar>
+
+  <div class="crud-container">
+    <div class="custom-card-header">
+      <h4>Escala Ocupacional</h4>
+    </div>
+    <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
+
+    <p-dialog
+      class="custom-dialog bg-blue-900"
+      header="Escala Ocupacional"
+      [(visible)]="funcionalidad.modal"
+      [modal]="true"
+      (onHide)="funcionalidad.closeModal()"
+      [style]="{ width: '60rem' }"
+      [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    >
+      <br />
+      <form [formGroup]="funcionalidad.form" class="custom-form">
+        <app-spinner [load]="funcionalidad.loadingSpinerForm">
+          <div class="p-fluid p-formgrid grid custom-form-grid">
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+              <div class="d-flex">
+                <div class="col me-3">
+                  <span class="p-float-label mb-4">
+                    <input
+                      pInputText
+                      id="ftxt-descripcion"
+                      type="text"
+                      formControlName="descripcion"
+                      required
+                    />
+                    <label for="ftxt-descripcion">* Descripcion</label>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="custom-toolbar d-flex justify-content-center">
+            <div class="p-toolbar-group-center">
+              <button
+                pButton
+                label="Guardar"
+                class="p-button m-1 p-button-info guardar-button"
+                icon="pi pi-send"
+                type="submit"
+                (click)="funcionalidad.save()"
+                pTooltip="Guardar"
+                tooltipPosition="right"
+              ></button>
+
+              <button
+                pButton
+                label="Cancelar"
+                class="p-button m-1 p-button-danger cancelar-button"
+                icon="pi pi-times"
+                (click)="funcionalidad.cancel()"
+                pTooltip="Cancelar"
+                tooltipPosition="right"
+              ></button>
+            </div>
+          </div>
+        </app-spinner>
+      </form>
+    </p-dialog>
+
+    <p-card class="custom-card">
+      <div class="caja-boton-principal custom-button-box">
+        <button
+          pButton
+          label="Agregar"
+          class="agregar"
+          icon="pi pi-plus"
+          (click)="funcionalidad.openModal()"
+          tooltipPosition="right"
+        ></button>
+      </div>
+
+      <p-divider class="custom-divider"></p-divider>
+
+      <app-table
+        [list]="funcionalidad.list"
+        (selectedOneRegister)="setSeleccionado($event)"
+      >
+      </app-table>
+    </p-card>
+  </div>
+  <br />
+  <app-footer></app-footer>
+</app-spinner>

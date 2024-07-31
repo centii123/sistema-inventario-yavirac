@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'provincia', loadChildren: () => import('./componentes/provincia/provincias.module').then(m => m.ProvinciasModule) },
   { path: 'rol-institucional', loadChildren: () => import('./componentes/rol-institutcional/roles_institucionales.module').then(m => m.RolesInstitucionalesModule) },
   { path: 'carreras', loadChildren: () => import('./componentes/carreras/carreras.module').then(m => m.CarrerasModule) },
+  { path: 'escala-ocupacional', loadChildren: () => import('./componentes/escala-ocupacional/escala-ocupacional.module').then(m => m.EscalaOcupacionalModule) },
   { path: 'titulos', loadChildren: () => import('./componentes/titulos/titulos.module').then(m => m.TitulosModule) },
   { path: 'generos', loadChildren: () => import('./componentes/genero/genero.module').then(m => m.GeneroModule) },
   { path: 'docentes', pathMatch: 'full', redirectTo: 'docentes' },
