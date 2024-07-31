@@ -25,6 +25,7 @@ export class FormComponent implements OnInit {
   selected: Aulas | null = null;
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
+  personaSelect:Persona[]=[]
   formSelectData: formSelectData = {
     persona: [],
     categoria:[],
@@ -73,13 +74,14 @@ export class FormComponent implements OnInit {
 
   setSeleccionado(registro: Aulas) {
     this.selected = registro;
+    this.personaSelect?.unshift(registro.persona);
     this.openModal()
     this.form.setValue({
       id: registro.id,
       nombre: registro.nombre,
       descripcion: registro.descripcion,
       categoriaAula:registro.categoriaAula,
-      persona: registro.persona,
+      persona: registro.persona ? registro.persona : null,
     });
 
   }
@@ -91,9 +93,12 @@ export class FormComponent implements OnInit {
     }
 
     const registro: Aulas = this.form.value;
-    registro.persona={
-      'id':registro.persona.id
+    if(registro.persona){
+      registro.persona={
+        'id':registro.persona.id
+      }
     }
+    
     console.log(registro)
 
     if (registro.id) {
@@ -132,6 +137,7 @@ export class FormComponent implements OnInit {
   cancel() {
     this.resetForm();
     this.modal = false;
+    this.personaSelect=[];
   }
 
   openModal() {
@@ -140,8 +146,10 @@ export class FormComponent implements OnInit {
     this.crudService.getAll('persona/').subscribe(
       (e:Persona[]) => {
         this.formSelectData.persona = e
-        this.formSelectData.persona = e.filter((n:Persona) => n.aula == null),
         this.formSelectData.persona = e.filter((n:Persona) => n.aula == null)
+        const filteredPersonaSelect = this.personaSelect.filter(item => item !== null);
+        this.formSelectData.persona=[...filteredPersonaSelect, ...this.formSelectData.persona]
+        console.log(this.formSelectData.persona)
         this.loadingSpinerForm = false
       },
       error => {
@@ -167,6 +175,7 @@ export class FormComponent implements OnInit {
   closeModal() {
     this.resetForm();
     this.modal = false;
+    this.personaSelect=[];
   }
 
   get selectedCustodio() {

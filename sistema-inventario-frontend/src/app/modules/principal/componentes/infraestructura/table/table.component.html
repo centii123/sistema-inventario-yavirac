@@ -144,7 +144,7 @@
             <td>{{ data.descripcion }}</td>
             <td>
               {{
-                data.persona?.nombres + " " + data.persona?.apellidos ||
+                data.persona ? data.persona?.nombres + " " + data.persona?.apellidos :
                   "sin custodio"
               }}
             </td>
