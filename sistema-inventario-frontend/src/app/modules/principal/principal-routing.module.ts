@@ -28,7 +28,6 @@ const routes: Routes = [
   { path: 'provincia', loadChildren: () => import('./componentes/provincia/provincias.module').then(m => m.ProvinciasModule) },
   { path: 'rol-institucional', loadChildren: () => import('./componentes/rol-institutcional/roles_institucionales.module').then(m => m.RolesInstitucionalesModule) },
   { path: 'carreras', loadChildren: () => import('./componentes/carreras/carreras.module').then(m => m.CarrerasModule) },
-  { path: 'enfermedad-catastrofica', loadChildren: () => import('./componentes/enfermedad-catastrofica/enfermedad-catastrofica.module').then(m => m.EnfermdadCatastroficaModule) },
   { path: 'titulos', loadChildren: () => import('./componentes/titulos/titulos.module').then(m => m.TitulosModule) },
   { path: 'generos', loadChildren: () => import('./componentes/genero/genero.module').then(m => m.GeneroModule) },
   { path: 'docentes', pathMatch: 'full', redirectTo: 'docentes' },
