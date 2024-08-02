@@ -94,7 +94,7 @@ app-card {
     width: 250px;
 }
 
-.container-page{
+.container-page {
     margin-top: 30px;
     width: 95%;
     margin-left: 2.5%;
@@ -102,7 +102,8 @@ app-card {
     border-radius: 5px;
     box-shadow: 0 2px 4px #a1a1a1;
 }
-.custom-card-header{
+
+.custom-card-header {
     background-color: #0D3C61;
     border-radius: 5px 5px 0 0;
     height: 100px;
@@ -113,8 +114,30 @@ app-card {
     color: white;
 }
 
-.line{
+.line {
     padding-top: 3px;
     padding-left: 80vw;
     background-color: white;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #0B3C61;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+}
+
+.dropdown-menu li a {
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }

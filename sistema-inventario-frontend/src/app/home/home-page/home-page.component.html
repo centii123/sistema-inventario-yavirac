@@ -1,16 +1,37 @@
 <div class="contenedor-imagen-logo-yavirac d-block">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
   <nav>
     <div class="logo">
-      <img src="/assets/img/log.jpeg" alt="Logo">
+      <img src="/assets/img/log.jpeg" alt="Logo" />
     </div>
     <ul class="nav-links">
-      <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
-      <li><a href="/inventario"><i class="fas fa-box"></i> Inventario</a></li>
-      <li><a href="/docentes"><i class="fas fa-chalkboard-teacher"></i> Docentes</a></li>
+      <li>
+        <a href="/home"><i class="fas fa-home"></i> Inicio</a>
+      </li>
+      <li>
+        <a href="/inventario"><i class="fas fa-box"></i> Inventario</a>
+      </li>
+      <li>
+        <a href="/docentes"
+          ><i class="fas fa-chalkboard-teacher"></i> Docentes</a
+        >
+      </li>
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-folder"></i> Otros</a>
+        <ul class="dropdown-menu">
+          <li><a href="/nacionalidad">Nacionalidades</a></li>
+          <li><a href="/opcion2">Opción 2</a></li>
+          <li><a href="/opcion3">Opción 3</a></li>
+        </ul>
+      </li>
     </ul>
     <div class="logout">
-      <a (click)="cerrarSesion()" class="pointer-botton"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+      <a (click)="cerrarSesion()" class="pointer-botton"
+        ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a
+      >
     </div>
   </nav>
   <div class="container-page mb-4">
@@ -21,15 +42,22 @@
     </div>
 
     <main>
-      <div class="container ">
-        <app-card ruta="/docentes" rutaImg="/assets/img/profe.jpeg" titulo="DOCENTES"
-          descripcion="Información sobre tus docentes."></app-card>
-        <app-card ruta="/inventario" rutaImg="/assets/img/inve.jpeg" titulo="INVENTARIOS"
-          descripcion="Información sobre los laboratorios, aulas y oficinas."></app-card>
+      <div class="container">
+        <app-card
+          ruta="/docentes"
+          rutaImg="/assets/img/profe.jpeg"
+          titulo="DOCENTES"
+          descripcion="Información sobre tus docentes."
+        ></app-card>
+        <app-card
+          ruta="/inventario"
+          rutaImg="/assets/img/inve.jpeg"
+          titulo="INVENTARIOS"
+          descripcion="Información sobre los laboratorios, aulas y oficinas."
+        ></app-card>
       </div>
     </main>
   </div>
-
 
   <app-footer></app-footer>
 </div>
