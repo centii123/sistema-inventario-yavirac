@@ -4,25 +4,17 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Carreras.Carreras;
 import com.example.sistema.inventario.backend.EscalaOcupacional.EscalaOcupacionales;
-import com.example.sistema.inventario.backend.EstadoCivil.EstadoCivil;
-import com.example.sistema.inventario.backend.EstudiosenCurso.EstudiosenCursos;
 import com.example.sistema.inventario.backend.FechaIngresoInstituto.FechaIngresoInstituto;
-import com.example.sistema.inventario.backend.Genero.Generos;
+import com.example.sistema.inventario.backend.Infraestructura.Infraestructura;
 import com.example.sistema.inventario.backend.Institutos.Institutos;
-import com.example.sistema.inventario.backend.Provincias.Provincias;
 import com.example.sistema.inventario.backend.RolesInstitucionales.RolesInstitucionales;
-import com.example.sistema.inventario.backend.aula.Aula;
 import com.example.sistema.inventario.backend.authz.entity.User;
-import com.example.sistema.inventario.backend.discapacidad.Discapacidad;
-import com.example.sistema.inventario.backend.enfermedadCatastrofica.EnfermedadCatastrofica;
 import com.example.sistema.inventario.backend.entidadPublica.EntidadPublica;
 import com.example.sistema.inventario.backend.nacionalidad.Nacionalidad;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -69,8 +61,8 @@ public class Persona extends GlobalEntity{
     @Column(length = 50)
     private String correoPersonal;
 
-    @Column(length = 50)
-    private String tipoDeSangre;
+    @Column(columnDefinition = "smallint")
+    private Integer tipoDeSangre;
 
     @Column(length = 100)
     private String direccionDomiciliaria;
@@ -86,17 +78,15 @@ public class Persona extends GlobalEntity{
 
     private String materiasImparte;
 
-    private Integer rmu;
+    @Column(columnDefinition = "smallint")
+    private Integer provincia;
 
-    @JsonIgnoreProperties(value="persona", allowSetters = true)
-    @OneToOne
-    @JoinColumn(nullable = true)
-    private Discapacidad discapacidad;
+    @Column(columnDefinition = "smallint")
+    private Integer genero;
 
-    @JsonIgnoreProperties(value="persona", allowSetters = true)
-    @OneToOne
-    @JoinColumn(nullable = true)
-    private EnfermedadCatastrofica enfermedadCatastrofica;
+    @Column(columnDefinition = "smallint")
+    private Integer estadoCivil;
+
 
     @JsonIgnoreProperties(value="persona", allowSetters = true)
     @OneToOne
@@ -112,15 +102,6 @@ public class Persona extends GlobalEntity{
     private EscalaOcupacionales escalaOcupacionales;
 
     @ManyToOne
-    private EstadoCivil estadoCivil;
-
-    @ManyToOne
-    private EstudiosenCursos estudiosenCursos;
-
-    @ManyToOne
-    private Generos genero;
-
-    @ManyToOne
     private Institutos institutos;
 
     @ManyToOne
@@ -130,14 +111,11 @@ public class Persona extends GlobalEntity{
     private Carreras carreras;
 
     @ManyToOne
-    private Provincias provincia;
-
-    @ManyToOne
     private RolesInstitucionales rolesInstitucionales;
 
     @JsonIgnoreProperties("persona")
     @OneToOne(mappedBy = "persona")
-    private Aula aula;
+    private Infraestructura infraestructura;
 
     @JsonIgnoreProperties(value="persona", allowSetters = true)
     @OneToOne

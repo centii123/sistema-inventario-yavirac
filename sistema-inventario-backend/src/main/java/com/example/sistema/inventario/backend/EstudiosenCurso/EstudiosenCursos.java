@@ -6,12 +6,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.example.sistema.inventario.backend.GlobalEntity;
+import com.example.sistema.inventario.backend.Persona.Persona;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
@@ -41,5 +43,8 @@ public class EstudiosenCursos extends GlobalEntity{
     private Date fechaDeFin;
 
     private Integer numeroDeHoras;
+
+    @ManyToOne
+    private Persona persona;
 
 }

@@ -1,4 +1,4 @@
-package com.example.sistema.inventario.backend.aula;
+package com.example.sistema.inventario.backend.Infraestructura;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,36 +25,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("aula")
 @Tag(name = "Controlador Aulas", description = "Tabla aulas")
 @CrossOrigin({"*"})
-public class AulaController {
+public class InfraestructuraController {
     
     @Autowired
-    AulaService service;
+    InfraestructuraService service;
 
     @Operation(summary = "Obtiene todas las aulas, Requiere aula-optener")
     @PreAuthorize("hasAuthority('aula-obtener')")
     @GetMapping("/")
-    public List<Aula> getAll(){
+    public List<Infraestructura> getAll(){
         return service.getAll();
     }
 
     @Operation(summary = "Obtiene una aula, Requiere aula-optener")
     @PreAuthorize("hasAuthority('aula-obtener-id')")
     @GetMapping("/{id}/")
-    public Aula findById(@PathVariable long id){
+    public Infraestructura findById(@PathVariable long id){
         return service.findById(id);
     }
 
     @Operation(summary = "Agrega un aula, Requiere aula-agregar")
     @PreAuthorize("hasAuthority('aula-agregar')")
     @PostMapping("/")
-    public Aula save(@RequestBody Aula entity){
+    public Infraestructura save(@RequestBody Infraestructura entity){
         return service.save(entity);
     }
 
     @Operation(summary = "Edita un aula, Requiere aula-editar")
     @PreAuthorize("hasAuthority('aula-editar')")
     @PutMapping("/")
-    public Aula update(@RequestBody Aula entity){
+    public Infraestructura update(@RequestBody Infraestructura entity){
         return service.save(entity);
     }
 

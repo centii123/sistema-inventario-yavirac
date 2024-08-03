@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,13 +25,13 @@ public class Discapacidad extends GlobalEntity{
 
     @Column (length = 50)
     private String numeroCarnet;
-
-    private Integer porcentaje;
+    
+    @Column (length =  3)
+    private String porcentaje;
 
     @Column (length =  50)
     private String tipoDiscapacidad;
     
-    @JsonIgnoreProperties("discapacidad")
-    @OneToOne(mappedBy = "discapacidad", cascade = CascadeType.ALL)
+    @ManyToOne
     private Persona persona;
 }

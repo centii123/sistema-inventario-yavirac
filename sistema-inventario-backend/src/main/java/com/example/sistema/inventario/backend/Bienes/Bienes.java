@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.CategoriasBienes.CategoriasBienes;
-import com.example.sistema.inventario.backend.aula.Aula;
+import com.example.sistema.inventario.backend.Infraestructura.Infraestructura;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -61,6 +61,6 @@ public class Bienes extends GlobalEntity {
     @ManyToOne
     @JoinColumn(name = "aula_id")
     @JsonIgnoreProperties("bienes")
-    private Aula aula;
+    private Infraestructura aula;
 
 }

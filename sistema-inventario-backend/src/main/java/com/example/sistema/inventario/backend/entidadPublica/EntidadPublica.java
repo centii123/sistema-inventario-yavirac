@@ -25,22 +25,18 @@ public class EntidadPublica extends GlobalEntity{
     private long id;
 
     @Column(columnDefinition = "smallint")
-    private Integer entidadPublica;
+    private Integer laboraOtraEntidadPublica;
 
     @Column(columnDefinition = "smallint")
-    private Integer honorarioSenecsyt;
+    private Integer RecibeOtroHonorarioSenecsyt;
 
     @Column(columnDefinition = "smallint")
-    private Integer familiarSenecsyt;
-
-    @Column(length = 50)
-    private String nombreFamiliar;
-
-    @Column(length = 50)
+    private Integer TienefamiliaresLaboraSenecsyt;
+    
     private String observaciones;
 
     @Column(length = 50)
-    private String codigoInstituto;
+    private String codigoInstitutoLabore;
 
     @JsonIgnoreProperties("entidadPublica")
     @OneToOne(mappedBy = "entidadPublica", cascade = CascadeType.ALL)
