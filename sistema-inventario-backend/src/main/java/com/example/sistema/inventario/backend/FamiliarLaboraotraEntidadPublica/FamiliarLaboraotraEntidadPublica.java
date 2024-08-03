@@ -2,6 +2,7 @@ package com.example.sistema.inventario.backend.FamiliarLaboraotraEntidadPublica;
 
 import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Persona.Persona;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,5 +25,6 @@ public class FamiliarLaboraotraEntidadPublica extends GlobalEntity{
     private String nombre;
 
     @ManyToOne
+    @JsonIgnoreProperties("familiarLaboraotraEntidadPublica")
     private Persona persona;
 }

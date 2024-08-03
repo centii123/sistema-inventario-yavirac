@@ -22,11 +22,11 @@ INSERT INTO authorities (name, endpoint) values ('Authority_PartialUpdate', 'PAT
 INSERT INTO authorities (name, endpoint) values ('AuthorityByUser_Read', 'GET:/api/authority/byuser/{id}/');
 
 
-INSERT INTO authorities (name, endpoint) values ('aula-obtener', 'GET:/aula/');
-INSERT INTO authorities (name, endpoint) values ('aula-obtener-id', 'GET:/aula/{id}/');
-INSERT INTO authorities (name, endpoint) values ('aula-agregar', 'POST:/aula/');
-INSERT INTO authorities (name, endpoint) values ('aula-editar', 'PUT:/aula/{id}/');
-INSERT INTO authorities (name, endpoint) values ('aula-eliminar', 'DELETE:/aula/{id}/');
+INSERT INTO authorities (name, endpoint) values ('infraestructura-obtener', 'GET:/infraestructura/');
+INSERT INTO authorities (name, endpoint) values ('infraestructura-obtener-id', 'GET:/infraestructura/{id}/');
+INSERT INTO authorities (name, endpoint) values ('infraestructura-agregar', 'POST:/infraestructura/');
+INSERT INTO authorities (name, endpoint) values ('infraestructura-editar', 'PUT:/infraestructura/{id}/');
+INSERT INTO authorities (name, endpoint) values ('infraestructura-eliminar', 'DELETE:/infraestructura/{id}/');
 
 /*permiso para bienes*/
 INSERT INTO authorities (name, endpoint) values ('bienes-obtener', 'GET:/bienes/');
@@ -43,12 +43,6 @@ INSERT INTO authorities (name, endpoint) values ('carreras-agregar', 'POST:/carr
 INSERT INTO authorities (name, endpoint) values ('carreras-editar', 'PUT:/carreras/{id}/');
 INSERT INTO authorities (name, endpoint) values ('carreras-eliminar', 'DELETE:/carreras/{id}/');
 
-/*permiso para categorias aulas*/
-INSERT INTO authorities (name, endpoint) values ('categorias-aulas-obtener', 'GET:/categorias-aulas/');
-INSERT INTO authorities (name, endpoint) values ('categorias-aulas-obtener-id', 'GET:/categorias-aulas/{id}/');
-INSERT INTO authorities (name, endpoint) values ('categorias-aulas-agregar', 'POST:/categorias-aulas/');
-INSERT INTO authorities (name, endpoint) values ('categorias-aulas-editar', 'PUT:/categorias-aulas/{id}/');
-INSERT INTO authorities (name, endpoint) values ('categorias-aulas-eliminar', 'DELETE:/categorias-aulas/{id}/');
 
 /*permiso para categorias bienes*/
 INSERT INTO authorities (name, endpoint) values ('categorias-bienes-obtener', 'GET:/categorias-bienes/');
@@ -85,12 +79,6 @@ INSERT INTO authorities (name, endpoint) values ('escala-ocupacional-agregar', '
 INSERT INTO authorities (name, endpoint) values ('escala-ocupacional-editar', 'PUT:/escala-ocupacional/{id}/');
 INSERT INTO authorities (name, endpoint) values ('escala-ocupacional-eliminar', 'DELETE:/escala-ocupacional/{id}/');
 
-/*permiso para estado civil*/
-INSERT INTO authorities (name, endpoint) values ('estado-civil-obtener', 'GET:/estado-civil/');
-INSERT INTO authorities (name, endpoint) values ('estado-civil-obtener-id', 'GET:/estado-civil/{id}/');
-INSERT INTO authorities (name, endpoint) values ('estado-civil-agregar', 'POST:/estado-civil/');
-INSERT INTO authorities (name, endpoint) values ('estado-civil-editar', 'PUT:/estado-civil/{id}/');
-INSERT INTO authorities (name, endpoint) values ('estado-civil-eliminar', 'DELETE:/estado-civil/{id}/');
 
 /*permiso para estudios en curso*/
 INSERT INTO authorities (name, endpoint) values ('estudios-curso-obtener', 'GET:/estudios-curso/');
@@ -106,12 +94,6 @@ INSERT INTO authorities (name, endpoint) values ('fecha-ingreso-instituto-agrega
 INSERT INTO authorities (name, endpoint) values ('fecha-ingreso-instituto-editar', 'PUT:/fecha-ingreso-instituto/{id}/');
 INSERT INTO authorities (name, endpoint) values ('fecha-ingreso-instituto-eliminar', 'DELETE:/fecha-ingreso-instituto/{id}/');
 
-/*permiso para genero*/
-INSERT INTO authorities (name, endpoint) values ('generos-obtener', 'GET:/generos/');
-INSERT INTO authorities (name, endpoint) values ('generos-obtener-id', 'GET:/generos/{id}/');
-INSERT INTO authorities (name, endpoint) values ('generos-agregar', 'POST:/generos/');
-INSERT INTO authorities (name, endpoint) values ('generos-editar', 'PUT:/generos/{id}/');
-INSERT INTO authorities (name, endpoint) values ('generos-eliminar', 'DELETE:/generos/{id}/');
 
 /*permiso para institutos*/
 INSERT INTO authorities (name, endpoint) values ('institutos-obtener', 'GET:/institutos/');
@@ -135,12 +117,6 @@ INSERT INTO authorities (name, endpoint) values ('persona-agregar', 'POST:/perso
 INSERT INTO authorities (name, endpoint) values ('persona-editar', 'PUT:/persona/{id}/');
 INSERT INTO authorities (name, endpoint) values ('persona-eliminar', 'DELETE:/persona/{id}/');
 
-/*permiso para provincias*/
-INSERT INTO authorities (name, endpoint) values ('provincias-obtener', 'GET:/provincias/');
-INSERT INTO authorities (name, endpoint) values ('provincias-obtener-id', 'GET:/provincias/{id}/');
-INSERT INTO authorities (name, endpoint) values ('provincias-agregar', 'POST:/provincias/');
-INSERT INTO authorities (name, endpoint) values ('provincias-editar', 'PUT:/provincias/{id}/');
-INSERT INTO authorities (name, endpoint) values ('provincias-eliminar', 'DELETE:/provincias/{id}/');
 
 /*permiso para roles institucionales*/
 INSERT INTO authorities (name, endpoint) values ('roles-institucionales-obtener', 'GET:/roles-institucionales/');
@@ -186,13 +162,6 @@ VALUES
   ('dygsddd','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
-INSERT INTO estado_civil (nombre,created_at, updated_at)
-VALUES
-  ('casado','2023-07-20 10:00:00', '2023-07-20 10:00:00'),
-  ('soltero','2023-07-20 10:00:00', '2023-07-20 10:00:00'),
-  ('divorciado','2023-07-20 10:00:00', '2023-07-20 10:00:00');
-
-/**/
 INSERT INTO fecha_ingreso_instituto (cambio_grupo_ocupacional_modalidad,created_at, updated_at, cambio_instituto_fusion, cambio_ocupacional_emergencia, primer_ingreso)
 VALUES
   ('2023-06-01 08:00:00','2023-07-20 10:00:00', '2023-07-20 10:00:00', '2024-01-15 09:30:00', '2022-11-20 14:45:00', '2021-03-05 07:15:00'),
@@ -204,27 +173,16 @@ INSERT INTO carreras(descripcion,created_at, updated_at)
 VALUES ('desarrollo de software','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('marketing','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('diseño de modas','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
-
-INSERT INTO provincias(descripcion,created_at, updated_at)
-VALUES ('pichincha','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('Guayas','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('Azuay','2023-07-20 10:00:00', '2023-07-20 10:00:00');
-/**/
 INSERT INTO institutos
-(canton,created_at, updated_at, coordinacion_zonal, direccion_instituto, nombre, regimen_laboral, provincias_id)
+(canton,created_at, updated_at, coordinacion_zonal, direccion_instituto, nombre, regimen_laboral, provincias)
 VALUES ('Quito','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'Zona Norte', 'Av. Amazonas y Naciones Unidas', 'Colegio Simón Bolívar', 'Contrato temporal', 1),
 ('Guayaquil','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'Zona Sur', 'Av. Kennedy y Benjamín Carrión', 'Colegio Juan Montalvo', 'Contrato indefinido', 2),
 ('Cuenca','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'Zona Centro', 'Av. de las Américas y Huayna Cápac', 'Escuela 9 de Octubre', 'Contrato a plazo fijo', 1);
 
 
-
-
 /**/
-INSERT INTO categorias_aulas(descripcion,created_at, updated_at)
-VALUES ('oficina','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('aula','2023-07-20 10:00:00', '2023-07-20 10:00:00'),('laboratorio','2023-07-20 10:00:00', '2023-07-20 10:00:00');
-
-/**/
-INSERT INTO enfermedad_catastrofica (cargo_discapacidad,created_at, updated_at, certificado_enfermedad, tipo_enfermedad)
+INSERT INTO enfermedad_catastrofica (cargo_persona_discapacidad,created_at, updated_at, institucion_certifica_enfermedad, tipo_enfermedad)
 VALUES (2,'2023-07-20 10:00:00', '2023-07-20 10:00:00', 'ministerio_salud', 'insuficiencia renal'), (2,'2023-07-20 10:00:00', '2023-07-20 10:00:00', 'iess','cancer');
-
 
 
 /**/
@@ -232,9 +190,12 @@ INSERT INTO nacionalidad (nombre,created_at, updated_at)
 VALUES ('ecuatoriano','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 /**/
-INSERT INTO entidad_publica(codigo_instituto,created_at, updated_at, entidad_publica, familiar_senecsyt, honorario_senecsyt, nombre_familiar, observaciones)
-VALUES ('15','2023-07-20 10:00:00', '2023-07-20 10:00:00',1,1, 1, 'Johan', 'nuevo empleado' ),
-('20','2023-07-20 10:00:00', '2023-07-20 10:00:00',2,1, 0, 'Maria', 'empleado transferido' );
+INSERT INTO entidad_publica(created_at, updated_at, 
+	recibe_otro_honorario_senecsyt, 
+	tienefamiliares_labora_senecsyt, codigo_instituto_labore, 
+	labora_otra_entidad_publica, observaciones)
+VALUES ('2023-07-20 10:00:00', '2023-07-20 10:00:00',1,1, 1, 1, 'nuevo empleado' ),
+('2023-07-20 10:00:00', '2023-07-20 10:00:00',2,1, 0, 1, 'empleado transferido' );
 
 /**/
 INSERT INTO discapacidad (numero_carnet,created_at, updated_at, porcentaje, tipo_discapacidad)
@@ -242,15 +203,12 @@ VALUES ('123456','2023-07-20 10:00:00', '2023-07-20 10:00:00', 15, 'discapacidad
 ('789012','2023-07-20 10:00:00', '2023-07-20 10:00:00', 30, 'discapacidad sensorial');
 
 /**/
-INSERT INTO escala_ocupacionales (descripcion,created_at, updated_at) VALUES
-('rector','2023-07-20 10:00:00', '2023-07-20 10:00:00'), ('docente','2023-07-20 10:00:00', '2023-07-20 10:00:00');
+INSERT INTO escala_ocupacionales (created_at, updated_at, grado, grupo_ocupacional, remuneracion) VALUES
+('2023-07-20 10:00:00', '2023-07-20 10:00:00',1,'ip1',1800), ('2023-07-20 10:00:00', '2023-07-20 10:00:00',1,'ip1',1800);
 
 /**/
 INSERT INTO titulos (titulos_optenidos,created_at, updated_at ,institucion, ano_del_titulo, intruccion_formal,numero_de_registro_senesyt) 
-VALUES ('ing. mecánico','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'U. central', '2002-05-10', 'tercer nivel', '4646465144');
-
-/**/
-INSERT INTO generos ( nombre,created_at, updated_at ) VALUES ('masculino','2023-07-20 10:00:00', '2023-07-20 10:00:00');
+VALUES ('ing. mecánico','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'U. central', '2002-05-10', 1, '4646465144');
 
 /**/
 INSERT INTO estudiosen_cursos ( nombre,created_at, updated_at, tipo_de_titulo, fecha_de_inicio, fecha_de_fin, numero_de_horas) VALUES
@@ -260,36 +218,22 @@ INSERT INTO estudiosen_cursos ( nombre,created_at, updated_at, tipo_de_titulo, f
 INSERT INTO categorias_bienes ( nombre,created_at, updated_at ) VALUES ('CPU','2023-07-20 10:00:00', '2023-07-20 10:00:00');
 
 
-
-
 /**/
 INSERT INTO persona
-(apellidos,created_at, updated_at, correo_personal, direccion_domiciliaria, dni, etnia, 
-fecha_de_nacimiento, horario_trabajo, materias_imparte, modalidad_jornada, 
-modalidad_laboral, nombres, rmu, telefono, telefono_domicilio, tipo_de_sangre, carreras_id, discapacidad_id, enfermedad_catastrofica_id, entidad_publica_id, 
-escala_ocupacionales_id, estado_civil_id, estudiosen_cursos_id, 
-fecha_ingreso_instituto_id, genero_id, institutos_id, nacionalidad_id, 
-provincia_id, roles_institucionales_id, user_id)
+(created_at, updated_at, apellidos, correo_personal, direccion_domiciliaria, dni, estado_civil, etnia, fecha_de_nacimiento, genero, horario_trabajo, materias_imparte, modalidad_jornada, modalidad_laboral, nombres, provincia, telefono, telefono_domicilio, tipo_de_sangre, carreras_id, entidad_publica_id, escala_ocupacionales_id, fecha_ingreso_instituto_id, institutos_id, nacionalidad_id, roles_institucionales_id, user_id)
 VALUES 
-('Gómez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'gomez@example.com', 'Av. Principal 123', '1234567890', 'Mestizo', 
-'1990-05-15', '08:00-17:00', 'Matemáticas, Física', 1, 
-'Tiempo completo', 'Juan', 1500.50, '0987654321', '022345678', 'O+', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1),
-('Pérez','2023-07-20 10:00:00', '2023-07-20 10:00:00', 'perez@example.com', 'Calle Secundaria 456', '0987654321', 'Indígena', 
-'1985-10-20', '07:00-16:00', 'Historia, Literatura', 1, 
-'Medio tiempo', 'María', 1200.75, '0998765432', '033456789', 'A-', 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,2);
+('2024-08-03 10:00:00','2024-08-03 10:00:00','Pérez','juan.perez@example.com','Calle Falsa 123','12345678',1,'Mestizo','1990-01-01',1,'08:00-16:00','Matemáticas, Física',1,'Presencial','Juan',1,'0987654321','022345678',1,1,1,1,1,1,1,1,1
+);
 
 
 /**/
-INSERT INTO aula (created_at, updated_at, descripcion, nombre, categoria_aula_id, persona_id)
-VALUES ('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'cyan', 'piso 2',1,1),
-('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'pachica', 'piso 1',2,2);
+INSERT INTO infraestructura (created_at, updated_at, descripcion, nombre, categoria_aula, persona_id)
+VALUES ('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'cyan', 'piso 2',1,1);
 
-/**/
-INSERT INTO bienes (codigo_del_bien,created_at, updated_at, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id,aula_id)
+INSERT INTO bienes (created_at, updated_at, codigo_del_bien, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id, infraestructura_id)
 VALUES
-  ('wwwputow7w7gf','2023-07-20 10:00:00', '2023-07-20 10:00:00', 1, 'nueva', true, 'hp', 'm7x', 'laptop', 'sin observaciones', '12345abc', 15.1, 11, 1,1),
-  ('abcde12345','2023-07-20 10:00:00', '2023-07-20 10:00:00', 2, 'antiguo', false, 'dell', 'xps13', 'ordenador', 'requiere mantenimiento', '67890def', 20.5, 16, 1,2),
-  ('fghij67890','2023-07-20 10:00:00', '2023-07-20 10:00:00', 3, 'nuevo', true, 'acer', 'swift3', 'laptop', 'sin detalles', '54321ghi', 25.0, 21, 1,2);
+  ('2024-08-03 10:00:00','2024-08-03 10:00:00','ABC123',1,'Laptop Dell',true,'Dell',
+    'XPS 13','Laptop Oficina','En buen estado','12345XYZ',1000.00,120.00,1,1 );
 
 /*INSERT INTO aula_bienes(
 	aula_id, bienes_id)

@@ -59,8 +59,8 @@ public class Bienes extends GlobalEntity {
     private CategoriasBienes categoriaBien;
 
     @ManyToOne
-    @JoinColumn(name = "aula_id")
+    @JoinColumn(name = "infraestructura_id")
     @JsonIgnoreProperties("bienes")
-    private Infraestructura aula;
+    private Infraestructura infraestructura;
 
 }

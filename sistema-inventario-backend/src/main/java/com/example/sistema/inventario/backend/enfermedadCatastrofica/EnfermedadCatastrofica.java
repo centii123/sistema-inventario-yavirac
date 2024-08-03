@@ -2,6 +2,8 @@ package com.example.sistema.inventario.backend.enfermedadCatastrofica;
 
 import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Persona.Persona;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,5 +32,6 @@ public class EnfermedadCatastrofica extends GlobalEntity{
     private Integer cargoPersonaDiscapacidad;
     
     @ManyToOne
+    @JsonIgnoreProperties("enfermedadCatastrofica")
     private Persona persona;
 }

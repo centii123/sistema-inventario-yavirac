@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Persona.Persona;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +46,7 @@ public class Titulos extends GlobalEntity{
     private String numeroDeRegistroSenesyt;
 
     @ManyToOne
+    @JsonIgnoreProperties("titulos")
     private Persona persona;
 
 }

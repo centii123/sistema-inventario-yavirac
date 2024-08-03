@@ -42,7 +42,7 @@ public class Infraestructura extends GlobalEntity{
     @JoinColumn( nullable = true) //error
     private Persona persona;
 
-    @JsonIgnoreProperties("aula")
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aula")
+    @JsonIgnoreProperties("infraestructura")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "infraestructura")
     private List<Bienes> bienes;
 }

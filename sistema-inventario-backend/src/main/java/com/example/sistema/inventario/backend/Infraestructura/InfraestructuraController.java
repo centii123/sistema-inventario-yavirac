@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping("aula")
+@RequestMapping("infraestructura")
 @Tag(name = "Controlador Aulas", description = "Tabla aulas")
 @CrossOrigin({"*"})
 public class InfraestructuraController {
@@ -30,36 +30,36 @@ public class InfraestructuraController {
     @Autowired
     InfraestructuraService service;
 
-    @Operation(summary = "Obtiene todas las aulas, Requiere aula-optener")
-    @PreAuthorize("hasAuthority('aula-obtener')")
+    @Operation(summary = "Obtiene todas las infraestructuras, Requiere infraestructura-optener")
+    @PreAuthorize("hasAuthority('infraestructura-obtener')")
     @GetMapping("/")
     public List<Infraestructura> getAll(){
         return service.getAll();
     }
 
-    @Operation(summary = "Obtiene una aula, Requiere aula-optener")
-    @PreAuthorize("hasAuthority('aula-obtener-id')")
+    @Operation(summary = "Obtiene una infraestructura, Requiere infraestructura-optener")
+    @PreAuthorize("hasAuthority('infraestructura-obtener-id')")
     @GetMapping("/{id}/")
     public Infraestructura findById(@PathVariable long id){
         return service.findById(id);
     }
 
-    @Operation(summary = "Agrega un aula, Requiere aula-agregar")
-    @PreAuthorize("hasAuthority('aula-agregar')")
+    @Operation(summary = "Agrega una infraestructura, Requiere infraestructura-agregar")
+    @PreAuthorize("hasAuthority('infraestructura-agregar')")
     @PostMapping("/")
     public Infraestructura save(@RequestBody Infraestructura entity){
         return service.save(entity);
     }
 
-    @Operation(summary = "Edita un aula, Requiere aula-editar")
-    @PreAuthorize("hasAuthority('aula-editar')")
+    @Operation(summary = "Edita una infraestructura, Requiere infraestructura-editar")
+    @PreAuthorize("hasAuthority('infraestructura-editar')")
     @PutMapping("/")
     public Infraestructura update(@RequestBody Infraestructura entity){
         return service.save(entity);
     }
 
-    @Operation(summary = "Elimina un aula, Requiere aula-eliminar")
-    @PreAuthorize("hasAuthority('aula-eliminar')")
+    @Operation(summary = "Elimina un aula, Requiere infraestructura-eliminar")
+    @PreAuthorize("hasAuthority('infraestructura-eliminar')")
     @DeleteMapping("/{id}/")
     public void deleteById(@PathVariable long id){
         

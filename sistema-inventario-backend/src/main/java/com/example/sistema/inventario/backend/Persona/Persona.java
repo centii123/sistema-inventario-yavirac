@@ -1,20 +1,27 @@
 package com.example.sistema.inventario.backend.Persona;
 
 import java.util.Date;
-
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.example.sistema.inventario.backend.GlobalEntity;
 import com.example.sistema.inventario.backend.Carreras.Carreras;
 import com.example.sistema.inventario.backend.EscalaOcupacional.EscalaOcupacionales;
+import com.example.sistema.inventario.backend.EstudiosenCurso.EstudiosenCursos;
+import com.example.sistema.inventario.backend.FamiliarLaboraotraEntidadPublica.FamiliarLaboraotraEntidadPublica;
 import com.example.sistema.inventario.backend.FechaIngresoInstituto.FechaIngresoInstituto;
 import com.example.sistema.inventario.backend.Infraestructura.Infraestructura;
 import com.example.sistema.inventario.backend.Institutos.Institutos;
 import com.example.sistema.inventario.backend.RolesInstitucionales.RolesInstitucionales;
+import com.example.sistema.inventario.backend.Titulos.Titulos;
 import com.example.sistema.inventario.backend.authz.entity.User;
+import com.example.sistema.inventario.backend.discapacidad.Discapacidad;
+import com.example.sistema.inventario.backend.enfermedadCatastrofica.EnfermedadCatastrofica;
 import com.example.sistema.inventario.backend.entidadPublica.EntidadPublica;
 import com.example.sistema.inventario.backend.nacionalidad.Nacionalidad;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +29,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -121,4 +129,25 @@ public class Persona extends GlobalEntity{
     @OneToOne
     @JoinColumn( nullable = true)
     private User user;
+
+
+    @JsonIgnoreProperties("persona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<Discapacidad> discapacidad;
+
+    @JsonIgnoreProperties("persona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<EnfermedadCatastrofica> enfermedadCatastrofica;
+
+    @JsonIgnoreProperties("persona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<FamiliarLaboraotraEntidadPublica> familiarLaboraotraEntidadPublica;
+
+    @JsonIgnoreProperties("persona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<EstudiosenCursos> estudiosenCursos;
+
+    @JsonIgnoreProperties("persona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<Titulos> titulos;
 }
