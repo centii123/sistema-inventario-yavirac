@@ -1,4 +1,4 @@
-package com.example.sistema.inventario.backend.aula;
+package com.example.sistema.inventario.backend.Infraestructura;
 
 import java.util.ArrayList;
 
@@ -7,16 +7,16 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AulaService {
+public class InfraestructuraService {
 
     @Autowired
-    AulaRepository repository;
+    InfraestructuraRepository repository;
 
-    public ArrayList<Aula> getAll() {
-        return (ArrayList<Aula>) this.repository.findAll();
+    public ArrayList<Infraestructura> getAll() {
+        return (ArrayList<Infraestructura>) this.repository.findAll();
     }
 
-    public Aula save(Aula entity) {
+    public Infraestructura save(Infraestructura entity) {
         return repository.save(entity);
     }
 
@@ -24,13 +24,13 @@ public class AulaService {
         repository.deleteById(id);
     }
 
-    public Aula findById(long id) {
+    public Infraestructura findById(long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Async
     public void delete(long id) {
-        Aula aula=this.findById(id);
+        Infraestructura aula=this.findById(id);
         aula.setPersona(null);
         aula.setBienes(null);
         this.save(aula);

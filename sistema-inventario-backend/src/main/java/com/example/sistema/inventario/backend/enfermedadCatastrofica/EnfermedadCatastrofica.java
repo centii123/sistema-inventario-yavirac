@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,12 +27,11 @@ public class EnfermedadCatastrofica extends GlobalEntity{
     private String tipoEnfermedad;
 
     @Column(length = 50)
-    private String certificadoEnfermedad;
+    private String institucionCertificaEnfermedad;
 
-    @Column(length = 50)
-    private String cargoDiscapacidad;
+    @Column(columnDefinition = "smallint")
+    private Integer cargoPersonaDiscapacidad;
     
-    @JsonIgnoreProperties("enfermedadCatastrofica")
-    @OneToOne(mappedBy = "enfermedadCatastrofica", cascade = CascadeType.ALL)
+    @ManyToOne
     private Persona persona;
 }

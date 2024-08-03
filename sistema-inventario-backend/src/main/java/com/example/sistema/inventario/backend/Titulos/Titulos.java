@@ -38,8 +38,8 @@ public class Titulos extends GlobalEntity{
     @DateTimeFormat(iso = ISO.DATE_TIME)
     private Date anoDelTitulo;
 
-    @Column(length = 75)
-    private String intruccionFormal;
+    @Column(columnDefinition = "smallint")
+    private Integer intruccionFormal;
 
     @Column(length = 50)
     private String numeroDeRegistroSenesyt;

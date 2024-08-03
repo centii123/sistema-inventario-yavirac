@@ -55,7 +55,7 @@ public class PersonaService {
     @Async
     public void delete(long id) {
         Persona persona=this.findById(id);
-        if(persona.getDiscapacidad() != null | 
+        /*if(persona.getDiscapacidad() != null | 
         persona.getEnfermedadCatastrofica() != null |
         persona.getEntidadPublica() != null |
         persona.getFechaIngresoInstituto() != null |
@@ -74,7 +74,7 @@ public class PersonaService {
             this.EntidadPublicaService.deleteById(DataEliminar.getEntidadPublica().getId());
             this.FechaIngresoInstitutoService.deleteFechaIngresoInstituto(DataEliminar.getFechaIngresoInstituto().getId());
             this.UserService.deleteById(DataEliminar.getUser().getId());
-        }
+        }*/
         
         this.deleteById(id);
     }

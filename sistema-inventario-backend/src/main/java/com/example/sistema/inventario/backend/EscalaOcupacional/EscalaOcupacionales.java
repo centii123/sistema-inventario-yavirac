@@ -19,7 +19,12 @@ public class EscalaOcupacionales extends GlobalEntity{
     private long id;
 
     @Column(length = 50)
-    private String descripcion;
+    private String grupoOcupacional;
+
+    @Column(columnDefinition = "smallint")
+    private Integer grado;
+
+    private Integer remuneracion;
 
 
 }
