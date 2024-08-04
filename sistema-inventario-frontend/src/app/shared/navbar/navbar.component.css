@@ -1,6 +1,6 @@
 .container-nav {
   margin: 0;
-  font-family: 'Times New Roman', Times, serif
+  font-family: 'Times New Roman', Times, serif;
 }
 
 nav {
@@ -42,10 +42,11 @@ nav {
 .nav-links a:hover,
 .dropdown-menu li a:hover,
 #sidebar-menu a:hover {
-  color: #FFD700; /* Cambia a un color de tu elección */
-  text-decoration: underline; /* O cualquier otro estilo de tu elección */
+  color: #FFD700; /* Cambia a un color dorado */
+  background-color: #1E4A72; /* Color de fondo azul más oscuro */  
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
-
 
 .logout a {
   text-decoration: none;
@@ -72,7 +73,6 @@ nav {
   align-items: center;
   justify-content: center;
 }
-
 
 .dropdown-menu {
   display: none;
