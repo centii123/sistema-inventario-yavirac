@@ -21,7 +21,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputNumberModule
   ],
   providers: [
-    CrudService, { provide: 'url', useValue: 'aula/' },
+    CrudService, { provide: 'url', useValue: 'infraestructura/' },
 
   ]
 
