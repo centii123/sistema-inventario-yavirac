@@ -50,6 +50,12 @@ nav {
     cursor: pointer;
 }
 
+.nav-links a:hover, .dropdown-menu a:hover {
+    color: #FFD700; /* Color dorado para el texto */
+    background-color: #1E4A72; /* Color de fondo azul más oscuro */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
 
 main {
     padding: 20px;
@@ -70,15 +76,12 @@ section {
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-
 }
-
 
 h1,
 h2 {
     color: #000000;
 }
-
 
 @media (max-width: 768px) {
     nav ul {
