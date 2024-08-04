@@ -1,109 +1,120 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: url('https://th.bing.com/th/id/R.9bcf139fb24e37a3c7264d67f6fdc16d?rik=qcFlaaMxZ76lLg&riu=http%3a%2f%2fyavirac.edu.ec%2fimg%2fslider%2finstalacion2.png&ehk=2fqkvL%2bjKp%2bynTHfsWLlwAylUuFvFbYonEom0O1nMZk%3d&risl=&pid=ImgRaw&r=0') ;
-    background-size: cover;
-    color: #ffffff;
-  }
-  
-  header {
-    background-color: rgba(246, 73, 1, 0.8);
-    color: #fff;
-    padding: 10px 0;
-  }
-  
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-  }
-  
-  nav ul li a:hover {
-    color: rgb(0, 68, 255);
-    border-bottom: 2px solid rgb(0, 68, 255);
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('https://th.bing.com/th/id/R.9bcf139fb24e37a3c7264d67f6fdc16d?rik=qcFlaaMxZ76lLg&riu=http%3a%2f%2fyavirac.edu.ec%2fimg%2fslider%2finstalacion2.png&ehk=2fqkvL%2bjKp%2bynTHfsWLlwAylUuFvFbYonEom0O1nMZk%3d&risl=&pid=ImgRaw&r=0');
+  background-size: cover;
+  color: #ffffff;
+}
 
-  .logo img {
-    height: 50px;
-  }
-  
-  ul {
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  ul li {
-    margin: 0 15px;
-  }
-  
-  ul li a {
-    color: #fff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  }
-  
-  ul li a i {
-    margin-right: 8px;
-  }
-  main {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  section {
-    margin: 20px 0;
-    color: #ffffff;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    width: calc(33.333% - 20px);
-    box-sizing: border-box;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  .card h3 {
-    color: #1877f2;
-    margin-top: 0;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-  }
-  
-  .card p {
-    margin: 10px 0 0;
-  }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-  }
+header {
+  background-color: rgba(246, 73, 1, 0.8);
+  color: #fff;
+  padding: 10px 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+nav ul li a:hover {
+  color: rgb(0, 68, 255);
+  border-bottom: 2px solid rgb(0, 68, 255);
+}
+
+.logo img {
+  height: 50px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin: 0 15px;
+}
+
+ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+ul li a i {
+  margin-right: 8px;
+}
+
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+section {
+  margin: 20px 0;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: calc(25% - 20px); /* Reduce el tamaño de las tarjetas */
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #333;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  color: #1877f2;
+  margin-top: 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.card p {
+  margin: 10px 0 0;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+#inventario div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#inventario .card {
+  flex: 1 1 calc(25% - 20px); /* Ajusta el tamaño de las tarjetas */
+}
