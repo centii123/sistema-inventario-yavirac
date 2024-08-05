@@ -22,12 +22,13 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { CardModule } from 'primeng/card';
+import { CardModule as PrimeCardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { TableModule } from 'primeng/table';
 import { TableComponent } from './componentes/nacionalidad/table/table.component';
 import { FormComponent } from './componentes/nacionalidad/form/form.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { CardModule } from "../../shared/card/card.module";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InventarioOficinasComponent,
     TableComponent,
     FormComponent
-
   ],
   imports: [
     CommonModule,
@@ -60,13 +60,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ToolbarModule,
     ButtonModule,
     TooltipModule,
-    CardModule,
+    PrimeCardModule, // Renombrado para evitar conflictos
     DividerModule,
     TableModule,
-    InputNumberModule
-
-    // No es necesario importar BrowserModule, FormsModule, o BrowserAnimationsModule aquí si ya están en AppModule
-  ]
-
+    InputNumberModule,
+    CardModule
+]
 })
 export class PrincipalModule { }

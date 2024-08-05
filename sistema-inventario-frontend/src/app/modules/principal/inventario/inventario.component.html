@@ -1,39 +1,33 @@
 <app-navbar></app-navbar>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <title>Portal Educativo</title>
-</head>
-<body>
-  <main>
-    <section id="home">
-      <h1>Bienvenido al Portal Educativo</h1>
-      <p>Esta es la página de inicio del portal educativo.</p>
-    </section>
-
-    <section id="inventario">
-      <h2>Inventario</h2>
-      <div >
-        <a href="/inventario-aulas/" class="card">
-          <img src="https://via.placeholder.com/150" alt="Aulas">
-          <p>Información sobre las aulas.</p>
-        </a>
-        <a href="/inventario-oficinas" class="card">
-          <img src="https://via.placeholder.com/150" alt="Oficinas">
-          <h3>OFICINAS</h3>
-          <p>Información sobre las oficinas.</p>
-        </a>
-        <a href="/inventario-laboratorios" class="card">
-          <img src="https://via.placeholder.com/150" alt="Laboratorios">
-          <h3>LABORATORIOS</h3>
-          <p>Información sobre los laboratorios.</p>
-        </a>
+<div class="contenedor-imagen-logo-yavirac d-block">
+  <div class="container-page mb-4">
+    <div class="custom-card-header">
+      <h4 class="m-1">Tu Inventario</h4>
+      <div class="line"></div>
+      <p class="mt-1">Bienvenidos al sistema de gestión de inventario</p>
+    </div>
+    <main>
+      <div class="container">
+        <app-card
+          ruta="/docentes"
+          rutaImg="/assets/img/aula.jpeg"
+          titulo="AULAS"
+          descripcion="Información sobre las AULAS."
+        ></app-card>
+        <app-card
+          ruta="/oficinas"
+          rutaImg="/assets/img/of.jpeg"
+          titulo="OFICINAS"
+          descripcion="Información sobre las oficinas."
+        ></app-card>
+        <app-card
+          ruta="/laboratorios"
+          rutaImg="/assets/img/lab.jpeg"
+          titulo="LABORATORIOS"
+          descripcion="Información sobre los laboratorios."
+        ></app-card>
       </div>
-    </section>
-  </main>
-  <app-footer></app-footer>
-</body>
-</html>
+    </main>
+  </div>
+</div>
+<app-footer></app-footer>
