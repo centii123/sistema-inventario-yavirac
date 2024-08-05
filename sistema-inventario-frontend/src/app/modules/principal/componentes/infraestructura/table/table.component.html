@@ -148,7 +148,7 @@
                   "sin custodio"
               }}
             </td>
-            <td>{{ data.categoriaAula?.descripcion}}</td>
+            <td>{{ data.categoriaAula == 1 ? 'Aula': data.categoriaAula == 2 ? 'Oficina' : data.categoriaAula == 3 ? 'Laboratorio' : 'sin categoria de Aula'}}</td>
             <td>
               <button
                 pButton

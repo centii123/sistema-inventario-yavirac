@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { Persona } from '../../model/persona';
 import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
-import { Aulas } from '../../model/aula';
+import { Infraestructura } from '../../model/infraestructura';
 
 
 
@@ -21,7 +21,7 @@ export class TableComponent {
   FechaOptener = (fecha: any) => obtenerFecha(fecha)
   modalEye: boolean = false;
   selectedData!: Persona | any;
-  AulaDelete!: Aulas;
+  AulaDelete!: Infraestructura;
   @Input() list: Persona[] = [];
   @Output() selectedOneRegister = new EventEmitter<Persona>();
   selectedAllRegister: Persona[] = [];
@@ -80,9 +80,7 @@ export class TableComponent {
           descripcion: data.aula.descripcion,
           nombre: data.aula.nombre,
           persona: null,
-          categoriaAula: {
-            id: data.aula.categoriaAula.id
-          },
+          categoriaAula: data.aula.categoriaAula.id,
           createdAt: data.aula.createdAt
         }
         this.crudService.update(this.AulaDelete, 'aula/').subscribe(

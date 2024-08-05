@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
-import { Aulas } from '../../model/aula';
+import { Infraestructura } from '../../model/infraestructura';
 import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
@@ -17,10 +17,10 @@ import { MessageService } from 'primeng/api';
 })
 export class TableComponent {
   modalEye: boolean = false;
-  selectedData!: Aulas | any;
-  @Input() list: Aulas[] = [];
-  @Output() selectedOneRegister = new EventEmitter<Aulas>();
-  selectedAllRegister: Aulas[] = [];
+  selectedData!: Infraestructura | any;
+  @Input() list: Infraestructura[] = [];
+  @Output() selectedOneRegister = new EventEmitter<Infraestructura>();
+  selectedAllRegister: Infraestructura[] = [];
   loading: boolean = false;
   @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
   mensagge: any;
@@ -53,7 +53,7 @@ export class TableComponent {
     }
   }
 
-  edit(register: Aulas): void {
+  edit(register: Infraestructura): void {
     this.selectedOneRegister.emit(register);
   }
 
@@ -116,7 +116,7 @@ export class TableComponent {
     this.selectedData = null;
   }
 
-  openModal(data: Aulas) {
+  openModal(data: Infraestructura) {
     this.selectedData = data;
     this.modalEye = true;
   }

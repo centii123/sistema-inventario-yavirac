@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
-import { Aulas } from '../../model/aula';
+import { Infraestructura } from '../../model/infraestructura';
 import { MessageService } from 'primeng/api';
 import { Persona } from '../../model/persona';
 
@@ -20,9 +20,9 @@ interface formSelectData {
 export class FormComponent implements OnInit {
   loadingSpiner!: boolean;
   form: FormGroup;
-  list: Aulas[] = [];
+  list: Infraestructura[] = [];
   modal: boolean = false;
-  selected: Aulas | null = null;
+  selected: Infraestructura | null = null;
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
   personaSelect:Persona[]=[]
@@ -60,8 +60,9 @@ export class FormComponent implements OnInit {
   load() {
     this.loadingSpiner = true;
     this.crudService.getAll().subscribe({
-      next: (data: Aulas[]) => {
+      next: (data: Infraestructura[]) => {
         this.list = data;
+        console.log(data)
         this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
         this.loadingSpiner = false;
       },
@@ -72,7 +73,7 @@ export class FormComponent implements OnInit {
     });
   }
 
-  setSeleccionado(registro: Aulas) {
+  setSeleccionado(registro: Infraestructura) {
     this.selected = registro;
     this.personaSelect?.unshift(registro.persona);
     this.openModal()
@@ -92,7 +93,7 @@ export class FormComponent implements OnInit {
       return;
     }
 
-    const registro: Aulas = this.form.value;
+    const registro: Infraestructura = this.form.value;
     if(registro.persona){
       registro.persona={
         'id':registro.persona.id
