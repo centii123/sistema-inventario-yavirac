@@ -34,7 +34,10 @@
 }
 
 .sidebar a:hover, .sidebar button:hover {
-  background-color: #ffa44f;
+  color: #FFD700; /* Cambia a un color dorado */
+  background-color: #1E4A72; /* Color de fondo azul más oscuro */  
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
 
 h4 {
