@@ -1,5 +1,75 @@
 <app-navbar></app-navbar>
-
-
-
+<div class="contenedor-imagen-logo-yavirac d-block">
+  <div class="container-page mb-4">
+    <div class="custom-card-header">
+      <h4 class="m-1">Docentes</h4>
+      <div class="line"></div>
+      <p class="mt-1">Bienvenidos al sistema de gestión de docentes</p>
+    </div>
+    <main>
+      <div class="container">
+        <!-- Fila 1 -->
+        <div class="row">
+          <div class="col-md-4 d-flex align-items-stretch">
+            <app-card
+              ruta="/persona"
+              rutaImg="/assets/img/aula.jpeg"
+              titulo="DOCENTES"
+              descripcion="Información sobre los docentes."
+              class="card-full-height"
+            ></app-card>
+          </div>
+          <div class="col-md-4 d-flex align-items-stretch">
+            <app-card
+              ruta="/nacionalidad"
+              rutaImg="/assets/img/of.jpeg"
+              titulo="NACIONALIDAD"
+              descripcion="Información sobre las nacionalidades."
+              class="card-full-height"
+            ></app-card>
+          </div>
+          <div class="col-md-4 d-flex align-items-stretch">
+            <app-card
+              ruta="/carreras"
+              rutaImg="/assets/img/lab.jpeg"
+              titulo="CARRERAS"
+              descripcion="Información sobre las carreras."
+              class="card-full-height"
+            ></app-card>
+          </div>
+        </div>
+        <!-- Fila 2 -->
+        <div class="row">
+          <div class="col-md-4 d-flex align-items-stretch">
+            <app-card
+              ruta="/rol-institucional"
+              rutaImg="/assets/img/lab.jpeg"
+              titulo="ROL INSTITUCIONAL"
+              descripcion="Información sobre el rol institucional."
+              class="card-full-height"
+            ></app-card>
+          </div>
+          <div class="col-md-4 d-flex align-items-stretch">
+            <app-card
+              ruta="/instituto"
+              rutaImg="/assets/img/lab.jpeg"
+              titulo="INSTITUTO"
+              descripcion="Información sobre los isntitutos."
+              class="card-full-height"
+            ></app-card>
+          </div>
+          <div class="col-md-4 d-flex align-items-stretch">
+            <app-card
+              ruta="/titulos"
+              rutaImg="/assets/img/lab.jpeg"
+              titulo="TITULOS"
+              descripcion="Información sobre los titulos."
+              class="card-full-height"
+            ></app-card>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
 <app-footer></app-footer>

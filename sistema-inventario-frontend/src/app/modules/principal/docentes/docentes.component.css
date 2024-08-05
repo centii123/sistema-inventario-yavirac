@@ -1,73 +1,92 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  h1,
+  h2 {
+    color: #000000;
+  }
+  
+  @media (max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+    }
+  
+    nav ul li {
+      margin: 10px 0;
+    }
+  }
+  
+  app-card {
+    width: 250px;
+  }
+  
+  .container-page {
+    margin-top: 30px;
+    width: 95%;
+    margin-left: 2.5%;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px #a1a1a1;
+  }
+  
+  .custom-card-header {
+    background-color: #0D3C61;
+    border-radius: 5px 5px 0 0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+  }
+  
+  .line {
+    padding-top: 3px;
+    padding-left: 80vw;
+    background-color: white;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #0B3C61;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+  }
+  
+  .dropdown-menu li a {
+    padding: 10px;
+    white-space: nowrap;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .contenedor-imagen-logo-yavirac {
     margin: 0;
     padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-main {
-    padding: 20px;
-}
-
-/* Estilos para la sección de docentes */
-.teachers {
-    margin-top: 20px;
-}
-
-.teacher {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.teacher img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    background-image: URL("/assets/img/logo_login.png");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  .card img {
+    margin: 0 auto;
+    max-width: 200px;
+    max-height: 200px;
+    height: autao;
+    border-radius: 10px;
     margin-bottom: 10px;
-}
-
-.teacher h3 {
-    margin: 5px 0;
-}
-
-.teacher p {
-    color: #666;
-}
-
-/* Estilos para el pie de página */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+  }

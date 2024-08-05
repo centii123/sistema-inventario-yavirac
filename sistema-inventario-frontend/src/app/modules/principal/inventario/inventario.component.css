@@ -86,7 +86,7 @@ app-card {
   margin: 0 auto;
   max-width: 200px;
   max-height: 200px;
-  height: auto;
+  height: autao;
   border-radius: 10px;
   margin-bottom: 10px;
 }
