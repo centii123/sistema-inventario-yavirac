@@ -40,6 +40,14 @@
   transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
 
+.btn-group .dropdown-toggle-split {
+  padding-right: 4rem; /* Ajusta este valor para mover la flecha más a la derecha */
+}
+
+.btn-group .fa-chevron-down {
+  margin-left: 2rem; /* Ajusta este valor para mover la flecha más a la derecha */
+}
+
 h4 {
   display: flex;
   align-items: center;
