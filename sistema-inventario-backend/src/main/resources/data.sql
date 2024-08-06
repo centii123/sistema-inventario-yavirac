@@ -134,6 +134,15 @@ INSERT INTO authorities (name, endpoint) values ('titulos-agregar', 'POST:/titul
 INSERT INTO authorities (name, endpoint) values ('titulos-editar', 'PUT:/titulos/{id}/');
 INSERT INTO authorities (name, endpoint) values ('titulos-eliminar', 'DELETE:/titulos/{id}/');
 
+/*permiso para familiares entidad publica*/
+INSERT INTO authorities (name, endpoint) values ('familiar-labora-otra-entidad-publica', 'GET:/familiar-labora-otra-entidad-publica/');
+INSERT INTO authorities (name, endpoint) values ('familiar-labora-otra-entidad-publica-id', 'GET:/familiar-labora-otra-entidad-publica/{id}/');
+INSERT INTO authorities (name, endpoint) values ('familiar-labora-otra-entidad-publica-agregar', 'POST:/familiar-labora-otra-entidad-publica/');
+INSERT INTO authorities (name, endpoint) values ('familiar-labora-otra-entidad-publica-editar', 'PUT:/familiar-labora-otra-entidad-publica/{id}/');
+INSERT INTO authorities (name, endpoint) values ('familiar-labora-otra-entidad-publica-eliminar', 'DELETE:/familiar-labora-otra-entidad-publica/{id}/');
+
+
+
 /*datos roles*/
 INSERT INTO roles (name) values ('ROLE_USUARIO_DE_APOYO');
 INSERT INTO roles (name) values ('ROLE_ADMIN');
