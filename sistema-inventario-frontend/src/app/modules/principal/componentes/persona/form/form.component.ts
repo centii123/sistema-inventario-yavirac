@@ -212,324 +212,113 @@ export class FormComponent implements OnInit {
       enfermedadForm: registro.enfermedadCatastrofica,
       entidadPublicaForm: registro.entidadPublica,
       fechaIngresoForm: {
-        id:registro.fechaIngresoInstituto.id,
-        primerIngreso:this.FechaOptener(registro.fechaIngresoInstituto.primerIngreso),
-        cambioOcupacionalEmergencia:this.FechaOptener(registro.fechaIngresoInstituto.cambioOcupacionalEmergencia),
-        cambioInstitutoFusion:this.FechaOptener(registro.fechaIngresoInstituto.cambioInstitutoFusion),
-        cambioGrupoOcupacionalModalidad:this.FechaOptener(registro.fechaIngresoInstituto.cambioGrupoOcupacionalModalidad)
+        id:registro.fechaIngresoInstituto ? registro.fechaIngresoInstituto.id : null,
+        primerIngreso:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.primerIngreso): null,
+        cambioOcupacionalEmergencia:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioOcupacionalEmergencia): null,
+        cambioInstitutoFusion:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioInstitutoFusion): null,
+        cambioGrupoOcupacionalModalidad:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioGrupoOcupacionalModalidad): null
       },//registro.fechaIngresoInstituto,
       userForm: registro.user
     });
-
-    console.log(this.form.value)
   }
 
 
-  save() {
-
-    /*
-    1- fechaIngresoForm
-    2- entidadPublicaForm
-    3- userForm
-    4-persona
-    6 - discapacidadForm
-    7- enfermedadCatastroficaForm
-    8-familiaresForm
-    9-estudiosenCursosForm
-    10 -titulosForm
-    */
-
-    let data=this.form.value
-    this.temporalDataAdd={
-      fechaIngresoForm:null,
-      entidadPublicaForm:null,
-      userForm:null,
-      personaForm:null
-    }
-    if(data.personaForm.id == null){
-      data.userForm={
-        username: data.personaForm.dni,
-        password: data.personaForm.dni
+  saveStatus=true;
+  hasNonNullFields(obj: any): boolean {
+    if (!obj) return false;
+    return Object.values(obj).some(value => value !== null && value !== undefined);
+  }
+  
+  async save() {
+    try {
+      let data = this.form.value;
+      console.log('data pro max', data);
+      this.temporalDataAdd = {
+        fechaIngresoForm: null,
+        entidadPublicaForm: null,
+        userForm: null,
+        personaForm: null
+      };
+  
+      if (data.personaForm.id == null) {
+        data.userForm = {
+          username: data.personaForm.dni,
+          password: data.personaForm.dni
+        };
+  
+        const userResponse = await this.crudService.add(data.userForm, 'api/user/').toPromise();
+        this.temporalDataAdd.userForm = userResponse.id;
+        data.personaForm.user = { id: this.temporalDataAdd.userForm };
+        console.log(data.personaForm);
+      } else {
+        data.personaForm.user = data.userForm.id ? { id: data.userForm.id } : null;
+        data.userForm = { id: null, username: null, password: null };
       }
-      this.crudService.add(data.userForm,'api/user/').subscribe({
-        next:(int)=>{
-          this.temporalDataAdd.userForm=int.id
-          data.personaForm.user={
-            id:this.temporalDataAdd.userForm
-          }
+  
+      data.personaForm.carreras = { id: data.personaForm.carreras.id };
+      data.personaForm.escalaOcupacionales = { id: data.personaForm.escalaOcupacionales.id };
+      data.personaForm.institutos = { id: data.personaForm.institutos.id };
+      data.personaForm.nacionalidad = { id: data.personaForm.nacionalidad.id };
+      data.personaForm.rolesInstitucionales = { id: data.personaForm.rolesInstitucionales.id };
+  
+      data.discapacidadForm = this.tableForm.discapacidad;
+      data.enfermedadCatastroficaForm = this.tableForm.enfermedad_catastrofica;
+      data.familiaresForm = this.tableForm.familiar_Labora_otra_Entidad_Publica;
+      data.estudiosenCursosForm = this.tableForm.estudios_en_curso;
+      data.titulosForm = this.tableForm.titulos;
+  
+      if (data.fechaIngresoForm && this.hasNonNullFields(data.fechaIngresoForm) && this.saveStatus) {
+        const fechaIngresoResponse = await this.crudService.add(data.fechaIngresoForm, 'fecha-ingreso-instituto/').toPromise();
+        data.personaForm.fechaIngresoInstituto = { id: fechaIngresoResponse.id };
+      }
+  
+      if (data.entidadPublicaForm && this.hasNonNullFields(data.entidadPublicaForm) && this.saveStatus) {
+        const entidadPublicaResponse = await this.crudService.add(data.entidadPublicaForm, 'entidadPublica/').toPromise();
+        data.personaForm.entidadPublica = { id: entidadPublicaResponse.id };
+      }
+  
+      if (data.personaForm && this.hasNonNullFields(data.personaForm) && this.saveStatus) {
+        const personaResponse = await this.crudService.add(data.personaForm).toPromise();
+        this.temporalDataAdd.personaForm = personaResponse.id;
+      }
+  
+      // Helper function to handle array saving
+      const saveArray = async (array: any[], endpoint: string) => {
+        for (const item of array) {
+          item.persona = { id: this.temporalDataAdd.personaForm };
+          await this.crudService.add(item, endpoint).toPromise();
         }
-      })
-
-    }else{
-      data.personaForm.user={
-        id:data.userForm.id
+      };
+  
+      if (data.enfermedadCatastroficaForm.length > 0 && this.saveStatus) {
+        await saveArray(data.enfermedadCatastroficaForm, 'enfermedadCatastrofica/');
       }
-
-      data.userForm={
-        id:null,
-        username: null,
-        password: null
+  
+      if (data.discapacidadForm.length > 0 && this.saveStatus) {
+        await saveArray(data.discapacidadForm, 'discapacidad/');
       }
-    }
-    
-    data.personaForm.carreras={
-      id:data.personaForm.carreras.id
-    }
-
-    data.personaForm.escalaOcupacionales={
-      id:data.personaForm.escalaOcupacionales.id
-    }
-
-    data.personaForm.institutos={
-      id:data.personaForm.institutos.id
-    }
-
-    data.personaForm.nacionalidad={
-      id:data.personaForm.nacionalidad.id
-    }
-
-    data.personaForm.rolesInstitucionales={
-      id:data.personaForm.rolesInstitucionales.id
-    }
-
-    
-    data.discapacidadForm=this.tableForm.discapacidad
-    data.enfermedadCatastroficaForm=this.tableForm.enfermedad_catastrofica
-    data.familiaresForm=this.tableForm.familiar_Labora_otra_Entidad_Publica
-    data.estudiosenCursosForm=this.tableForm.estudios_en_curso
-    data.titulosForm=this.tableForm.titulos
-
-    
-
-    //rolesInstitucionales
-    console.log('la data es:', data);
-
-    this.crudService.add(data.fechaIngresoForm,'fecha-ingreso-instituto/').subscribe({
-      next:(e)=>{
-        this.temporalDataAdd.fechaIngresoForm=e.id
-        this.crudService.add(data.entidadPublicaForm,'entidadPublica/').subscribe({
-          next: (e)=>{
-            this.temporalDataAdd.entidadPublicaForm=e.id
-            console.log(data.userForm)
-            this.temporalDataAdd.userForm=e.id
-                data.personaForm.fechaIngresoInstituto={
-                  id:this.temporalDataAdd.fechaIngresoForm
-                }
-                data.personaForm.entidadPublica={
-                  id:this.temporalDataAdd.entidadPublicaForm
-                }
-
-                console.log(data.personaForm)
-                
-                this.crudService.add(data.personaForm).subscribe({
-                  next:(e)=>{
-                    this.temporalDataAdd.personaForm=e.id
-                    data.enfermedadCatastroficaForm.forEach((iteracion:any) => {
-                      iteracion.persona={
-                        id:this.temporalDataAdd.personaForm
-                      }
-
-                      this.crudService.add(iteracion,'enfermedadCatastrofica/').subscribe({
-                        next:este=>{
-                          console.log(este)
-                        },
-                        error: error => {
-                          console.error('Error:', error);
-                        }
-                      })
-                    });
-
-                    data.discapacidadForm.forEach((iteracion:any) => {
-                      iteracion.persona={
-                        id:this.temporalDataAdd.personaForm
-                      }
-
-                      this.crudService.add(iteracion,'discapacidad/').subscribe({
-                        next:este=>{
-                          console.log(este)
-                        },
-                        error: error => {
-                          console.error('Error:', error);
-                        }
-                      })
-                    });
-
-                    data.estudiosenCursosForm.forEach((iteracion:any) => {
-                      iteracion.persona={
-                        id:this.temporalDataAdd.personaForm
-                      }
-
-                      this.crudService.add(iteracion,'estudios-curso/').subscribe({
-                        next:este=>{
-                          console.log(este)
-                        },
-                        error: error => {
-                          console.error('Error:', error);
-                        }
-                      })
-                    });
-
-                    data.titulosForm.forEach((iteracion:any) => {
-                      iteracion.persona={
-                        id:this.temporalDataAdd.personaForm
-                      }
-
-                      this.crudService.add(iteracion,'titulos/').subscribe({
-                        next:este=>{
-                          console.log(este)
-                        },
-                        error: error => {
-                          console.error('Error:', error);
-                        }
-                      })
-                    });
-
-                    data.familiaresForm.forEach((iteracion:any) => {
-                      iteracion.persona={
-                        id:this.temporalDataAdd.personaForm
-                      }
-
-                      this.crudService.add(iteracion,'familiar-labora-otra-entidad-publica/').subscribe({
-                        next:este=>{
-                          console.log(este)
-                        },
-                        error: error => {
-                          console.error('Error:', error);
-                        }
-                      })
-                    });
-                    this.resetForm();
-                    this.load();
-                    this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
-                    //const addDiscapacidad = data.discapacidadForm.for(id => this.nacionalidadService.deleteNacionalidad(id))
-                  },
-                  error: error => {
-                    console.error('Error:', error);
-                  }
-                })
-          },
-          error: error => {
-            console.error('Error:', error);
-          }
-        })
-      },
-      error: error => {
-        console.error('Error:', error);
+  
+      if (data.estudiosenCursosForm.length > 0 && this.saveStatus) {
+        await saveArray(data.estudiosenCursosForm, 'estudios-curso/');
       }
-    })
-
-    /*this.crudService.add(discapacidad, 'discapacidad/').subscribe({
-      next: (respDiscapacidad) => {
-        console.log('Discapacidad saved:', respDiscapacidad.id);
-        discapacidad.id = respDiscapacidad.id;
-
-        this.crudService.add(enfermedadCatastrofica, 'enfermedadCatastrofica/').subscribe({
-          next: (respEnfermedad) => {
-
-            enfermedadCatastrofica.id = respEnfermedad.id;
-            console.log('Enfermedad saved:', enfermedadCatastrofica);
-
-            this.crudService.add(entidadPublica, 'entidadPublica/').subscribe({
-              next: (respEntidad) => {
-                console.log('Entidad Publica saved:', respEntidad.id);
-                entidadPublica.id = respEntidad.id;
-
-                this.crudService.add(fechaIngresoInstituto, 'fecha-ingreso-instituto/').subscribe({
-                  next: (respFechaIngreso) => {
-                    console.log('Fecha Ingreso saved:', respFechaIngreso.id);
-                    fechaIngresoInstituto.id = respFechaIngreso.id;
-
-                    this.crudService.add(user, 'api/user/').subscribe({
-                      next: (respUser) => {
-                        console.log('User saved:', respUser.id);
-                        user.id = respUser.id;
-
-                        const persona: any = {
-                          ...personaForm,
-                          discapacidad: { id: discapacidad.id },
-                          enfermedadCatastrofica: { id: enfermedadCatastrofica.id },
-                          entidadPublica: { id: entidadPublica.id },
-                          fechaIngresoInstituto: { id: fechaIngresoInstituto.id },
-                          user: { id: user.id },
-                          escalaOcupacionales: { id: personaForm.escalaOcupacionales.id },
-                          estadoCivil: { id: personaForm.estadoCivil.id },
-                          estudiosenCursos: { id: personaForm.estudiosenCursos.id },
-                          genero: { id: personaForm.genero.id },
-                          institutos: { id: personaForm.institutos.id },
-                          nacionalidad: { id: personaForm.nacionalidad.id },
-                          carreras: { id: personaForm.carreras.id },
-                          provincia: { id: personaForm.provincia.id },
-                          rolesInstitucionales: { id: personaForm.rolesInstitucionales.id },
-
-
-                        };
-
-                        const modalidadJornadaValue = this.form.value.personaForm;
-
-                        const modalidadJornada: Persona = {
-                          ...modalidadJornadaValue,
-                          modalidadJornada: modalidadJornadaValue.modalidadJornada?.value || modalidadJornadaValue.modalidadJornada
-                        }
-
-                        persona.telefono = String(persona.telefono)
-                        persona.telefonoDomicilio = String(persona.telefonoDomicilio)
-
-                        console.log('data a enviar', persona)
-
-                        if (persona.id) {
-                          console.log('Updating persona:', persona);
-                          this.crudService.update(persona).subscribe({
-                            next: () => {
-                              console.log('Persona updated');
-                              this.resetForm();
-                              this.load();
-                              this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Registro actualizado exitosamente!' });
-                            },
-                            error: error => {
-                              console.error('Error updating persona:', error);
-                            }
-                          });
-                        } else {
-                          console.log('Adding persona:', persona);
-                          this.crudService.add(persona).subscribe({
-                            next: () => {
-                              console.log('Persona added');
-                              this.resetForm();
-                              this.load();
-                              this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
-                            },
-                            error: error => {
-                              console.error('Error adding persona:', error);
-                            }
-                          });
-                        }
-                      },
-                      error: error => {
-                        console.error('Error saving user:', error);
-                      }
-                    });
-                  },
-                  error: error => {
-                    console.error('Error saving fechaIngreso:', error);
-                  }
-                });
-              },
-              error: error => {
-                console.error('Error saving entidadPublica:', error);
-              }
-            });
-          },
-          error: error => {
-            console.error('Error saving enfermedadCatastrofica:', error);
-          }
-        });
-      },
-      error: error => {
-        console.error('Error saving discapacidad:', error);
+  
+      if (data.titulosForm.length > 0 && this.saveStatus) {
+        await saveArray(data.titulosForm, 'titulos/');
       }
-    });*/
-
-    this.modal = false;
+  
+      if (data.familiaresForm.length > 0 && this.saveStatus) {
+        await saveArray(data.familiaresForm, 'familiar-labora-otra-entidad-publica/');
+      }
+  
+      this.resetForm();
+      this.load();
+      this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
+      this.modal = false;
+  
+    } catch (error) {
+      console.error('Error:', error);
+      this.saveStatus = false;
+    }
   }
 
 
@@ -663,8 +452,12 @@ visible: any={
 dataIndex:any=null;
 
     showDialog(data:any) {
-        this.visible[data] = true;
-        
+      this.form.get('titulosForm')?.reset();
+      this.form.get('discapacidadForm')?.reset();
+      this.form.get('familiaresForm')?.reset();
+      this.form.get('estudiosenCursosForm')?.reset();
+      this.form.get('enfermedadCatastroficaForm')?.reset();
+      this.visible[data] = true;
     }
 
     saveDiscapacidad(formSelectorTable:any,ValueFormData:any){
@@ -676,12 +469,22 @@ dataIndex:any=null;
         this.tableForm[formSelectorTable].push(this.form.value[ValueFormData])
         
       }
-      
+      this.visible={
+        discapacidad:false,
+        enfermedadCatastrofica:false,
+        familiar:false,
+        estudiosCurso:false,
+        titulos:false
+      }
       
     }
 
-    deleteRegisterDiscapacidad(index:number){
-      this.tableForm.discapacidad.splice(index, 1);
+    deleteRegisterDiscapacidad(index:number,formSelectorTable:any){
+      if (this.tableForm && this.tableForm[formSelectorTable]) {
+        this.tableForm[formSelectorTable].splice(index, 1);
+      } else {
+        console.error('tableForm or formSelectorTable is undefined');
+      }
 
     }
 

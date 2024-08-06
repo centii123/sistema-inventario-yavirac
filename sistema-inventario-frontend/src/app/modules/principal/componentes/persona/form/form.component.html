@@ -292,7 +292,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'titulos')" 
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -328,7 +328,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'discapacidad')" 
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -364,7 +364,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'enfermedad_catastrofica')" 
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -397,7 +397,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'familiar_Labora_otra_Entidad_Publica')" 
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -433,7 +433,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'estudios_en_curso')" 
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -507,11 +507,11 @@
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
                 <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('discapacidad','discapacidadForm')" pTooltip="Guardar"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('discapacidad','discapacidadForm')"
                     tooltipPosition="right"></button>
 
                 <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    icon="pi pi-times" (click)="cancel()"
                     tooltipPosition="right"></button>
             </div>
         </div>
@@ -552,11 +552,11 @@
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
                 <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('enfermedad_catastrofica','enfermedadCatastroficaForm')" pTooltip="Guardar"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('enfermedad_catastrofica','enfermedadCatastroficaForm')"
                     tooltipPosition="right"></button>
 
                 <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    icon="pi pi-times" (click)="cancel()"
                     tooltipPosition="right"></button>
             </div>
         </div>
@@ -583,11 +583,11 @@
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
                 <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('familiar_Labora_otra_Entidad_Publica','familiaresForm')" pTooltip="Guardar"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('familiar_Labora_otra_Entidad_Publica','familiaresForm')"
                     tooltipPosition="right"></button>
 
                 <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    icon="pi pi-times" (click)="cancel()"
                     tooltipPosition="right"></button>
             </div>
         </div>
@@ -636,11 +636,11 @@
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
                 <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('estudios_en_curso','estudiosenCursosForm')" pTooltip="Guardar"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('estudios_en_curso','estudiosenCursosForm')"
                     tooltipPosition="right"></button>
 
                 <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    icon="pi pi-times" (click)="cancel()"
                     tooltipPosition="right"></button>
             </div>
         </div>
@@ -688,11 +688,11 @@
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
                 <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('titulos','titulosForm')" pTooltip="Guardar"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('titulos','titulosForm')"
                     tooltipPosition="right"></button>
 
                 <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    icon="pi pi-times" (click)="cancel()"
                     tooltipPosition="right"></button>
             </div>
         </div>
