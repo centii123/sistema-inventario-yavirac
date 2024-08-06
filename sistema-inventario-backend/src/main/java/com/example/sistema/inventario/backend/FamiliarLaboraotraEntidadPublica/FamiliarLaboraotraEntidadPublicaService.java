@@ -1,8 +1,12 @@
 package com.example.sistema.inventario.backend.FamiliarLaboraotraEntidadPublica;
 
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class FamiliarLaboraotraEntidadPublicaService {
@@ -10,18 +14,26 @@ public class FamiliarLaboraotraEntidadPublicaService {
     FamiliarLaboraotraEntidadPublicaRepository repository;
 
     public ArrayList<FamiliarLaboraotraEntidadPublica> getAll() {
-        return (ArrayList<FamiliarLaboraotraEntidadPublica>) this.repository.findAll();
+        return (ArrayList<FamiliarLaboraotraEntidadPublica>) repository.findAllActive();
     }
     
     public FamiliarLaboraotraEntidadPublica save(FamiliarLaboraotraEntidadPublica entity){
         return repository.save(entity);
     }
     
+    @Transactional
     public void deleteById(long id){
-        repository.deleteById(id);
+        Optional<FamiliarLaboraotraEntidadPublica> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            FamiliarLaboraotraEntidadPublica entity = optional.get();
+            entity.setDeletedAt(LocalDateTime.now());
+            repository.save(entity);
+        }
     }
     
     public FamiliarLaboraotraEntidadPublica findById(long id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id)
+                         .filter(f -> f.getDeletedAt() == null)
+                         .orElse(null);
     }
 }

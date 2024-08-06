@@ -11,6 +11,9 @@ nav {
   padding: 10px 20px;
   color: white;
 }
+.nav-links li a {
+  cursor: pointer; /* Hace que el cursor sea una mano cuando pasa sobre cualquier enlace */
+}
 
 .logo img {
   height: 50px;

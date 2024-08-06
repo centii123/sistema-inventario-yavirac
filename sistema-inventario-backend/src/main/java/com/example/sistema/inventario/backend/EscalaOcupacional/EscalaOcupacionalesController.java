@@ -57,8 +57,8 @@ public class EscalaOcupacionalesController {
     @Operation(summary = "Elimina una Escala Ocupacional, Requiere escala-ocupacional-eliminar")
     @PreAuthorize("hasAuthority('escala-ocupacional-eliminar')")
     @DeleteMapping("/{id}/")
-    public void deeteById(@PathVariable long id) {
-        service.deeteById(id);
+    public void deleteById(@PathVariable long id) {
+        service.deleteById(id);
     }
 
 }
