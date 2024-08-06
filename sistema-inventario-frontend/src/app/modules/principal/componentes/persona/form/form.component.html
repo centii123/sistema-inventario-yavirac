@@ -45,7 +45,7 @@
                                             </span>
 
                                             <span class="p-float-label mb-4">
-                                                <p-inputMask id="ftxt-dni" mask="999999999-9" formControlName="dni"
+                                                <p-inputMask id="ftxt-dni" mask="9999999999" formControlName="dni"
                                                     placeholder=""></p-inputMask>
                                                 <label for="ftxt-dni">* Dni</label>
                                             </span>
@@ -669,6 +669,12 @@
                         <input pInputText id="ftxt-institucion" type="text"
                         formControlName="institucion" required>
                         <label for="ftxt-institucion">* Institucion</label>
+                    </span>
+
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-numeroDeRegistroSenesyt" type="text"
+                        formControlName="numeroDeRegistroSenesyt" required>
+                        <label for="ftxt-numeroDeRegistroSenesyt">* Numero De Registro de Senesyt</label>
                     </span>
                     <span class="p-float-label mb-4">
                         <input pInputText id="ftxt-anoDelTitulo" type="date"

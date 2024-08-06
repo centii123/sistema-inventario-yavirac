@@ -6,6 +6,7 @@ import { Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInsti
 import { affirmation, estadoCivil, genero, intruccionFormal, modalidadJornada, TipoDeSangre } from '../constants/constantes-persona';
 import { provincias } from 'src/app/core/constants/constantes-globales';
 import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -50,22 +51,9 @@ export class FormComponent implements OnInit {
     estudios_en_curso:[],
     titulos:[]
   }
-
-  
   activeIndex: number = 0;
-  
-  // entidadPublicaOptions: any[] = [
-  //   { label: 'NO', value: 0 },
-  //   { label: 'SI', value: 1 }
-  // ];
-  // honorarioSenecsytOptions: any[] = [
-  //   { label: 'NO', value: 0 },
-  //   { label: 'SI', value: 1 }
-  // ];
-  // familiarSenecsytOptions: any[] = [
-  //   { label: 'NO', value: 0 },
-  //   { label: 'SI', value: 1 }
-  // ];
+
+  temporalDataAdd!:any;
 
   constructor(
     private fb: FormBuilder,
@@ -88,31 +76,31 @@ export class FormComponent implements OnInit {
 
       titulosForm:this.fb.group({
         id: new FormControl(null),
-        titulosOptenidos: ['', Validators.required],
-        numeroDeRegistroSenesyt: ['', Validators.required],
-        intruccionFormal: ['', Validators.required],
-        institucion: ['', Validators.required],
-        anoDelTitulo: ['', Validators.required],
+        titulosOptenidos: new FormControl(null),
+        numeroDeRegistroSenesyt: new FormControl(null),
+        intruccionFormal: new FormControl(null),
+        institucion: new FormControl(null),
+        anoDelTitulo: new FormControl(null),
       }),
       discapacidadForm: this.fb.group({
         id: new FormControl(null),
-        numeroCarnet: ['', Validators.required],
-        porcentaje: [0, Validators.required],
-        tipoDiscapacidad: ['', Validators.required]
+        numeroCarnet: new FormControl(null),
+        porcentaje: [0],
+        tipoDiscapacidad: new FormControl(null)
       }),
       estudiosenCursosForm:this.fb.group({
         id: new FormControl(null),
-        nombre: ['', Validators.required],
-        tipoDeTitulo: ['', Validators.required],
-        numeroDeHoras: ['', Validators.required],
-        fechaDeInicio: ['', Validators.required],
-        fechaDeFin: ['', Validators.required],
+        nombre: new FormControl(null),
+        tipoDeTitulo: new FormControl(null),
+        numeroDeHoras: new FormControl(null),
+        fechaDeInicio: new FormControl(null),
+        fechaDeFin: new FormControl(null),
       }),
       enfermedadCatastroficaForm: this.fb.group({
         id: new FormControl(null),
-        cargoPersonaDiscapacidad: ['', Validators.required],
-        institucionCertificaEnfermedad: ['', Validators.required],
-        tipoEnfermedad: ['', Validators.required]
+        cargoPersonaDiscapacidad: new FormControl(null),
+        institucionCertificaEnfermedad: new FormControl(null),
+        tipoEnfermedad: new FormControl(null)
       }),
       entidadPublicaForm: this.fb.group({
         id: new FormControl(null),
@@ -131,7 +119,7 @@ export class FormComponent implements OnInit {
       }),
       familiaresForm: this.fb.group({
         id: new FormControl(null),
-        nombre: ['', Validators.required],
+        nombre: new FormControl(null),
       }),
       userForm: this.fb.group({
         id: new FormControl(null),
@@ -154,7 +142,6 @@ export class FormComponent implements OnInit {
         modalidadJornada: new FormControl('', [Validators.required]),
         horarioTrabajo: new FormControl('', [Validators.required]),
         materiasImparte: new FormControl('', [Validators.required]),
-        rmu: new FormControl('', [Validators.required]),
         //muchos a uno
         escalaOcupacionales: new FormControl('', [Validators.required]),
         estadoCivil: new FormControl('', [Validators.required]),
@@ -225,6 +212,7 @@ export class FormComponent implements OnInit {
       enfermedadForm: registro.enfermedadCatastrofica,
       entidadPublicaForm: registro.entidadPublica,
       fechaIngresoForm: {
+        id:registro.fechaIngresoInstituto.id,
         primerIngreso:this.FechaOptener(registro.fechaIngresoInstituto.primerIngreso),
         cambioOcupacionalEmergencia:this.FechaOptener(registro.fechaIngresoInstituto.cambioOcupacionalEmergencia),
         cambioInstitutoFusion:this.FechaOptener(registro.fechaIngresoInstituto.cambioInstitutoFusion),
@@ -238,26 +226,199 @@ export class FormComponent implements OnInit {
 
 
   save() {
-    console.log('la data es:', this.form);
 
-    const personaForm: any = this.form.value.personaForm;
-    const discapacidad: Discapacidad = this.form.value.discapacidadForm;
-    const enfermedadCatastrofica: EnfermedadCatastrofica = this.form.value.enfermedadForm;
-    const entidadPublicaFormValue = this.form.value.entidadPublicaForm;
+    /*
+    1- fechaIngresoForm
+    2- entidadPublicaForm
+    3- userForm
+    4-persona
+    6 - discapacidadForm
+    7- enfermedadCatastroficaForm
+    8-familiaresForm
+    9-estudiosenCursosForm
+    10 -titulosForm
+    */
 
-    // Compruebe si los campos están definidos y luego asigne los valores.
-    const entidadPublica: EntidadPublica = {
-      ...entidadPublicaFormValue,
-      entidadPublica: entidadPublicaFormValue.entidadPublica?.value || entidadPublicaFormValue.entidadPublica,
-      honorarioSenecsyt: entidadPublicaFormValue.honorarioSenecsyt?.value || entidadPublicaFormValue.honorarioSenecsyt,
-      familiarSenecsyt: entidadPublicaFormValue.familiarSenecsyt?.value || entidadPublicaFormValue.familiarSenecsyt,
-    };
+    let data=this.form.value
+    this.temporalDataAdd={
+      fechaIngresoForm:null,
+      entidadPublicaForm:null,
+      userForm:null,
+      personaForm:null
+    }
+    if(data.personaForm.id == null){
+      data.userForm={
+        username: data.personaForm.dni,
+        password: data.personaForm.dni
+      }
+      this.crudService.add(data.userForm,'api/user/').subscribe({
+        next:(int)=>{
+          this.temporalDataAdd.userForm=int.id
+          data.personaForm.user={
+            id:this.temporalDataAdd.userForm
+          }
+        }
+      })
 
+    }else{
+      data.personaForm.user={
+        id:data.userForm.id
+      }
 
-    const fechaIngresoInstituto: FechaIngresoInstituto = this.form.value.fechaIngresoForm;
-    const user: User = this.form.value.userForm;
+      data.userForm={
+        id:null,
+        username: null,
+        password: null
+      }
+    }
+    
+    data.personaForm.carreras={
+      id:data.personaForm.carreras.id
+    }
 
-    this.crudService.add(discapacidad, 'discapacidad/').subscribe({
+    data.personaForm.escalaOcupacionales={
+      id:data.personaForm.escalaOcupacionales.id
+    }
+
+    data.personaForm.institutos={
+      id:data.personaForm.institutos.id
+    }
+
+    data.personaForm.nacionalidad={
+      id:data.personaForm.nacionalidad.id
+    }
+
+    data.personaForm.rolesInstitucionales={
+      id:data.personaForm.rolesInstitucionales.id
+    }
+
+    
+    data.discapacidadForm=this.tableForm.discapacidad
+    data.enfermedadCatastroficaForm=this.tableForm.enfermedad_catastrofica
+    data.familiaresForm=this.tableForm.familiar_Labora_otra_Entidad_Publica
+    data.estudiosenCursosForm=this.tableForm.estudios_en_curso
+    data.titulosForm=this.tableForm.titulos
+
+    
+
+    //rolesInstitucionales
+    console.log('la data es:', data);
+
+    this.crudService.add(data.fechaIngresoForm,'fecha-ingreso-instituto/').subscribe({
+      next:(e)=>{
+        this.temporalDataAdd.fechaIngresoForm=e.id
+        this.crudService.add(data.entidadPublicaForm,'entidadPublica/').subscribe({
+          next: (e)=>{
+            this.temporalDataAdd.entidadPublicaForm=e.id
+            console.log(data.userForm)
+            this.temporalDataAdd.userForm=e.id
+                data.personaForm.fechaIngresoInstituto={
+                  id:this.temporalDataAdd.fechaIngresoForm
+                }
+                data.personaForm.entidadPublica={
+                  id:this.temporalDataAdd.entidadPublicaForm
+                }
+
+                console.log(data.personaForm)
+                
+                this.crudService.add(data.personaForm).subscribe({
+                  next:(e)=>{
+                    this.temporalDataAdd.personaForm=e.id
+                    data.enfermedadCatastroficaForm.forEach((iteracion:any) => {
+                      iteracion.persona={
+                        id:this.temporalDataAdd.personaForm
+                      }
+
+                      this.crudService.add(iteracion,'enfermedadCatastrofica/').subscribe({
+                        next:este=>{
+                          console.log(este)
+                        },
+                        error: error => {
+                          console.error('Error:', error);
+                        }
+                      })
+                    });
+
+                    data.discapacidadForm.forEach((iteracion:any) => {
+                      iteracion.persona={
+                        id:this.temporalDataAdd.personaForm
+                      }
+
+                      this.crudService.add(iteracion,'discapacidad/').subscribe({
+                        next:este=>{
+                          console.log(este)
+                        },
+                        error: error => {
+                          console.error('Error:', error);
+                        }
+                      })
+                    });
+
+                    data.estudiosenCursosForm.forEach((iteracion:any) => {
+                      iteracion.persona={
+                        id:this.temporalDataAdd.personaForm
+                      }
+
+                      this.crudService.add(iteracion,'estudios-curso/').subscribe({
+                        next:este=>{
+                          console.log(este)
+                        },
+                        error: error => {
+                          console.error('Error:', error);
+                        }
+                      })
+                    });
+
+                    data.titulosForm.forEach((iteracion:any) => {
+                      iteracion.persona={
+                        id:this.temporalDataAdd.personaForm
+                      }
+
+                      this.crudService.add(iteracion,'titulos/').subscribe({
+                        next:este=>{
+                          console.log(este)
+                        },
+                        error: error => {
+                          console.error('Error:', error);
+                        }
+                      })
+                    });
+
+                    data.familiaresForm.forEach((iteracion:any) => {
+                      iteracion.persona={
+                        id:this.temporalDataAdd.personaForm
+                      }
+
+                      this.crudService.add(iteracion,'familiar-labora-otra-entidad-publica/').subscribe({
+                        next:este=>{
+                          console.log(este)
+                        },
+                        error: error => {
+                          console.error('Error:', error);
+                        }
+                      })
+                    });
+                    this.resetForm();
+                    this.load();
+                    this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
+                    //const addDiscapacidad = data.discapacidadForm.for(id => this.nacionalidadService.deleteNacionalidad(id))
+                  },
+                  error: error => {
+                    console.error('Error:', error);
+                  }
+                })
+          },
+          error: error => {
+            console.error('Error:', error);
+          }
+        })
+      },
+      error: error => {
+        console.error('Error:', error);
+      }
+    })
+
+    /*this.crudService.add(discapacidad, 'discapacidad/').subscribe({
       next: (respDiscapacidad) => {
         console.log('Discapacidad saved:', respDiscapacidad.id);
         discapacidad.id = respDiscapacidad.id;
@@ -366,7 +527,7 @@ export class FormComponent implements OnInit {
       error: error => {
         console.error('Error saving discapacidad:', error);
       }
-    });
+    });*/
 
     this.modal = false;
   }
@@ -389,6 +550,13 @@ export class FormComponent implements OnInit {
     this.resetForm();
     this.modal = false;
     this.activeIndex=0
+    this.visible={
+      discapacidad:false,
+      enfermedadCatastrofica:false,
+      familiar:false,
+      estudiosCurso:false,
+      titulos:false
+    }
   }
 
   openModal() {
@@ -464,7 +632,14 @@ export class FormComponent implements OnInit {
   closeModal() {
     this.resetForm();
     this.modal = false;
-    this.activeIndex=0
+    this.activeIndex=0;
+    this.visible={
+      discapacidad:false,
+      enfermedadCatastrofica:false,
+      familiar:false,
+      estudiosCurso:false,
+      titulos:false
+    }
   }
 
   edit(register: Persona): void {
