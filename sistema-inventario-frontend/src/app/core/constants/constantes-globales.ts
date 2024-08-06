@@ -1,0 +1,27 @@
+
+export const provincias:any[]=[
+    {data: "Azuay", value: 1},
+    {data: "Bolívar", value: 2},
+    {data: "Cañar", value: 3},
+    {data: "Carchi", value: 4},
+    {data: "Chimborazo", value: 5},
+    {data: "Cotopaxi", value: 6},
+    {data: "El Oro", value: 7},
+    {data: "Esmeraldas", value: 8},
+    {data: "Galápagos", value: 9},
+    {data: "Guayas", value: 10},
+    {data: "Imbabura", value: 11},
+    {data: "Loja", value: 12},
+    {data: "Los Ríos", value: 13},
+    {data: "Manabí", value: 14},
+    {data: "Morona Santiago", value: 15},
+    {data: "Napo", value: 16},
+    {data: "Orellana", value: 17},
+    {data: "Pastaza", value: 18},
+    {data: "Pichincha", value: 19},
+    {data: "Santa Elena", value: 20},
+    {data: "Santo Domingo de los Tsáchilas", value: 21},
+    {data: "Sucumbíos", value: 22},
+    {data: "Tungurahua", value: 23},
+    {data: "Zamora Chinchipe", value: 24}
+]

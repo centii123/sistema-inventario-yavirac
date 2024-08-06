@@ -7,172 +7,29 @@
         </div>
 
         <p-dialog class="custom-dialog bg-blue-900" header="Docentes" [(visible)]="modal" [modal]="true"
-            (onHide)="closeModal()" [style]="{ width: '60rem', minHeight: '90vh'}" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-            [maximizable]="true">
+            (onHide)="closeModal()" [style]="{ width: '60rem', minHeight: '90vh'}"
+            [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
             <br>
 
             <form [formGroup]="form" class="custom-form">
                 <app-spinner [load]="loadingSpinerForm">
                     <div class="p-fluid p-formgrid grid custom-form-grid">
-                        <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
-                            <div class="d-flex">
-                                <p-tabView>
-                                    <p-tabPanel header="Discapacidad" formGroupName="discapacidadForm">
-                                        <!-- Subformularios de uno a uno -->
-                                        <!-- Discapacidad Form -->
-                                    
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-numeroCarnet" type="text"
-                                                    formControlName="numeroCarnet" required>
-                                                <label for="ftxt-numeroCarnet">* Número de Carnet</label>
-                                            </span>
-
-                                            <div class="p-float-label mb-4">
-                                                <p-inputNumber formControlName="porcentaje" [showButtons]="true"
-                                                    inputId="porcentaje"></p-inputNumber>
-                                                <label for="ftxt-porcentaje">* Porcentaje</label>
-                                            </div>
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-tipoDiscapacidad" type="text"
-                                                    formControlName="tipoDiscapacidad" required>
-                                                <label for="ftxt-tipoDiscapacidad">* Tipo de Discapacidad</label>
-                                            </span>
-
-                                    </p-tabPanel>
-
-                                    <p-tabPanel header="Enfermedad Catastrofica" formGroupName="enfermedadForm">
-
-                                        <!-- Enfermedad Form -->
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-cargoDiscapacidad" type="text"
-                                                    formControlName="cargoDiscapacidad" required>
-                                                <label for="ftxt-cargoDiscapacidad">* Cargo discapacidad</label>
-                                            </span>
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-certificadoEnfermedad" type="text"
-                                                    formControlName="certificadoEnfermedad" required>
-                                                <label for="ftxt-certificadoEnfermedad">* Certificado de
-                                                    Enfermedad</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-tipoEnfermedad" type="text"
-                                                    formControlName="tipoEnfermedad" required>
-                                                <label for="ftxt-tipoEnfermedad">* Tipo de Enfermedad</label>
-                                            </span>
-
-                                    </p-tabPanel>
-                                    <p-tabPanel header="Entidad publica" formGroupName="entidadPublicaForm">
-
-                                        <!-- Entidad Pública Form -->
-                                            <span class="p-float-label mb-4">
-                                                <p-dropdown formControlName="entidadPublica"
-                                                    placeholder="* Entidad Publica" [options]="entidadPublicaOptions"
-                                                    [filter]="true" [showClear]="true" optionLabel="label"
-                                                    optionValue="value">
-                                                </p-dropdown>
-                                                <label for="ftxt-entidadPublica">* Labora entidad publica</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <p-dropdown formControlName="honorarioSenecsyt"
-                                                    placeholder="* Horario Senecsyt"
-                                                    [options]="honorarioSenecsytOptions" [filter]="true"
-                                                    [showClear]="true" optionLabel="label" optionValue="value">
-                                                </p-dropdown>
-                                                <label for="ftxt-honorarioSenecsyt">* Horario Senecsyt</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <p-dropdown formControlName="familiarSenecsyt"
-                                                    placeholder="* Familiar Senecsyt"
-                                                    [options]="familiarSenecsytOptions" [filter]="true"
-                                                    [showClear]="true" optionLabel="label" optionValue="value">
-                                                </p-dropdown>
-                                                <label for="ftxt-familiarSenecsyt">* Familiar Senecsyt</label>
-                                            </span>
-
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-nombreFamiliar" type="text"
-                                                    formControlName="nombreFamiliar" required>
-                                                <label for="ftxt-nombreFamiliar">* Nombre del Familiar</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <textarea id="float-observaciones" formControlName="observaciones"
-                                                    rows="3" cols="30" pInputTextarea></textarea>
-                                                <label for="float-observaciones">* Observaciones</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-codigoInstituto" type="text"
-                                                    formControlName="codigoInstituto" required>
-                                                <label for="ftxt-codigoInstituto">* Codigo Instituto</label>
-                                            </span>
-
-                                    </p-tabPanel>
-                                    <p-tabPanel header="Fecha ingreso" formGroupName="fechaIngresoForm">
-
-                                        <!-- Fecha Ingreso Form -->
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-cambioOcupacionalEmergencia" type="date"
-                                                    formControlName="cambioOcupacionalEmergencia" required>
-                                                <label for="ftxt-cambioOcupacionalEmergencia">* Cambio Ocupacional
-                                                    Emergencia</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-primerIngreso" type="date"
-                                                    formControlName="primerIngreso" required>
-                                                <label for="ftxt-primerIngreso">* Primer Ingreso</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-cambioGrupoOcupacionalModalidad" type="date"
-                                                    formControlName="cambioGrupoOcupacionalModalidad" required>
-                                                <label for="ftxt-cambioGrupoOcupacionalModalidad">* Cambio Grupo
-                                                    Ocupacional
-                                                    Modalidad</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-cambioInstitutoFusion" type="date"
-                                                    formControlName="cambioInstitutoFusion" required>
-                                                <label for="ftxt-cambioInstitutoFusion">* Cambio Instituto
-                                                    Fusión</label>
-                                            </span>
-
-                                    </p-tabPanel>
-                                    <p-tabPanel header="Usuario" formGroupName="userForm">
-
-                                        <!-- User Form -->
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-username" type="text"
-                                                    formControlName="username" required>
-                                                <label for="ftxt-username">* Username</label>
-                                            </span>
-
-                                            <span class="p-float-label mb-4">
-                                                <input pInputText id="ftxt-password" type="password"
-                                                    formControlName="password" required>
-                                                <label for="ftxt-password">* Password</label>
-                                            </span>
-                                    </p-tabPanel>
-                                    <p-tabPanel header="Docente" formGroupName="personaForm">
-                                        <!--Persona-->
-                                    
+                        <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3" >
+                            <p-tabView [(activeIndex)]="activeIndex" [scrollable]="true">
+                                <p-tabPanel header="Docente" formGroupName="personaForm">
+                                    <!--Persona-->
+                                    <div class="row mt-3">
+                                        <div class="col me-3 ">
                                             <span class="p-float-label mb-4">
                                                 <input pInputText id="ftxt-nombres" type="text"
                                                     formControlName="nombres" required>
-                                                <label for="ftxt-nombres">* Nombre</label>
+                                                <label for="ftxt-nombres">* Nombres</label>
                                             </span>
 
                                             <span class="p-float-label mb-4">
                                                 <input pInputText id="ftxt-apellidos" type="text"
                                                     formControlName="apellidos" required>
-                                                <label for="ftxt-apellidos">* Apellido</label>
+                                                <label for="ftxt-apellidos">* Apellidos</label>
                                             </span>
 
                                             <span class="p-float-label mb-4">
@@ -181,168 +38,412 @@
                                                 <label for="ftxt-etnia">* Etnia</label>
                                             </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-fechaDeNacimiento" type="date"
-                                                        formControlName="fechaDeNacimiento" required>
-                                                    <label for="ftxt-fecha_de_inicio">* Fecha de Nacimiento</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-fechaDeNacimiento" type="date"
+                                                    formControlName="fechaDeNacimiento" required>
+                                                <label for="ftxt-fecha_de_inicio">* Fecha de Nacimiento</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-dni" type="text" formControlName="dni"
-                                                        required>
-                                                    <label for="ftxt-dni">* Dni</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-inputMask id="ftxt-dni" mask="9999999999" formControlName="dni"
+                                                    placeholder=""></p-inputMask>
+                                                <label for="ftxt-dni">* Dni</label>
+                                            </span>
 
-                                                <div class="p-float-label mb-4">
-                                                    <p-inputNumber formControlName="telefono" [showButtons]="true"
-                                                        inputId="telefono"> </p-inputNumber>
-                                                    <label for="ftxt-telefono">* Telefono</label>
-                                                </div>
+                                            <div class="p-float-label mb-4">
+                                                <p-inputMask id="ftxt-telefono" mask="999-999-9999"
+                                                    formControlName="telefono" placeholder=""></p-inputMask>
 
-                                                <div class="p-float-label mb-4">
-                                                    <p-inputNumber formControlName="telefonoDomicilio"
-                                                        [showButtons]="true" inputId="telefonoDomicilio">
-                                                    </p-inputNumber>
-                                                    <label for="ftxt-telefonoDomicilio">* Telefono Domicilio</label>
-                                                </div>
+                                                <label for="ftxt-telefono">* Telefono</label>
+                                            </div>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-correoPersonal" type="text"
-                                                        formControlName="correoPersonal" required>
-                                                    <label for="ftxt-correoPersonal">* Correo Personal</label>
-                                                </span>
+                                            <div class="p-float-label mb-4">
+                                                <p-inputMask id="ftxt-telefonoDomicilio" mask="999-999-9999"
+                                                    formControlName="telefonoDomicilio" placeholder=""></p-inputMask>
+                                                <label for="ftxt-telefonoDomicilio">Telefono Domicilio</label>
+                                            </div>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-tipoDeSangre" type="text"
-                                                        formControlName="tipoDeSangre" required>
-                                                    <label for="ftxt-tipoDeSangre">* Tipo de sangre</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-correoPersonal" type="email"
+                                                    formControlName="correoPersonal" required>
+                                                <label for="ftxt-correoPersonal">* Correo Personal</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-direccionDomiciliaria" type="text"
-                                                        formControlName="direccionDomiciliaria" required>
-                                                    <label for="ftxt-direccionDomiciliaria">* Direccion
-                                                        Domiciliaria</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown id="ftxt-tipoDeSangre" placeholder="* Modalidad Jornada"
+                                                    formControlName="tipoDeSangre"
+                                                    [options]="formSelectData.tipoDeSangreOptions" optionLabel="data"
+                                                    optionValue="value"></p-dropdown>
+                                                <label for="ftxt-tipoDeSangre">* Tipo de sangre</label>
+                                            </span>
+                                            <span class="p-float-label mb-4">
+                                                <textarea rows="2" cols="30" pInputTextarea
+                                                    formControlName="direccionDomiciliaria"
+                                                    id="ftxt-direccionDomiciliaria"></textarea>
+                                                <label for="ftxt-direccionDomiciliaria">* Direccion
+                                                    Domiciliaria</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-modalidadLaboral" type="text"
-                                                        formControlName="modalidadLaboral" required>
-                                                    <label for="ftxt-modalidadLaboral">* Modalidad Laboral</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-modalidadLaboral" type="text"
+                                                    formControlName="modalidadLaboral" required>
+                                                <label for="ftxt-modalidadLaboral">* Modalidad Laboral</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="modalidadJornada"
-                                                        placeholder="* Modalidad Jornada"
-                                                        [options]="modalidadJornadaOptions" [filter]="true"
-                                                        [showClear]="true" optionLabel="label" optionValue="value">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-modalidadJornada">* Modalidad Jornada</label>
-                                                </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-horarioTrabajo" type="text"
-                                                        formControlName="horarioTrabajo" required>
-                                                    <label for="ftxt-horarioTrabajo">* Horario de trabajo</label>
-                                                </span>
+                                        </div>
+                                        <div class="col">
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="modalidadJornada"
+                                                    placeholder="* Modalidad Jornada"
+                                                    [options]="formSelectData.modalidadJornadaOptions" [filter]="true"
+                                                    [showClear]="true" optionLabel="label" optionValue="value">
+                                                </p-dropdown>
+                                                <label for="ftxt-modalidadJornada">* Modalidad Jornada</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <input pInputText id="ftxt-materiasImparte" type="text"
-                                                        formControlName="materiasImparte" required>
-                                                    <label for="ftxt-materiasImparte">* Materias que Imparte</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <input pInputText id="ftxt-horarioTrabajo" type="text"
+                                                    formControlName="horarioTrabajo" required>
+                                                <label for="ftxt-horarioTrabajo">* Horario de trabajo</label>
+                                            </span>
 
-                                                <div class="p-float-label mb-4">
-                                                    <p-inputNumber formControlName="rmu" [showButtons]="true"
-                                                        inputId="valor" mode="currency" currency="USD"> </p-inputNumber>
-                                                    <label for="ftxt-rmu">* RMU</label>
-                                                </div>
 
-                                                <!--FKS-->
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="escalaOcupacionales"
-                                                        placeholder="* Escala Ocupacional"
-                                                        [options]="formSelectDataEscalaOcupacionales" [filter]="true"
-                                                        filterBy="descripcion" [showClear]="true"
-                                                        optionLabel="descripcion">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-escalaOcupacionales">* Escala Ocupacional</label>
-                                                </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="estadoCivil"
-                                                        placeholder="* Estado Civil"
-                                                        [options]="formSelectDataEstadoCivil" [filter]="true"
-                                                        filterBy="nombre" [showClear]="true" optionLabel="nombre">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-estadoCivil">* Estado Civil</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="provincia" placeholder="* Provincias"
+                                                    [options]="formSelectData.provinciasOptions" [filter]="true"
+                                                    filterBy="data" optionLabel="data" optionValue="value">
+                                                </p-dropdown>
+                                                <label for="ftxt-provincia">* Provincias</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="estudiosenCursos"
-                                                        placeholder="* Estudios en Curso"
-                                                        [options]="formSelectDataEstudiosenCursos" [filter]="true"
-                                                        filterBy="nombre" [showClear]="true" optionLabel="nombre">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-estudiosenCursos">* Estudios en Curso</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="genero" placeholder="* Genero"
+                                                    [options]="formSelectData.generoOptions" optionLabel="label"
+                                                    optionValue="value">
+                                                </p-dropdown>
+                                                <label for="ftxt-genero">* Genero</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="genero" placeholder="* Genero"
-                                                        [options]="formSelectDataGenero" [filter]="true"
-                                                        filterBy="nombre" [showClear]="true" optionLabel="nombre">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-genero">* Genero</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="estadoCivil" placeholder="* Estado Civil"
+                                                    [options]="formSelectData.estadoCivilOptions" optionLabel="label"
+                                                    optionValue="value">
+                                                </p-dropdown>
+                                                <label for="ftxt-estadoCivil">* Estado Civil</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="institutos" placeholder="* Institutos"
-                                                        [options]="formSelectDataInstitutos" [filter]="true"
-                                                        filterBy="nombre" [showClear]="true" optionLabel="nombre">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-institutos">* Institutos</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="nacionalidad" placeholder="* Nacionalidad"
+                                                    [options]="formSelectDataNacionalidad" [filter]="true"
+                                                    filterBy="nombre" optionLabel="nombre">
+                                                </p-dropdown>
+                                                <label for="ftxt-nacionalidad">* Nacionalidad</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="nacionalidad"
-                                                        placeholder="* Nacionalidad"
-                                                        [options]="formSelectDataNacionalidad" [filter]="true"
-                                                        filterBy="nombre" [showClear]="true" optionLabel="nombre">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-nacionalidad">* Nacionalidad</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="rolesInstitucionales"
+                                                    placeholder="* Roles Institucionales"
+                                                    [options]="formSelectDataRolesInstitucionales" [filter]="true"
+                                                    filterBy="descripcion" [showClear]="true" optionLabel="descripcion">
+                                                </p-dropdown>
+                                                <label for="ftxt-rolesInstitucionales">* Roles
+                                                    Institucionales</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="carreras" placeholder="* Carreras"
-                                                        [options]="formSelectDataCarreras" [filter]="true"
-                                                        filterBy="descripcion" [showClear]="true"
-                                                        optionLabel="descripcion">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-carreras">* Carreras</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="institutos" placeholder="* Institutos"
+                                                    [options]="formSelectDataInstitutos" [filter]="true"
+                                                    filterBy="nombre" optionLabel="nombre">
+                                                </p-dropdown>
+                                                <label for="ftxt-institutos">* Institutos</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="provincia" placeholder="* Provincias"
-                                                        [options]="formSelectDataProvincia" [filter]="true"
-                                                        filterBy="descripcion" [showClear]="true"
-                                                        optionLabel="descripcion">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-provincia">* Provincias</label>
-                                                </span>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="escalaOcupacionales"
+                                                    placeholder="* Escala Ocupacional"
+                                                    [options]="formSelectDataEscalaOcupacionales" [filter]="true"
+                                                    filterBy="grupoOcupacional" optionLabel="grupoOcupacional">
+                                                </p-dropdown>
+                                                <label for="ftxt-escalaOcupacionales">* Escala Ocupacional</label>
+                                            </span>
+                                            <span class="p-float-label mb-4">
+                                                <textarea rows="2" cols="30" pInputTextarea
+                                                    formControlName="materiasImparte"
+                                                    id="ftxt-materiasImparte"></textarea>
+                                                <label for="ftxt-materiasImparte">* Materias que Imparte</label>
+                                            </span>
 
-                                                <span class="p-float-label mb-4">
-                                                    <p-dropdown formControlName="rolesInstitucionales"
-                                                        placeholder="* Roles Institucionales"
-                                                        [options]="formSelectDataRolesInstitucionales" [filter]="true"
-                                                        filterBy="descripcion" [showClear]="true"
-                                                        optionLabel="descripcion">
-                                                    </p-dropdown>
-                                                    <label for="ftxt-rolesInstitucionales">* Roles
-                                                        Institucionales</label>
-                                                </span>
-                                    </p-tabPanel>
-                                </p-tabView>
-                            </div>
+                                            <span class="p-float-label mb-4">
+                                                <p-dropdown formControlName="carreras" placeholder="* Carreras"
+                                                    [options]="formSelectDataCarreras" [filter]="true"
+                                                    filterBy="descripcion" [showClear]="true" optionLabel="descripcion">
+                                                </p-dropdown>
+                                                <label for="ftxt-carreras">* Carreras</label>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Fecha ingreso" formGroupName="fechaIngresoForm">
+
+                                    <!-- Fecha Ingreso Form -->
+                                    <span class="p-float-label mb-4 mt-3">
+                                        <input pInputText id="ftxt-cambioOcupacionalEmergencia" type="date"
+                                            formControlName="cambioOcupacionalEmergencia" required>
+                                        <label for="ftxt-cambioOcupacionalEmergencia">* Cambio Ocupacional
+                                            Emergencia</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-primerIngreso" type="date"
+                                            formControlName="primerIngreso" required>
+                                        <label for="ftxt-primerIngreso">* Primer Ingreso</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-cambioGrupoOcupacionalModalidad" type="date"
+                                            formControlName="cambioGrupoOcupacionalModalidad" required>
+                                        <label for="ftxt-cambioGrupoOcupacionalModalidad">* Cambio Grupo
+                                            Ocupacional
+                                            Modalidad</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-cambioInstitutoFusion" type="date"
+                                            formControlName="cambioInstitutoFusion" required>
+                                        <label for="ftxt-cambioInstitutoFusion">* Cambio Instituto
+                                            Fusión</label>
+                                    </span>
+
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Entidad publica" formGroupName="entidadPublicaForm">
+
+                                    <!-- Entidad Pública Form -->
+                                    <span class="p-float-label mb-4">
+                                        <p-dropdown formControlName="laboraOtraEntidadPublica"
+                                            placeholder="* Entidad Publica"
+                                            [options]="formSelectData.entidadPublicaOptions" optionLabel="label"
+                                            optionValue="value">
+                                        </p-dropdown>
+                                        <label for="ftxt-entidadPublica">* Labora entidad publica</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <p-dropdown formControlName="recibeOtroHonorarioSenecsyt"
+                                            placeholder="* Horario Senecsyt"
+                                            [options]="formSelectData.honorarioSenecsytOptions" optionLabel="label"
+                                            optionValue="value">
+                                        </p-dropdown>
+                                        <label for="ftxt-recibeOtroHonorarioSenecsyt">* Horario Senecsyt</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <p-dropdown formControlName="tienefamiliaresLaboraSenecsyt"
+                                            placeholder="* Familiar Senecsyt"
+                                            [options]="formSelectData.familiarSenecsytOptions" optionLabel="label"
+                                            optionValue="value">
+                                        </p-dropdown>
+                                        <label for="ftxt-tienefamiliaresLaboraSenecsyt">* Familiar Senecsyt</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <textarea id="float-observaciones" formControlName="observaciones" rows="3"
+                                            cols="30" pInputTextarea></textarea>
+                                        <label for="float-observaciones">* Observaciones</label>
+                                    </span>
+
+                                    <span class="p-float-label mb-4">
+                                        <input pInputText id="ftxt-codigoInstitutoLabore" type="text"
+                                            formControlName="codigoInstitutoLabore" required>
+                                        <label for="ftxt-codigoInstitutoLabore">* Codigo Instituto</label>
+                                    </span>
+
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Titulos" formGroupName="titulosForm">
+                                    <p-table [value]="tableForm.titulos" styleClass="p-datatable-gridlines"
+                                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                                        <ng-template pTemplate="caption">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-primary" (click)="showDialog('titulos')">Agregar</button>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Nombre del Titulos</th>
+                                                <th>Numero De Registro Senesyt</th>
+                                                <th>Año Del Titulo</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                                            <tr>
+                                                <td>{{ data.titulosOptenidos }}</td>
+                                                <td>{{ data.numeroDeRegistroSenesyt }}</td>
+                                                <td>{{ this.FechaOptener(data.anoDelTitulo) }}</td>
+                                                <td>
+                                                    <button pButton pRipple icon="pi pi-pencil"
+                                                        class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
+                                                        (click)="editDiscapacidad(data,rowIndex,'titulos')"
+                                                        tooltipPosition="left"></button>
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button-rounded p-button-danger p-button-text p-button-sm"
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        tooltipPosition="left"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Discapacidad" formGroupName="discapacidadForm">
+                                    <p-table [value]="tableForm.discapacidad" styleClass="p-datatable-gridlines"
+                                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                                        <ng-template pTemplate="caption">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-primary" (click)="showDialog('discapacidad')">Agregar</button>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Tipo Discapacidad</th>
+                                                <th>Porcentaje</th>
+                                                <th>Numero de Carnet</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                                            <tr>
+                                                <td>{{ data.tipoDiscapacidad }}</td>
+                                                <td>{{ data.porcentaje }} %</td>
+                                                <td>{{ data.numeroCarnet }}</td>
+                                                <td>
+                                                    <button pButton pRipple icon="pi pi-pencil"
+                                                        class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
+                                                        (click)="editDiscapacidad(data,rowIndex,'discapacidad')"
+                                                        tooltipPosition="left"></button>
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button-rounded p-button-danger p-button-text p-button-sm"
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        tooltipPosition="left"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Enfermedad Catastrofica" formGroupName="discapacidadForm">
+                                    <p-table [value]="tableForm.enfermedad_catastrofica" styleClass="p-datatable-gridlines"
+                                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                                        <ng-template pTemplate="caption">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-primary" (click)="showDialog('enfermedadCatastrofica')">Agregar</button>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Tipo de Enfermedad</th>
+                                                <th>Institucion que Certifica la Enfermedad</th>
+                                                <th>Acargo de Persona con Discapacidad</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                                            <tr>
+                                                <td>{{ data.tipoEnfermedad }}</td>
+                                                <td>{{ data.institucionCertificaEnfermedad }}</td>
+                                                <td>{{ data.cargoPersonaDiscapacidad == 1 ? 'Acargo de persona con discapacidad': data.cargoPersonaDiscapacidad == 2 ? 'sin persona acargo': 'N/A' }}</td>
+                                                <td>
+                                                    <button pButton pRipple icon="pi pi-pencil"
+                                                        class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
+                                                        (click)="editDiscapacidad(data,rowIndex,'enfermedadCatastrofica')"
+                                                        tooltipPosition="left"></button>
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button-rounded p-button-danger p-button-text p-button-sm"
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        tooltipPosition="left"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Familiares" formGroupName="familiaresForm">
+                                    <p-table [value]="tableForm.familiar_Labora_otra_Entidad_Publica" styleClass="p-datatable-gridlines"
+                                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                                        <ng-template pTemplate="caption">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-primary" (click)="showDialog('familiar')">Agregar</button>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>nombre</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                                            <tr>
+                                                <td>{{ data.nombre }}</td>
+
+                                                <td>
+                                                    <button pButton pRipple icon="pi pi-pencil"
+                                                        class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
+                                                        (click)="editDiscapacidad(data,rowIndex,'familiar')"
+                                                        tooltipPosition="left"></button>
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button-rounded p-button-danger p-button-text p-button-sm"
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        tooltipPosition="left"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Estudios en Curso" formGroupName="estudiosenCursosForm">
+                                    <p-table [value]="tableForm.estudios_en_curso" styleClass="p-datatable-gridlines"
+                                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                                        <ng-template pTemplate="caption">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-primary" (click)="showDialog('estudiosCurso')">Agregar</button>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Tipo De Titulo</th>
+                                                <th>Numero De Horas</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                                            <tr>
+                                                <td>{{ data.nombre }}</td>
+                                                <td>{{ data.tipoDeTitulo }} %</td>
+                                                <td>{{ data.numeroDeHoras }}</td>
+                                                <td>
+                                                    <button pButton pRipple icon="pi pi-pencil"
+                                                        class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
+                                                        (click)="editDiscapacidad(data,rowIndex,'estudiosCurso')"
+                                                        tooltipPosition="left"></button>
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button-rounded p-button-danger p-button-text p-button-sm"
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex)" 
+                                                        tooltipPosition="left"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </p-tabPanel>
+
+                                
+
+                            </p-tabView>
                         </div>
                     </div><br>
                     <div class="custom-toolbar d-flex justify-content-center">
@@ -369,9 +470,231 @@
             <p-divider class="custom-divider"></p-divider>
 
             <app-table [list]="list" (selectedOneRegister)="setSeleccionado($event)">
-            </app-table> 
+            </app-table>
         </p-card>
     </div>
     <br>
     <app-footer></app-footer>
 </app-spinner>
+
+<p-dialog header="Discapacidad" [(visible)]="visible.discapacidad" [style]="{width: '50vw'}">
+    <form [formGroup]="form" class="custom-form"  >
+        <div class="p-fluid p-formgrid grid custom-form-grid">
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                <div formGroupName="discapacidadForm" style="width: 100%;">
+                    <span class="p-float-label mb-4 mt-4">
+                        <input pInputText id="ftxt-tipoDiscapacidad" type="text"
+                        formControlName="tipoDiscapacidad" required>
+                        <label for="ftxt-tipoDiscapacidad">* Tipo de Discapacidad</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-porcentaje" type="text"
+                        formControlName="porcentaje" required>
+                        <label for="ftxt-porcentaje">* Porcentaje</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-numeroCarnet" type="text"
+                        formControlName="numeroCarnet" required>
+                        <label for="ftxt-numeroCarnet">* Numero de Carnet</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+
+        <div class="custom-toolbar d-flex justify-content-center">
+            <div class="p-toolbar-group-center">
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('discapacidad','discapacidadForm')" pTooltip="Guardar"
+                    tooltipPosition="right"></button>
+
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    tooltipPosition="right"></button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="Enfermedad Catastrofica" [(visible)]="visible.enfermedadCatastrofica" [style]="{width: '50vw'}">
+    <form [formGroup]="form" class="custom-form"  >
+        <div class="p-fluid p-formgrid grid custom-form-grid">
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                <div formGroupName="enfermedadCatastroficaForm" style="width: 100%;">
+                    <span class="p-float-label mb-4">
+                        <p-dropdown formControlName="cargoPersonaDiscapacidad"
+                            placeholder="* cargoPersonaDiscapacidad"
+                            [options]="formSelectData.cargoPersonaDiscapacidadOption" optionLabel="label"
+                            optionValue="value">
+                        </p-dropdown>
+                        <label for="ftxt-entidadPublica">* Acargo de Persona con Discapacidad</label>
+                    </span>
+                    <span class="p-float-label mb-4 mt-4">
+                        <input pInputText id="ftxt-tipoEnfermedad" type="text"
+                        formControlName="tipoEnfermedad" required>
+                        <label for="ftxt-tipoEnfermedad">* Tipo de Enfermedad</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-institucionCertificaEnfermedad" type="text"
+                        formControlName="institucionCertificaEnfermedad" required>
+                        <label for="ftxt-institucionCertificaEnfermedad">* Institucion que Certifica la Enfermedad</label>
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+        
+
+        <div class="custom-toolbar d-flex justify-content-center">
+            <div class="p-toolbar-group-center">
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('enfermedad_catastrofica','enfermedadCatastroficaForm')" pTooltip="Guardar"
+                    tooltipPosition="right"></button>
+
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    tooltipPosition="right"></button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="Familiar que Labora en Otra Entidad Publica" [(visible)]="visible.familiar" [style]="{width: '50vw'}">
+    <form [formGroup]="form" class="custom-form"  >
+        <div class="p-fluid p-formgrid grid custom-form-grid">
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                <div formGroupName="familiaresForm" style="width: 100%;">
+                    <span class="p-float-label mb-4 mt-4">
+                        <input pInputText id="ftxt-nombre" type="text"
+                        formControlName="nombre" required>
+                        <label for="ftxt-nombre">* Nombre</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+
+        <div class="custom-toolbar d-flex justify-content-center">
+            <div class="p-toolbar-group-center">
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('familiar_Labora_otra_Entidad_Publica','familiaresForm')" pTooltip="Guardar"
+                    tooltipPosition="right"></button>
+
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    tooltipPosition="right"></button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="Estudios en Curso" [(visible)]="visible.estudiosCurso" [style]="{width: '50vw'}">
+    <form [formGroup]="form" class="custom-form"  >
+        <div class="p-fluid p-formgrid grid custom-form-grid">
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                <div formGroupName="estudiosenCursosForm" style="width: 100%;">
+                    <span class="p-float-label mb-4 mt-4">
+                        <input pInputText id="ftxt-nombre" type="text"
+                        formControlName="nombre" required>
+                        <label for="ftxt-nombre">* Nombre</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-tipoDeTitulo" type="text"
+                        formControlName="tipoDeTitulo" required>
+                        <label for="ftxt-tipoDeTitulo">* Tipo De Titulo</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-fechaDeInicio" type="date"
+                            formControlName="fechaDeInicio" required>
+                        <label for="ftxt-fechaDeInicio">* Fecha De Inicio</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-fechaDeFin" type="date"
+                            formControlName="fechaDeFin" required>
+                        <label for="ftxt-fechaDeFin">* Fecha De Fin</label>
+                    </span>
+                    
+                    
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-numeroDeHoras" type="number"
+                        formControlName="numeroDeHoras" required>
+                        <label for="ftxt-numeroDeHoras">* Numero De Horas</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+
+        <div class="custom-toolbar d-flex justify-content-center">
+            <div class="p-toolbar-group-center">
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('estudios_en_curso','estudiosenCursosForm')" pTooltip="Guardar"
+                    tooltipPosition="right"></button>
+
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    tooltipPosition="right"></button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="Titulos" [(visible)]="visible.titulos" [style]="{width: '50vw'}">
+    <form [formGroup]="form" class="custom-form"  >
+        <div class="p-fluid p-formgrid grid custom-form-grid">
+            <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                <div formGroupName="titulosForm" style="width: 100%;">
+                    <span class="p-float-label mb-4 mt-4">
+                        <input pInputText id="ftxt-titulosOptenidos" type="text"
+                        formControlName="titulosOptenidos" required>
+                        <label for="ftxt-titulosOptenidos">* Titulos Optenidos</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <p-dropdown formControlName="intruccionFormal"
+                            placeholder="* intruccionFormal"
+                            [options]="formSelectData.intruccionFormalOption" optionLabel="label"
+                            optionValue="value">
+                        </p-dropdown>
+                        <label for="ftxt-entidadPublica">* Intruccion Formal</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-institucion" type="text"
+                        formControlName="institucion" required>
+                        <label for="ftxt-institucion">* Institucion</label>
+                    </span>
+
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-numeroDeRegistroSenesyt" type="text"
+                        formControlName="numeroDeRegistroSenesyt" required>
+                        <label for="ftxt-numeroDeRegistroSenesyt">* Numero De Registro de Senesyt</label>
+                    </span>
+                    <span class="p-float-label mb-4">
+                        <input pInputText id="ftxt-anoDelTitulo" type="date"
+                            formControlName="anoDelTitulo" required>
+                        <label for="ftxt-anoDelTitulo">* Año Del Titulo</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="custom-toolbar d-flex justify-content-center">
+            <div class="p-toolbar-group-center">
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
+                    icon="pi pi-send" type="submit" (click)="saveDiscapacidad('titulos','titulosForm')" pTooltip="Guardar"
+                    tooltipPosition="right"></button>
+
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                    icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar"
+                    tooltipPosition="right"></button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
