@@ -3,34 +3,22 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-}
-
-h1,
-h2 {
-  color: #000000;
-}
-
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-  }
-
-  nav ul li {
-    margin: 10px 0;
-  }
+  gap: 40px; /* Aumenta el espacio entre las tarjetas */
+  padding: 40px; /* Aumenta el espacio alrededor del contenedor */
 }
 
 app-card {
   width: 250px;
+  margin: 25px; /* Aumenta el margen a cada tarjeta */
 }
 
 .container-page {
-  margin-top: 30px;
-  width: 95%;
-  margin-left: 2.5%;
+  margin-top: 40px; /* Aumenta el margen superior del contenedor */
+  width: 85%; /* Ajusta el ancho del contenedor */
+  margin-left: 7.5%; /* Ajusta el margen izquierdo del contenedor */
   border: 1px solid rgb(204, 204, 204);
   border-radius: 5px;
-  box-shadow: 0 2px 4px #a1a1a1;
+  box-shadow: 0 6px 8px #a1a1a1; /* Aumenta la sombra del contenedor */
 }
 
 .custom-card-header {
@@ -86,7 +74,7 @@ app-card {
   margin: 0 auto;
   max-width: 200px;
   max-height: 200px;
-  height: autao;
+  height: auto;
   border-radius: 10px;
   margin-bottom: 10px;
 }
