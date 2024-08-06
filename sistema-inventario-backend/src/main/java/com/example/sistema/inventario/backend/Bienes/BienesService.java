@@ -3,12 +3,15 @@ package com.example.sistema.inventario.backend.Bienes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+// import java.util.Optional;
 
 @Service
 @Transactional
 public class BienesService {
+
     @Autowired
     private final BienesRepository bienesRepository;
 
@@ -18,13 +21,12 @@ public class BienesService {
 
     // Obtener todos los bienes
     public List<Bienes> getAllBienes() {
-        return bienesRepository.findAll();
+        return bienesRepository.findAllActive();
     }
 
     // Obtener bien por ID
     public Bienes getBienesById(Long id) {
-        Optional<Bienes> bienesOptional = bienesRepository.findById(id);
-        return bienesOptional.orElse(null);
+        return bienesRepository.findById(id).filter(b -> b.getDeletedAt() == null).orElse(null);
     }
 
     // Crear nuevo bien
@@ -41,9 +43,13 @@ public class BienesService {
         return null;
     }
 
-    // Eliminar bien por ID
+    // Eliminar bien por ID (eliminación lógica)
     public void deleteBienes(Long id) {
-        bienesRepository.deleteById(id);
+        Bienes bien = bienesRepository.findById(id).orElse(null);
+        if (bien != null && bien.getDeletedAt() == null) {
+            bien.setDeletedAt(LocalDateTime.now());
+            bienesRepository.save(bien);
+        }
     }
 
     // Buscar bienes por nombre

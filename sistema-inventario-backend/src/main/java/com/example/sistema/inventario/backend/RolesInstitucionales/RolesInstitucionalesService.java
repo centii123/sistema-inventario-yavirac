@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+// import java.util.Optional;
 
 @Service
 @Transactional
 public class RolesInstitucionalesService {
+
     @Autowired
     private final RolesInstitucionalesRepository rolesRepository;
 
@@ -19,13 +21,12 @@ public class RolesInstitucionalesService {
 
     // Obtener todos los roles institucionales
     public List<RolesInstitucionales> getAllRolesInstitucionales() {
-        return rolesRepository.findAll();
+        return rolesRepository.findAllActive();
     }
 
     // Obtener rol institucional por ID
     public RolesInstitucionales getRolesInstitucionalesById(Long id) {
-        Optional<RolesInstitucionales> optional = rolesRepository.findById(id);
-        return optional.orElse(null);
+        return rolesRepository.findById(id).filter(r -> r.getDeletedAt() == null).orElse(null);
     }
 
     // Crear nuevo rol institucional
@@ -42,8 +43,12 @@ public class RolesInstitucionalesService {
         return null;
     }
 
-    // Eliminar rol institucional por ID
+    // Eliminar rol institucional por ID (eliminación lógica)
     public void deleteRolesInstitucionales(Long id) {
-        rolesRepository.deleteById(id);
+        RolesInstitucionales rol = rolesRepository.findById(id).orElse(null);
+        if (rol != null && rol.getDeletedAt() == null) {
+            rol.setDeletedAt(LocalDateTime.now());
+            rolesRepository.save(rol);
+        }
     }
 }

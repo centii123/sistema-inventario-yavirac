@@ -1,9 +1,12 @@
 package com.example.sistema.inventario.backend.Persona;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.sistema.inventario.backend.FechaIngresoInstituto.FechaIngresoInstitutoService;
 import com.example.sistema.inventario.backend.authz.service.UserService;
@@ -17,44 +20,54 @@ public class PersonaService {
     PersonaRepository repository;
 
     @Autowired
-    DiscapacidadService DiscapacidadService;
+    DiscapacidadService discapacidadService;
 
     @Autowired
-    EnfermedadCatastroficaService EnfermedadCatastroficaService;
+    EnfermedadCatastroficaService enfermedadCatastroficaService;
 
     @Autowired
-    EntidadPublicaService EntidadPublicaService;
+    EntidadPublicaService entidadPublicaService;
 
     @Autowired
-    FechaIngresoInstitutoService FechaIngresoInstitutoService;
+    FechaIngresoInstitutoService fechaIngresoInstitutoService;
 
     @Autowired
-    UserService UserService;
+    UserService userService;
 
+    // Obtener todas las personas activas
     public List<Persona> getAll() {
-        return (List<Persona>) repository.findAll();
+        return repository.findAllActive();
     }
-    
-    public Persona save(Persona entity){
+
+    // Guardar una nueva persona
+    public Persona save(Persona entity) {
         return repository.save(entity);
     }
-    
-    public void deleteById(long id){
-        repository.deleteById(id);
-    }
-    
-    public Persona findById(long id){
-        return repository.findById(id).orElse(null);
+
+    // Eliminar persona por ID (eliminación lógica)
+    @Transactional
+    public void deleteById(long id) {
+        Persona persona = repository.findById(id).orElse(null);
+        if (persona != null && persona.getDeletedAt() == null) {
+            persona.setDeletedAt(LocalDateTime.now());
+            repository.save(persona);
+        }
     }
 
+    // Obtener persona por ID
+    public Persona findById(long id) {
+        return repository.findById(id).filter(p -> p.getDeletedAt() == null).orElse(null);
+    }
+
+    // Obtener persona por DNI
     public Persona findByDni(String dni) {
         return repository.findByDni(dni);
     }
 
-    
+    // Método asincrónico para eliminar personas
     @Async
     public void delete(long id) {
-        Persona persona=this.findById(id);
+        Persona persona = this.findById(id);
         /*if(persona.getDiscapacidad() != null | 
         persona.getEnfermedadCatastrofica() != null |
         persona.getEntidadPublica() != null |
@@ -75,7 +88,6 @@ public class PersonaService {
             this.FechaIngresoInstitutoService.deleteFechaIngresoInstituto(DataEliminar.getFechaIngresoInstituto().getId());
             this.UserService.deleteById(DataEliminar.getUser().getId());
         }*/
-        
         this.deleteById(id);
     }
 }

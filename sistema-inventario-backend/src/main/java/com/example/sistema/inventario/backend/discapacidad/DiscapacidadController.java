@@ -40,7 +40,7 @@ public class DiscapacidadController {
     @PreAuthorize("hasAuthority('discapacidad-obtener-id')")
     @GetMapping("/{id}/")
     public Discapacidad findById(@PathVariable long id){
-        return service.findByid(id);
+        return service.findById(id);
     }
 
     @Operation(summary = "Agrega una discapacidad, Requiere discapacidad-agregar")
