@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       }
     } else {
       this.loginForm.markAllAsTouched();
-      alert("Error al ingresar los datos.");
+      alert("Usuario incorrecto.");
     }
   }
 
