@@ -14,7 +14,7 @@ interface Person {
 interface formSelectData{
   persona:any[],
     categoria:any[],
-    aula:any[]
+    infraestructura:any[]
 }
 
 @Component({
@@ -23,6 +23,7 @@ interface formSelectData{
   styleUrls: ['./../../../../../core/styles/crudGlobal.css']
 })
 export class FormComponent implements OnInit {
+  selectedData!: Bienes | any;
   loadingSpiner!: boolean;
   form: FormGroup;
   list: Bienes[] = [];
@@ -33,7 +34,7 @@ export class FormComponent implements OnInit {
   formSelectData:formSelectData={
     persona:[],
     categoria:[],
-    aula:[]
+    infraestructura:[]
   };
 
   getPerson(id:any,index:number){
@@ -87,7 +88,7 @@ export class FormComponent implements OnInit {
       valorIva: new FormControl('', [Validators.required]),
       serie: new FormControl('', [Validators.required]),
       categoriaBien:new FormControl('', [Validators.required]),
-      aula:new FormControl(null),
+      infraestructura:new FormControl(null),
     });
   }
 
@@ -128,7 +129,7 @@ export class FormComponent implements OnInit {
       valorIva: registro.valorIva,
       serie: registro.serie,
       categoriaBien: registro.categoriaBien,
-      aula:registro.aula ? registro.aula.id : null
+      infraestructura:registro.infraestructura ? registro.infraestructura.id : null
     });
     
   }
@@ -145,12 +146,12 @@ export class FormComponent implements OnInit {
         'id':registro.categoriaBien.id
       }
       console.log(registro)
-      if(typeof registro.aula === 'number'){
-        registro.aula={
-          id:registro.aula
+      if(typeof registro.infraestructura === 'number'){
+        registro.infraestructura={
+          id:registro.infraestructura
         }
       }else{
-        registro.aula=null
+        registro.infraestructura=null
       }
 
     if (registro.id) {
@@ -213,9 +214,9 @@ export class FormComponent implements OnInit {
         this.loadingSpinerForm=false
       }
     )
-    this.crudService.getAll('aula/').subscribe(
+    this.crudService.getAll('infraestructura/').subscribe(
       e=>{
-        this.formSelectData.aula=e
+        this.formSelectData.infraestructura=e
         this.loadingSpinerForm=false
       },
       error=>{
@@ -238,4 +239,6 @@ export class FormComponent implements OnInit {
   getOptionLabel(data: any): string {
     return `${data.dni} - ${data.nombres}`;
   }
+
+  
 }

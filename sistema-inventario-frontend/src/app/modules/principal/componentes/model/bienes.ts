@@ -15,5 +15,5 @@ export interface Bienes extends globalModels {
     valorIva: number,
     serie: string,
     categoriaBien:CategoriaBienes,
-    aula:any
+    infraestructura:any
 }

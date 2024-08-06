@@ -130,7 +130,7 @@
               </div>
             </th>
 
-            <th class="text-center" style="width: 176px">Acciones</th>
+            <th class="text-center" style="width: 230px">Acciones</th>
           </tr>
         </ng-template>
 
@@ -148,14 +148,26 @@
                   "sin custodio"
               }}
             </td>
-            <td>{{ data.categoriaAula == 1 ? 'Aula': data.categoriaAula == 2 ? 'Oficina' : data.categoriaAula == 3 ? 'Laboratorio' : 'sin categoria de Aula'}}</td>
+            <td>{{ data.categoriaAula == 1 ? 'Aula': data.categoriaAula == 2 ? 'Laboratorio' : data.categoriaAula == 3 ? 'Oficina' : 'sin categoria de Aula'}}</td>
             <td>
+              <a class="abienes" href="/bienes/{{ data.id}}" pTooltip="Ver bienes"><i class="fas fa-university"></i></a>
+
+              <!-- <button
+                pButton
+                pRipple
+                icon="fas fa-box"
+                class="p-button-rounded p-button-info p-button-text p-button-sm"
+                [routerLink]="['/bienes', data.id]" 
+                pTooltip="Ver bienes"
+                tooltipPosition="left"
+              ></button> -->
               <button
                 pButton
                 pRipple
                 icon="pi pi-eye"
                 class="p-button-rounded p-button-info p-button-text p-button-sm"
                 (click)="openModal(data)"
+                pTooltip="Más Informacion"
                 tooltipPosition="left"
               ></button>
               <button
@@ -231,8 +243,8 @@
         class="list-group-item d-flex justify-content-between align-items-start ancho-list"
       >
         <div class="me-auto overflow-hidden text-wrap">
-          <div class="fw-bold">categoriaAula:</div>
-          <p>{{ selectedData.categoriaAula.descripcion }}</p>
+          <div class="fw-bold">categoria del Aula:</div>
+          <p>{{ selectedData.categoriaAula == 1 ? 'Aula': selectedData.categoriaAula == 2 ? 'Laboratorio' : selectedData.categoriaAula == 3 ? 'Oficina' : 'sin categoria de Aula'}}</p>
         </div>
       </li>
     </ul>

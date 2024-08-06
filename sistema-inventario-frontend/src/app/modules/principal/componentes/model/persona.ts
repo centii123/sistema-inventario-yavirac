@@ -60,7 +60,7 @@ export interface Persona extends globalModels {
   // FK
   escalaOcupacionales: any;
   estadoCivil: any;
-  estudiosenCursos: any;
+  
   genero: any;
   institutos: any;
   nacionalidad: any;
@@ -69,7 +69,10 @@ export interface Persona extends globalModels {
   rolesInstitucionales: any;
 
   // One-to-One
-  discapacidad: Discapacidad;
+  titulos:never[];
+  discapacidad: never[];
+  familiarLaboraotraEntidadPublica:never[]
+  estudiosenCursos: never[];
   enfermedadCatastrofica: EnfermedadCatastrofica;
   entidadPublica: EntidadPublica;
   fechaIngresoInstituto: FechaIngresoInstituto;

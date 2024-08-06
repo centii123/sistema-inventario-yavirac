@@ -14,6 +14,7 @@ import java.util.List;
 @Tag(name = "Controlador Bienes", description = "Tabla bienes")
 @CrossOrigin({"*"})
 public class BienesController {
+
     @Autowired
     private final BienesService bienesService;
 
@@ -45,6 +46,14 @@ public class BienesController {
         return bienesService.findByNombre(nombre);
     }
 
+    // GET bienes por ID de infraestructura
+    @Operation(summary = "Obtiene bienes por ID de infraestructura, Requiere bienes-obtener-infraestructura")
+    @PreAuthorize("hasAuthority('bienes-obtener-infraestructura')")
+    @GetMapping("/infraestructura/{infraestructuraId}")
+    public List<Bienes> findByInfraestructuraId(@PathVariable("infraestructuraId") Long infraestructuraId) {
+        return bienesService.findByInfraestructuraId(infraestructuraId);
+    }
+
     // POST crear nuevo bien
     @Operation(summary = "Agrega un bien, Requiere bienes-agregar")
     @PreAuthorize("hasAuthority('bienes-agregar')")
@@ -58,7 +67,7 @@ public class BienesController {
     @PreAuthorize("hasAuthority('bienes-editar')")
     @PutMapping("/")
     public Bienes update(@RequestBody Bienes entity){
-        return bienesService.createBienes(entity);
+        return bienesService.updateBienes(entity.getId(), entity);
     }
 
     // DELETE bien por ID

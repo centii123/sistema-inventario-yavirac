@@ -69,8 +69,8 @@
                                         <label for="ftxt-custodio">* Categoria</label>
                                     </span>
                                     <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="aula" placeholder="Aula"
-                                            [options]="formSelectData.aula" [filter]="true" filterBy="nombre"
+                                        <p-dropdown formControlName="infraestructura" placeholder="Aula"
+                                            [options]="formSelectData.infraestructura" [filter]="true" filterBy="nombre"
                                             [showClear]="true" optionLabel="nombre" optionValue="id">
                                         </p-dropdown>
                                         <label for="ftxt-custodio">Aula</label>
@@ -125,6 +125,7 @@
 
 
         <p-card class="custom-card">
+            
             <div class="caja-boton-principal custom-button-box">
                 <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
                     tooltipPosition="right"></button>

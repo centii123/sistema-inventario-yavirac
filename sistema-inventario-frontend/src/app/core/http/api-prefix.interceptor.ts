@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { jwtDecode } from "jwt-decode";
 import { Observable } from "rxjs";
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
@@ -10,26 +9,26 @@ import 'jspdf-autotable';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl: any;
+  private apiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = 'http://localhost:8080';
+    this.apiUrl = 'http://localhost:8080'; // Asegúrate de que esta URL sea correcta
   }
 
   private headers() {
     return new HttpHeaders({
-      'Authorization': `${sessionStorage.getItem('token')}`
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}` // Asegúrate de que el token esté en el formato correcto
     });
-  }
-
-  getOne(ruta: string,id:number): Observable<any> {
-    const headers = this.headers();
-    return this.http.get<any[]>(`${this.apiUrl}/${ruta}/${id}/`, { headers });
   }
 
   get(ruta: string): Observable<any[]> {
     const headers = this.headers();
     return this.http.get<any[]>(`${this.apiUrl}/${ruta}`, { headers });
+  }
+
+  getOne(ruta: string, id: number): Observable<any> {
+    const headers = this.headers();
+    return this.http.get<any>(`${this.apiUrl}/${ruta}/${id}/`, { headers });
   }
 
   post(ruta: string, body: any): Observable<any> {

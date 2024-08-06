@@ -31,6 +31,7 @@ INSERT INTO authorities (name, endpoint) values ('infraestructura-eliminar', 'DE
 /*permiso para bienes*/
 INSERT INTO authorities (name, endpoint) values ('bienes-obtener', 'GET:/bienes/');
 INSERT INTO authorities (name, endpoint) values ('bienes-obtener-id', 'GET:/bienes/{id}/');
+INSERT INTO authorities (name, endpoint) values ('bienes-obtener-infraestructura', 'GET:/bienes/infraestructura/{id}/');
 INSERT INTO authorities (name, endpoint) values ('bienes-obtener-nombre', 'GET:/bienes/{nombre}/');
 INSERT INTO authorities (name, endpoint) values ('bienes-agregar', 'POST:/bienes/');
 INSERT INTO authorities (name, endpoint) values ('bienes-editar', 'PUT:/bienes/{id}/');
@@ -50,6 +51,7 @@ INSERT INTO authorities (name, endpoint) values ('categorias-bienes-obtener-id',
 INSERT INTO authorities (name, endpoint) values ('categorias-bienes-agregar', 'POST:/categorias-bienes/');
 INSERT INTO authorities (name, endpoint) values ('categorias-bienes-editar', 'PUT:/categorias-bienes/{id}/');
 INSERT INTO authorities (name, endpoint) values ('categorias-bienes-eliminar', 'DELETE:/categorias-bienes/{id}/');
+
 
 /*permiso para discapacidad*/
 INSERT INTO authorities (name, endpoint) values ('discapacidad-obtener', 'GET:/discapacidad/');

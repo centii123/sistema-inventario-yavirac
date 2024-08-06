@@ -5,6 +5,6 @@ export interface Infraestructura extends globalModels{
     nombre: string;
     descripcion: string;
     persona: any;
-    categoriaAula: number
+    categoriaAula: number;
 }
 
