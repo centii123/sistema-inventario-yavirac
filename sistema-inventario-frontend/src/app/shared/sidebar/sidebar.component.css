@@ -40,6 +40,22 @@
   transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
 
+.btn-group .dropdown-toggle-split {
+  padding-right: 4rem; /* Ajusta este valor para mover la flecha más a la derecha */
+}
+
+.btn-group .fa-chevron-down {
+  margin-left: 2rem; /* Ajusta este valor para mover la flecha más a la derecha */
+}
+
+
+.btn-custom {
+  min-width: 150px; /* Ajusta el valor para hacer el botón más ancho */
+  text-align: center; /* Centra el texto dentro del botón */
+}
+
+
+
 h4 {
   display: flex;
   align-items: center;
@@ -110,4 +126,17 @@ h4 {
 .dropdown-item i {
   margin-right: 20px; /* Espacio entre el icono y el texto */
 }
+#sidebar .dropdown .btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 
+#sidebar .dropdown-toggle::after {
+  display: none;
+}
+
+#sidebar .dropdown-menu {
+  width: 100%;
+}

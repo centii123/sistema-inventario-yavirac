@@ -22,6 +22,11 @@ nav {
     margin: 0 20px;
 }
 
+.nav-links li a {
+    cursor: pointer;
+    /* Hace que el cursor sea una mano cuando pasa sobre cualquier enlace */
+}
+
 .nav-links a {
     text-decoration: none;
     color: white;
@@ -50,11 +55,17 @@ nav {
     cursor: pointer;
 }
 
-.nav-links a:hover, .dropdown-menu a:hover, .logout a:hover {
-    color: #FFD700; /* Color dorado para el texto */
-    background-color: #1E4A72; /* Color de fondo azul más oscuro */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+.nav-links a:hover,
+.dropdown-menu a:hover,
+.logout a:hover {
+    color: #FFD700;
+    /* Color dorado para el texto */
+    background-color: #1E4A72;
+    /* Color de fondo azul más oscuro */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s;
+    /* Transición suave */
 }
 
 main {
