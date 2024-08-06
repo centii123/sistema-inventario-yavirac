@@ -150,8 +150,9 @@
             </td>
             <td>{{ data.categoriaAula == 1 ? 'Aula': data.categoriaAula == 2 ? 'Laboratorio' : data.categoriaAula == 3 ? 'Oficina' : 'sin categoria de Aula'}}</td>
             <td>
+              <a class="abienes" href="/bienes/{{ data.id}}" pTooltip="Ver bienes"><i class="fas fa-university"></i></a>
 
-              <button
+              <!-- <button
                 pButton
                 pRipple
                 icon="fas fa-box"
@@ -159,7 +160,7 @@
                 [routerLink]="['/bienes', data.id]" 
                 pTooltip="Ver bienes"
                 tooltipPosition="left"
-              ></button>
+              ></button> -->
               <button
                 pButton
                 pRipple

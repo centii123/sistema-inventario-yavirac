@@ -21,7 +21,13 @@
 }
 
   
-  .icon-link i {
+.icon-link i {
     font-size: 1.2rem; /* Asegura que el tamaño del icono coincida con los botones */
-  }
+}
+
+.abienes{
+    position: absolute;
+    margin-top: 12px;
+    margin-left: -25px;
+}
   
