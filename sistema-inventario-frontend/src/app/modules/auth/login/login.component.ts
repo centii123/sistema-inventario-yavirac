@@ -1,9 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
-
-
 
 @Component({
   selector: 'app-login',
@@ -11,21 +10,17 @@ import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginError: String = "";
-
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
-  })
+  });
+  loginComprobacion!: boolean;
 
-  loginComprobacion!:boolean;
-
-
-  constructor(private router: Router, private api:ApiService) { }
+  constructor(private router: Router, private api: ApiService) { }
 
   ngOnInit(): void {
-    this.comprobarLogin()
+    this.comprobarLogin();
   }
 
   get username() {
@@ -36,31 +31,39 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls.password;
   }
 
-  comprobarLogin(){
-    if(sessionStorage.getItem('token')){
+  comprobarLogin() {
+    if (sessionStorage.getItem('token')) {
       this.loginComprobacion = true;
-    }else{
+    } else {
       this.loginComprobacion = false;
     }
 
-    if(this.loginComprobacion == true){
+    if (this.loginComprobacion == true) {
       this.router.navigate(['/home']);
     }
-    
   }
 
   async submit() {
     if (this.loginForm.valid) {
       this.loginError = "";
-      await this.api.login(this.loginForm.value.username!,this.loginForm.value.password!)
-      this.router.navigateByUrl('/home');
-          this.loginForm.reset();
-
-    }
-    else {
+      try {
+        await this.api.login(this.loginForm.value.username!, this.loginForm.value.password!);
+        this.router.navigateByUrl('/home');
+        this.loginForm.reset();
+      } catch (error: unknown) {
+        if (this.isHttpErrorResponse(error) && error.status === 401) {
+          this.loginError = "El usuario no existe.";
+        } else {
+          this.loginError = "Error al iniciar sesión. Por favor, inténtelo de nuevo.";
+        }
+      }
+    } else {
       this.loginForm.markAllAsTouched();
       alert("Error al ingresar los datos.");
     }
   }
 
+  private isHttpErrorResponse(error: unknown): error is HttpErrorResponse {
+    return typeof error === 'object' && error !== null && 'status' in error;
+  }
 }

@@ -42,6 +42,11 @@
                         <label for="floatingInputGroup1">Contraseña</label>
                       </div>
                     </div>
+
+                    <!-- Mensaje de error -->
+                    <div *ngIf="loginError" class="alert alert-danger" role="alert">
+                      {{ loginError }}
+                    </div>
   
                     <div class="text-center pt-1 mb-5 pb-1">
                       <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary btn-block fa-lg mb-3" type="submit">Inicia tu sesion</button>
@@ -62,5 +67,3 @@
     </div>
   </section>
 </div>
-
-
