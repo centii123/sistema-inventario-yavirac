@@ -7,7 +7,6 @@ import { Persona } from '../../model/persona';
 
 interface formSelectData {
   persona: Persona[],
-  categoria:any[],
 }
 
 
@@ -27,10 +26,13 @@ export class FormComponent implements OnInit {
   loadingSpinerForm!: boolean;
   personaSelect:Persona[]=[]
   formSelectData: formSelectData = {
-    persona: [],
-    categoria:[],
+    persona: []
   };
-
+  CategoriaOptions: any[] = [
+    { label: 'Aula', value: 1 },
+    { label: 'Laboratotio', value: 2 },
+    { label: 'Oficina', value: 3 }
+  ];
   constructor(
     private formBuilder: FormBuilder,
     private crudService: CrudService,
@@ -159,16 +161,16 @@ export class FormComponent implements OnInit {
       }
     ),
 
-    this.crudService.getAll('categorias-aulas/').subscribe(
-      e=>{
-        this.formSelectData.categoria=e
-        this.loadingSpinerForm=false
-      },
-      error=>{
-        console.error(error)
-        this.loadingSpinerForm=false
-      }
-    )
+    // this.crudService.getAll('categorias-aulas/').subscribe(
+    //   e=>{
+    //     this.formSelectData.categoria=e
+    //     this.loadingSpinerForm=false
+    //   },
+    //   error=>{
+    //     console.error(error)
+    //     this.loadingSpinerForm=false
+    //   }
+    // )
 
     this.modal = true;
   }

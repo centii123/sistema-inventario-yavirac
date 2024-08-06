@@ -39,18 +39,13 @@
                   </span>
 
                   <span class="p-float-label mb-4">
-                    <p-dropdown
-                      formControlName="categoriaAula"
-                      placeholder="categoriaAula"
-                      [options]="formSelectData.categoria"
-                      [filter]="true"
-                      filterBy="descripcion"
-                      [showClear]="true"
-                      optionLabel="descripcion"
-                    >
+                    <p-dropdown formControlName="categoriaAula"
+                        placeholder="* Categoria del Aula"
+                        [options]="CategoriaOptions" [filter]="true"
+                        [showClear]="true" optionLabel="label" optionValue="value">
                     </p-dropdown>
-                    <label for="ftxt-categoriaAula">Categoria de la Aula</label>
-                  </span>
+                    <label for="ftxt-modalidadJornada">* Categoria de la Aula</label>
+                </span>
                 </div>
                 <div class="col">
                   <span class="p-float-label mb-4">

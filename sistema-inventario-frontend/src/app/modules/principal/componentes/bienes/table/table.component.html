@@ -145,11 +145,17 @@
                 </li>
               </ul>
 
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
                   <div class=" me-auto overflow-hidden text-wrap">
                     <div class="fw-bold">Observaciones:</div>
                     <p>{{selectedData.observaciones}}</p>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                  <div class=" me-auto overflow-hidden text-wrap">
+                    <div class="fw-bold">Infraestructura:</div>
+                    <p>{{ selectedData.infraestructura.nombre}}</p>
                   </div>
                 </li>
               </ul>

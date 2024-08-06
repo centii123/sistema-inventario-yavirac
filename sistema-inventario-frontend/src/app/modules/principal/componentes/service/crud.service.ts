@@ -39,5 +39,4 @@ export class CrudService {
         return this.http.delete(url);
     }
 
-
 }
