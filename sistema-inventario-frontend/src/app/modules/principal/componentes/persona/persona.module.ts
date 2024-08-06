@@ -8,6 +8,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PersonaRoutingModule } from './persona-routing.module';
 import { TabViewModule } from 'primeng/tabview';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import { TabViewModule } from 'primeng/tabview';
     ...CrudModules,
     DropdownModule,
     InputNumberModule,
-    TabViewModule
+    TabViewModule,
+    InputMaskModule
+    
   ],
   providers:[
     CrudService,{provide:'url', useValue:'persona/'}

@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CrudService } from '../../service/crud.service';
 import { MessageService } from 'primeng/api';
 import { Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInstituto, Persona, User } from '../../model/persona';
+import { affirmation, estadoCivil, genero, intruccionFormal, modalidadJornada, TipoDeSangre } from '../constants/constantes-persona';
+import { provincias } from 'src/app/core/constants/constantes-globales';
+import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
 
 @Component({
   selector: 'app-form',
@@ -10,6 +13,7 @@ import { Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInsti
   styleUrls: ['./../../../../../core/styles/crudGlobal.css']
 })
 export class FormComponent implements OnInit {
+  FechaOptener = (fecha: any) => obtenerFecha(fecha)
   loadingSpiner!: boolean;
   form: FormGroup;
   list: Persona[] = [];
@@ -26,22 +30,42 @@ export class FormComponent implements OnInit {
   formSelectDataCarreras!: any[];
   formSelectDataProvincia!: any[];
   formSelectDataRolesInstitucionales!: any[];
-  modalidadJornadaOptions: any[] = [
-    { label: 'Medio Tiempo', value: 0 },
-    { label: 'Tiempo Completo', value: 1 }
-  ];
-  entidadPublicaOptions: any[] = [
-    { label: 'NO', value: 0 },
-    { label: 'SI', value: 1 }
-  ];
-  honorarioSenecsytOptions: any[] = [
-    { label: 'NO', value: 0 },
-    { label: 'SI', value: 1 }
-  ];
-  familiarSenecsytOptions: any[] = [
-    { label: 'NO', value: 0 },
-    { label: 'SI', value: 1 }
-  ];
+  formSelectData={
+    tipoDeSangreOptions:TipoDeSangre,
+    modalidadJornadaOptions : modalidadJornada,
+    provinciasOptions:provincias,
+    generoOptions:genero,
+    estadoCivilOptions:estadoCivil,
+    entidadPublicaOptions:affirmation,
+    honorarioSenecsytOptions:affirmation,
+    familiarSenecsytOptions:affirmation,
+    cargoPersonaDiscapacidadOption:affirmation,
+    intruccionFormalOption:intruccionFormal
+  }
+
+  tableForm:any={
+    discapacidad:[],
+    enfermedad_catastrofica:[],
+    familiar_Labora_otra_Entidad_Publica:[],
+    estudios_en_curso:[],
+    titulos:[]
+  }
+
+  
+  activeIndex: number = 0;
+  
+  // entidadPublicaOptions: any[] = [
+  //   { label: 'NO', value: 0 },
+  //   { label: 'SI', value: 1 }
+  // ];
+  // honorarioSenecsytOptions: any[] = [
+  //   { label: 'NO', value: 0 },
+  //   { label: 'SI', value: 1 }
+  // ];
+  // familiarSenecsytOptions: any[] = [
+  //   { label: 'NO', value: 0 },
+  //   { label: 'SI', value: 1 }
+  // ];
 
   constructor(
     private fb: FormBuilder,
@@ -62,26 +86,41 @@ export class FormComponent implements OnInit {
   initForm(): FormGroup {
     return this.fb.group({
 
+      titulosForm:this.fb.group({
+        id: new FormControl(null),
+        titulosOptenidos: ['', Validators.required],
+        numeroDeRegistroSenesyt: ['', Validators.required],
+        intruccionFormal: ['', Validators.required],
+        institucion: ['', Validators.required],
+        anoDelTitulo: ['', Validators.required],
+      }),
       discapacidadForm: this.fb.group({
         id: new FormControl(null),
         numeroCarnet: ['', Validators.required],
         porcentaje: [0, Validators.required],
         tipoDiscapacidad: ['', Validators.required]
       }),
-      enfermedadForm: this.fb.group({
+      estudiosenCursosForm:this.fb.group({
         id: new FormControl(null),
-        cargoDiscapacidad: ['', Validators.required],
-        certificadoEnfermedad: ['', Validators.required],
+        nombre: ['', Validators.required],
+        tipoDeTitulo: ['', Validators.required],
+        numeroDeHoras: ['', Validators.required],
+        fechaDeInicio: ['', Validators.required],
+        fechaDeFin: ['', Validators.required],
+      }),
+      enfermedadCatastroficaForm: this.fb.group({
+        id: new FormControl(null),
+        cargoPersonaDiscapacidad: ['', Validators.required],
+        institucionCertificaEnfermedad: ['', Validators.required],
         tipoEnfermedad: ['', Validators.required]
       }),
       entidadPublicaForm: this.fb.group({
         id: new FormControl(null),
-        entidadPublica: ['', Validators.required],
-        honorarioSenecsyt: ['', Validators.required],
-        familiarSenecsyt: ['', Validators.required],
-        nombreFamiliar: ['', Validators.required],
+        laboraOtraEntidadPublica: ['', Validators.required],
+        recibeOtroHonorarioSenecsyt: ['', Validators.required],
+        tienefamiliaresLaboraSenecsyt: ['', Validators.required],
         observaciones: ['', Validators.required],
-        codigoInstituto: ['', Validators.required]
+        codigoInstitutoLabore: ['', Validators.required]
       }),
       fechaIngresoForm: this.fb.group({
         id: new FormControl(null),
@@ -89,6 +128,10 @@ export class FormComponent implements OnInit {
         primerIngreso: ['', Validators.required],
         cambioGrupoOcupacionalModalidad: ['', Validators.required],
         cambioInstitutoFusion: ['', Validators.required]
+      }),
+      familiaresForm: this.fb.group({
+        id: new FormControl(null),
+        nombre: ['', Validators.required],
       }),
       userForm: this.fb.group({
         id: new FormControl(null),
@@ -115,7 +158,6 @@ export class FormComponent implements OnInit {
         //muchos a uno
         escalaOcupacionales: new FormControl('', [Validators.required]),
         estadoCivil: new FormControl('', [Validators.required]),
-        estudiosenCursos: new FormControl('', [Validators.required]),
         genero: new FormControl('', [Validators.required]),
         institutos: new FormControl('', [Validators.required]),
         nacionalidad: new FormControl('', [Validators.required]),
@@ -145,19 +187,22 @@ export class FormComponent implements OnInit {
   setSeleccionado(registro: Persona) {
     this.selected = registro;
     this.openModal();
-    console.log('Registro seleccionado:', registro);
+    this.tableForm.discapacidad=registro.discapacidad
+    this.tableForm.enfermedad_catastrofica=registro.enfermedadCatastrofica
+    this.tableForm.familiar_Labora_otra_Entidad_Publica=registro.familiarLaboraotraEntidadPublica
+    this.tableForm.estudios_en_curso=registro.estudiosenCursos
+    this.tableForm.titulos=registro.titulos
 
-    // Asignación de valores al formulario principal
     this.form.patchValue({
       personaForm: {
         id: registro.id,
         nombres: registro.nombres,
         apellidos: registro.apellidos,
         etnia: registro.etnia,
-        fechaDeNacimiento: registro.fechaDeNacimiento,
+        fechaDeNacimiento: this.FechaOptener(registro.fechaDeNacimiento),
         dni: registro.dni,
-        telefono: parseInt(registro.telefono),
-        telefonoDomicilio: parseInt(registro.telefonoDomicilio),
+        telefono: registro.telefono,
+        telefonoDomicilio: registro.telefonoDomicilio,
         correoPersonal: registro.correoPersonal,
         tipoDeSangre: registro.tipoDeSangre,
         direccionDomiciliaria: registro.direccionDomiciliaria,
@@ -179,9 +224,16 @@ export class FormComponent implements OnInit {
       discapacidadForm: registro.discapacidad,
       enfermedadForm: registro.enfermedadCatastrofica,
       entidadPublicaForm: registro.entidadPublica,
-      fechaIngresoForm: registro.fechaIngresoInstituto,
+      fechaIngresoForm: {
+        primerIngreso:this.FechaOptener(registro.fechaIngresoInstituto.primerIngreso),
+        cambioOcupacionalEmergencia:this.FechaOptener(registro.fechaIngresoInstituto.cambioOcupacionalEmergencia),
+        cambioInstitutoFusion:this.FechaOptener(registro.fechaIngresoInstituto.cambioInstitutoFusion),
+        cambioGrupoOcupacionalModalidad:this.FechaOptener(registro.fechaIngresoInstituto.cambioGrupoOcupacionalModalidad)
+      },//registro.fechaIngresoInstituto,
       userForm: registro.user
     });
+
+    console.log(this.form.value)
   }
 
 
@@ -231,13 +283,6 @@ export class FormComponent implements OnInit {
                         console.log('User saved:', respUser.id);
                         user.id = respUser.id;
 
-                        // Verifica que todas las entidades relacionadas tienen un ID antes de crear la Persona
-                        console.log('discapacidad:', discapacidad);
-                        console.log('enfermedadCatastrofica:', enfermedadCatastrofica);
-                        console.log('entidadPublica:', entidadPublica);
-                        console.log('fechaIngresoInstituto:', fechaIngresoInstituto);
-                        console.log('user:', user);
-                        console.log('esto tiene persona:', this.form.value)
                         const persona: any = {
                           ...personaForm,
                           discapacidad: { id: discapacidad.id },
@@ -330,11 +375,20 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
+    this.tableForm={
+      discapacidad:[],
+      enfermedad_catastrofica:[],
+      familiar_Labora_otra_Entidad_Publica:[],
+      estudios_en_curso:[],
+      titulos:[]
+    }
+    this.activeIndex=0
   }
 
   cancel() {
     this.resetForm();
     this.modal = false;
+    this.activeIndex=0
   }
 
   openModal() {
@@ -355,29 +409,9 @@ export class FormComponent implements OnInit {
         this.loadingSpinerForm = false;
       }
     );
-    this.crudService.getAll('estado-civil/').subscribe(
-      e => {
-        this.formSelectDataEstadoCivil = e;
-        this.loadingSpinerForm = false;
-      },
-      error => {
-        console.error(error);
-        this.loadingSpinerForm = false;
-      }
-    );
     this.crudService.getAll('estudios-curso/').subscribe(
       e => {
         this.formSelectDataEstudiosenCursos = e;
-        this.loadingSpinerForm = false;
-      },
-      error => {
-        console.error(error);
-        this.loadingSpinerForm = false;
-      }
-    );
-    this.crudService.getAll('generos/').subscribe(
-      e => {
-        this.formSelectDataGenero = e;
         this.loadingSpinerForm = false;
       },
       error => {
@@ -415,16 +449,6 @@ export class FormComponent implements OnInit {
         this.loadingSpinerForm = false;
       }
     );
-    this.crudService.getAll('provincias/').subscribe(
-      e => {
-        this.formSelectDataProvincia = e;
-        this.loadingSpinerForm = false;
-      },
-      error => {
-        console.error(error);
-        this.loadingSpinerForm = false;
-      }
-    );
     this.crudService.getAll('roles-institucionales/').subscribe(
       e => {
         this.formSelectDataRolesInstitucionales = e;
@@ -440,5 +464,89 @@ export class FormComponent implements OnInit {
   closeModal() {
     this.resetForm();
     this.modal = false;
+    this.activeIndex=0
   }
+
+  edit(register: Persona): void {
+
+  }
+
+  deleteRegister(id: number): void {
+
+}
+
+//table form
+
+
+visible: any={
+  discapacidad:false,
+  enfermedadCatastrofica:false,
+  familiar:false,
+  estudiosCurso:false,
+  titulos:false
+}
+dataIndex:any=null;
+
+    showDialog(data:any) {
+        this.visible[data] = true;
+        
+    }
+
+    saveDiscapacidad(formSelectorTable:any,ValueFormData:any){
+      console.log(this.form.value[ValueFormData])
+      if(typeof this.dataIndex === 'number'){
+        this.tableForm[formSelectorTable][this.dataIndex]=this.form.value[ValueFormData]
+        this.dataIndex=null
+      }else{
+        this.tableForm[formSelectorTable].push(this.form.value[ValueFormData])
+        
+      }
+      
+      
+    }
+
+    deleteRegisterDiscapacidad(index:number){
+      this.tableForm.discapacidad.splice(index, 1);
+
+    }
+
+    editDiscapacidad(data:any,index:number,dataDialog:any){
+      this.dataIndex=index
+      this.showDialog(dataDialog)
+      console.log(data)
+      this.form.patchValue({
+        discapacidadForm:{
+          id: data.id,
+          numeroCarnet: data.numeroCarnet,
+          porcentaje: data.porcentaje,
+          tipoDiscapacidad: data.tipoDiscapacidad
+        },
+        estudiosenCursosForm:{
+          id: data.id,
+          nombre: data.nombre,
+          tipoDeTitulo: data.tipoDeTitulo,
+          numeroDeHoras: data.numeroDeHoras,
+          fechaDeInicio:this.FechaOptener(data.fechaDeInicio),
+          fechaDeFin: this.FechaOptener(data.fechaDeFin),
+        },
+        enfermedadCatastroficaForm:{
+          id: data.id,
+          cargoPersonaDiscapacidad: data.cargoPersonaDiscapacidad,
+          institucionCertificaEnfermedad:data.institucionCertificaEnfermedad,
+          tipoEnfermedad: data.tipoEnfermedad
+        },
+        familiaresForm:{
+          id: data.id,
+          nombre: data.nombre,
+        },
+        titulosForm:{
+          id: data.id,
+          titulosOptenidos: data.titulosOptenidos,
+          numeroDeRegistroSenesyt: data.numeroDeRegistroSenesyt,
+          intruccionFormal: data.intruccionFormal,
+          institucion: data.institucion,
+          anoDelTitulo:this.FechaOptener(data.anoDelTitulo),
+        },
+      })
+    }
 }
