@@ -31,6 +31,10 @@ public class TitulosService {
         }
     }
 
+    public void deleteByIdFisical(long id){
+        repository.deleteById(id);
+    }
+
     public Titulos findById(long id) {
         return repository.findById(id).filter(t -> t.getDeletedAt() == null).orElse(null);
     }

@@ -45,6 +45,14 @@ export class FormComponent implements OnInit {
   }
 
   tableForm:any={
+    discapacidad: [],
+    enfermedad_catastrofica: [],
+    familiar_Labora_otra_Entidad_Publica: [],
+    estudios_en_curso: [],
+    titulos: []
+  };
+
+  tableFormDelete:any={
     discapacidad:[],
     enfermedad_catastrofica:[],
     familiar_Labora_otra_Entidad_Publica:[],
@@ -160,7 +168,6 @@ export class FormComponent implements OnInit {
     this.loadingSpiner = true;
     this.crudService.getAll().subscribe({
       next: (data: Persona[]) => {
-        console.log(data)
         this.list = data;
         this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
         this.loadingSpiner = false;
@@ -172,13 +179,22 @@ export class FormComponent implements OnInit {
   }
 
   setSeleccionado(registro: Persona) {
+    console.log('registro',registro)
     this.selected = registro;
+    this.tableForm={
+      discapacidad: [],
+      enfermedad_catastrofica: [],
+      familiar_Labora_otra_Entidad_Publica: [],
+      estudios_en_curso: [],
+      titulos: []
+    };
     this.openModal();
-    this.tableForm.discapacidad=registro.discapacidad
-    this.tableForm.enfermedad_catastrofica=registro.enfermedadCatastrofica
-    this.tableForm.familiar_Labora_otra_Entidad_Publica=registro.familiarLaboraotraEntidadPublica
-    this.tableForm.estudios_en_curso=registro.estudiosenCursos
-    this.tableForm.titulos=registro.titulos
+    this.tableForm.discapacidad = Array.isArray(registro.discapacidad) ? [...registro.discapacidad] : [];
+    this.tableForm.enfermedad_catastrofica = Array.isArray(registro.enfermedadCatastrofica) ? [...registro.enfermedadCatastrofica] : [];
+    this.tableForm.familiar_Labora_otra_Entidad_Publica = Array.isArray(registro.familiarLaboraotraEntidadPublica) ? [...registro.familiarLaboraotraEntidadPublica] : [];
+    this.tableForm.estudios_en_curso = Array.isArray(registro.estudiosenCursos) ? [...registro.estudiosenCursos] : [];
+    this.tableForm.titulos = Array.isArray(registro.titulos) ? [...registro.titulos] : [];
+    
 
     this.form.patchValue({
       personaForm: {
@@ -232,7 +248,6 @@ export class FormComponent implements OnInit {
   async save() {
     try {
       let data = this.form.value;
-      console.log('data pro max', data);
       this.temporalDataAdd = {
         fechaIngresoForm: null,
         entidadPublicaForm: null,
@@ -249,7 +264,6 @@ export class FormComponent implements OnInit {
         const userResponse = await this.crudService.add(data.userForm, 'api/user/').toPromise();
         this.temporalDataAdd.userForm = userResponse.id;
         data.personaForm.user = { id: this.temporalDataAdd.userForm };
-        console.log(data.personaForm);
       } else {
         data.personaForm.user = data.userForm.id ? { id: data.userForm.id } : null;
         data.userForm = { id: null, username: null, password: null };
@@ -281,8 +295,7 @@ export class FormComponent implements OnInit {
         const personaResponse = await this.crudService.add(data.personaForm).toPromise();
         this.temporalDataAdd.personaForm = personaResponse.id;
       }
-  
-      // Helper function to handle array saving
+
       const saveArray = async (array: any[], endpoint: string) => {
         for (const item of array) {
           item.persona = { id: this.temporalDataAdd.personaForm };
@@ -309,6 +322,34 @@ export class FormComponent implements OnInit {
       if (data.familiaresForm.length > 0 && this.saveStatus) {
         await saveArray(data.familiaresForm, 'familiar-labora-otra-entidad-publica/');
       }
+
+      /*{
+    discapacidad:[],
+    enfermedad_catastrofica:[],
+    familiar_Labora_otra_Entidad_Publica:[],
+    estudios_en_curso:[],
+    titulos:[]
+  } */
+
+      if(this.tableFormDelete.discapacidad.length > 0){
+        this.deleteSelected('discapacidad','discapacidad/')
+      }
+
+      if(this.tableFormDelete.enfermedad_catastrofica.length > 0){
+        this.deleteSelected('enfermedad_catastrofica','enfermedadCatastrofica/')
+      }
+
+      if(this.tableFormDelete.familiar_Labora_otra_Entidad_Publica.length > 0){
+        this.deleteSelected('familiar_Labora_otra_Entidad_Publica','familiar-labora-otra-entidad-publica/')
+      }
+
+      if(this.tableFormDelete.estudios_en_curso.length > 0){
+        this.deleteSelected('estudios_en_curso','estudios-curso/')
+      }
+
+      if(this.tableFormDelete.titulos.length > 0){
+        this.deleteSelected('titulos','titulos/')
+      }
   
       this.resetForm();
       this.load();
@@ -325,13 +366,7 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
-    this.tableForm={
-      discapacidad:[],
-      enfermedad_catastrofica:[],
-      familiar_Labora_otra_Entidad_Publica:[],
-      estudios_en_curso:[],
-      titulos:[]
-    }
+    this.tableForm={}
     this.activeIndex=0
   }
 
@@ -431,17 +466,6 @@ export class FormComponent implements OnInit {
     }
   }
 
-  edit(register: Persona): void {
-
-  }
-
-  deleteRegister(id: number): void {
-
-}
-
-//table form
-
-
 visible: any={
   discapacidad:false,
   enfermedadCatastrofica:false,
@@ -460,8 +484,7 @@ dataIndex:any=null;
       this.visible[data] = true;
     }
 
-    saveDiscapacidad(formSelectorTable:any,ValueFormData:any){
-      console.log(this.form.value[ValueFormData])
+    saveTableForm(formSelectorTable:any,ValueFormData:any){
       if(typeof this.dataIndex === 'number'){
         this.tableForm[formSelectorTable][this.dataIndex]=this.form.value[ValueFormData]
         this.dataIndex=null
@@ -479,8 +502,34 @@ dataIndex:any=null;
       
     }
 
+    deleteSelected(tableForm:string,url:any): void {
+      const idsToDelete = this.tableFormDelete[tableForm].map((n:any) => n.id);
+      if (idsToDelete.length === 0) {
+        return;
+      }
+  
+      const deleteObservables = idsToDelete.map((id:any) => this.crudService.delete(id,`${url}${'fisica/'}`));
+      deleteObservables.forEach((e:any) => {
+        e.subscribe(
+          () => {
+            this.list = this.list.filter(n => !idsToDelete.includes(n.id));
+            this.tableFormDelete[tableForm]=[]
+          },
+          (error:any) => {
+            console.error('Error deleting:', error);
+          }
+        );
+      })
+      
+      //forkJoin(deleteObservables)
+    }
+
     deleteRegisterDiscapacidad(index:number,formSelectorTable:any){
       if (this.tableForm && this.tableForm[formSelectorTable]) {
+        if(this.tableForm[formSelectorTable][index].id){
+          this.tableFormDelete[formSelectorTable].push(this.tableForm[formSelectorTable][index])
+        }
+        this.tableFormDelete[formSelectorTable].push
         this.tableForm[formSelectorTable].splice(index, 1);
       } else {
         console.error('tableForm or formSelectorTable is undefined');
@@ -491,7 +540,6 @@ dataIndex:any=null;
     editDiscapacidad(data:any,index:number,dataDialog:any){
       this.dataIndex=index
       this.showDialog(dataDialog)
-      console.log(data)
       this.form.patchValue({
         discapacidadForm:{
           id: data.id,

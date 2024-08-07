@@ -57,7 +57,7 @@ public class Persona extends GlobalEntity{
     @DateTimeFormat(iso = ISO.DATE_TIME)
     private Date fechaDeNacimiento;
 
-    @Column(length = 10)
+    @Column(length = 12)
     private String dni;
 
     @Column(length = 12)

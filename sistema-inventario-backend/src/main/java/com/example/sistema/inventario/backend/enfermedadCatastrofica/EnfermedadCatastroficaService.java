@@ -33,6 +33,10 @@ public class EnfermedadCatastroficaService {
         }
     }
 
+    public void deleteByIdFisical(long id){
+        repository.deleteById(id);
+    }
+
     // Obtener enfermedad catastrófica por ID
     public EnfermedadCatastrofica findById(long id) {
         return repository.findById(id).filter(e -> e.getDeletedAt() == null).orElse(null);

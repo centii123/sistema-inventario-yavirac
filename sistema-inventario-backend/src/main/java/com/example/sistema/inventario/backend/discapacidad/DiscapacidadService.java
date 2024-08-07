@@ -33,6 +33,10 @@ public class DiscapacidadService {
         }
     }
 
+    public void deleteByIdFisical(long id){
+        repository.deleteById(id);
+    }
+
     // Obtener discapacidad por ID
     public Discapacidad findById(long id) {
         return repository.findById(id).filter(d -> d.getDeletedAt() == null).orElse(null);

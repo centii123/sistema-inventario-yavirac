@@ -30,6 +30,10 @@ public class FamiliarLaboraotraEntidadPublicaService {
             repository.save(entity);
         }
     }
+
+    public void deleteByIdFisical(long id){
+        repository.deleteById(id);
+    }
     
     public FamiliarLaboraotraEntidadPublica findById(long id){
         return repository.findById(id)

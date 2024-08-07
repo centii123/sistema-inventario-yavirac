@@ -59,4 +59,11 @@ public class EstudiosenCursosController {
     public void deeteById(@PathVariable long id) {
         service.deleteById(id);
     }
+
+    @Operation(summary = "Elimina un Estudio en Curso fisicamente, Requiere estudios-curso-eliminar")
+    @PreAuthorize("hasAuthority('estudios-curso-eliminar')")
+    @DeleteMapping("/fisica/{id}/")
+    public void deeteByIdFisical(@PathVariable long id) {
+        service.deleteByIdFisical(id);
+    }
 }

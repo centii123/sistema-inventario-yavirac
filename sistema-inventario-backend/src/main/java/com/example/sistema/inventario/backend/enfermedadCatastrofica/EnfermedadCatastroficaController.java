@@ -61,4 +61,11 @@ public class EnfermedadCatastroficaController {
     public void deleteById(@PathVariable long id) {
         service.deleteById(id);
     }
+
+    @Operation(summary = "Eliminar una enfermedad catastrofica fisicamente, Requiere enfermedad-catastrofica-eliminar")
+    @PreAuthorize("hasAuthority('enfermedad-catastrofica-eliminar')")
+    @DeleteMapping("/fisica/{id}/")
+    public void deleteByIdFisical(@PathVariable long id) {
+        service.deleteByIdFisical(id);
+    }
 }

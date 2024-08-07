@@ -61,4 +61,11 @@ public class FamiliarLaboraotraEntidadPublicaController {
         service.deleteById(id);
     }
 
+    @Operation(summary = "Elimina un Estudio en Curso fisicamente, Requiere familiar-labora-otra-entidad-publica-eliminar")
+    @PreAuthorize("hasAuthority('familiar-labora-otra-entidad-publica-eliminar')")
+    @DeleteMapping("/fisica/{id}/")
+    public void deeteByIdFisical(@PathVariable long id) {
+        service.deleteByIdFisical(id);
+    }
+
 }

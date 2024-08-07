@@ -60,4 +60,11 @@ public class TitulosController {
         service.deleteById(id);
     }
 
+    @Operation(summary = "Elimina un titulo fisicamente, Requiere titulos-eliminar")
+    @PreAuthorize("hasAuthority('titulos-eliminar')")
+    @DeleteMapping("/fisica/{id}/")
+    public void deeteByIdFisical(@PathVariable long id) {
+        service.deleteByIdFisical(id);
+    }
+
 }

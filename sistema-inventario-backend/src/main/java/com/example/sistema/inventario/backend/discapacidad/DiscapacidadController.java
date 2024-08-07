@@ -63,5 +63,12 @@ public class DiscapacidadController {
     public void deleteById(@PathVariable long id){
         service.deleteById(id);
     }
+
+    @Operation(summary = "Elimina una discapacidad fisicamente, Requiere discapacidad-eliminar")
+    @PreAuthorize("hasAuthority('discapacidad-eliminar')")
+    @DeleteMapping("/fisica/{id}/")
+    public void deleteByIdFisica(@PathVariable long id){
+        service.deleteByIdFisical(id);
+    }
     
 }
