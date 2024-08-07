@@ -241,10 +241,9 @@ VALUES
 INSERT INTO infraestructura (created_at, updated_at, descripcion, nombre, categoria_aula, persona_id)
 VALUES ('2023-07-20 10:00:00', '2023-07-20 10:00:00', 'cyan', 'piso 2',1,1);
 
-INSERT INTO bienes (created_at, updated_at, codigo_del_bien, custodio, descripcion, estado, marca, modelo, nombre, observaciones, serie, valor, valor_iva, categoria_bien_id, infraestructura_id)
+INSERT INTO bienes (created_at, updated_at, codigo_del_bien, descripcion, estado, marca, observaciones, serie, valor, valor_iva, categoria_bien_id, infraestructura_id)
 VALUES
-  ('2024-08-03 10:00:00','2024-08-03 10:00:00','ABC123',1,'Laptop Dell',true,'Dell',
-    'XPS 13','Laptop Oficina','En buen estado','12345XYZ',1000.00,120.00,1,1 );
+  ('2024-08-03 10:00:00','2024-08-03 10:00:00', 'ABC123', 'Laptop Dell', 1, 'Dell', 'XPS 13', '12345XYZ', 1000.00, 120.00, 1, 1 );
 
 /*INSERT INTO aula_bienes(
 	aula_id, bienes_id)

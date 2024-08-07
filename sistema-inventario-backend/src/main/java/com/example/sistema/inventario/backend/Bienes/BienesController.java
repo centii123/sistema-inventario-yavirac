@@ -38,14 +38,6 @@ public class BienesController {
         return bienesService.getBienesById(id);
     }
 
-    // GET bienes por nombre
-    @Operation(summary = "Obtiene una bien por el nombre, Requiere bienes-obtener-nombre")
-    @PreAuthorize("hasAuthority('bienes-obtener-nombre')")
-    @GetMapping("/nombre/{nombre}")
-    public List<Bienes> findByNombre(@PathVariable("nombre") String nombre) {
-        return bienesService.findByNombre(nombre);
-    }
-
     // GET bienes por ID de infraestructura
     @Operation(summary = "Obtiene bienes por ID de infraestructura, Requiere bienes-obtener-infraestructura")
     @PreAuthorize("hasAuthority('bienes-obtener-infraestructura')")

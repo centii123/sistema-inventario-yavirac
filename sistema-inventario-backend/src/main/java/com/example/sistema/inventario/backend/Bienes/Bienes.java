@@ -27,23 +27,16 @@ public class Bienes extends GlobalEntity {
     private long id;
 
     @Column(length = 50)
-    private String nombre;
-
-    @Column(length = 50)
     private String codigoDelBien;
 
     @Column(length = 50)
     private String marca;
-
-    @Column(length = 50)
-    private String modelo;
-
-    private Integer custodio;
     
     @Column(length = 255)
     private String descripcion;
-
-    private Boolean estado;
+    
+    @Column(columnDefinition = "smallint")
+    private Integer estado;
 
     @Column(length = 255)
     private String observaciones;
