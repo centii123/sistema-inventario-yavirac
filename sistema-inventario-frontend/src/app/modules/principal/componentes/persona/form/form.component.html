@@ -45,9 +45,9 @@
                                             </span>
 
                                             <span class="p-float-label mb-4">
-                                                <p-inputMask id="ftxt-dni" mask="9999999999" formControlName="dni"
+                                                <p-inputMask id="ftxt-dni" mask="999999999-9" formControlName="dni"
                                                     placeholder=""></p-inputMask>
-                                                <label for="ftxt-dni">* Dni</label>
+                                                <label for="ftxt-dni">* Cedula / Pasaporte</label>
                                             </span>
 
                                             <div class="p-float-label mb-4">
@@ -488,8 +488,7 @@
                         <label for="ftxt-tipoDiscapacidad">* Tipo de Discapacidad</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-porcentaje" type="text"
-                        formControlName="porcentaje" required>
+                        <p-inputNumber formControlName="porcentaje" id="ftxt-porcentaje" [min]="0" [max]="100" ftxt-porcentaje suffix="%"> </p-inputNumber>
                         <label for="ftxt-porcentaje">* Porcentaje</label>
                     </span>
                     <span class="p-float-label mb-4">
