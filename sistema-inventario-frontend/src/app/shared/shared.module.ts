@@ -4,13 +4,15 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { ProvinciasPipe } from '../core/pipes/provincias.pipe';
 
 @NgModule({
   declarations: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ProvinciasPipe
   ],
   imports: [
     CommonModule
@@ -19,7 +21,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ProvinciasPipe
   ]
 })
 export class SharedModule { }

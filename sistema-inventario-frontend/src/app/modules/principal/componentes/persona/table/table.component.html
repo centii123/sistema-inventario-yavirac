@@ -135,7 +135,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
                           <div class=" me-auto overflow-hidden text-wrap">
                             <div class="fw-bold">Tipo de Sangre:</div>
-                            <p>{{selectedData.tipoDeSangre}}</p>
+                            <p>{{selectedData.tipoDeSangre | tipoSangre}}</p>
                           </div>
                         </li>
                       </ul>
@@ -173,13 +173,13 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
                           <div class=" me-auto overflow-hidden text-wrap">
                             <div class="fw-bold">Escala Ocupacional:</div>
-                            <p>{{selectedData.escalaOcupacionales.descripcion}}</p>
+                            <p>{{selectedData.escalaOcupacionales.grupoOcupacional}}</p>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
                           <div class=" me-auto overflow-hidden text-wrap">
                             <div class="fw-bold">Estado Civil:</div>
-                            <p>{{selectedData.estadoCivil.nombre}}</p>
+                            <p>{{ selectedData.estadoCivil | estadoCivil }}</p>
                           </div>
                         </li>
                       </ul>
@@ -187,7 +187,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
                           <div class=" me-auto overflow-hidden text-wrap">
                             <div class="fw-bold">Genero:</div>
-                            <p>{{selectedData.genero.nombre}}</p>
+                            <p>{{selectedData.genero | genero}}</p>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
@@ -217,7 +217,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
                           <div class=" me-auto overflow-hidden text-wrap">
                             <div class="fw-bold">Provincia:</div>
-                            <p>{{selectedData.provincia.descripcion}}</p>
+                            <p>{{selectedData.provincia | provincias}}</p>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
@@ -227,14 +227,21 @@
                           </div>
                         </li>
                       </ul>
-                      <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
+                      <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                          <div class=" me-auto overflow-hidden text-wrap">
+                            <div class="fw-bold">Etnia:</div>
+                            <p>{{selectedData.etnia}}</p>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
                           <div class=" me-auto overflow-hidden text-wrap">
                             <div class="fw-bold">Materias que Imparte:</div>
                             <p>{{selectedData.materiasImparte}}</p>
                           </div>
                         </li>
                       </ul>
+                      
                     </div>
 
                   </p-tabPanel>
@@ -273,6 +280,51 @@
                     </div>
                     
                   </p-tabPanel>
+
+                  <p-tabPanel header="Entidad Publica">
+                    <div class="d-flex flex-column align-items-center">
+                      <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                          <div class=" me-auto overflow-hidden text-wrap">
+                            <div class="fw-bold">Labora en Otra Entidad Publica:</div>
+                            <p>{{selectedData.entidadPublica.laboraOtraEntidadPublica | affirmative }}</p>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                          <div class=" me-auto overflow-hidden text-wrap">
+                            <div class="fw-bold">Recibe Otro Honorario de Senecsyt:</div>
+                            <p>{{selectedData.entidadPublica.recibeOtroHonorarioSenecsyt | affirmative}}</p>
+                          </div>
+                        </li>
+                      </ul>
+                      
+                      <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                          <div class=" me-auto overflow-hidden text-wrap">
+                            <div class="fw-bold">codigo de Instituto en el que Labore:</div>
+                            <p>{{selectedData.entidadPublica.codigoInstitutoLabore}}</p>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                          <div class=" me-auto overflow-hidden text-wrap">
+                            <div class="fw-bold">Tiene Familiar que Labore en Senescyt Institutos:</div>
+                            <p>{{selectedData.entidadPublica.tienefamiliaresLaboraSenecsyt | affirmative}}</p>
+                          </div>
+                        </li>
+                      </ul>
+                      <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
+                          <div class=" me-auto overflow-hidden text-wrap">
+                            <div class="fw-bold">Observaciones:</div>
+                            <p>{{selectedData.entidadPublica.observaciones}}</p>
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </p-tabPanel>
+
+
                   <p-tabPanel header="Discapacidad">
                     <div class="d-flex flex-column align-items-center">
                       <ul class="list-group list-group-horizontal">
@@ -325,52 +377,7 @@
                       </ul>
                     </div>
                   </p-tabPanel>
-                  <p-tabPanel header="Entidad Publica">
-                    <div class="d-flex flex-column align-items-center">
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Labora en Otra Entidad Publica:</div>
-                            <p>{{selectedData.entidadPublica.entidadPublica == 0 ? 'No labora en entidad publica':selectedData.entidadPublica.entidadPublica == 1 ? 'Si labora en una entidad publica':"sin registro"}}</p>
-                          </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Recibe Otro Honorario de Senecsyt:</div>
-                            <p>{{selectedData.entidadPublica.honorarioSenecsyt == 0 ? 'No Recibe Otro Honorario de Senecsyt':selectedData.entidadPublica.honorarioSenecsyt == 1 ? 'Si Recibe Otro Honorario de Senecsyt':"sin registro"}}</p>
-                          </div>
-                        </li>
-                      </ul>
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Tiene Familiar que Labore en Senescyt Institutos:</div>
-                            <p>{{selectedData.entidadPublica.familiarSenecsyt == 0 ? 'No tiene familia en Senescyt':selectedData.entidadPublica.familiarSenecsyt == 1 ? 'Si tiene familia en Senescyt':"sin registro"}}</p>
-                          </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Nombre Familiar Labore en Senescyt Institutos:</div>
-                            <p>{{selectedData.entidadPublica.nombreFamiliar}}</p>
-                          </div>
-                        </li>
-                      </ul>
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">codigo de Instituto en el que Labore:</div>
-                            <p>{{selectedData.entidadPublica.codigoInstituto}}</p>
-                          </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Observaciones:</div>
-                            <p>{{selectedData.entidadPublica.observaciones}}</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </p-tabPanel>
+                  
                   <!-- <p-tabPanel [disabled]="true" header="Header IV"> </p-tabPanel> -->
               </p-tabView>
                 

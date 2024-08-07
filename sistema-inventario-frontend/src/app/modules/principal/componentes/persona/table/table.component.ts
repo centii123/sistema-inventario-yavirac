@@ -138,6 +138,7 @@ export class TableComponent {
 
   openModal(data: Persona) {
     this.selectedData = data;
+    console.log('ver mas',data)
     this.modalEye = true;
   }
 
