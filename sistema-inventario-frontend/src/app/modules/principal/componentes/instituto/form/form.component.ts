@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CrudService } from '../../service/crud.service';
 import { Institutos } from '../../model/instituto';
 import { MessageService } from 'primeng/api';
+import { ProvinciasPipe } from 'src/app/core/pipes/provincias.pipe';
 
 interface Provincia {
   id: number;

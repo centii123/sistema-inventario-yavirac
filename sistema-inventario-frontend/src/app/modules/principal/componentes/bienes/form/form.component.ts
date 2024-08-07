@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
-import { Bienes } from '../../model/bienes';
+import { BienesService } from '../../service/bienes.service';
 import { MessageService } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
+import { Bienes } from '../../model/bienes';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-interface formSelectData{
-    categoria:any[],
-    infraestructura:any[]
+interface formSelectData {
+  categoria: any[],
+  infraestructura: any[]
 }
 
 @Component({
@@ -23,6 +26,7 @@ export class FormComponent implements OnInit {
   selected: Bienes | null = null;
   dataDrop!: any[];
   loadingSpinerForm!: boolean;
+  infraestructuraName: SafeHtml = '';
   EstadoOptions: any[] = [
     { label: 'Nuevo', value: 1 },
     { label: 'Usado', value: 2 },
@@ -30,23 +34,51 @@ export class FormComponent implements OnInit {
     { label: 'Reparado', value: 4 },
     { label: 'Mantenimiento', value: 5 }
   ];
-  formSelectData:formSelectData={
-    categoria:[],
-    infraestructura:[]
+  formSelectData: formSelectData = {
+    categoria: [],
+    infraestructura: []
   };
-
 
   constructor(
     private formBuilder: FormBuilder,
     private crudService: CrudService,
-    private messageService: MessageService
+    private bienesService: BienesService,
+    private messageService: MessageService,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) {
-    this.form= this.initForm();
+    this.form = this.initForm();
   }
 
   ngOnInit(): void {
     this.load();
+    this.route.paramMap.subscribe(params => {
+      const infraestructuraId = +params.get('id')!;
+      if (infraestructuraId) {
+        this.bienesService.getBienesByInfraestructuraId(infraestructuraId).subscribe({
+          next: (data: Bienes[]) => {
+            console.log('Datos recibidos:', data);
+            this.list = data;
+            if (data.length > 0 && data[0].infraestructura) {
+              this.infraestructuraName = this.sanitizer.bypassSecurityTrustHtml(
+                'Bienes de la Infraestructura: ' + data[0].infraestructura.nombre +
+                '<div style="text-align: left;">Custodio: ' + data[0].infraestructura.persona.nombres + '</div>'
+              );
+              console.log(this.infraestructuraName);
+            } else {
+              this.infraestructuraName = 'Nombre de infraestructura no disponible';
+            }
+          },
+          error: error => {
+            console.error('Error al obtener bienes:', error);
+          }
+        });
+      } else {
+        this.infraestructuraName = 'Todos los bienes';
+      }
+    });
   }
+
 
   get f() {
     return this.form.controls;
@@ -63,8 +95,8 @@ export class FormComponent implements OnInit {
       valor: new FormControl('', [Validators.required]),
       valorIva: new FormControl('', [Validators.required]),
       serie: new FormControl('', [Validators.required]),
-      categoriaBien:new FormControl('', [Validators.required]),
-      infraestructura:new FormControl(null),
+      categoriaBien: new FormControl('', [Validators.required]),
+      infraestructura: new FormControl(null),
     });
   }
 
@@ -75,9 +107,7 @@ export class FormComponent implements OnInit {
         this.list = data;
         this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
         this.loadingSpiner = false;
-
       },
-      
       error: error => {
         this.loadingSpiner = false;
       }
@@ -86,7 +116,7 @@ export class FormComponent implements OnInit {
 
   setSeleccionado(registro: Bienes) {
     this.selected = registro;
-    this.openModal()
+    this.openModal();
     this.form.setValue({
       id: registro.id,
       descripcion: registro.descripcion,
@@ -98,9 +128,8 @@ export class FormComponent implements OnInit {
       valorIva: registro.valorIva,
       serie: registro.serie,
       categoriaBien: registro.categoriaBien,
-      infraestructura:registro.infraestructura ? registro.infraestructura.id : null
+      infraestructura: registro.infraestructura ? registro.infraestructura.id : null
     });
-    
   }
 
   save() {
@@ -109,21 +138,19 @@ export class FormComponent implements OnInit {
     }
 
     const registro: Bienes = this.form.value;
-      registro.categoriaBien={
-        'id':registro.categoriaBien.id
-      }
-      console.log(registro)
-      if(typeof registro.infraestructura === 'number'){
-        registro.infraestructura={
-        id:registro.infraestructura
-        }
-      }else{
-        registro.infraestructura=null
-      }
+    registro.categoriaBien = {
+      'id': registro.categoriaBien.id
+    };
+    console.log('Registro a guardar:', registro);
+    if (typeof registro.infraestructura === 'number') {
+      registro.infraestructura = {
+        id: registro.infraestructura
+      };
+    } else {
+      registro.infraestructura = null;
+    }
 
     if (registro.id) {
-      console.log(registro)
-
       this.crudService.update(registro).subscribe({
         next: () => {
           this.resetForm();
@@ -131,10 +158,10 @@ export class FormComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Registro actualizado exitosamente!' });
         },
         error: error => {
+          console.error('Error al actualizar:', error);
         }
       });
     } else {
-      
       this.crudService.add(registro).subscribe({
         next: () => {
           this.resetForm();
@@ -142,9 +169,9 @@ export class FormComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
         },
         error: error => {
+          console.error('Error al agregar:', error);
         }
       });
-      
     }
 
     this.modal = false;
@@ -161,29 +188,29 @@ export class FormComponent implements OnInit {
   }
 
   openModal() {
-    this.loadingSpinerForm=true
+    this.loadingSpinerForm = true;
     this.resetForm();
 
     this.crudService.getAll('categorias-bienes/').subscribe(
-      e=>{
-        this.formSelectData.categoria=e
-        this.loadingSpinerForm=false
+      e => {
+        this.formSelectData.categoria = e;
+        this.loadingSpinerForm = false;
       },
-      error=>{
-        console.error(error)
-        this.loadingSpinerForm=false
+      error => {
+        console.error('Error al cargar categorías:', error);
+        this.loadingSpinerForm = false;
       }
-    )
+    );
     this.crudService.getAll('infraestructura/').subscribe(
-      e=>{
-        this.formSelectData.infraestructura=e
-        this.loadingSpinerForm=false
+      e => {
+        this.formSelectData.infraestructura = e;
+        this.loadingSpinerForm = false;
       },
-      error=>{
-        console.error(error)
-        this.loadingSpinerForm=false
+      error => {
+        console.error('Error al cargar infraestructuras:', error);
+        this.loadingSpinerForm = false;
       }
-    )
+    );
     this.modal = true;
   }
 
@@ -191,6 +218,4 @@ export class FormComponent implements OnInit {
     this.resetForm();
     this.modal = false;
   }
-
-  
 }

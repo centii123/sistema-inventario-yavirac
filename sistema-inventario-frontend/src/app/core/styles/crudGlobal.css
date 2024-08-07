@@ -56,3 +56,33 @@ input[type="date"]:invalid {
 input[type="date"]:focus {
     color: black;
 }
+
+.barra {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.p {
+    background-color: #0D3C61;
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 3rem; 
+    padding: 0 1rem; 
+    border-radius: 0.25rem; 
+    font-size: 1rem; 
+    
+}
+
+.p p {
+    margin: 0; 
+}
+
+.p .custodio {
+    color: #000; /* Cambia el color del texto a negro para probar */
+    text-align: left;
+    margin-top: 5px;
+  }
+  

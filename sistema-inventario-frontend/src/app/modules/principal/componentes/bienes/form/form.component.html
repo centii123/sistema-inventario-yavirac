@@ -113,7 +113,11 @@
 
         <p-card class="custom-card">
 
-            <div class="caja-boton-principal custom-button-box">
+            <div class="caja-boton-principal custom-button-box barra">
+                <div class="p">
+                    <p [innerHTML]="infraestructuraName"></p>
+
+                </div>
                 <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
                     tooltipPosition="right"></button>
             </div>
