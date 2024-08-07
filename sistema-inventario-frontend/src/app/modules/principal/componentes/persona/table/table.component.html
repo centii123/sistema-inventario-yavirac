@@ -108,7 +108,7 @@
   <p-dialog header="Mas Información" class="custom-dialog bg-blue-900" [(visible)]="modalEye" [modal]="true"
               (onHide)="closeModal()" [draggable]="true" [resizable]="true" [style]="{ width: '60rem', minHeight: '90vh'}">
               <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
-                <p-tabView>
+                <p-tabView [(activeIndex)]="activeIndex" [scrollable]="true" >
                   <p-tabPanel header="Docente">
                     <div class="d-flex flex-column align-items-center">
                       <ul class="list-group list-group-horizontal">
@@ -325,58 +325,116 @@
                   </p-tabPanel>
 
 
-                  <p-tabPanel header="Discapacidad">
-                    <div class="d-flex flex-column align-items-center">
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Tipo de Discapacidad:</div>
-                            <p>{{selectedData.discapacidad.tipoDiscapacidad}}</p>
-                          </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Porcentaje:</div>
-                            <p>{{selectedData.discapacidad.porcentaje}} %</p>
-                          </div>
-                        </li>
-                      </ul>
-                      <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Numero de Carnet:</div>
-                            <p>{{selectedData.discapacidad.numeroCarnet}}</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </p-tabPanel>
-                  <p-tabPanel header="Enfermedad Catastrofica">
-                    <div class="d-flex flex-column align-items-center">
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Certificado de Enfermedad:</div>
-                            <p>{{selectedData.enfermedadCatastrofica.certificadoEnfermedad}}</p>
-                          </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Cargo de Discapacidad:</div>
-                            <p>{{selectedData.enfermedadCatastrofica.cargoDiscapacidad}}</p>
-                          </div>
-                        </li>
-                      </ul>
-                      <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
-                          <div class=" me-auto overflow-hidden text-wrap">
-                            <div class="fw-bold">Tipo de Enfermedad:</div>
-                            <p>{{selectedData.enfermedadCatastrofica.tipoEnfermedad}}</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </p-tabPanel>
+                  <p-tabPanel header="Titulos">
+                    <p-table [value]="selectedData.titulos" styleClass="p-datatable-gridlines"
+                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Nombre del Titulos</th>
+                                <th>Numero De Registro Senesyt</th>
+                                <th>Año Del Titulo</th>
+                                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{ data.titulosOptenidos }}</td>
+                                <td>{{ data.numeroDeRegistroSenesyt }}</td>
+                                <td>{{ this.FechaOptener(data.anoDelTitulo) }}</td>
+                                
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+
+                <p-tabPanel header="Discapacidad" >
+                    <p-table [value]="selectedData.discapacidad" styleClass="p-datatable-gridlines"
+                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                        
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Tipo Discapacidad</th>
+                                <th>Porcentaje</th>
+                                <th>Numero de Carnet</th>
+                                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{ data.tipoDiscapacidad }}</td>
+                                <td>{{ data.porcentaje }} %</td>
+                                <td>{{ data.numeroCarnet }}</td>
+                                
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+
+                <p-tabPanel header="Enfermedad Catastrofica">
+                    <p-table [value]="selectedData.enfermedadCatastrofica" styleClass="p-datatable-gridlines"
+                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                        
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Tipo de Enfermedad</th>
+                                <th>Institucion que Certifica la Enfermedad</th>
+                                <th>Acargo de Persona con Discapacidad</th>
+                                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{ data.tipoEnfermedad }}</td>
+                                <td>{{ data.institucionCertificaEnfermedad }}</td>
+                                <td>{{ data.cargoPersonaDiscapacidad == 1 ? 'Acargo de persona con discapacidad': data.cargoPersonaDiscapacidad == 2 ? 'sin persona acargo': 'N/A' }}</td>
+                                
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+
+                <p-tabPanel header="Familiares">
+                    <p-table [value]="selectedData.familiarLaboraotraEntidadPublica" styleClass="p-datatable-gridlines"
+                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                       
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>nombre</th>
+                                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{ data.nombre }}</td>
+
+                                
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+
+                <p-tabPanel header="Estudios en Curso">
+                    <p-table [value]="selectedData.estudiosenCursos" styleClass="p-datatable-gridlines"
+                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                       
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo De Titulo</th>
+                                <th>Numero De Horas</th>
+                                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{ data.nombre }}</td>
+                                <td>{{ data.tipoDeTitulo }} %</td>
+                                <td>{{ data.numeroDeHoras }}</td>
+                               
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
                   
                   <!-- <p-tabPanel [disabled]="true" header="Header IV"> </p-tabPanel> -->
               </p-tabView>

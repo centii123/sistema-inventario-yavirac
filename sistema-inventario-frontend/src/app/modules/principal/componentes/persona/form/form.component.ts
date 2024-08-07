@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { MessageService } from 'primeng/api';
-import { Discapacidad, EnfermedadCatastrofica, EntidadPublica, FechaIngresoInstituto, Persona, User } from '../../model/persona';
+import { Persona,} from '../../model/persona';
 import { affirmation, estadoCivil, genero, intruccionFormal, modalidadJornada, TipoDeSangre } from '../constants/constantes-persona';
 import { provincias } from 'src/app/core/constants/constantes-globales';
 import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
-import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-form',
@@ -359,7 +359,6 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
-    this.activeIndex=0
   }
 
   cancel() {
@@ -376,6 +375,13 @@ export class FormComponent implements OnInit {
   }
 
   openModal() {
+    this.tableForm={
+      discapacidad: [],
+      enfermedad_catastrofica: [],
+      familiar_Labora_otra_Entidad_Publica: [],
+      estudios_en_curso: [],
+      titulos: []
+    };
     this.loadingSpinerForm = true;
     this.resetForm();
     this.loadDropdownData();
