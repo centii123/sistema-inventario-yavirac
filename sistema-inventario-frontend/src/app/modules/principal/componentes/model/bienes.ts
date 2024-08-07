@@ -4,12 +4,9 @@ import { CategoriaBienes } from "./categorias-bienes";
 export interface Bienes extends globalModels {
     id: number;
     descripcion: string;
-    nombre: string,
     codigoDelBien: string,
     marca: string,
-    modelo: string,
-    custodio: any,
-    estado: boolean,
+    estado: number,
     observaciones: string,
     valor: number,
     valorIva: number,

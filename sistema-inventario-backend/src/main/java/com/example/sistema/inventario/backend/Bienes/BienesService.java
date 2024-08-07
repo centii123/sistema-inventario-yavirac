@@ -51,10 +51,6 @@ public class BienesService {
         }
     }
 
-    // Buscar bienes por nombre
-    public List<Bienes> findByNombre(String nombre) {
-        return bienesRepository.findByNombre(nombre);
-    }
 
     // Buscar bienes por ID de infraestructura
     public List<Bienes> findByInfraestructuraId(Long infraestructuraId) {

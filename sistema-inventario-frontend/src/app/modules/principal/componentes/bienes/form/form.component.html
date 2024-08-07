@@ -19,29 +19,26 @@
                         <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                             <div class="d-flex">
                                 <div class="col me-3">
+
                                     <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="custodio" placeholder="Custodio"
-                                            [options]="formSelectData.persona" [filter]="true" filterBy="dni,nombres"
-                                            [showClear]="true" optionLabel="id">
-                                            <ng-template let-data pTemplate="item">
-                                                <div class="flex align-items-center gap-2">
-                                                    <div>{{ data.dni }} - {{ data.nombres }} {{ data.apellidos }}</div>
-                                                </div>
-                                            </ng-template>
-                                            <ng-template pTemplate="selectedItem">
-                                                <div>{{ getOptionLabel(selectedCustodio) }}</div>
-                                            </ng-template>
+                                        <p-dropdown formControlName="categoriaBien" placeholder="* Categoria Del Bien"
+                                            [options]="formSelectData.categoria" [filter]="true" filterBy="nombre"
+                                            [showClear]="true" optionLabel="nombre">
                                         </p-dropdown>
-                                        <label for="ftxt-custodio">Custodio</label>
+                                        <label for="ftxt-custodio">* Categoria</label>
                                     </span>
+
                                     <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-nombre" type="text" formControlName="nombre"
-                                            required>
-                                        <label for="ftxt-nombre">* Nombre</label>
+                                        <p-dropdown formControlName="estado" placeholder="* Estado"
+                                            [options]="EstadoOptions" [filter]="true" [showClear]="true"
+                                            optionLabel="label" optionValue="value">
+                                        </p-dropdown>
+                                        <label for="ftxt-estado">* Estado</label>
                                     </span>
-                                    
+
                                     <div class="p-float-label mb-4">
-                                        <p-inputNumber formControlName="valor" [showButtons]="true" inputId="valor" mode="currency" currency="USD"  > </p-inputNumber>
+                                        <p-inputNumber formControlName="valor" [showButtons]="true" inputId="valor"
+                                            mode="currency" currency="USD"> </p-inputNumber>
                                         <label for="ftxt-valor">* Valor</label>
                                     </div>
 
@@ -50,24 +47,15 @@
                                         <input pInputText id="ftxt-marca" type="text" formControlName="marca" required>
                                         <label for="ftxt-marca">* Marca</label>
                                     </span>
+
                                     <span class="p-float-label mb-4">
-                                        <input pInputText id="ftxt-modelo" type="text" formControlName="modelo"
-                                            required>
-                                        <label for="ftxt-modelo">* Modelo</label>
-                                    </span>
-                                    <span class="p-float-label mb-4">
-                                        <textarea id="float-descripcion" formControlName="descripcion"  rows="3" cols="30" pInputTextarea ></textarea>
+                                        <textarea id="float-descripcion" formControlName="descripcion" rows="3"
+                                            cols="30" pInputTextarea></textarea>
                                         <label for="float-descripcion">* Descripcion</label>
                                     </span>
                                 </div>
                                 <div class="col">
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="categoriaBien" placeholder="* Categoria Del Bien"
-                                            [options]="formSelectData.categoria" [filter]="true" filterBy="nombre"
-                                            [showClear]="true" optionLabel="nombre">
-                                        </p-dropdown>
-                                        <label for="ftxt-custodio">* Categoria</label>
-                                    </span>
+
                                     <span class="p-float-label mb-4">
                                         <p-dropdown formControlName="infraestructura" placeholder="Aula"
                                             [options]="formSelectData.infraestructura" [filter]="true" filterBy="nombre"
@@ -75,34 +63,33 @@
                                         </p-dropdown>
                                         <label for="ftxt-custodio">Aula</label>
                                     </span>
-                                    <span class="p-float-label mb-4">
-                                        <p-dropdown formControlName="estado" [options]="['true','false']"
-                                        placeholder="* Estado"></p-dropdown>
-                                        <label for="ftxt-estado">* Estado</label>
-                                    </span>
-                                    <div class="p-float-label mb-4">
-                                        <p-inputNumber formControlName="valorIva" [showButtons]="true" inputId="valorIva" mode="currency" currency="USD" > </p-inputNumber>
-                                        <label for="ftxt-valor">* Valor Con Iva</label>
-                                    </div>
+
                                     <span class="p-float-label mb-4">
                                         <input pInputText id="ftxt-codigoDelBien" type="text"
                                             formControlName="codigoDelBien" required>
                                         <label for="ftxt-codigoDelBien">* Codigo Del Bien</label>
                                     </span>
 
+                                    <div class="p-float-label mb-4">
+                                        <p-inputNumber formControlName="valorIva" [showButtons]="true"
+                                            inputId="valorIva" mode="currency" currency="USD"> </p-inputNumber>
+                                        <label for="ftxt-valor">* Valor Con Iva</label>
+                                    </div>
+
                                     <span class="p-float-label mb-4">
                                         <input pInputText id="ftxt-serie" type="text" formControlName="serie" required>
                                         <label for="ftxt-serie">* Serie</label>
                                     </span>
                                     <span class="p-float-label mb-4">
-                                        <textarea id="float-observaciones" formControlName="observaciones"  rows="3" cols="30" pInputTextarea ></textarea>
+                                        <textarea id="float-observaciones" formControlName="observaciones" rows="3"
+                                            cols="30" pInputTextarea></textarea>
                                         <label for="float-observaciones">* Observaciones</label>
                                     </span>
                                 </div>
                             </div>
 
 
-                            
+
                         </div>
                     </div><br>
                     <div class="custom-toolbar d-flex justify-content-center">
@@ -125,7 +112,7 @@
 
 
         <p-card class="custom-card">
-            
+
             <div class="caja-boton-principal custom-button-box">
                 <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
                     tooltipPosition="right"></button>

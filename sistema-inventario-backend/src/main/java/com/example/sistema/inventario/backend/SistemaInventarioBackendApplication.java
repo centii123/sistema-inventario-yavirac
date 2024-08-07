@@ -10,3 +10,4 @@ public class SistemaInventarioBackendApplication {
 		SpringApplication.run(SistemaInventarioBackendApplication.class, args);
 	}
 } 
+ 
