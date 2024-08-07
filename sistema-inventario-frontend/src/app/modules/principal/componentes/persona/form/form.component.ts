@@ -181,13 +181,6 @@ export class FormComponent implements OnInit {
   setSeleccionado(registro: Persona) {
     console.log('registro',registro)
     this.selected = registro;
-    this.tableForm={
-      discapacidad: [],
-      enfermedad_catastrofica: [],
-      familiar_Labora_otra_Entidad_Publica: [],
-      estudios_en_curso: [],
-      titulos: []
-    };
     this.openModal();
     this.tableForm.discapacidad = Array.isArray(registro.discapacidad) ? [...registro.discapacidad] : [];
     this.tableForm.enfermedad_catastrofica = Array.isArray(registro.enfermedadCatastrofica) ? [...registro.enfermedadCatastrofica] : [];
@@ -366,7 +359,6 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
-    this.tableForm={}
     this.activeIndex=0
   }
 
@@ -484,7 +476,8 @@ dataIndex:any=null;
       this.visible[data] = true;
     }
 
-    saveTableForm(formSelectorTable:any,ValueFormData:any){
+    saveTableForm(formSelectorTable:string,ValueFormData:any){
+      console.log( formSelectorTable,ValueFormData)
       if(typeof this.dataIndex === 'number'){
         this.tableForm[formSelectorTable][this.dataIndex]=this.form.value[ValueFormData]
         this.dataIndex=null
