@@ -52,14 +52,14 @@ export class LoginComponent implements OnInit {
         this.loginForm.reset();
       } catch (error: unknown) {
         if (this.isHttpErrorResponse(error) && error.status === 401) {
-          this.loginError = "El usuario no existe.";
+          this.loginError = "El usuario o la contraseña son incorrectos.";
         } else {
           this.loginError = "Error al iniciar sesión. Por favor, inténtelo de nuevo.";
         }
       }
     } else {
+      this.loginError = "EL usuario o contraseña son incorrectos.";
       this.loginForm.markAllAsTouched();
-      alert("Usuario incorrecto.");
     }
   }
 
@@ -67,3 +67,4 @@ export class LoginComponent implements OnInit {
     return typeof error === 'object' && error !== null && 'status' in error;
   }
 }
+ 

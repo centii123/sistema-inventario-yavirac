@@ -18,7 +18,8 @@ export const genero: any[] = [
 export const estadoCivil: any[] = [
     { label: 'Soltero/a', value: 0 },
     { label: 'Casado/a', value: 1 },
-    { label: 'Divorciado/a', value: 2 }
+    { label: 'Divorciado/a', value: 2 },
+    { label: 'Viudo/a', value: 3 }
 ];
 
 export const modalidadJornada: any[] = [

@@ -13,6 +13,8 @@ export class EstadoCivilPipe implements PipeTransform {
         return 'Casado/a';
       case 2:
         return 'Divorciado/a';
+        case 3:
+        return 'Viudo/a';
       default:
         return 'sin registro';
     }

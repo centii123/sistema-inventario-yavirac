@@ -29,6 +29,8 @@ export class TableComponent {
   @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
   mensagge: any;
 
+  activeIndex: number = 0;
+
   constructor(private crudService: CrudService, private apiService: ApiService, private messageService: MessageService) { }
 
 
@@ -134,6 +136,7 @@ export class TableComponent {
   cancel() {
     this.modalEye = false;
     this.selectedData = null;
+    this.activeIndex=0
   }
 
   openModal(data: Persona) {
@@ -145,5 +148,6 @@ export class TableComponent {
   closeModal() {
     this.modalEye = false;
     this.selectedData = null;
+    this.activeIndex=0
   }
 }
