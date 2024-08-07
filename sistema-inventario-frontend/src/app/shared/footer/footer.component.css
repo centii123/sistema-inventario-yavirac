@@ -1,11 +1,117 @@
+/* color: rgb(255, 86, 0); Color naranja para los íconos */
+/* background-color: #232B37; */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 footer {
-    background: #0B3C61;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-    bottom: 0;
-    font-family:'Times New Roman', Times, serif
-  }
-  
+  background-color: #232B37;
+  color: #ffffff;
+  padding: 40px 0;
+  text-align: left;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 40px;
+  min-width: 220px;
+}
+
+.footer-section h2 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-section a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+.footer-section ul {
+  margin-top: 10px;
+}
+
+.footer-section ul li {
+  margin-bottom: 9px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #acabab; /* Línea debajo de cada enlace */
+  padding-bottom: 8px;
+}
+
+.footer-section ul li i {
+  margin-right: 10px;
+  color: rgb(255, 86, 0); /* Color naranja para los íconos */
+}
+
+.footer-section .socials {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-section .social-icon {
+  display: inline-block;
+  width: 70px;
+  height: 40px;
+  margin-right: 10px;
+  background-color: #ffffff;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #262626;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.footer-section .social-icon:hover {
+  background-color: #575757;
+  color: rgb(255, 86, 0); /* Color naranja para los íconos de redes sociales al pasar el mouse */
+}
+
+.footer-section img {
+  max-width: 150px;
+  margin-bottom: 10px; /* Espacio debajo del logo */
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  background-color: #232B37;
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: rgb(255, 255, 255); /* Color naranja para el texto específico */
+}
+
+.footer-section .info-icon {
+  color: rgb(255, 86, 0); /* Color naranja para los íconos de información */
+  margin-right: 10px;
+  border-bottom: 1px solid #444444; /* Línea debajo de cada ítem */
+  padding-bottom: 10px;
+}
