@@ -32,14 +32,34 @@ export class NavbarComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    const sidebar = document.querySelector("#sidebar") as HTMLElement;
-    const clickedInsideSidebar = sidebar.contains(event.target as Node);
-    const clickedMenuIcon = (event.target as HTMLElement).classList.contains('menu-icon') || (event.target as HTMLElement).closest('.menu-icon') != null;
+    const sidebar = document.querySelector("#sidebar") as HTMLElement | null;
+    
+    // Verificamos si el sidebar no es null
+    const clickedInsideSidebar = sidebar ? sidebar.contains(event.target as Node) : false;
+    const clickedMenuIcon = (event.target as HTMLElement).classList.contains('menu-icon') || 
+                            (event.target as HTMLElement).closest('.menu-icon') != null;
 
     if (!clickedInsideSidebar && this.side && !clickedMenuIcon) {
-      this.closeSidebar();
+      this.closeSidebarSide();
     }
   }
+
+  closeSidebarSide() {
+    // Implementa la lógica para cerrar el sidebar aquí
+    this.side = false;
+  }
+
+
+  // @HostListener('document:click', ['$event'])
+  // onDocumentClick(event: MouseEvent) {
+  //   const sidebar = document.querySelector("#sidebar") as HTMLElement;
+  //   const clickedInsideSidebar = sidebar.contains(event.target as Node);
+  //   const clickedMenuIcon = (event.target as HTMLElement).classList.contains('menu-icon') || (event.target as HTMLElement).closest('.menu-icon') != null;
+
+  //   if (!clickedInsideSidebar && this.side && !clickedMenuIcon) {
+  //     this.closeSidebar();
+  //   }
+  // }
 
   openSidebar() {
     const sidebar = document.querySelector("#sidebar") as HTMLElement;

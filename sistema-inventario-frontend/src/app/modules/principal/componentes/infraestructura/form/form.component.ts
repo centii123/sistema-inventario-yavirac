@@ -4,6 +4,7 @@ import { CrudService } from '../../service/crud.service';
 import { Infraestructura } from '../../model/infraestructura';
 import { MessageService } from 'primeng/api';
 import { Persona } from '../../model/persona';
+import { ActivatedRoute } from '@angular/router';
 
 interface formSelectData {
   persona: Persona[],
@@ -33,16 +34,22 @@ export class FormComponent implements OnInit {
     { label: 'Laboratotio', value: 2 },
     { label: 'Oficina', value: 3 }
   ];
+
+  categoriaUrl?:number | null;
   constructor(
     private formBuilder: FormBuilder,
     private crudService: CrudService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private route: ActivatedRoute
   ) {
     this.form = this.initForm();
   }
 
   ngOnInit(): void {
     this.load();
+    this.route.queryParams.subscribe(params => {
+      this.categoriaUrl = +params['categoria'];
+    });
   }
 
   get f() {
@@ -90,7 +97,6 @@ export class FormComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.value)
     if (this.form.invalid) {
       return;
     }
@@ -102,7 +108,6 @@ export class FormComponent implements OnInit {
       }
     }
     
-    console.log(registro)
 
     if (registro.id) {
 
@@ -135,6 +140,7 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
+    this.form.get('categoriaAula')?.setValue(this.categoriaUrl ?? 'null');
   }
 
   cancel() {
@@ -149,10 +155,9 @@ export class FormComponent implements OnInit {
     this.crudService.getAll('persona/').subscribe(
       (e:Persona[]) => {
         this.formSelectData.persona = e
-        this.formSelectData.persona = e.filter((n:Persona) => n.aula == null)
+        this.formSelectData.persona = e.filter((n:Persona) => n.infraestructura == null)
         const filteredPersonaSelect = this.personaSelect.filter(item => item !== null);
         this.formSelectData.persona=[...filteredPersonaSelect, ...this.formSelectData.persona]
-        console.log(this.formSelectData.persona)
         this.loadingSpinerForm = false
       },
       error => {

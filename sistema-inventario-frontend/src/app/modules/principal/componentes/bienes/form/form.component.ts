@@ -38,6 +38,7 @@ export class FormComponent implements OnInit {
     categoria: [],
     infraestructura: []
   };
+  infraestructuraId?: number | null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,16 +54,19 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.load();
     this.route.paramMap.subscribe(params => {
-      const infraestructuraId = +params.get('id')!;
-      if (infraestructuraId) {
-        this.bienesService.getBienesByInfraestructuraId(infraestructuraId).subscribe({
+      const id = params.get('id');
+      this.infraestructuraId = id ? +id : null;
+      //this.infraestructuraId = +params.get('id')!;
+      if (this.infraestructuraId) {
+        this.bienesService.getBienesByInfraestructuraId(this.infraestructuraId).subscribe({
           next: (data: Bienes[]) => {
             console.log('Datos recibidos:', data);
             this.list = data;
             if (data.length > 0 && data[0].infraestructura) {
+              let persona= data[0].infraestructura.persona?.nombres ? data[0].infraestructura.persona.nombres : "sin custodio"
               this.infraestructuraName = this.sanitizer.bypassSecurityTrustHtml(
                 'Bienes de la Infraestructura: ' + data[0].infraestructura.nombre +
-                '<div style="text-align: left;">Custodio: ' + data[0].infraestructura.persona.nombres + '</div>'
+                '<div style="text-align: left;">Custodio: ' + persona + '</div>'
               );
               console.log(this.infraestructuraName);
             } else {
@@ -96,7 +100,7 @@ export class FormComponent implements OnInit {
       valorIva: new FormControl('', [Validators.required]),
       serie: new FormControl('', [Validators.required]),
       categoriaBien: new FormControl('', [Validators.required]),
-      infraestructura: new FormControl(null),
+      infraestructura: new FormControl(null)
     });
   }
 
@@ -180,6 +184,7 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
+    this.form.get('infraestructura')?.setValue(this.infraestructuraId ?? 'null');
   }
 
   cancel() {
