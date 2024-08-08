@@ -1,9 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { Nacionalidad } from '../../model/nacionalidad';
 import { NacionalidadService } from '../../service/nacionalidad.service';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
+import { MessageService } from 'primeng/api';
+import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -11,12 +13,21 @@ import { Table } from 'primeng/table';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+  
+confirmDeleteSelectedNacionalidades() {
+throw new Error('Method not implemented.');
+}
+confirmDeleteNacionalidad(arg0: any) {
+throw new Error('Method not implemented.');
+}
   @Input() nacionalidades: Nacionalidad[] = [];
   @Output() selectedNacionalidad = new EventEmitter<Nacionalidad>();
   selectedNacionalidades: Nacionalidad[] = [];
   loading: boolean = false;
+  @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
+  mensagge: any;
 
-  constructor(private nacionalidadService: NacionalidadService, private apiService: ApiService) {}
+  constructor(private nacionalidadService: NacionalidadService, private apiService: ApiService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.getNacionalidades();
@@ -28,6 +39,7 @@ export class TableComponent implements OnInit {
       (data: Nacionalidad[]) => {
         this.nacionalidades = data;
         this.loading = false;
+        console.log("Datos obtenidos");
       },
       (error) => {
         console.error('Error fetching nacionalidades:', error);
@@ -57,14 +69,22 @@ export class TableComponent implements OnInit {
   }
 
   deleteNacionalidad(id: number): void {
-    this.nacionalidadService.deleteNacionalidad(id).subscribe(
-      () => {
-        this.nacionalidades = this.nacionalidades.filter(n => n.id !== id);
-      },
-      (error) => {
-        console.error('Error deleting nacionalidad:', error);
-      }
-    );
+    this.mensagge = {
+      message: '¿Esta seguro que desea eliminar este registro?',
+      messageError: { severity: 'warn', summary: 'Cancelado', detail: 'Acción de eliminado Cancelado' }
+    }
+    
+    this.confirmDialog?.confirm1(() =>{ 
+      this.nacionalidadService.deleteNacionalidad(id).subscribe(
+        () => {
+          this.nacionalidades = this.nacionalidades.filter(n => n.id !== id);
+        },
+        (error) => {
+          console.error('Error deleting nacionalidad:', error);
+        }
+      );
+    },this.mensagge);
+    
   }
 
   deleteSelectedNacionalidad(): void {
@@ -92,5 +112,6 @@ export class TableComponent implements OnInit {
   applyFilter(event: Event, table: Table): void {
     const inputElement = event.target as HTMLInputElement;
     table.filterGlobal(inputElement.value, 'contains');
+    this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
   }
 }

@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
 import { Bienes } from '../../model/bienes';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 interface formSelectData {
   categoria: any[],
@@ -38,6 +39,9 @@ export class FormComponent implements OnInit {
     categoria: [],
     infraestructura: []
   };
+  infraestructuraId?: number | null;
+
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,16 +57,19 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.load();
     this.route.paramMap.subscribe(params => {
-      const infraestructuraId = +params.get('id')!;
-      if (infraestructuraId) {
-        this.bienesService.getBienesByInfraestructuraId(infraestructuraId).subscribe({
+      const id = params.get('id');
+      this.infraestructuraId = id ? +id : null;
+      //this.infraestructuraId = +params.get('id')!;
+      if (this.infraestructuraId) {
+        this.bienesService.getBienesByInfraestructuraId(this.infraestructuraId).subscribe({
           next: (data: Bienes[]) => {
             console.log('Datos recibidos:', data);
             this.list = data;
             if (data.length > 0 && data[0].infraestructura) {
+              let persona= data[0].infraestructura.persona?.nombres ? data[0].infraestructura.persona.nombres : "sin custodio"
               this.infraestructuraName = this.sanitizer.bypassSecurityTrustHtml(
                 'Bienes de la Infraestructura: ' + data[0].infraestructura.nombre +
-                '<div style="text-align: left;">Custodio: ' + data[0].infraestructura.persona.nombres + '</div>'
+                '<div style="text-align: left;">Custodio: ' + persona + '</div>'
               );
               console.log(this.infraestructuraName);
             } else {
@@ -96,22 +103,41 @@ export class FormComponent implements OnInit {
       valorIva: new FormControl('', [Validators.required]),
       serie: new FormControl('', [Validators.required]),
       categoriaBien: new FormControl('', [Validators.required]),
-      infraestructura: new FormControl(null),
+      infraestructura: new FormControl(null)
     });
   }
 
   load() {
     this.loadingSpiner = true;
-    this.crudService.getAll().subscribe({
-      next: (data: Bienes[]) => {
-        this.list = data;
-        this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
-        this.loadingSpiner = false;
-      },
-      error: error => {
-        this.loadingSpiner = false;
-      }
-    });
+    if(typeof this.infraestructuraId == 'number'){
+      this.subscriptions.add(
+        this.bienesService.getBienesByInfraestructuraId(this.infraestructuraId).subscribe(
+          (data) => {
+            console.log(data);
+            this.list = data;
+            this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
+            this.loadingSpiner = false;
+          },
+          (error) => {
+            console.error('Error al obtener bienes:', error);
+            this.loadingSpiner = false;
+          }
+        )      
+      );
+    }else{
+      this.crudService.getAll().subscribe({
+        next: (data: Bienes[]) => {
+          this.list = data;
+          this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
+          this.loadingSpiner = false;
+        },
+        error: error => {
+          this.loadingSpiner = false;
+        }
+      });
+    }
+    
+    
   }
 
   setSeleccionado(registro: Bienes) {
@@ -180,6 +206,7 @@ export class FormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.selected = null;
+    this.form.get('infraestructura')?.setValue(this.infraestructuraId ?? 'null');
   }
 
   cancel() {

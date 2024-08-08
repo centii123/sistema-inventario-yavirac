@@ -54,7 +54,7 @@ export class TableComponent {
     this.selectedOneRegister.emit(register);
   }
 
-  delete(id:number){
+  delete(id: number) {
     this.crudService.delete(id).subscribe(
       () => {
         this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
@@ -75,17 +75,19 @@ export class TableComponent {
       message: '¿Esta seguro que desea eliminar este registro?',
       messageError: { severity: 'warn', summary: 'Cancelado', detail: 'Acción de eliminado Cancelado' }
     }
+    
     this.confirmDialog?.confirm1(() => {
-      if(data.aula != null){
+      if (data.infraestructura != null) {
         this.AulaDelete = {
-          id: data.aula.id,
-          descripcion: data.aula.descripcion,
-          nombre: data.aula.nombre,
+          id: data.infraestructura.id,
+          descripcion: data.infraestructura.descripcion,
+          nombre: data.infraestructura.nombre,
           persona: null,
-          categoriaAula: data.aula.categoriaAula.id,
-          createdAt: data.aula.createdAt
+          categoriaAula: data.infraestructura.categoriaAula,
+          createdAt: data.infraestructura.createdAt
         }
-        this.crudService.update(this.AulaDelete, 'aula/').subscribe(
+        console.log('eliminar data', this.AulaDelete)
+        this.crudService.update(this.AulaDelete, 'infraestructura/').subscribe(
           () => {
             this.delete(data.id);
           },
@@ -93,19 +95,16 @@ export class TableComponent {
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar este recurso' });
           }
         )
-      } else{
+      } else {
         this.delete(data.id);
       }
+       }, this.mensagge);
+      /**/
+    }
 
-      
-
-    }, this.mensagge);
-    /**/
-  }
-
-  deleteSelected(): void {
-    const idsToDelete = this.selectedAllRegister.map(n => n.id);
-    if (idsToDelete.length === 0) {
+    deleteSelected(): void {
+      const idsToDelete = this.selectedAllRegister.map(n => n.id);
+      if(idsToDelete.length === 0) {
       return;
     }
 
@@ -136,18 +135,18 @@ export class TableComponent {
   cancel() {
     this.modalEye = false;
     this.selectedData = null;
-    this.activeIndex=0
+    this.activeIndex = 0
   }
 
   openModal(data: Persona) {
     this.selectedData = data;
-    console.log('ver mas',data)
+    console.log('ver mas', data)
     this.modalEye = true;
   }
 
   closeModal() {
     this.modalEye = false;
     this.selectedData = null;
-    this.activeIndex=0
+    this.activeIndex = 0
   }
 }
