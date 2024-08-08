@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { Nacionalidad } from '../../model/nacionalidad';
 import { NacionalidadService } from '../../service/nacionalidad.service';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { MessageService } from 'primeng/api';
+import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -12,8 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  mensagge: { message: string; messageError: { severity: string; summary: string; detail: string; }; } | undefined;
-  confirmDialog: any;
+  
 confirmDeleteSelectedNacionalidades() {
 throw new Error('Method not implemented.');
 }
@@ -24,6 +24,8 @@ throw new Error('Method not implemented.');
   @Output() selectedNacionalidad = new EventEmitter<Nacionalidad>();
   selectedNacionalidades: Nacionalidad[] = [];
   loading: boolean = false;
+  @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
+  mensagge: any;
 
   constructor(private nacionalidadService: NacionalidadService, private apiService: ApiService, private messageService: MessageService) {}
 
@@ -71,17 +73,18 @@ throw new Error('Method not implemented.');
       message: '¿Esta seguro que desea eliminar este registro?',
       messageError: { severity: 'warn', summary: 'Cancelado', detail: 'Acción de eliminado Cancelado' }
     }
-    this.confirmDialog?.confirm1(() =>{
-      
+    
+    this.confirmDialog?.confirm1(() =>{ 
+      this.nacionalidadService.deleteNacionalidad(id).subscribe(
+        () => {
+          this.nacionalidades = this.nacionalidades.filter(n => n.id !== id);
+        },
+        (error) => {
+          console.error('Error deleting nacionalidad:', error);
+        }
+      );
     },this.mensagge);
-    this.nacionalidadService.deleteNacionalidad(id).subscribe(
-      () => {
-        this.nacionalidades = this.nacionalidades.filter(n => n.id !== id);
-      },
-      (error) => {
-        console.error('Error deleting nacionalidad:', error);
-      }
-    );
+    
   }
 
   deleteSelectedNacionalidad(): void {
