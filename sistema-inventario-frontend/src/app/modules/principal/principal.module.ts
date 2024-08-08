@@ -29,6 +29,7 @@ import { TableComponent } from './componentes/nacionalidad/table/table.component
 import { FormComponent } from './componentes/nacionalidad/form/form.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from "../../shared/card/card.module";
+import { GlobalConfirmDialogModule } from "../../shared/global-confirm-dialog/global-confirm-dialog.module";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { CardModule } from "../../shared/card/card.module";
     DividerModule,
     TableModule,
     InputNumberModule,
-    CardModule
+    CardModule,
+    GlobalConfirmDialogModule
 ]
 })
 export class PrincipalModule { }

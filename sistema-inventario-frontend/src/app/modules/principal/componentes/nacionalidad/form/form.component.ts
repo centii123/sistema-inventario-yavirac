@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Nacionalidad } from '../../model/nacionalidad';
 import { NacionalidadService } from '../../service/nacionalidad.service';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private nacionalidadService: NacionalidadService
+    private nacionalidadService: NacionalidadService,
+    private messageService: MessageService
   ) {
     this.formNacionalidad = this.initForm();
   }
@@ -90,6 +92,7 @@ export class FormComponent implements OnInit {
           this.message = 'Nacionalidad creada correctamente';
           this.resetForm();
           this.loadNacionalidades();
+          this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
         },
         error: error => {
           this.message = `Error: ${error.message}`;
