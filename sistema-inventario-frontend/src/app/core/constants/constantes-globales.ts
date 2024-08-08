@@ -25,3 +25,32 @@ export const provincias:any[]=[
     {data: "Tungurahua", value: 23},
     {data: "Zamora Chinchipe", value: 24}
 ]
+
+export interface Grado {
+    value: number;
+    data: string;
+  }
+
+  export const grado: Grado[] = [
+    { value: 1, data: '1' },
+    { value: 2, data: '2' },
+    { value: 3, data: '3' },
+    { value: 4, data: '4' },
+    { value: 5, data: '5' },
+    { value: 6, data: '6' },
+    { value: 7, data: '7' },
+    { value: 8, data: '8' },
+    { value: 9, data: '9' },
+    { value: 10, data: '10' },
+    { value: 11, data: '11' },
+    { value: 12, data: '12' },
+    { value: 13, data: '13' },
+    { value: 14, data: '14' },
+    { value: 15, data: '15' },
+    { value: 16, data: '16' },
+    { value: 17, data: '17' },
+    { value: 18, data: '18' },
+    { value: 19, data: '19' },
+    { value: 20, data: '20' },
+  ];
+  

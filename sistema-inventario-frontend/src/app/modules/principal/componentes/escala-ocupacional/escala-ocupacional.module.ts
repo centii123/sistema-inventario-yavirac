@@ -5,6 +5,8 @@ import { CrudService } from '../service/crud.service';
 import { CrudModules } from 'src/app/core/global-modules/crud-Modules.module';
 import { CrudFuncionalidadFormService } from '../service/crud-funcionalidad-Form.service';
 import { EscalaOcupacionalRoutingModule } from './escala-ocupacional-routing.module';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { EscalaOcupacionalRoutingModule } from './escala-ocupacional-routing.mod
   ],
   imports: [
     EscalaOcupacionalRoutingModule,
-    ...CrudModules
+    ...CrudModules,
+    DropdownModule,
+    InputNumberModule
   ],
   providers: [
     CrudService, { provide: 'url', useValue: 'escala-ocupacional/' },

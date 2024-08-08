@@ -4,6 +4,7 @@ import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
 import { Provincias } from '../../model/provincia';
+import { EscalaOcupacional } from '../../model/escala-ocupacionales';
 
 @Component({
   selector: 'app-table',
@@ -11,9 +12,9 @@ import { Provincias } from '../../model/provincia';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  @Input() list: Provincias[] = [];
-  @Output() selectedOneRegister = new EventEmitter<Provincias>();
-  selectedAllRegister: Provincias[] = [];
+  @Input() list: EscalaOcupacional[] = [];
+  @Output() selectedOneRegister = new EventEmitter<EscalaOcupacional>();
+  selectedAllRegister: EscalaOcupacional[] = [];
   loading: boolean = false;
 
   constructor(private crudService: CrudService, private apiService: ApiService) { }
@@ -25,7 +26,7 @@ export class TableComponent implements OnInit {
   getAllRegister(): void {
     this.loading = true;
     this.crudService.getAll().subscribe(
-      (data: Provincias[]) => {
+      (data: EscalaOcupacional[]) => {
         this.list = data;
         this.loading = false;
       },
@@ -52,7 +53,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  edit(register: Provincias): void {
+  edit(register: EscalaOcupacional): void {
     this.selectedOneRegister.emit(register);
   }
 
