@@ -31,6 +31,7 @@ export class FormComponent implements OnInit {
   formSelectDataCarreras!: any[];
   formSelectDataProvincia!: any[];
   formSelectDataRolesInstitucionales!: any[];
+  
   formSelectData={
     tipoDeSangreOptions:TipoDeSangre,
     modalidadJornadaOptions : modalidadJornada,

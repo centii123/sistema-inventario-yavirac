@@ -36,6 +36,14 @@
                   </span>
 
                   <span class="p-float-label mb-4">
+                    <p-dropdown formControlName="provincias" placeholder="* Provincias"
+                        [options]="formSelectDataProvincia" [filter]="true"
+                        filterBy="data" optionLabel="data" optionValue="value">
+                    </p-dropdown>
+                    <label for="ftxt-provincia">* Provincias</label>
+                  </span>
+
+                  <span class="p-float-label mb-4">
                     <input
                       pInputText
                       id="ftxt-coordinacionZonal"
@@ -63,19 +71,6 @@
                 </div>
                 <div class="col">
                   <span class="p-float-label mb-4">
-                    <p-dropdown
-                      formControlName="provincias"
-                      placeholder="provincias"
-                      [options]="formSelectData.provincia"
-                      [filter]="true"
-                      filterBy="descripcion"
-                      [showClear]="true"
-                      optionLabel="descripcion"
-                    >
-                    </p-dropdown>
-                    <label for="ftxt-provincias">Provincias</label>
-                  </span>
-                  <span class="p-float-label mb-4">
                     <input
                       pInputText
                       id="ftxt-nombre"
@@ -94,7 +89,7 @@
                       formControlName="regimenLaboral"
                       required
                     />
-                    <label for="ftxt-regimenLaboral">* Regimen Laboralt</label>
+                    <label for="ftxt-regimenLaboral">* Regimen Laboral</label>
                   </span>
                 </div>
               </div>

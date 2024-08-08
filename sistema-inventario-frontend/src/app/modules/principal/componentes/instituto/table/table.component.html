@@ -177,7 +177,7 @@
             <td>{{ data.canton }}</td>
             <td>{{ data.direccionInstituto }}</td>
             <td>{{ data.regimenLaboral }}</td>
-            <td>{{ data.provincias?.descripcion || "sin provincia" }}</td>
+            <td>{{ data.provincias | provincias}}</td>
             <td>
               <button
                 pButton
@@ -281,7 +281,7 @@
       >
         <div class="me-auto overflow-hidden text-wrap">
           <div class="fw-bold">Provincias:</div>
-          <p>{{ selectedData.provincias.descripcion }}</p>
+          <p>{{ selectedData.provincias | provincias }}</p>
         </div>
       </li>
     </ul>
