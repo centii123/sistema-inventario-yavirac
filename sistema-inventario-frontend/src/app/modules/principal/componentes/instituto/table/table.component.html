@@ -85,17 +85,6 @@
             <th style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="id">
-              <div class="flex justify-content-between align-items-center">
-                <span style="font-weight: bold">&#8470;</span>
-                <p-sortIcon field="id"></p-sortIcon>
-                <p-columnFilter
-                  type="text"
-                  field="id"
-                  display="menu"
-                ></p-columnFilter>
-              </div>
-            </th>
             <th pSortableColumn="nombre">
               <div class="flex justify-content-between align-items-center">
                 Instituto
@@ -118,17 +107,7 @@
                 ></p-columnFilter>
               </div>
             </th>
-            <th pSortableColumn="canton">
-              <div class="flex justify-content-between align-items-center">
-                Canton
-                <p-sortIcon field="canton"></p-sortIcon>
-                <p-columnFilter
-                  type="text"
-                  field="canton"
-                  display="menu"
-                ></p-columnFilter>
-              </div>
-            </th>
+          
             <th pSortableColumn="direccionInstituto">
               <div class="flex justify-content-between align-items-center">
                 Direccion Instituto
@@ -136,17 +115,6 @@
                 <p-columnFilter
                   type="text"
                   field="direccionInstituto"
-                  display="menu"
-                ></p-columnFilter>
-              </div>
-            </th>
-            <th pSortableColumn="regimenLaboral">
-              <div class="flex justify-content-between align-items-center">
-                Regimen Laboral
-                <p-sortIcon field="regimenLaboral"></p-sortIcon>
-                <p-columnFilter
-                  type="text"
-                  field="regimenLaboral"
                   display="menu"
                 ></p-columnFilter>
               </div>
@@ -171,12 +139,9 @@
             <td>
               <p-tableCheckbox [value]="data"></p-tableCheckbox>
             </td>
-            <td>{{ rowIndex + 1 }}</td>
             <td>{{ data.nombre }}</td>
             <td>{{ data.coordinacionZonal }}</td>
-            <td>{{ data.canton }}</td>
             <td>{{ data.direccionInstituto }}</td>
-            <td>{{ data.regimenLaboral }}</td>
             <td>{{ data.provincias | provincias}}</td>
             <td>
               <button
