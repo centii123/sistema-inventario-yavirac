@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
 import { Bienes } from '../../model/bienes';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 interface formSelectData {
   categoria: any[],
@@ -39,6 +40,8 @@ export class FormComponent implements OnInit {
     infraestructura: []
   };
   infraestructuraId?: number | null;
+
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -106,16 +109,35 @@ export class FormComponent implements OnInit {
 
   load() {
     this.loadingSpiner = true;
-    this.crudService.getAll().subscribe({
-      next: (data: Bienes[]) => {
-        this.list = data;
-        this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
-        this.loadingSpiner = false;
-      },
-      error: error => {
-        this.loadingSpiner = false;
-      }
-    });
+    if(typeof this.infraestructuraId == 'number'){
+      this.subscriptions.add(
+        this.bienesService.getBienesByInfraestructuraId(this.infraestructuraId).subscribe(
+          (data) => {
+            console.log(data);
+            this.list = data;
+            this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
+            this.loadingSpiner = false;
+          },
+          (error) => {
+            console.error('Error al obtener bienes:', error);
+            this.loadingSpiner = false;
+          }
+        )      
+      );
+    }else{
+      this.crudService.getAll().subscribe({
+        next: (data: Bienes[]) => {
+          this.list = data;
+          this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
+          this.loadingSpiner = false;
+        },
+        error: error => {
+          this.loadingSpiner = false;
+        }
+      });
+    }
+    
+    
   }
 
   setSeleccionado(registro: Bienes) {
