@@ -35,11 +35,12 @@
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
               <div class="d-flex">
                 <div class="col me-3">
-                  <span class="p-float-label mb-4">
-                    <input pInputText id="ftxt-remuneracion" type="number" formControlName="remuneracion" required />
-                    <label for="ftxt-remuneracion">* Remuneración</label>
-                  </span>
-                </div>
+                <span class="p-float-label mb-4">
+                  <p-inputNumber formControlName="remuneracion" [showButtons]="true" inputId="valor"
+                      mode="currency" currency="USD"> </p-inputNumber>
+                  <label for="ftxt-valor">* Remuneración</label>
+                </span>
+               </div>
               </div>
             </div>
           </div>

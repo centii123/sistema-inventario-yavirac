@@ -1,10 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { forkJoin } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
 import { Provincias } from '../../model/provincia';
 import { EscalaOcupacional } from '../../model/escala-ocupacionales';
+import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-table',
@@ -16,8 +18,10 @@ export class TableComponent implements OnInit {
   @Output() selectedOneRegister = new EventEmitter<EscalaOcupacional>();
   selectedAllRegister: EscalaOcupacional[] = [];
   loading: boolean = false;
+  @ViewChild(GlobalConfirmDialogComponent) confirmDialog?: GlobalConfirmDialogComponent;
+  mensagge: any;
 
-  constructor(private crudService: CrudService, private apiService: ApiService) { }
+  constructor(private crudService: CrudService, private apiService: ApiService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getAllRegister();
@@ -58,6 +62,11 @@ export class TableComponent implements OnInit {
   }
 
   deleteRegister(id: number): void {
+    this.mensagge = {
+      message: '¿Esta seguro que desea eliminar este registro?',
+      messageError: { severity: 'warn', summary: 'Cancelado', detail: 'Acción de eliminado Cancelado' }
+    }
+    this.confirmDialog?.confirm1(() => {
     this.crudService.delete(id).subscribe(
       () => {
         this.list = this.list.filter(n => n.id !== id);
@@ -65,7 +74,7 @@ export class TableComponent implements OnInit {
       (error) => {
         console.error('Error deleting nacionalidad:', error);
       }
-    );
+    );}, this.mensagge);
   }
 
   deleteSelected(): void {
