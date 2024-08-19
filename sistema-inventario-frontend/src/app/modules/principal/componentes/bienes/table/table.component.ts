@@ -36,8 +36,8 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.route.paramMap.subscribe(params => {
-        const infraestructuraId = +params.get('id')!; 
+      this.route.queryParams.subscribe(params => {
+        const infraestructuraId = params['infraestructura'];; 
         if (infraestructuraId) {
           this.getBienesByInfraestructuraId(infraestructuraId);
         }

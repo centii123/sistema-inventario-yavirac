@@ -39,9 +39,7 @@ export class FormComponent implements OnInit {
     categoria: [],
     infraestructura: []
   };
-  infraestructuraId?: number | null;
-
-  private subscriptions: Subscription = new Subscription();
+  infraestructuraId?:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,32 +54,14 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
+    this.route.queryParams.subscribe(params => {
+      const id = params['infraestructura'];
       this.infraestructuraId = id ? +id : null;
-      //this.infraestructuraId = +params.get('id')!;
-      if (this.infraestructuraId) {
-        this.bienesService.getBienesByInfraestructuraId(this.infraestructuraId).subscribe({
-          next: (data: Bienes[]) => {
-            console.log('Datos recibidos:', data);
-            this.list = data;
-            if (data.length > 0 && data[0].infraestructura) {
-              let persona= data[0].infraestructura.persona?.nombres ? data[0].infraestructura.persona.nombres : "sin custodio"
-              this.infraestructuraName = this.sanitizer.bypassSecurityTrustHtml(
-                'Bienes de la Infraestructura: ' + data[0].infraestructura.nombre +
-                '<div style="text-align: left;">Custodio: ' + persona + '</div>'
-              );
-              console.log(this.infraestructuraName);
-            } else {
-              this.infraestructuraName = 'Nombre de infraestructura no disponible';
-            }
-          },
-          error: error => {
-            console.error('Error al obtener bienes:', error);
-          }
-        });
+      if (params['infraestructura']) {
+        this.load(id)
       } else {
         this.infraestructuraName = 'Todos los bienes';
+        this.load()
       }
     });
   }
@@ -107,24 +87,9 @@ export class FormComponent implements OnInit {
     });
   }
 
-  load() {
+  load(id=null) {
     this.loadingSpiner = true;
-    if(typeof this.infraestructuraId == 'number'){
-      this.subscriptions.add(
-        this.bienesService.getBienesByInfraestructuraId(this.infraestructuraId).subscribe(
-          (data) => {
-            console.log(data);
-            this.list = data;
-            this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
-            this.loadingSpiner = false;
-          },
-          (error) => {
-            console.error('Error al obtener bienes:', error);
-            this.loadingSpiner = false;
-          }
-        )      
-      );
-    }else{
+    if(id == null){
       this.crudService.getAll().subscribe({
         next: (data: Bienes[]) => {
           this.list = data;
@@ -135,6 +100,28 @@ export class FormComponent implements OnInit {
           this.loadingSpiner = false;
         }
       });
+    }else{
+      this.bienesService.getBienesByInfraestructuraId(id).subscribe(
+        (data) => {
+          this.list = data;
+          this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
+          if (data.length > 0 && data[0].infraestructura) {
+            let persona= data[0].infraestructura.persona?.nombres ? data[0].infraestructura.persona.nombres : "sin custodio"
+            this.infraestructuraName = this.sanitizer.bypassSecurityTrustHtml(
+              'Bienes de la Infraestructura: ' + data[0].infraestructura.nombre +
+              '<div style="text-align: left;">Custodio: ' + persona + '</div>'
+            );
+            console.log(this.infraestructuraName);
+          } else {
+            this.infraestructuraName = 'Nombre de infraestructura no disponible';
+          }
+          this.loadingSpiner = false;
+        },
+        (error) => {
+          console.error('Error al obtener bienes:', error);
+          this.loadingSpiner = false;
+        }
+      ) 
     }
     
     
@@ -180,7 +167,7 @@ export class FormComponent implements OnInit {
       this.crudService.update(registro).subscribe({
         next: () => {
           this.resetForm();
-          this.load();
+          this.load(this.infraestructuraId);
           this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Registro actualizado exitosamente!' });
         },
         error: error => {
@@ -191,7 +178,7 @@ export class FormComponent implements OnInit {
       this.crudService.add(registro).subscribe({
         next: () => {
           this.resetForm();
-          this.load();
+          this.load(this.infraestructuraId);
           this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
         },
         error: error => {
