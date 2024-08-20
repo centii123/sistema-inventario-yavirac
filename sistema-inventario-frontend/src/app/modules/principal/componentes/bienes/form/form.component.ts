@@ -33,7 +33,8 @@ export class FormComponent implements OnInit {
     { label: 'Usado', value: 2 },
     { label: 'Dañado', value: 3 },
     { label: 'Reparado', value: 4 },
-    { label: 'Mantenimiento', value: 5 }
+    { label: 'Mantenimiento', value: 5 },
+    { label: 'Dado de baja', value: 6 }
   ];
   formSelectData: formSelectData = {
     categoria: [],
