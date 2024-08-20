@@ -50,6 +50,14 @@ export class FormComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {
     this.form = this.initForm();
+    this.form.get('valor')?.valueChanges.subscribe(valor => {
+      const iva = this.calculateIVA(valor); // Implementa la lógica de cálculo de IVA
+      this.form.get('valorIva')?.setValue(iva);
+    });
+  }
+
+  calculateIVA(valor: number): number {
+    return valor * 1.15;
   }
 
   ngOnInit(): void {
@@ -80,7 +88,7 @@ export class FormComponent implements OnInit {
       estado: new FormControl(1, [Validators.required]),
       observaciones: new FormControl('', [Validators.required]),
       valor: new FormControl('', [Validators.required]),
-      valorIva: new FormControl('', [Validators.required]),
+      valorIva: new FormControl(''),
       serie: new FormControl('', [Validators.required]),
       categoriaBien: new FormControl('', [Validators.required]),
       infraestructura: new FormControl(null)

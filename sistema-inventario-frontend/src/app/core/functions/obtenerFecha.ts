@@ -6,6 +6,8 @@ export function obtenerFecha(fechaISO: any): string {
         } else {
             return fechaISO;
         }
+    }else if(fechaISO == null) {
+        return 'sin fecha'
     }else{
         return 'sin fecha'
     }

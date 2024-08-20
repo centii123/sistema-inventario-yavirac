@@ -32,17 +32,48 @@
                                                 <label for="ftxt-apellidos">* Apellidos</label>
                                             </span>
 
-                                            <span class="p-float-label mb-4">
+                                            <span class="p-float-label" style="margin-bottom: 11px;">
                                                 <input pInputText id="ftxt-etnia" type="text" formControlName="etnia"
                                                     required>
                                                 <label for="ftxt-etnia">* Etnia</label>
                                             </span>
+                                            <div class="mb-4" formGroupName="FechaForm">
+                                                <small>* Fecha de Nacimiento</small>
+                                                <div class="d-flex">
+                                                    <span class="p-float-label me-2">
+                                                        <select class="form-select" formControlName="dia" aria-label="Default select example">
+                                                            <option value="0">Dia</option>
+                                                            <ng-container *ngFor="let item of dias; let i = index">
+                                                                <option value="{{item}}">{{ item }}</option>
+                                                            </ng-container>
+                                                        </select>
+                                                    </span>
+                                                    <span class="p-float-label me-2">
+                                                        <select class="form-select" formControlName="mes" aria-label="Default select example">
+                                                            <option value="0">Mes</option>
+                                                            <ng-container *ngFor="let item of meses; let i = index">
+                                                                <option value="{{item.value}}">{{ item.data }}</option>
+                                                            </ng-container>
+                                                        </select>
+                                                    </span>
+                                                    <span class="p-float-label me-2">
+                                                        <select class="form-select" formControlName="year" aria-label="Default select example">
+                                                            <option value="0">Año</option>
+                                                            <ng-container *ngFor="let item of years; let i = index">
+                                                                <option value="{{item}}">{{ item }}</option>
+                                                            </ng-container>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                                
+                                            </div>
 
-                                            <span class="p-float-label mb-4">
+                                            <!-- <span class="p-float-label mb-4">
                                                 <input pInputText id="ftxt-fechaDeNacimiento" type="date"
                                                     formControlName="fechaDeNacimiento" required>
                                                 <label for="ftxt-fecha_de_inicio">* Fecha de Nacimiento</label>
-                                            </span>
+                                            </span> -->
+
 
                                             <span class="p-float-label mb-4">
                                                 <p-inputMask id="ftxt-dni" mask="999999999-9" formControlName="dni"
