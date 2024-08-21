@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CrudService } from '../../service/crud.service';
 import { MessageService } from 'primeng/api';
 import { Persona,} from '../../model/persona';
-import { affirmation, estadoCivil, genero, intruccionFormal, modalidadJornada, TipoDeSangre } from '../constants/constantes-persona';
+import { affirmation, estadoCivil, genero, intruccionFormal, meses, modalidadJornada, TipoDeSangre } from '../constants/constantes-persona';
 import { provincias } from 'src/app/core/constants/constantes-globales';
 import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
 
@@ -45,6 +45,7 @@ export class FormComponent implements OnInit {
     intruccionFormalOption:intruccionFormal
   }
 
+
   tableForm:any={
     discapacidad: [],
     enfermedad_catastrofica: [],
@@ -52,6 +53,11 @@ export class FormComponent implements OnInit {
     estudios_en_curso: [],
     titulos: []
   };
+
+  dias:string[]=[]
+  years:number[]=[]
+  meses=meses
+  fechaActualEcuador:string=''
 
   tableFormDelete:any={
     discapacidad:[],
@@ -69,7 +75,10 @@ export class FormComponent implements OnInit {
     private crudService: CrudService,
     private messageService: MessageService
   ) {
+    this.diasForm()
+    this.fechaActual()
     this.form = this.initForm();
+
   }
 
   ngOnInit(): void {
@@ -78,6 +87,48 @@ export class FormComponent implements OnInit {
 
   get f() {
     return this.form.controls;
+  }
+
+  diasForm(){
+    for (let index = 1; index <= 31; index++) {
+      if(String(index).length == 1){
+        this.dias.push(`0${index}`)
+      }else{
+        this.dias.push(`${index}`)
+      }
+      
+      
+    }
+  }
+
+  fechaActual(){
+    const fechaActual = new Date();
+
+    const opciones: Intl.DateTimeFormatOptions = {
+      timeZone: 'America/Guayaquil',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false 
+    };
+
+    const fechaEnEcuador = new Intl.DateTimeFormat('es-EC', opciones).format(fechaActual).split(",");
+    this.fechaActualEcuador=fechaEnEcuador[0]
+    const fechaActualYear=this.fechaActualEcuador.split("/")
+    this.ComprobacionMayorEdadForm(parseInt(fechaActualYear[2]))
+  }
+
+  ComprobacionMayorEdadForm(yearActual:number){
+    const comprobacion = yearActual - 18
+    const minYear= yearActual - 70
+    for (let index = minYear; index <= comprobacion; index++) {
+      this.years.push(index)
+    }
+    this.years=this.years.reverse()
+    
   }
 
   initForm(): FormGroup {
@@ -136,6 +187,11 @@ export class FormComponent implements OnInit {
         password: ['', Validators.required]
       }),
       personaForm: this.fb.group({
+        FechaForm: this.fb.group({
+          dia:new FormControl(1, [Validators.required]),
+          mes:new FormControl(1, [Validators.required]),
+          year:new FormControl(1, [Validators.required])
+        }),
         id: new FormControl(null),
         nombres: new FormControl('', [Validators.required]),
         apellidos: new FormControl('', [Validators.required]),
@@ -188,10 +244,16 @@ export class FormComponent implements OnInit {
     this.tableForm.familiar_Labora_otra_Entidad_Publica = Array.isArray(registro.familiarLaboraotraEntidadPublica) ? [...registro.familiarLaboraotraEntidadPublica] : [];
     this.tableForm.estudios_en_curso = Array.isArray(registro.estudiosenCursos) ? [...registro.estudiosenCursos] : [];
     this.tableForm.titulos = Array.isArray(registro.titulos) ? [...registro.titulos] : [];
-    
+    const fechaNacimiento=this.FechaOptener(registro.fechaDeNacimiento).split('-')
+    console.log(fechaNacimiento)
 
     this.form.patchValue({
       personaForm: {
+        FechaForm: {
+          dia: fechaNacimiento[2],
+          mes: fechaNacimiento[1],
+          year: Number(fechaNacimiento[0])
+        },
         id: registro.id,
         nombres: registro.nombres,
         apellidos: registro.apellidos,
@@ -262,6 +324,9 @@ export class FormComponent implements OnInit {
         data.personaForm.user = data.userForm.id ? { id: data.userForm.id } : null;
         data.userForm = { id: null, username: null, password: null };
       }
+
+      
+      data.personaForm.fechaDeNacimiento=`${data.personaForm.FechaForm.year}-${data.personaForm.FechaForm.mes}-${data.personaForm.FechaForm.dia}`;
   
       data.personaForm.carreras = { id: data.personaForm.carreras.id };
       data.personaForm.escalaOcupacionales = { id: data.personaForm.escalaOcupacionales.id };
@@ -274,7 +339,7 @@ export class FormComponent implements OnInit {
       data.familiaresForm = this.tableForm.familiar_Labora_otra_Entidad_Publica;
       data.estudiosenCursosForm = this.tableForm.estudios_en_curso;
       data.titulosForm = this.tableForm.titulos;
-  
+      console.log(data.personaForm)
       if (data.fechaIngresoForm && this.hasNonNullFields(data.fechaIngresoForm) && this.saveStatus) {
         const fechaIngresoResponse = await this.crudService.add(data.fechaIngresoForm, 'fecha-ingreso-instituto/').toPromise();
         data.personaForm.fechaIngresoInstituto = { id: fechaIngresoResponse.id };
@@ -316,14 +381,6 @@ export class FormComponent implements OnInit {
       if (data.familiaresForm.length > 0 && this.saveStatus) {
         await saveArray(data.familiaresForm, 'familiar-labora-otra-entidad-publica/');
       }
-
-      /*{
-    discapacidad:[],
-    enfermedad_catastrofica:[],
-    familiar_Labora_otra_Entidad_Publica:[],
-    estudios_en_curso:[],
-    titulos:[]
-  } */
 
       if(this.tableFormDelete.discapacidad.length > 0){
         this.deleteSelected('discapacidad','discapacidad/')
@@ -386,6 +443,15 @@ export class FormComponent implements OnInit {
     this.loadingSpinerForm = true;
     this.resetForm();
     this.loadDropdownData();
+    this.form.patchValue({
+      personaForm:{
+        FechaForm: {
+          dia: 0,
+          mes: 0,
+          year: 0
+        },
+      }
+    })
     this.modal = true;
   }
 

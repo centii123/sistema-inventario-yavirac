@@ -52,3 +52,18 @@ export const intruccionFormal: any[] = [
     { label: 'Educación de Cuarto Nivel - Maestría', value: 18 },
     { label: 'Educación de Cuarto Nivel - Doctorado (PhD)', value: 19 }
 ];
+
+export const meses: { value: string, data: string }[] = [
+    { value: '01', data: 'Enero' },
+    { value: '02', data: 'Febrero' },
+    { value: '03', data: 'Marzo' },
+    { value: '04', data: 'Abril' },
+    { value: '05', data: 'Mayo' },
+    { value: '06', data: 'Junio' },
+    { value: '07', data: 'Julio' },
+    { value: '08', data: 'Agosto' },
+    { value: '09', data: 'Septiembre' },
+    { value: '10', data: 'Octubre' },
+    { value: '11', data: 'Noviembre' },
+    { value: '12', data: 'Diciembre' },
+];
