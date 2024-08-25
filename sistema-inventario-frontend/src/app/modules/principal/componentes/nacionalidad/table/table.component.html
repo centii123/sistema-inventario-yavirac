@@ -9,18 +9,30 @@
         <ng-template pTemplate="caption">
           <div class="botones">
             <div>
+              <!-- Botón para exportar a Excel -->
               <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
                 class="p-button-sm p-button-outlined p-button-success p-mr-2 m-1" pTooltip="Exportar a Excel"
                 tooltipPosition="bottom"></button>
+              <!-- Botón para exportar a PDF -->
               <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
                 class="p-button-sm p-button-outlined p-button-danger p-mr-2 m-1" pTooltip="Exportar a PDF"
                 tooltipPosition="bottom"></button>
+              <!-- Botón para eliminar elementos seleccionados -->
               <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger p-button-sm m-1"
                 (click)="deleteSelectedNacionalidad()" pTooltip="Eliminar Seleccionados" tooltipPosition="right"
                 [disabled]="!selectedNacionalidades || !selectedNacionalidades.length"></button>
+              <!-- Botón para limpiar los filtros -->
               <button pButton label="Limpiar" class="p-button-outlined p-button-sm m-1" icon="pi pi-filter-slash"
                 (click)="clear(dt)" pTooltip="Quitar Filtros" tooltipPosition="right"></button>
+
+              <!-- Botón para cargar archivo Excel -->
+              <button pButton pRipple icon="pi pi-upload" label="Cargar a Excel" class="p-button-sm p-button-info m-1"
+                (click)="fileUpload.click()" pTooltip="Importar datos desde Excel" tooltipPosition="bottom"></button>
+              <!-- Input invisible para el archivo -->
+              <input type="file" #fileUpload accept=".xls,.xlsx" (change)="onFileChange($event)" style="display:none">
+
             </div>
+            <!-- Barra de búsqueda -->
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input pInputText type="text" class="p-inputtext-sm" (input)="applyFilter($event, dt)"
@@ -79,4 +91,3 @@
   </div>
 </section>
 <app-global-confirm-dialog></app-global-confirm-dialog>
-

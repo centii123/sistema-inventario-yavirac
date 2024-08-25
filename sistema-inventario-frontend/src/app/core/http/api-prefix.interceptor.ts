@@ -81,4 +81,40 @@ export class ApiService {
     });
     doc.save(`${fileName}.pdf`);
   }
+
+  // Método para importar datos desde Excel
+  importExcel(file: File, ruta: string): Observable<any> {
+    return new Observable<any>(observer => {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+          const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+          this.http.post(`${this.apiUrl}/${ruta}`, jsonData, {
+            headers: this.headers(),
+            responseType: 'text'
+          }).subscribe(
+            response => {
+              observer.next({ success: true, response });
+              observer.complete();
+            },
+            error => {
+              observer.error(error);
+            }
+          );
+        } catch (err) {
+          observer.error(err);
+        }
+      };
+
+      reader.onerror = (err) => observer.error(err); 
+      reader.readAsArrayBuffer(file); // Iniciar la lectura del archivo
+    });
+  }
+
+
 }

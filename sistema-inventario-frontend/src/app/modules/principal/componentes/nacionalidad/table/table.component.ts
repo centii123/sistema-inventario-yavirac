@@ -114,4 +114,31 @@ throw new Error('Method not implemented.');
     table.filterGlobal(inputElement.value, 'contains');
     this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado con exito!' });
   }
+
+ // Importar desde Excel
+ onFileChange(event: any): void {
+  const fileInput = event.target;
+  const file = fileInput.files[0];
+
+  if (file) {
+    const ruta = 'nacionalidad/import';
+
+    this.apiService.importExcel(file, ruta).subscribe(
+      (result) => {
+        this.getNacionalidades(); 
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos importados exitosamente' });
+
+        // Limpiador del input :)
+        fileInput.value = null;
+      },
+      (error) => {
+        console.error('Error importing Excel data:', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al importar datos' });
+      }
+    );
+  }
+}
+
+
+  
 }

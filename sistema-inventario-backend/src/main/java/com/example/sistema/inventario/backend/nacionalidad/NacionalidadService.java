@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class NacionalidadService {
@@ -13,7 +14,7 @@ public class NacionalidadService {
     @Autowired
     private NacionalidadRepository repository;
 
-    // Obtener todas las nacionalidades
+    // Obtener todas las nacionalidades activas (sin eliminación lógica)
     public ArrayList<Nacionalidad> getAll(){
         return (ArrayList<Nacionalidad>) repository.findAllActive();
     }
@@ -21,6 +22,12 @@ public class NacionalidadService {
     // Guardar una nueva nacionalidad
     public Nacionalidad save(Nacionalidad entity){
         return repository.save(entity);
+    }
+
+    // Guardar múltiples nacionalidades a la vez
+    @Transactional
+    public void saveAll(List<Nacionalidad> nacionalidades) {
+        repository.saveAll(nacionalidades);
     }
 
     // Eliminar nacionalidad por ID (eliminación lógica)

@@ -108,8 +108,10 @@ INSERT INTO authorities (name, endpoint) values ('institutos-eliminar', 'DELETE:
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-obtener', 'GET:/nacionalidad/');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-obtener-id', 'GET:/nacionalidad/{id}/');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-agregar', 'POST:/nacionalidad/');
+INSERT INTO authorities (name, endpoint) values ('nacionalidad-importar', 'POST:/nacionalidad-import');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-editar', 'PUT:/nacionalidad/{id}/');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-eliminar', 'DELETE:/nacionalidad/{id}/');
+
 
 /*permiso para persona*/
 INSERT INTO authorities (name, endpoint) values ('persona-obtener', 'GET:/persona/');
