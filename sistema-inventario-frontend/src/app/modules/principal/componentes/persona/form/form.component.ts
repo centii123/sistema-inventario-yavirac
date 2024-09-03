@@ -493,6 +493,13 @@ export class FormComponent implements OnInit {
     if (this.selected === null) {
       this.form.reset();
       this.resetFileInput();
+      const img = this.previewImage.nativeElement;
+    console.log(img)
+    if (img) {
+      img.src = "/assets/img/usuario.png";
+      console.log(img.src)
+      img.style.display = 'block';
+    }
     }
   }
 
