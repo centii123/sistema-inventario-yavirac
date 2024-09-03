@@ -1,12 +1,18 @@
 package com.example.sistema.inventario.backend.Persona;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.sistema.inventario.backend.FechaIngresoInstituto.FechaIngresoInstitutoService;
 import com.example.sistema.inventario.backend.authz.service.UserService;
@@ -16,6 +22,10 @@ import com.example.sistema.inventario.backend.entidadPublica.EntidadPublicaServi
 
 @Service
 public class PersonaService {
+
+    private static final String UPLOAD_DIR = "uploads/images/";
+    private static final long MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
     @Autowired
     PersonaRepository repository;
 
@@ -39,9 +49,40 @@ public class PersonaService {
         return repository.findAllActive();
     }
 
-    // Guardar una nueva persona
-    public Persona save(Persona entity) {
+    // Guardar una nueva persona con imagen
+    public Persona save(Persona entity, MultipartFile imageFile) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // Validar tamaño de archivo
+            if (imageFile.getSize() > MAX_FILE_SIZE) {
+                throw new IOException("Archivo demasiado grande. El tamaño máximo permitido es 5MB.");
+            }
+
+            // Validar tipo de archivo
+            String contentType = imageFile.getContentType();
+            if (!isImage(contentType)) {
+                throw new IOException("Tipo de archivo no soportado. Solo se permiten imágenes.");
+            }
+
+            // Generar un nombre único para el archivo
+            String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+            Path imagePath = Paths.get(UPLOAD_DIR + fileName);
+
+            // Crear directorio si no existe
+            Files.createDirectories(imagePath.getParent());
+
+            // Guardar la imagen en el directorio
+            Files.write(imagePath, imageFile.getBytes());
+
+            // Asignar la URL de la imagen a la entidad
+            String imageUrl = "http://localhost:8080/images/" + fileName; // Ruta accesible públicamente
+            entity.setImagen(imageUrl);
+        }
         return repository.save(entity);
+    }
+
+    // Método para verificar si el tipo de archivo es una imagen
+    private boolean isImage(String contentType) {
+        return contentType != null && (contentType.equals("image/png") || contentType.equals("image/jpeg") || contentType.equals("image/jpg") || contentType.equals("image/gif") || contentType.equals("image/webp"));
     }
 
     // Eliminar persona por ID (eliminación lógica)
@@ -68,26 +109,7 @@ public class PersonaService {
     @Async
     public void delete(long id) {
         Persona persona = this.findById(id);
-        /*if(persona.getDiscapacidad() != null | 
-        persona.getEnfermedadCatastrofica() != null |
-        persona.getEntidadPublica() != null |
-        persona.getFechaIngresoInstituto() != null |
-        persona.getUser() != null){
-            
-            Persona DataEliminar=this.findById(id);
-            persona.setDiscapacidad(null);
-            persona.setEnfermedadCatastrofica(null);
-            persona.setEntidadPublica(null);
-            persona.setFechaIngresoInstituto(null);
-            persona.setUser(null);
-            persona.setAula(null);
-            this.save(persona);
-            this.DiscapacidadService.deleteById(DataEliminar.getDiscapacidad().getId());
-            this.EnfermedadCatastroficaService.deleteById(DataEliminar.getEnfermedadCatastrofica().getId());
-            this.EntidadPublicaService.deleteById(DataEliminar.getEntidadPublica().getId());
-            this.FechaIngresoInstitutoService.deleteFechaIngresoInstituto(DataEliminar.getFechaIngresoInstituto().getId());
-            this.UserService.deleteById(DataEliminar.getUser().getId());
-        }*/
+        // Eliminar relaciones si existen
         this.deleteById(id);
     }
 }

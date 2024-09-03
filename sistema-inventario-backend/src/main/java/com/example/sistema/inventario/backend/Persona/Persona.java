@@ -95,6 +95,8 @@ public class Persona extends GlobalEntity{
     @Column(columnDefinition = "smallint")
     private Integer estadoCivil;
 
+    @Column(length = 255)
+    private String imagen;
 
     @JsonIgnoreProperties(value="persona", allowSetters = true)
     @OneToOne

@@ -108,7 +108,6 @@ INSERT INTO authorities (name, endpoint) values ('institutos-eliminar', 'DELETE:
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-obtener', 'GET:/nacionalidad/');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-obtener-id', 'GET:/nacionalidad/{id}/');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-agregar', 'POST:/nacionalidad/');
-INSERT INTO authorities (name, endpoint) values ('nacionalidad-importar', 'POST:/nacionalidad-import');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-editar', 'PUT:/nacionalidad/{id}/');
 INSERT INTO authorities (name, endpoint) values ('nacionalidad-eliminar', 'DELETE:/nacionalidad/{id}/');
 
@@ -252,9 +251,9 @@ INSERT INTO categorias_bienes ( nombre,created_at, updated_at ) VALUES ('CPU','2
 
 /**/
 INSERT INTO persona
-(created_at, updated_at, apellidos, correo_personal, direccion_domiciliaria, dni, estado_civil, etnia, fecha_de_nacimiento, genero, horario_trabajo, materias_imparte, modalidad_jornada, modalidad_laboral, nombres, provincia, telefono, telefono_domicilio, tipo_de_sangre, carreras_id, entidad_publica_id, escala_ocupacionales_id, fecha_ingreso_instituto_id, institutos_id, nacionalidad_id, roles_institucionales_id, user_id)
+(created_at, updated_at, apellidos, correo_personal, direccion_domiciliaria, dni, estado_civil, etnia, fecha_de_nacimiento, genero, horario_trabajo, materias_imparte, modalidad_jornada, modalidad_laboral, nombres, provincia, telefono, telefono_domicilio, tipo_de_sangre, carreras_id, entidad_publica_id, escala_ocupacionales_id, fecha_ingreso_instituto_id, institutos_id, nacionalidad_id, roles_institucionales_id, user_id, imagen)
 VALUES 
-('2024-08-03 10:00:00','2024-08-03 10:00:00','Pérez','juan.perez@example.com','Calle Falsa 123','12345678',1,'Mestizo','1990-01-01',1,'08:00-16:00','Matemáticas, Física',1,'Presencial','Juan',1,'0987654321','022345678',1,1,1,1,1,1,1,1,1
+('2024-08-03 10:00:00','2024-08-03 10:00:00','Pérez','juan.perez@example.com','Calle Falsa 123','12345678',1,'Mestizo','1990-01-01',1,'08:00-16:00','Matemáticas, Física',1,'Presencial','Juan',1,'0987654321','022345678',1,1,1,1,1,1,1,1,1, 'http://localhost:8080/images/bbbb.jpg'
 );
 
 

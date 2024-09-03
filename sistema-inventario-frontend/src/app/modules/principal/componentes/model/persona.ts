@@ -56,11 +56,12 @@ export interface Persona extends globalModels {
   horarioTrabajo: string;
   materiasImparte: string;
   rmu: number;
+  imagen: any;
 
   // FK
   escalaOcupacionales: any;
   estadoCivil: any;
-  
+
   genero: any;
   institutos: any;
   nacionalidad: any;

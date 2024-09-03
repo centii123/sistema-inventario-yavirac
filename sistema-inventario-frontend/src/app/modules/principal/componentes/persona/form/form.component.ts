@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { MessageService } from 'primeng/api';
-import { Persona,} from '../../model/persona';
+import { Persona, } from '../../model/persona';
 import { affirmation, estadoCivil, genero, intruccionFormal, meses, modalidadJornada, TipoDeSangre } from '../constants/constantes-persona';
 import { provincias } from 'src/app/core/constants/constantes-globales';
 import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
@@ -31,22 +31,23 @@ export class FormComponent implements OnInit {
   formSelectDataCarreras!: any[];
   formSelectDataProvincia!: any[];
   formSelectDataRolesInstitucionales!: any[];
-  
-  formSelectData={
-    tipoDeSangreOptions:TipoDeSangre,
-    modalidadJornadaOptions : modalidadJornada,
-    provinciasOptions:provincias,
-    generoOptions:genero,
-    estadoCivilOptions:estadoCivil,
-    entidadPublicaOptions:affirmation,
-    honorarioSenecsytOptions:affirmation,
-    familiarSenecsytOptions:affirmation,
-    cargoPersonaDiscapacidadOption:affirmation,
-    intruccionFormalOption:intruccionFormal
+  selectedImage: File | null = null;
+
+  formSelectData = {
+    tipoDeSangreOptions: TipoDeSangre,
+    modalidadJornadaOptions: modalidadJornada,
+    provinciasOptions: provincias,
+    generoOptions: genero,
+    estadoCivilOptions: estadoCivil,
+    entidadPublicaOptions: affirmation,
+    honorarioSenecsytOptions: affirmation,
+    familiarSenecsytOptions: affirmation,
+    cargoPersonaDiscapacidadOption: affirmation,
+    intruccionFormalOption: intruccionFormal
   }
 
 
-  tableForm:any={
+  tableForm: any = {
     discapacidad: [],
     enfermedad_catastrofica: [],
     familiar_Labora_otra_Entidad_Publica: [],
@@ -54,21 +55,21 @@ export class FormComponent implements OnInit {
     titulos: []
   };
 
-  dias:string[]=[]
-  years:number[]=[]
-  meses=meses
-  fechaActualEcuador:string=''
+  dias: string[] = []
+  years: number[] = []
+  meses = meses
+  fechaActualEcuador: string = ''
 
-  tableFormDelete:any={
-    discapacidad:[],
-    enfermedad_catastrofica:[],
-    familiar_Labora_otra_Entidad_Publica:[],
-    estudios_en_curso:[],
-    titulos:[]
+  tableFormDelete: any = {
+    discapacidad: [],
+    enfermedad_catastrofica: [],
+    familiar_Labora_otra_Entidad_Publica: [],
+    estudios_en_curso: [],
+    titulos: []
   }
   activeIndex: number = 0;
 
-  temporalDataAdd!:any;
+  temporalDataAdd!: any;
 
   constructor(
     private fb: FormBuilder,
@@ -89,19 +90,19 @@ export class FormComponent implements OnInit {
     return this.form.controls;
   }
 
-  diasForm(){
+  diasForm() {
     for (let index = 1; index <= 31; index++) {
-      if(String(index).length == 1){
+      if (String(index).length == 1) {
         this.dias.push(`0${index}`)
-      }else{
+      } else {
         this.dias.push(`${index}`)
       }
-      
-      
+
+
     }
   }
 
-  fechaActual(){
+  fechaActual() {
     const fechaActual = new Date();
 
     const opciones: Intl.DateTimeFormatOptions = {
@@ -112,29 +113,29 @@ export class FormComponent implements OnInit {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: false 
+      hour12: false
     };
 
     const fechaEnEcuador = new Intl.DateTimeFormat('es-EC', opciones).format(fechaActual).split(",");
-    this.fechaActualEcuador=fechaEnEcuador[0]
-    const fechaActualYear=this.fechaActualEcuador.split("/")
+    this.fechaActualEcuador = fechaEnEcuador[0]
+    const fechaActualYear = this.fechaActualEcuador.split("/")
     this.ComprobacionMayorEdadForm(parseInt(fechaActualYear[2]))
   }
 
-  ComprobacionMayorEdadForm(yearActual:number){
+  ComprobacionMayorEdadForm(yearActual: number) {
     const comprobacion = yearActual - 18
-    const minYear= yearActual - 70
+    const minYear = yearActual - 70
     for (let index = minYear; index <= comprobacion; index++) {
       this.years.push(index)
     }
-    this.years=this.years.reverse()
-    
+    this.years = this.years.reverse()
+
   }
 
   initForm(): FormGroup {
     return this.fb.group({
 
-      titulosForm:this.fb.group({
+      titulosForm: this.fb.group({
         id: new FormControl(null),
         titulosOptenidos: new FormControl(null),
         numeroDeRegistroSenesyt: new FormControl(null),
@@ -148,7 +149,7 @@ export class FormComponent implements OnInit {
         porcentaje: [0],
         tipoDiscapacidad: new FormControl(null)
       }),
-      estudiosenCursosForm:this.fb.group({
+      estudiosenCursosForm: this.fb.group({
         id: new FormControl(null),
         nombre: new FormControl(null),
         tipoDeTitulo: new FormControl(null),
@@ -188,9 +189,9 @@ export class FormComponent implements OnInit {
       }),
       personaForm: this.fb.group({
         FechaForm: this.fb.group({
-          dia:new FormControl(1, [Validators.required]),
-          mes:new FormControl(1, [Validators.required]),
-          year:new FormControl(1, [Validators.required])
+          dia: new FormControl(1, [Validators.required]),
+          mes: new FormControl(1, [Validators.required]),
+          year: new FormControl(1, [Validators.required])
         }),
         id: new FormControl(null),
         nombres: new FormControl('', [Validators.required]),
@@ -207,6 +208,7 @@ export class FormComponent implements OnInit {
         modalidadJornada: new FormControl('', [Validators.required]),
         horarioTrabajo: new FormControl('', [Validators.required]),
         materiasImparte: new FormControl('', [Validators.required]),
+        // iamgen: new FormControl(null),
         //muchos a uno
         escalaOcupacionales: new FormControl('', [Validators.required]),
         estadoCivil: new FormControl('', [Validators.required]),
@@ -216,6 +218,7 @@ export class FormComponent implements OnInit {
         carreras: new FormControl('', [Validators.required]),
         provincia: new FormControl('', [Validators.required]),
         rolesInstitucionales: new FormControl('', [Validators.required]),
+
       })
 
     });
@@ -236,7 +239,7 @@ export class FormComponent implements OnInit {
   }
 
   setSeleccionado(registro: Persona) {
-    console.log('registro',registro)
+    console.log('registro', registro)
     this.selected = registro;
     this.openModal();
     this.tableForm.discapacidad = Array.isArray(registro.discapacidad) ? [...registro.discapacidad] : [];
@@ -244,7 +247,7 @@ export class FormComponent implements OnInit {
     this.tableForm.familiar_Labora_otra_Entidad_Publica = Array.isArray(registro.familiarLaboraotraEntidadPublica) ? [...registro.familiarLaboraotraEntidadPublica] : [];
     this.tableForm.estudios_en_curso = Array.isArray(registro.estudiosenCursos) ? [...registro.estudiosenCursos] : [];
     this.tableForm.titulos = Array.isArray(registro.titulos) ? [...registro.titulos] : [];
-    const fechaNacimiento=this.FechaOptener(registro.fechaDeNacimiento).split('-')
+    const fechaNacimiento = this.FechaOptener(registro.fechaDeNacimiento).split('-')
     console.log(fechaNacimiento)
 
     this.form.patchValue({
@@ -284,39 +287,46 @@ export class FormComponent implements OnInit {
       enfermedadForm: registro.enfermedadCatastrofica,
       entidadPublicaForm: registro.entidadPublica,
       fechaIngresoForm: {
-        id:registro.fechaIngresoInstituto ? registro.fechaIngresoInstituto.id : null,
-        primerIngreso:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.primerIngreso): null,
-        cambioOcupacionalEmergencia:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioOcupacionalEmergencia): null,
-        cambioInstitutoFusion:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioInstitutoFusion): null,
-        cambioGrupoOcupacionalModalidad:registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioGrupoOcupacionalModalidad): null
+        id: registro.fechaIngresoInstituto ? registro.fechaIngresoInstituto.id : null,
+        primerIngreso: registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.primerIngreso) : null,
+        cambioOcupacionalEmergencia: registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioOcupacionalEmergencia) : null,
+        cambioInstitutoFusion: registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioInstitutoFusion) : null,
+        cambioGrupoOcupacionalModalidad: registro.fechaIngresoInstituto ? this.FechaOptener(registro.fechaIngresoInstituto.cambioGrupoOcupacionalModalidad) : null
       },//registro.fechaIngresoInstituto,
       userForm: registro.user
     });
   }
 
 
-  saveStatus=true;
+  saveStatus = true;
   hasNonNullFields(obj: any): boolean {
     if (!obj) return false;
     return Object.values(obj).some(value => value !== null && value !== undefined);
   }
-  
+
   async save() {
     try {
       let data = this.form.value;
+
+      // Elimina el campo 'FechaForm' después de usarlo para construir 'fechaDeNacimiento'
+      if (data.personaForm.FechaForm) {
+        data.personaForm.fechaDeNacimiento = `${data.personaForm.FechaForm.year}-${data.personaForm.FechaForm.mes}-${data.personaForm.FechaForm.dia}`;
+        delete data.personaForm.FechaForm; // Eliminamos el campo 'FechaForm'
+      }
+
       this.temporalDataAdd = {
         fechaIngresoForm: null,
         entidadPublicaForm: null,
         userForm: null,
         personaForm: null
       };
-  
+
       if (data.personaForm.id == null) {
         data.userForm = {
           username: data.personaForm.dni,
           password: data.personaForm.dni
         };
-  
+
         const userResponse = await this.crudService.add(data.userForm, 'api/user/').toPromise();
         this.temporalDataAdd.userForm = userResponse.id;
         data.personaForm.user = { id: this.temporalDataAdd.userForm };
@@ -325,93 +335,109 @@ export class FormComponent implements OnInit {
         data.userForm = { id: null, username: null, password: null };
       }
 
-      
-      data.personaForm.fechaDeNacimiento=`${data.personaForm.FechaForm.year}-${data.personaForm.FechaForm.mes}-${data.personaForm.FechaForm.dia}`;
-  
       data.personaForm.carreras = { id: data.personaForm.carreras.id };
       data.personaForm.escalaOcupacionales = { id: data.personaForm.escalaOcupacionales.id };
       data.personaForm.institutos = { id: data.personaForm.institutos.id };
       data.personaForm.nacionalidad = { id: data.personaForm.nacionalidad.id };
       data.personaForm.rolesInstitucionales = { id: data.personaForm.rolesInstitucionales.id };
-  
+
       data.discapacidadForm = this.tableForm.discapacidad;
       data.enfermedadCatastroficaForm = this.tableForm.enfermedad_catastrofica;
       data.familiaresForm = this.tableForm.familiar_Labora_otra_Entidad_Publica;
       data.estudiosenCursosForm = this.tableForm.estudios_en_curso;
       data.titulosForm = this.tableForm.titulos;
-      console.log(data.personaForm)
+
+      // Manejo de las relaciones uno a uno
       if (data.fechaIngresoForm && this.hasNonNullFields(data.fechaIngresoForm) && this.saveStatus) {
         const fechaIngresoResponse = await this.crudService.add(data.fechaIngresoForm, 'fecha-ingreso-instituto/').toPromise();
         data.personaForm.fechaIngresoInstituto = { id: fechaIngresoResponse.id };
       }
-  
+
       if (data.entidadPublicaForm && this.hasNonNullFields(data.entidadPublicaForm) && this.saveStatus) {
         const entidadPublicaResponse = await this.crudService.add(data.entidadPublicaForm, 'entidadPublica/').toPromise();
         data.personaForm.entidadPublica = { id: entidadPublicaResponse.id };
       }
-  
-      if (data.personaForm && this.hasNonNullFields(data.personaForm) && this.saveStatus) {
-        const personaResponse = await this.crudService.add(data.personaForm).toPromise();
-        this.temporalDataAdd.personaForm = personaResponse.id;
+
+      // Crear FormData y agregar el JSON de persona
+      const formData = new FormData();
+      formData.append('persona', JSON.stringify(data.personaForm));
+
+      // Agregar la imagen seleccionada al FormData
+      if (this.selectedImage) {
+        formData.append('image', this.selectedImage);
       }
 
+      formData.forEach((value, key) => {
+        console.log('datos  ' + key, value);
+      });
+
+      // Guardar persona
+      if (data.personaForm && this.hasNonNullFields(data.personaForm) && this.saveStatus) {
+        const personaResponse = await this.crudService.adds(formData, '').toPromise();
+        this.temporalDataAdd.personaForm = personaResponse.id;
+      }
+      this.resetFileInput();
       const saveArray = async (array: any[], endpoint: string) => {
         for (const item of array) {
           item.persona = { id: this.temporalDataAdd.personaForm };
           await this.crudService.add(item, endpoint).toPromise();
         }
       };
-  
+
+      // Guardar arrays relacionados (uno a muchos)
       if (data.enfermedadCatastroficaForm.length > 0 && this.saveStatus) {
         await saveArray(data.enfermedadCatastroficaForm, 'enfermedadCatastrofica/');
       }
-  
+
       if (data.discapacidadForm.length > 0 && this.saveStatus) {
         await saveArray(data.discapacidadForm, 'discapacidad/');
       }
-  
+
       if (data.estudiosenCursosForm.length > 0 && this.saveStatus) {
         await saveArray(data.estudiosenCursosForm, 'estudios-curso/');
       }
-  
+
       if (data.titulosForm.length > 0 && this.saveStatus) {
         await saveArray(data.titulosForm, 'titulos/');
       }
-  
+
       if (data.familiaresForm.length > 0 && this.saveStatus) {
         await saveArray(data.familiaresForm, 'familiar-labora-otra-entidad-publica/');
       }
 
-      if(this.tableFormDelete.discapacidad.length > 0){
-        this.deleteSelected('discapacidad','discapacidad/')
+      // Eliminar datos de tablas relacionados
+      if (this.tableFormDelete.discapacidad.length > 0) {
+        this.deleteSelected('discapacidad', 'discapacidad/');
       }
 
-      if(this.tableFormDelete.enfermedad_catastrofica.length > 0){
-        this.deleteSelected('enfermedad_catastrofica','enfermedadCatastrofica/')
+      if (this.tableFormDelete.enfermedad_catastrofica.length > 0) {
+        this.deleteSelected('enfermedad_catastrofica', 'enfermedadCatastrofica/');
       }
 
-      if(this.tableFormDelete.familiar_Labora_otra_Entidad_Publica.length > 0){
-        this.deleteSelected('familiar_Labora_otra_Entidad_Publica','familiar-labora-otra-entidad-publica/')
+      if (this.tableFormDelete.familiar_Labora_otra_Entidad_Publica.length > 0) {
+        this.deleteSelected('familiar_Labora_otra_Entidad_Publica', 'familiar-labora-otra-entidad-publica/');
       }
 
-      if(this.tableFormDelete.estudios_en_curso.length > 0){
-        this.deleteSelected('estudios_en_curso','estudios-curso/')
+      if (this.tableFormDelete.estudios_en_curso.length > 0) {
+        this.deleteSelected('estudios_en_curso', 'estudios-curso/');
       }
 
-      if(this.tableFormDelete.titulos.length > 0){
-        this.deleteSelected('titulos','titulos/')
+      if (this.tableFormDelete.titulos.length > 0) {
+        this.deleteSelected('titulos', 'titulos/');
       }
-  
+
       this.resetForm();
       this.load();
       this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Registro agregado exitosamente!' });
       this.modal = false;
-  
+
     } catch (error) {
       console.error('Error:', error);
       this.saveStatus = false;
     }
   }
+
+
 
 
   resetForm() {
@@ -422,18 +448,19 @@ export class FormComponent implements OnInit {
   cancel() {
     this.resetForm();
     this.modal = false;
-    this.activeIndex=0
-    this.visible={
-      discapacidad:false,
-      enfermedadCatastrofica:false,
-      familiar:false,
-      estudiosCurso:false,
-      titulos:false
+    this.activeIndex = 0
+    this.visible = {
+      discapacidad: false,
+      enfermedadCatastrofica: false,
+      familiar: false,
+      estudiosCurso: false,
+      titulos: false
     }
+    this.resetFileInput();
   }
 
   openModal() {
-    this.tableForm={
+    this.tableForm = {
       discapacidad: [],
       enfermedad_catastrofica: [],
       familiar_Labora_otra_Entidad_Publica: [],
@@ -444,7 +471,7 @@ export class FormComponent implements OnInit {
     this.resetForm();
     this.loadDropdownData();
     this.form.patchValue({
-      personaForm:{
+      personaForm: {
         FechaForm: {
           dia: 0,
           mes: 0,
@@ -453,6 +480,10 @@ export class FormComponent implements OnInit {
       }
     })
     this.modal = true;
+    if (this.selected === null) {
+      this.form.reset();
+      this.resetFileInput();
+  }
   }
 
   loadDropdownData() {
@@ -521,124 +552,142 @@ export class FormComponent implements OnInit {
   closeModal() {
     this.resetForm();
     this.modal = false;
-    this.activeIndex=0;
-    this.visible={
-      discapacidad:false,
-      enfermedadCatastrofica:false,
-      familiar:false,
-      estudiosCurso:false,
-      titulos:false
+    this.activeIndex = 0;
+    this.visible = {
+      discapacidad: false,
+      enfermedadCatastrofica: false,
+      familiar: false,
+      estudiosCurso: false,
+      titulos: false
+    }
+    this.resetFileInput();
+  }
+
+  visible: any = {
+    discapacidad: false,
+    enfermedadCatastrofica: false,
+    familiar: false,
+    estudiosCurso: false,
+    titulos: false
+  }
+  dataIndex: any = null;
+
+  showDialog(data: any) {
+    this.form.get('titulosForm')?.reset();
+    this.form.get('discapacidadForm')?.reset();
+    this.form.get('familiaresForm')?.reset();
+    this.form.get('estudiosenCursosForm')?.reset();
+    this.form.get('enfermedadCatastroficaForm')?.reset();
+    this.visible[data] = true;
+  }
+
+  saveTableForm(formSelectorTable: string, ValueFormData: any) {
+    console.log(formSelectorTable, ValueFormData)
+    if (typeof this.dataIndex === 'number') {
+      this.tableForm[formSelectorTable][this.dataIndex] = this.form.value[ValueFormData]
+      this.dataIndex = null
+    } else {
+      this.tableForm[formSelectorTable].push(this.form.value[ValueFormData])
+
+    }
+    this.visible = {
+      discapacidad: false,
+      enfermedadCatastrofica: false,
+      familiar: false,
+      estudiosCurso: false,
+      titulos: false
+    }
+
+  }
+
+  deleteSelected(tableForm: string, url: any): void {
+    const idsToDelete = this.tableFormDelete[tableForm].map((n: any) => n.id);
+    if (idsToDelete.length === 0) {
+      return;
+    }
+
+    const deleteObservables = idsToDelete.map((id: any) => this.crudService.delete(id, `${url}${'fisica/'}`));
+    deleteObservables.forEach((e: any) => {
+      e.subscribe(
+        () => {
+          this.list = this.list.filter(n => !idsToDelete.includes(n.id));
+          this.tableFormDelete[tableForm] = []
+        },
+        (error: any) => {
+          console.error('Error deleting:', error);
+        }
+      );
+    })
+
+    //forkJoin(deleteObservables)
+  }
+
+  deleteRegisterDiscapacidad(index: number, formSelectorTable: any) {
+    if (this.tableForm && this.tableForm[formSelectorTable]) {
+      if (this.tableForm[formSelectorTable][index].id) {
+        this.tableFormDelete[formSelectorTable].push(this.tableForm[formSelectorTable][index])
+      }
+      this.tableFormDelete[formSelectorTable].push
+      this.tableForm[formSelectorTable].splice(index, 1);
+    } else {
+      console.error('tableForm or formSelectorTable is undefined');
+    }
+
+  }
+
+  editDiscapacidad(data: any, index: number, dataDialog: any) {
+    this.dataIndex = index
+    this.showDialog(dataDialog)
+    this.form.patchValue({
+      discapacidadForm: {
+        id: data.id,
+        numeroCarnet: data.numeroCarnet,
+        porcentaje: data.porcentaje,
+        tipoDiscapacidad: data.tipoDiscapacidad
+      },
+      estudiosenCursosForm: {
+        id: data.id,
+        nombre: data.nombre,
+        tipoDeTitulo: data.tipoDeTitulo,
+        numeroDeHoras: data.numeroDeHoras,
+        fechaDeInicio: this.FechaOptener(data.fechaDeInicio),
+        fechaDeFin: this.FechaOptener(data.fechaDeFin),
+      },
+      enfermedadCatastroficaForm: {
+        id: data.id,
+        cargoPersonaDiscapacidad: data.cargoPersonaDiscapacidad,
+        institucionCertificaEnfermedad: data.institucionCertificaEnfermedad,
+        tipoEnfermedad: data.tipoEnfermedad
+      },
+      familiaresForm: {
+        id: data.id,
+        nombre: data.nombre,
+      },
+      titulosForm: {
+        id: data.id,
+        titulosOptenidos: data.titulosOptenidos,
+        numeroDeRegistroSenesyt: data.numeroDeRegistroSenesyt,
+        intruccionFormal: data.intruccionFormal,
+        institucion: data.institucion,
+        anoDelTitulo: this.FechaOptener(data.anoDelTitulo),
+      },
+    })
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedImage = input.files[0];
+      // Aquí puedes hacer algo más si es necesario, como mostrar una vista previa de la imagen
     }
   }
 
-visible: any={
-  discapacidad:false,
-  enfermedadCatastrofica:false,
-  familiar:false,
-  estudiosCurso:false,
-  titulos:false
+  resetFileInput() {
+    const fileInput = document.getElementById('image-upload') as HTMLInputElement;
+    if (fileInput) {
+        fileInput.value = '';
+    }
 }
-dataIndex:any=null;
 
-    showDialog(data:any) {
-      this.form.get('titulosForm')?.reset();
-      this.form.get('discapacidadForm')?.reset();
-      this.form.get('familiaresForm')?.reset();
-      this.form.get('estudiosenCursosForm')?.reset();
-      this.form.get('enfermedadCatastroficaForm')?.reset();
-      this.visible[data] = true;
-    }
-
-    saveTableForm(formSelectorTable:string,ValueFormData:any){
-      console.log( formSelectorTable,ValueFormData)
-      if(typeof this.dataIndex === 'number'){
-        this.tableForm[formSelectorTable][this.dataIndex]=this.form.value[ValueFormData]
-        this.dataIndex=null
-      }else{
-        this.tableForm[formSelectorTable].push(this.form.value[ValueFormData])
-        
-      }
-      this.visible={
-        discapacidad:false,
-        enfermedadCatastrofica:false,
-        familiar:false,
-        estudiosCurso:false,
-        titulos:false
-      }
-      
-    }
-
-    deleteSelected(tableForm:string,url:any): void {
-      const idsToDelete = this.tableFormDelete[tableForm].map((n:any) => n.id);
-      if (idsToDelete.length === 0) {
-        return;
-      }
   
-      const deleteObservables = idsToDelete.map((id:any) => this.crudService.delete(id,`${url}${'fisica/'}`));
-      deleteObservables.forEach((e:any) => {
-        e.subscribe(
-          () => {
-            this.list = this.list.filter(n => !idsToDelete.includes(n.id));
-            this.tableFormDelete[tableForm]=[]
-          },
-          (error:any) => {
-            console.error('Error deleting:', error);
-          }
-        );
-      })
-      
-      //forkJoin(deleteObservables)
-    }
-
-    deleteRegisterDiscapacidad(index:number,formSelectorTable:any){
-      if (this.tableForm && this.tableForm[formSelectorTable]) {
-        if(this.tableForm[formSelectorTable][index].id){
-          this.tableFormDelete[formSelectorTable].push(this.tableForm[formSelectorTable][index])
-        }
-        this.tableFormDelete[formSelectorTable].push
-        this.tableForm[formSelectorTable].splice(index, 1);
-      } else {
-        console.error('tableForm or formSelectorTable is undefined');
-      }
-
-    }
-
-    editDiscapacidad(data:any,index:number,dataDialog:any){
-      this.dataIndex=index
-      this.showDialog(dataDialog)
-      this.form.patchValue({
-        discapacidadForm:{
-          id: data.id,
-          numeroCarnet: data.numeroCarnet,
-          porcentaje: data.porcentaje,
-          tipoDiscapacidad: data.tipoDiscapacidad
-        },
-        estudiosenCursosForm:{
-          id: data.id,
-          nombre: data.nombre,
-          tipoDeTitulo: data.tipoDeTitulo,
-          numeroDeHoras: data.numeroDeHoras,
-          fechaDeInicio:this.FechaOptener(data.fechaDeInicio),
-          fechaDeFin: this.FechaOptener(data.fechaDeFin),
-        },
-        enfermedadCatastroficaForm:{
-          id: data.id,
-          cargoPersonaDiscapacidad: data.cargoPersonaDiscapacidad,
-          institucionCertificaEnfermedad:data.institucionCertificaEnfermedad,
-          tipoEnfermedad: data.tipoEnfermedad
-        },
-        familiaresForm:{
-          id: data.id,
-          nombre: data.nombre,
-        },
-        titulosForm:{
-          id: data.id,
-          titulosOptenidos: data.titulosOptenidos,
-          numeroDeRegistroSenesyt: data.numeroDeRegistroSenesyt,
-          intruccionFormal: data.intruccionFormal,
-          institucion: data.institucion,
-          anoDelTitulo:this.FechaOptener(data.anoDelTitulo),
-        },
-      })
-    }
 }

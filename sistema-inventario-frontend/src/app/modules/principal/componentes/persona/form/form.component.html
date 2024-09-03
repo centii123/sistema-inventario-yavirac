@@ -14,12 +14,18 @@
             <form [formGroup]="form" class="custom-form">
                 <app-spinner [load]="loadingSpinerForm">
                     <div class="p-fluid p-formgrid grid custom-form-grid">
-                        <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3" >
+                        <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                             <p-tabView [(activeIndex)]="activeIndex">
                                 <p-tabPanel header="Docente" formGroupName="personaForm">
                                     <!--Persona-->
                                     <div class="row mt-3">
                                         <div class="col me-3 ">
+                                            <!-- Campo para subir la imagen -->
+                                            <span class="p-float-label mb-4">
+                                                <input id="image-upload" type="file" accept="image/*"
+                                                       (change)="onFileSelected($event)" />
+                                                <label for="image-upload"></label>
+                                            </span> 
                                             <span class="p-float-label mb-4">
                                                 <input pInputText id="ftxt-nombres" type="text"
                                                     formControlName="nombres" required>
@@ -41,7 +47,8 @@
                                                 <small>* Fecha de Nacimiento</small>
                                                 <div class="d-flex">
                                                     <span class="p-float-label me-2">
-                                                        <select class="form-select" formControlName="dia" aria-label="Default select example">
+                                                        <select class="form-select" formControlName="dia"
+                                                            aria-label="Default select example">
                                                             <option value="0">Dia</option>
                                                             <ng-container *ngFor="let item of dias; let i = index">
                                                                 <option value="{{item}}">{{ item }}</option>
@@ -49,7 +56,8 @@
                                                         </select>
                                                     </span>
                                                     <span class="p-float-label me-2">
-                                                        <select class="form-select" formControlName="mes" aria-label="Default select example">
+                                                        <select class="form-select" formControlName="mes"
+                                                            aria-label="Default select example">
                                                             <option value="0">Mes</option>
                                                             <ng-container *ngFor="let item of meses; let i = index">
                                                                 <option value="{{item.value}}">{{ item.data }}</option>
@@ -57,7 +65,8 @@
                                                         </select>
                                                     </span>
                                                     <span class="p-float-label me-2">
-                                                        <select class="form-select" formControlName="year" aria-label="Default select example">
+                                                        <select class="form-select" formControlName="year"
+                                                            aria-label="Default select example">
                                                             <option value="0">Año</option>
                                                             <ng-container *ngFor="let item of years; let i = index">
                                                                 <option value="{{item}}">{{ item }}</option>
@@ -65,7 +74,7 @@
                                                         </select>
                                                     </span>
                                                 </div>
-                                                
+
                                             </div>
 
                                             <!-- <span class="p-float-label mb-4">
@@ -134,7 +143,8 @@
                                             </span>
 
                                             <span class="p-float-label mb-4">
-                                                <p-inputMask mask="99:99 99:99" formControlName="horarioTrabajo" id="ftxt-horarioTrabajo"></p-inputMask>
+                                                <p-inputMask mask="99:99 99:99" formControlName="horarioTrabajo"
+                                                    id="ftxt-horarioTrabajo"></p-inputMask>
                                                 <label for="ftxt-horarioTrabajo">* Horario de trabajo</label>
                                             </span>
 
@@ -299,7 +309,8 @@
                                         [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
                                         <ng-template pTemplate="caption">
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-primary" (click)="showDialog('titulos')">Agregar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="showDialog('titulos')">Agregar</button>
                                             </div>
                                         </ng-template>
                                         <ng-template pTemplate="header">
@@ -322,7 +333,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'titulos')" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'titulos')"
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -335,7 +346,8 @@
                                         [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
                                         <ng-template pTemplate="caption">
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-primary" (click)="showDialog('discapacidad')">Agregar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="showDialog('discapacidad')">Agregar</button>
                                             </div>
                                         </ng-template>
                                         <ng-template pTemplate="header">
@@ -358,7 +370,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'discapacidad')" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'discapacidad')"
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -367,11 +379,13 @@
                                 </p-tabPanel>
 
                                 <p-tabPanel header="Enfermedad Catastrofica" formGroupName="discapacidadForm">
-                                    <p-table [value]="tableForm.enfermedad_catastrofica" styleClass="p-datatable-gridlines"
-                                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                                    <p-table [value]="tableForm.enfermedad_catastrofica"
+                                        styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }"
+                                        [ngStyle]="{ 'zoom': '0.70' }">
                                         <ng-template pTemplate="caption">
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-primary" (click)="showDialog('enfermedadCatastrofica')">Agregar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="showDialog('enfermedadCatastrofica')">Agregar</button>
                                             </div>
                                         </ng-template>
                                         <ng-template pTemplate="header">
@@ -386,7 +400,9 @@
                                             <tr>
                                                 <td>{{ data.tipoEnfermedad }}</td>
                                                 <td>{{ data.institucionCertificaEnfermedad }}</td>
-                                                <td>{{ data.cargoPersonaDiscapacidad == 1 ? 'Acargo de persona con discapacidad': data.cargoPersonaDiscapacidad == 2 ? 'sin persona acargo': 'N/A' }}</td>
+                                                <td>{{ data.cargoPersonaDiscapacidad == 1 ? 'Acargo de persona con
+                                                    discapacidad': data.cargoPersonaDiscapacidad == 2 ? 'sin persona
+                                                    acargo': 'N/A' }}</td>
                                                 <td>
                                                     <button pButton pRipple icon="pi pi-pencil"
                                                         class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2"
@@ -394,7 +410,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'enfermedad_catastrofica')" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'enfermedad_catastrofica')"
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -403,11 +419,13 @@
                                 </p-tabPanel>
 
                                 <p-tabPanel header="Familiares" formGroupName="familiaresForm">
-                                    <p-table [value]="tableForm.familiar_Labora_otra_Entidad_Publica" styleClass="p-datatable-gridlines"
-                                        [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+                                    <p-table [value]="tableForm.familiar_Labora_otra_Entidad_Publica"
+                                        styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }"
+                                        [ngStyle]="{ 'zoom': '0.70' }">
                                         <ng-template pTemplate="caption">
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-primary" (click)="showDialog('familiar')">Agregar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="showDialog('familiar')">Agregar</button>
                                             </div>
                                         </ng-template>
                                         <ng-template pTemplate="header">
@@ -427,7 +445,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'familiar_Labora_otra_Entidad_Publica')" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'familiar_Labora_otra_Entidad_Publica')"
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -440,7 +458,8 @@
                                         [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
                                         <ng-template pTemplate="caption">
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-primary" (click)="showDialog('estudiosCurso')">Agregar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="showDialog('estudiosCurso')">Agregar</button>
                                             </div>
                                         </ng-template>
                                         <ng-template pTemplate="header">
@@ -463,7 +482,7 @@
                                                         tooltipPosition="left"></button>
                                                     <button pButton pRipple icon="pi pi-trash"
                                                         class="p-button-rounded p-button-danger p-button-text p-button-sm"
-                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'estudios_en_curso')" 
+                                                        (click)="deleteRegisterDiscapacidad(rowIndex,'estudios_en_curso')"
                                                         tooltipPosition="left"></button>
                                                 </td>
                                             </tr>
@@ -471,7 +490,7 @@
                                     </p-table>
                                 </p-tabPanel>
 
-                                
+
 
                             </p-tabView>
                         </div>
@@ -508,221 +527,206 @@
 </app-spinner>
 
 <p-dialog header="Discapacidad" [(visible)]="visible.discapacidad" [style]="{width: '50vw'}">
-    <form [formGroup]="form" class="custom-form"  >
+    <form [formGroup]="form" class="custom-form">
         <div class="p-fluid p-formgrid grid custom-form-grid">
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                 <div formGroupName="discapacidadForm" style="width: 100%;">
                     <span class="p-float-label mb-4 mt-4">
-                        <input pInputText id="ftxt-tipoDiscapacidad" type="text"
-                        formControlName="tipoDiscapacidad" required>
+                        <input pInputText id="ftxt-tipoDiscapacidad" type="text" formControlName="tipoDiscapacidad"
+                            required>
                         <label for="ftxt-tipoDiscapacidad">* Tipo de Discapacidad</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <p-inputNumber formControlName="porcentaje" id="ftxt-porcentaje" [min]="0" [max]="100" ftxt-porcentaje suffix="%"> </p-inputNumber>
+                        <p-inputNumber formControlName="porcentaje" id="ftxt-porcentaje" [min]="0" [max]="100"
+                            ftxt-porcentaje suffix="%"> </p-inputNumber>
                         <label for="ftxt-porcentaje">* Porcentaje</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-numeroCarnet" type="text"
-                        formControlName="numeroCarnet" required>
+                        <input pInputText id="ftxt-numeroCarnet" type="text" formControlName="numeroCarnet" required>
                         <label for="ftxt-numeroCarnet">* Numero de Carnet</label>
                     </span>
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
 
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
-                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveTableForm('discapacidad','discapacidadForm')"
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                    type="submit" (click)="saveTableForm('discapacidad','discapacidadForm')"
                     tooltipPosition="right"></button>
 
-                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()"
-                    tooltipPosition="right"></button>
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button" icon="pi pi-times"
+                    (click)="cancel()" tooltipPosition="right"></button>
             </div>
         </div>
     </form>
 </p-dialog>
 
 <p-dialog header="Enfermedad Catastrofica" [(visible)]="visible.enfermedadCatastrofica" [style]="{width: '50vw'}">
-    <form [formGroup]="form" class="custom-form"  >
+    <form [formGroup]="form" class="custom-form">
         <div class="p-fluid p-formgrid grid custom-form-grid">
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                 <div formGroupName="enfermedadCatastroficaForm" style="width: 100%;">
                     <span class="p-float-label mb-4">
-                        <p-dropdown formControlName="cargoPersonaDiscapacidad"
-                            placeholder="* cargoPersonaDiscapacidad"
+                        <p-dropdown formControlName="cargoPersonaDiscapacidad" placeholder="* cargoPersonaDiscapacidad"
                             [options]="formSelectData.cargoPersonaDiscapacidadOption" optionLabel="label"
                             optionValue="value">
                         </p-dropdown>
                         <label for="ftxt-entidadPublica">* Acargo de Persona con Discapacidad</label>
                     </span>
                     <span class="p-float-label mb-4 mt-4">
-                        <input pInputText id="ftxt-tipoEnfermedad" type="text"
-                        formControlName="tipoEnfermedad" required>
+                        <input pInputText id="ftxt-tipoEnfermedad" type="text" formControlName="tipoEnfermedad"
+                            required>
                         <label for="ftxt-tipoEnfermedad">* Tipo de Enfermedad</label>
                     </span>
                     <span class="p-float-label mb-4">
                         <input pInputText id="ftxt-institucionCertificaEnfermedad" type="text"
-                        formControlName="institucionCertificaEnfermedad" required>
-                        <label for="ftxt-institucionCertificaEnfermedad">* Institucion que Certifica la Enfermedad</label>
+                            formControlName="institucionCertificaEnfermedad" required>
+                        <label for="ftxt-institucionCertificaEnfermedad">* Institucion que Certifica la
+                            Enfermedad</label>
                     </span>
-                    
+
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
 
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
-                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveTableForm('enfermedad_catastrofica','enfermedadCatastroficaForm')"
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                    type="submit" (click)="saveTableForm('enfermedad_catastrofica','enfermedadCatastroficaForm')"
                     tooltipPosition="right"></button>
 
-                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()"
-                    tooltipPosition="right"></button>
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button" icon="pi pi-times"
+                    (click)="cancel()" tooltipPosition="right"></button>
             </div>
         </div>
     </form>
 </p-dialog>
 
 <p-dialog header="Familiar que Labora en Otra Entidad Publica" [(visible)]="visible.familiar" [style]="{width: '50vw'}">
-    <form [formGroup]="form" class="custom-form"  >
+    <form [formGroup]="form" class="custom-form">
         <div class="p-fluid p-formgrid grid custom-form-grid">
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                 <div formGroupName="familiaresForm" style="width: 100%;">
                     <span class="p-float-label mb-4 mt-4">
-                        <input pInputText id="ftxt-nombre" type="text"
-                        formControlName="nombre" required>
+                        <input pInputText id="ftxt-nombre" type="text" formControlName="nombre" required>
                         <label for="ftxt-nombre">* Nombre</label>
                     </span>
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
 
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
-                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveTableForm('familiar_Labora_otra_Entidad_Publica','familiaresForm')"
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                    type="submit" (click)="saveTableForm('familiar_Labora_otra_Entidad_Publica','familiaresForm')"
                     tooltipPosition="right"></button>
 
-                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()"
-                    tooltipPosition="right"></button>
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button" icon="pi pi-times"
+                    (click)="cancel()" tooltipPosition="right"></button>
             </div>
         </div>
     </form>
 </p-dialog>
 
 <p-dialog header="Estudios en Curso" [(visible)]="visible.estudiosCurso" [style]="{width: '50vw'}">
-    <form [formGroup]="form" class="custom-form"  >
+    <form [formGroup]="form" class="custom-form">
         <div class="p-fluid p-formgrid grid custom-form-grid">
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                 <div formGroupName="estudiosenCursosForm" style="width: 100%;">
                     <span class="p-float-label mb-4 mt-4">
-                        <input pInputText id="ftxt-nombre" type="text"
-                        formControlName="nombre" required>
+                        <input pInputText id="ftxt-nombre" type="text" formControlName="nombre" required>
                         <label for="ftxt-nombre">* Nombre</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-tipoDeTitulo" type="text"
-                        formControlName="tipoDeTitulo" required>
+                        <input pInputText id="ftxt-tipoDeTitulo" type="text" formControlName="tipoDeTitulo" required>
                         <label for="ftxt-tipoDeTitulo">* Tipo De Titulo</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-fechaDeInicio" type="date"
-                            formControlName="fechaDeInicio" required>
+                        <input pInputText id="ftxt-fechaDeInicio" type="date" formControlName="fechaDeInicio" required>
                         <label for="ftxt-fechaDeInicio">* Fecha De Inicio</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-fechaDeFin" type="date"
-                            formControlName="fechaDeFin" required>
+                        <input pInputText id="ftxt-fechaDeFin" type="date" formControlName="fechaDeFin" required>
                         <label for="ftxt-fechaDeFin">* Fecha De Fin</label>
                     </span>
-                    
-                    
+
+
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-numeroDeHoras" type="number"
-                        formControlName="numeroDeHoras" required>
+                        <input pInputText id="ftxt-numeroDeHoras" type="number" formControlName="numeroDeHoras"
+                            required>
                         <label for="ftxt-numeroDeHoras">* Numero De Horas</label>
                     </span>
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
 
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
-                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveTableForm('estudios_en_curso','estudiosenCursosForm')"
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                    type="submit" (click)="saveTableForm('estudios_en_curso','estudiosenCursosForm')"
                     tooltipPosition="right"></button>
 
-                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()"
-                    tooltipPosition="right"></button>
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button" icon="pi pi-times"
+                    (click)="cancel()" tooltipPosition="right"></button>
             </div>
         </div>
     </form>
 </p-dialog>
 
 <p-dialog header="Titulos" [(visible)]="visible.titulos" [style]="{width: '50vw'}">
-    <form [formGroup]="form" class="custom-form"  >
+    <form [formGroup]="form" class="custom-form">
         <div class="p-fluid p-formgrid grid custom-form-grid">
             <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
                 <div formGroupName="titulosForm" style="width: 100%;">
                     <span class="p-float-label mb-4 mt-4">
-                        <input pInputText id="ftxt-titulosOptenidos" type="text"
-                        formControlName="titulosOptenidos" required>
+                        <input pInputText id="ftxt-titulosOptenidos" type="text" formControlName="titulosOptenidos"
+                            required>
                         <label for="ftxt-titulosOptenidos">* Titulos Optenidos</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <p-dropdown formControlName="intruccionFormal"
-                            placeholder="* intruccionFormal"
-                            [options]="formSelectData.intruccionFormalOption" optionLabel="label"
-                            optionValue="value">
+                        <p-dropdown formControlName="intruccionFormal" placeholder="* intruccionFormal"
+                            [options]="formSelectData.intruccionFormalOption" optionLabel="label" optionValue="value">
                         </p-dropdown>
                         <label for="ftxt-entidadPublica">* Intruccion Formal</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-institucion" type="text"
-                        formControlName="institucion" required>
+                        <input pInputText id="ftxt-institucion" type="text" formControlName="institucion" required>
                         <label for="ftxt-institucion">* Institucion</label>
                     </span>
 
                     <span class="p-float-label mb-4">
                         <input pInputText id="ftxt-numeroDeRegistroSenesyt" type="text"
-                        formControlName="numeroDeRegistroSenesyt" required>
+                            formControlName="numeroDeRegistroSenesyt" required>
                         <label for="ftxt-numeroDeRegistroSenesyt">* Numero De Registro de Senesyt</label>
                     </span>
                     <span class="p-float-label mb-4">
-                        <input pInputText id="ftxt-anoDelTitulo" type="date"
-                            formControlName="anoDelTitulo" required>
+                        <input pInputText id="ftxt-anoDelTitulo" type="date" formControlName="anoDelTitulo" required>
                         <label for="ftxt-anoDelTitulo">* Año Del Titulo</label>
                     </span>
                 </div>
             </div>
         </div>
-        
+
         <div class="custom-toolbar d-flex justify-content-center">
             <div class="p-toolbar-group-center">
-                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button"
-                    icon="pi pi-send" type="submit" (click)="saveTableForm('titulos','titulosForm')"
-                    tooltipPosition="right"></button>
+                <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                    type="submit" (click)="saveTableForm('titulos','titulosForm')" tooltipPosition="right"></button>
 
-                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
-                    icon="pi pi-times" (click)="cancel()"
-                    tooltipPosition="right"></button>
+                <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button" icon="pi pi-times"
+                    (click)="cancel()" tooltipPosition="right"></button>
             </div>
         </div>
     </form>
