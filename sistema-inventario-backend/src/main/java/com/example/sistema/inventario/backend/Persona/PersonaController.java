@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("persona")
 @Tag(name = "Controlador Persona", description = "Tabla Persona")
-@CrossOrigin({"*"})
+@CrossOrigin({ "*" })
 public class PersonaController {
 
     @Autowired
@@ -45,8 +45,8 @@ public class PersonaController {
     @Operation(summary = "Agrega una persona, Requiere persona-agregar")
     @PreAuthorize("hasAuthority('persona-agregar')")
     @PostMapping("/")
-    public Persona save(@RequestParam("persona") String personaJson, 
-                        @RequestParam(value = "image", required = false) MultipartFile image) {
+    public Persona save(@RequestParam("persona") String personaJson,
+            @RequestParam(value = "image", required = false) MultipartFile image) {
         try {
             Persona persona = convertJsonToPersona(personaJson);
             return service.save(persona, image);
@@ -59,8 +59,8 @@ public class PersonaController {
     @Operation(summary = "Edita una persona, Requiere persona-editar")
     @PreAuthorize("hasAuthority('persona-editar')")
     @PutMapping("/")
-    public Persona update(@RequestParam("persona") String personaJson, 
-                          @RequestParam(value = "image", required = false) MultipartFile image) {
+    public Persona update(@RequestParam("persona") String personaJson,
+            @RequestParam(value = "image", required = false) MultipartFile image) {
         try {
             Persona persona = convertJsonToPersona(personaJson);
             return service.save(persona, image);
@@ -81,4 +81,6 @@ public class PersonaController {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(personaJson, Persona.class);
     }
+
+ 
 }
