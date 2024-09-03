@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../service/crud.service';
 import { MessageService } from 'primeng/api';
@@ -11,7 +11,7 @@ import { obtenerFecha } from 'src/app/core/functions/obtenerFecha';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./../../../../../core/styles/crudGlobal.css']
+  styleUrls: ['./../../../../../core/styles/crudGlobal.css', './previa.css']
 })
 export class FormComponent implements OnInit {
   FechaOptener = (fecha: any) => obtenerFecha(fecha)
@@ -238,10 +238,12 @@ export class FormComponent implements OnInit {
     });
   }
 
+  @ViewChild('previa') previewImage!: ElementRef<HTMLImageElement>;
   setSeleccionado(registro: Persona) {
-    console.log('registro', registro)
+    console.log('registro', registro.imagen)
     this.selected = registro;
     this.openModal();
+
     this.tableForm.discapacidad = Array.isArray(registro.discapacidad) ? [...registro.discapacidad] : [];
     this.tableForm.enfermedad_catastrofica = Array.isArray(registro.enfermedadCatastrofica) ? [...registro.enfermedadCatastrofica] : [];
     this.tableForm.familiar_Labora_otra_Entidad_Publica = Array.isArray(registro.familiarLaboraotraEntidadPublica) ? [...registro.familiarLaboraotraEntidadPublica] : [];
@@ -295,6 +297,14 @@ export class FormComponent implements OnInit {
       },//registro.fechaIngresoInstituto,
       userForm: registro.user
     });
+
+    const img = this.previewImage.nativeElement;
+    console.log(img)
+    if (img) {
+      img.src = String(registro.imagen);
+      console.log(img.src)
+      img.style.display = 'block';
+    }
   }
 
 
@@ -483,7 +493,7 @@ export class FormComponent implements OnInit {
     if (this.selected === null) {
       this.form.reset();
       this.resetFileInput();
-  }
+    }
   }
 
   loadDropdownData() {
@@ -678,16 +688,30 @@ export class FormComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedImage = input.files[0];
-      // Aquí puedes hacer algo más si es necesario, como mostrar una vista previa de la imagen
+      if (this.selectedImage && this.selectedImage.type.startsWith('image/')) {
+        const objectURL = URL.createObjectURL(this.selectedImage);
+        const img = document.getElementById('previa') as HTMLInputElement;
+        if (img) {
+          img.src = objectURL;
+          img.style.display = 'block';
+          img.onload = function () {
+            URL.revokeObjectURL(objectURL);
+          };
+        }
+
+      } else {
+        alert('Por favor, selecciona una imagen.');
+      }
     }
+
   }
 
   resetFileInput() {
     const fileInput = document.getElementById('image-upload') as HTMLInputElement;
     if (fileInput) {
-        fileInput.value = '';
+      fileInput.value = '';
     }
-}
+  }
 
-  
+
 }
