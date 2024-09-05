@@ -20,7 +20,9 @@ import { Infraestructura } from '../../model/infraestructura';
 export class TableComponent {
   FechaOptener = (fecha: any) => obtenerFecha(fecha)
   modalEye: boolean = false;
+  modal: boolean = false;
   selectedData!: Persona | any;
+  selected!: Persona | any;
   AulaDelete!: Infraestructura;
   @Input() list: Persona[] = [];
   @Output() selectedOneRegister = new EventEmitter<Persona>();
@@ -30,6 +32,7 @@ export class TableComponent {
   mensagge: any;
 
   activeIndex: number = 0;
+  activedIndex: number = 0;
 
   constructor(private crudService: CrudService, private apiService: ApiService, private messageService: MessageService) { }
 
@@ -149,4 +152,14 @@ export class TableComponent {
     this.selectedData = null;
     this.activeIndex = 0
   }
+
+  abrirModal(data: Persona){
+    this.selected = data;
+    this.modal = true;
+  }
+
+  cerrarModal(){
+    this.modal = false;
+  }
+
 }

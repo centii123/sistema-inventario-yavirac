@@ -74,7 +74,7 @@ public class PersonaService {
             Files.write(imagePath, imageFile.getBytes());
 
             // Asignar la URL de la imagen a la entidad
-            String imageUrl = "http://localhost:8080/images/" + fileName; // Ruta accesible públicamente
+            String imageUrl = "http://localhost:8080/images/" + fileName;
             entity.setImagen(imageUrl);
         }
         return repository.save(entity);
