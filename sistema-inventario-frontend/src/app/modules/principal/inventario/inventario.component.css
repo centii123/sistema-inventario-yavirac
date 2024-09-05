@@ -1,15 +1,16 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 40px; /* Aumenta el espacio entre las tarjetas */
-  padding: 40px; /* Aumenta el espacio alrededor del contenedor */
+  justify-content: space-between;
+  flex-wrap: nowrap; /* Evita que las tarjetas se envuelvan en varias líneas */
+  gap: 20px; /* Ajusta el espacio entre las tarjetas */
+  padding: 20px; /* Espacio alrededor del contenedor */
 }
 
 app-card {
   width: 250px;
-  margin: 25px; /* Aumenta el margen a cada tarjeta */
+  flex-shrink: 0; /* Evita que las tarjetas se reduzcan de tamaño */
+  margin: 0; /* Elimina márgenes para asegurar que caben en una sola fila */
 }
 
 .container-page {
@@ -77,4 +78,11 @@ app-card {
   height: auto;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 1200px) {
+  .container {
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en pantallas más pequeñas */
+  }
 }
