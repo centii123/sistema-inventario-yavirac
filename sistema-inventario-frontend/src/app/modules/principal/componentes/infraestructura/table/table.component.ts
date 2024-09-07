@@ -148,6 +148,7 @@ export class TableComponent implements OnInit {
 
   openModal(data: Infraestructura) {
     this.selectedData = data;
+    console.log("los datos seleccionados son: "+ this.selectedData.categoriaAula)
     this.modalEye = true;
   }
 

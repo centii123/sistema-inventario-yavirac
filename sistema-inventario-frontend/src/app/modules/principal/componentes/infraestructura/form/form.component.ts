@@ -32,7 +32,8 @@ export class FormComponent implements OnInit {
   CategoriaOptions: any[] = [
     { label: 'Aula', value: 1 },
     { label: 'Laboratotio', value: 2 },
-    { label: 'Oficina', value: 3 }
+    { label: 'Oficina', value: 3 },
+    { label: 'Talleres', value: 4 }
   ];
 
   categoriaUrl?:number | null;

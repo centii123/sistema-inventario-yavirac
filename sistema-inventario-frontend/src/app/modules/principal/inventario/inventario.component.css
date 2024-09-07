@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap; /* Evita que las tarjetas se envuelvan en varias líneas */
-  gap: 20px; /* Ajusta el espacio entre las tarjetas */
+  gap: 10px; /* Ajusta el espacio entre las tarjetas */
   padding: 20px; /* Espacio alrededor del contenedor */
 }
 
