@@ -135,7 +135,8 @@
       <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
         <div class="me-auto overflow-hidden text-wrap">
           <div class="fw-bold">Infraestructura:</div>
-          <p>{{ selectedData?.infraestructura?.nombre ? selectedData.infraestructura.nombre : 'Sin Infraestructura asignada' }}</p>
+          <p>{{ selectedData?.infraestructura?.nombre ? selectedData.infraestructura.nombre : 'Sin Infraestructura
+            asignada' }}</p>
         </div>
       </li>
     </ul>
@@ -144,7 +145,8 @@
       <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
         <div class="me-auto overflow-hidden text-wrap">
           <div class="fw-bold">Custodio:</div>
-          <p *ngIf="selectedData?.infraestructura?.persona?.nombres && selectedData?.infraestructura?.persona?.apellidos; else noCustodio">
+          <p
+            *ngIf="selectedData?.infraestructura?.persona?.nombres && selectedData?.infraestructura?.persona?.apellidos; else noCustodio">
             {{ selectedData.infraestructura.persona.nombres + ' ' + selectedData.infraestructura.persona.apellidos }}
           </p>
           <ng-template #noCustodio>sin custodio</ng-template>

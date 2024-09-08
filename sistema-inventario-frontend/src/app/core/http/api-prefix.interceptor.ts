@@ -115,6 +115,4 @@ export class ApiService {
       reader.readAsArrayBuffer(file); // Iniciar la lectura del archivo
     });
   }
-
-
 }

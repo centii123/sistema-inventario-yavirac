@@ -19,8 +19,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     DropdownModule,
     InputNumberModule
   ],
-  providers:[
-    CrudService,{provide:'url', useValue:'bienes/'}
+  providers: [
+    CrudService, { provide: 'url', useValue: 'bienes/' }
   ]
 })
 export class BienesModule { }

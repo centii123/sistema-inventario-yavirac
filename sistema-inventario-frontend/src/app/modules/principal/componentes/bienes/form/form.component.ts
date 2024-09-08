@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
     categoria: [],
     infraestructura: []
   };
-  infraestructuraId?:any;
+  infraestructuraId?: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -96,9 +96,9 @@ export class FormComponent implements OnInit {
     });
   }
 
-  load(id=null) {
+  load(id = null) {
     this.loadingSpiner = true;
-    if(id == null){
+    if (id == null) {
       this.crudService.getAll().subscribe({
         next: (data: Bienes[]) => {
           this.list = data;
@@ -109,13 +109,13 @@ export class FormComponent implements OnInit {
           this.loadingSpiner = false;
         }
       });
-    }else{
+    } else {
       this.bienesService.getBienesByInfraestructuraId(id).subscribe(
         (data) => {
           this.list = data;
           this.list.sort((a, b) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime());
           if (data.length > 0 && data[0].infraestructura) {
-            let persona= data[0].infraestructura.persona?.nombres ? data[0].infraestructura.persona.nombres : "sin custodio"
+            let persona = data[0].infraestructura.persona?.nombres ? data[0].infraestructura.persona.nombres : "sin custodio"
             this.infraestructuraName = this.sanitizer.bypassSecurityTrustHtml(
               'Bienes de la Infraestructura: ' + data[0].infraestructura.nombre +
               '<div style="text-align: left;">Custodio: ' + persona + '</div>'
@@ -130,10 +130,10 @@ export class FormComponent implements OnInit {
           console.error('Error al obtener bienes:', error);
           this.loadingSpiner = false;
         }
-      ) 
+      )
     }
-    
-    
+
+
   }
 
   setSeleccionado(registro: Bienes) {

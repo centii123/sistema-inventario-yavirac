@@ -57,30 +57,34 @@ p {
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
+
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes float {
-  0%, 100% {
-      transform: translatey(0px);
+
+  0%,
+  100% {
+    transform: translatey(0px);
   }
+
   50% {
-      transform: translatey(-20px);
+    transform: translatey(-20px);
   }
 }
 
 @media (max-width: 600px) {
   h1 {
-      font-size: 4rem;
+    font-size: 4rem;
   }
 
   p {
-      font-size: 1.2rem;
+    font-size: 1.2rem;
   }
 }
