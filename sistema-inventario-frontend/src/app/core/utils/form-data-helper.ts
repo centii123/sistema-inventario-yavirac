@@ -32,7 +32,7 @@ export function createFormData(persona: Persona): FormData {
   formData.append('provincia', JSON.stringify(persona.provincia));
   formData.append('rolesInstitucionales', JSON.stringify(persona.rolesInstitucionales));
 
-  // One-to-One -
+  // One-to-One
   formData.append('discapacidad', JSON.stringify(persona.discapacidad));
   formData.append('enfermedadCatastrofica', JSON.stringify(persona.enfermedadCatastrofica));
   formData.append('entidadPublica', JSON.stringify(persona.entidadPublica));
