@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+
+<div class="nacionalidad-container">
+    <div class="custom-card-header">
+        <h4>Nacionalidades</h4>
+    </div>
+    <!-- <p-confirmDialog class="custom-confirm-dialog"></p-confirmDialog> -->
+
+    <p-dialog class="custom-dialog bg-blue-900" header="Nacionalidad" [(visible)]="modal" [modal]="true"
+        (onHide)="closeModal()" [draggable]="true" [resizable]="true">
+
+        <br>
+        <form [formGroup]="formNacionalidad" class="custom-form">
+            <div class="p-fluid p-formgrid grid custom-form-grid">
+                <div class="p-field col-12 md:col-4 md:mb-4 mb-0 px-3">
+                    <span class="p-float-label">
+                        <input pInputText id="ftxt-nombre" type="text" formControlName="nombre" required>
+                        <label for="ftxt-nombre">* Nombre</label>
+                    </span>
+                </div>
+            </div><br>
+            <div class="central custom-toolbar">
+                <div class="p-toolbar-group-center">
+                    <button pButton label="Guardar" class="p-button m-1 p-button-info guardar-button" icon="pi pi-send"
+                        type="submit" (click)="saveNacionalidad()" pTooltip="Guardar" tooltipPosition="right"></button>
+
+                    <button pButton label="Cancelar" class="p-button m-1 p-button-danger cancelar-button"
+                        icon="pi pi-times" (click)="cancel()" pTooltip="Cancelar" tooltipPosition="right"></button>
+                </div>
+            </div>
+        </form>
+
+    </p-dialog>
+
+    <p-card class="custom-card">
+        <div class="caja-boton-principal custom-button-box">
+            <button pButton label="Agregar" class="agregar" icon="pi pi-plus" (click)="openModal()"
+                tooltipPosition="right"></button>
+        </div>
+
+        <p-divider class="custom-divider"></p-divider>
+
+        <app-table [nacionalidades]="listNacionalidad" (selectedNacionalidad)="setSeleccionado($event)">
+        </app-table>
+    </p-card>
+</div>
+<br>

@@ -1,0 +1,107 @@
+.container-nav {
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0B3C61;
+  padding: 10px 20px;
+  color: white;
+}
+.nav-links li a {
+  cursor: pointer; /* Hace que el cursor sea una mano cuando pasa sobre cualquier enlace */
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin: 0 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a i {
+  margin-right: 8px;
+}
+
+.nav-links a:hover,
+.dropdown-menu li a:hover,
+#sidebar-menu a:hover {
+  color: #FFD700; /* Cambia a un color dorado */
+  background-color: #1E4A72; /* Color de fondo azul más oscuro */  
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.logout a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.logout a i {
+  margin-right: 8px;
+}
+
+.logout a:hover {
+  color: #FFD700; /* Cambia a un color dorado */
+  background-color: #1E4A72; /* Color de fondo azul más oscuro */  
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.pointer-botton {
+  cursor: pointer;
+}
+
+.menu-icon {
+  display: flex;
+}
+
+.icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #0B3C61;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+}
+
+.dropdown-menu li a {
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="contenedor-imagen-logo-yavirac d-block">
+  <div class="container-page mb-4">
+    <div class="custom-card-header">
+      <h4 class="m-1">Tu Inventario</h4>
+      <div class="line"></div>
+      <p class="mt-1">Bienvenidos al sistema de gestión de inventario</p>
+    </div>
+    <main>
+      <div class="container">
+        <app-card
+          ruta="/infraestructura?categoria=1"
+          rutaImg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv14G6m-HQpfeXWCXhZwLwpNyUbs3MKWhrog&s"
+          titulo="AULAS"
+          descripcion="Información sobre las AULAS."
+        ></app-card>
+        <app-card
+          ruta="/infraestructura?categoria=2"
+          rutaImg="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPDksPQUH-ccYl9Eu4UMU3l0a4sc4vvEAqxnmU5JosFS3JHVTji-5Hv5UwZ2G6kIwrqn6FE8T92l5SBRdz2KGchpoL5-tWROFvZkQLhR3vHze4rtFo157T9ivX9qvo4JzcxrcqMC11Ogc/s1600/4.png"
+          titulo="LABORATORIOS"
+          descripcion="Información sobre los laboratorios."
+        ></app-card>
+        <app-card
+          ruta="/infraestructura?categoria=3"
+          rutaImg="https://yavirac.edu.ec/wp-content/uploads/2024/05/mision-yavirac.jpg"
+          titulo="OFICINAS"
+          descripcion="Información sobre las oficinas."
+        ></app-card>
+        <app-card
+          ruta="/infraestructura?categoria=4"
+          rutaImg="https://yavirac.edu.ec/wp-content/uploads/2024/05/modas-v2.jpg"
+          titulo="TALLERES"
+          descripcion="Información sobre los talleres."
+        ></app-card>
+      </div>
+    </main>
+  </div>
+</div>
+<app-footer></app-footer>

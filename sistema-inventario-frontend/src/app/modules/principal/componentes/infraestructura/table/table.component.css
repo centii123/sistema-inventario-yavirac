@@ -1,0 +1,33 @@
+.bold-text {
+    font-weight: bold;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ancho-list {
+    width: 250px;
+}
+
+.ancho-list-spanded {
+    width: 500px;
+}
+
+.text-wrap {
+    word-wrap: break-word;
+}
+
+  
+.icon-link i {
+    font-size: 1.2rem; /* Asegura que el tamaño del icono coincida con los botones */
+}
+
+.abienes{
+    position: absolute;
+    margin-top: 12px;
+    margin-left: -25px;
+}
+  

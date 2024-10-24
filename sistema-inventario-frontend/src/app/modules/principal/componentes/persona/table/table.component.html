@@ -1,0 +1,481 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <p-table #dt [value]="list" [rows]="5" [paginator]="true" [loading]="loading"
+        [globalFilterFields]="['dni','nombres', 'apellidos']" responsiveLayout="scroll"
+        [(selection)]="selectedAllRegister" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[5, 10, 15]">
+
+        <ng-template pTemplate="caption">
+          <div class="botones">
+            <div>
+              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-sm p-button-outlined p-button-success p-mr-2 m-1" pTooltip="Exportar a Excel"
+                tooltipPosition="bottom"></button>
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                class="p-button-sm p-button-outlined p-button-danger p-mr-2 m-1" pTooltip="Exportar a PDF"
+                tooltipPosition="bottom"></button>
+              <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger p-button-sm m-1"
+                (click)="deleteSelected()" pTooltip="Eliminar Seleccionados" tooltipPosition="right"
+                [disabled]="!selectedAllRegister || !selectedAllRegister.length"></button>
+              <button pButton label="Limpiar" class="p-button-outlined p-button-sm m-1" icon="pi pi-filter-slash"
+                (click)="clear(dt)" pTooltip="Quitar Filtros" tooltipPosition="right"></button>
+            </div>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" class="p-inputtext-sm" (input)="applyFilter($event, dt)"
+                placeholder="Busqueda General" />
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="imagen">
+              <div class="flex justify-content-between align-items-center">Foto
+              </div>
+            </th>
+            <th pSortableColumn="dni">
+              <div class="flex justify-content-between align-items-center">cedula / pasaporte
+                <p-sortIcon field="dni"></p-sortIcon>
+                <p-columnFilter type="text" field="dni" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="nombres">
+              <div class="flex justify-content-between align-items-center">Nombres
+                <p-sortIcon field="nombres"></p-sortIcon>
+                <p-columnFilter type="text" field="nombres" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="apellidos">
+              <div class="flex justify-content-between align-items-center">Apellidos
+                <p-sortIcon field="apellidos"></p-sortIcon>
+                <p-columnFilter type="text" field="apellidos" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th pSortableColumn="correoPersonal">
+              <div class="flex justify-content-between align-items-center">Correo
+              </div>
+            </th>
+            <th pSortableColumn="telefono">
+              <div class="flex justify-content-between align-items-center">Telefono
+              </div>
+            </th>
+            <th class="text-center" style="width: 176px;">Acciones</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="data"></p-tableCheckbox>
+            </td>
+            <td><img [src]="data.imagen ? data.imagen : '/assets/img/usuario.png'" alt="Imagen Docente" class="img"
+                (click)="abrirModal(data)" />
+            </td>
+            <td>{{data.dni}}</td>
+            <td>
+              {{data.nombres}}
+            </td>
+            <td>{{data.apellidos}}</td>
+            <td>
+              {{data.correoPersonal}}
+            </td>
+            <td>
+              {{data.telefono}}
+            </td>
+            <td>
+              <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-info p-button-text p-button-sm"
+                (click)="openModal(data)" pTooltip="Ver más Información" tooltipPosition="left"></button>
+              <button pButton pRipple icon="pi pi-pencil"
+                class="p-button-rounded p-button-warning p-button-text p-button-sm p-mr-2" (click)="edit(data)"
+                pTooltip="Editar" tooltipPosition="left"></button>
+              <button pButton pRipple icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text p-button-sm" (click)="deleteRegister(data)"
+                pTooltip="Eliminar" tooltipPosition="left"></button>
+
+            </td>
+          </tr>
+
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            Registros Totales: {{list ? list.length : 0}}.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</section>
+<p-dialog header="Mas Información" class="custom-dialog bg-blue-900" [(visible)]="modalEye" [modal]="true"
+  (onHide)="closeModal()" [draggable]="true" [resizable]="true" [style]="{ width: '60rem', minHeight: '90vh'}">
+  <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+    <p-tabView [(activeIndex)]="activeIndex" [scrollable]="true">
+      <p-tabPanel header="Docente">
+        <div class="d-flex contenedor">
+
+          <div class="d-flex flex-column align-items-start">
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item d-flex justify-content-center align-items-center ancho-list">
+                <div class="text-wrap">
+                  <div class="fw-bold foto">Foto de Perfil:</div>
+                  <div class="d-flex justify-content-center">
+                    <img [src]="selectedData.imagen ? selectedData.imagen : '/assets/img/usuario.png'"
+                      alt="Imagen Docente" class="img-fluid" />
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="d-flex flex-column align-items-start">
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                <div class="me-auto overflow-hidden text-wrap">
+                  <div class="fw-bold">Etnia:</div>
+                  <p>{{selectedData.etnia}}</p>
+                </div>
+              </li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                <div class="me-auto overflow-hidden text-wrap">
+                  <div class="fw-bold">Fecha de Nacimiento:</div>
+                  <p>{{FechaOptener(selectedData.fechaDeNacimiento)}}</p>
+                </div>
+              </li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+                <div class="me-auto overflow-hidden text-wrap">
+                  <div class="fw-bold">Teléfono Domicilio:</div>
+                  <p>{{selectedData.telefonoDomicilio}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Materias que Imparte:</div>
+                <p>{{selectedData.materiasImparte}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Tipo de Sangre:</div>
+                <p>{{selectedData.tipoDeSangre | tipoSangre}}</p>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Direccion Domiciliaria:</div>
+                <p>{{selectedData.direccionDomiciliaria}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Modalidad Jornada:</div>
+                <p>
+                  {{ selectedData.modalidadJornada === 0 ? 'Medio Tiempo' : selectedData.modalidadJornada === 1 ?
+                  'Tiempo Completo' : 'Jornada no encontrada' }}
+                </p>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Modalidad Laboral:</div>
+                <p>{{selectedData.modalidadLaboral}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Horario de Trabajo:</div>
+                <p>{{selectedData.horarioTrabajo}}</p>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Escala Ocupacional:</div>
+                <p>{{selectedData.escalaOcupacionales.grupoOcupacional}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Estado Civil:</div>
+                <p>{{ selectedData.estadoCivil | estadoCivil }}</p>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Genero:</div>
+                <p>{{selectedData.genero | genero}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Instituto:</div>
+                <p>{{selectedData.institutos.nombre}}</p>
+              </div>
+            </li>
+          </ul>
+
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Nacionalidad:</div>
+                <p>{{selectedData.nacionalidad.nombre}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Carrera:</div>
+                <p>{{selectedData.carreras.descripcion}}</p>
+              </div>
+            </li>
+          </ul>
+
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Provincia:</div>
+                <p>{{selectedData.provincia | provincias}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Roles Institucionales:</div>
+                <p>{{selectedData.rolesInstitucionales.descripcion}}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </p-tabPanel>
+      <p-tabPanel header="Fecha Ingreso">
+        <div class="d-flex flex-column align-items-center">
+
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Primer Ingreso:</div>
+                <p>{{FechaOptener(selectedData.fechaIngresoInstituto?.primerIngreso)}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Cambio Grupo Ocupacional Modalidad:</div>
+                <p>{{FechaOptener(selectedData.fechaIngresoInstituto?.cambioGrupoOcupacionalModalidad)}}</p>
+              </div>
+            </li>
+          </ul>
+
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Cambio Instituto Fusion:</div>
+                <p>{{FechaOptener(selectedData.fechaIngresoInstituto?.cambioInstitutoFusion)}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Cambio Ocupacional Emergencia:</div>
+                <p>{{FechaOptener(selectedData.fechaIngresoInstituto?.cambioOcupacionalEmergencia)}}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Entidad Publica">
+        <div class="d-flex flex-column align-items-center">
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Labora en Otra Entidad Publica:</div>
+                <p>{{selectedData.entidadPublica?.laboraOtraEntidadPublica | affirmative }}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Recibe Otro Honorario de Senecsyt:</div>
+                <p>{{selectedData.entidadPublica?.recibeOtroHonorarioSenecsyt | affirmative}}</p>
+              </div>
+            </li>
+          </ul>
+
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">codigo de Instituto en el que Labore:</div>
+                <p>{{selectedData.entidadPublica?.codigoInstitutoLabore}}</p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Tiene Familiar que Labore en Senescyt Institutos:</div>
+                <p>{{selectedData.entidadPublica?.tienefamiliaresLaboraSenecsyt | affirmative}}</p>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between align-items-start ancho-list-spanded">
+              <div class=" me-auto overflow-hidden text-wrap">
+                <div class="fw-bold">Observaciones:</div>
+                <p>{{selectedData.entidadPublica?.observaciones}}</p>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </p-tabPanel>
+
+
+      <p-tabPanel header="Titulos">
+        <p-table [value]="selectedData.titulos" styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nombre del Titulos</th>
+              <th>Numero De Registro Senesyt</th>
+              <th>Año Del Titulo</th>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ data.titulosOptenidos }}</td>
+              <td>{{ data.numeroDeRegistroSenesyt }}</td>
+              <td>{{ this.FechaOptener(data.anoDelTitulo) }}</td>
+
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Discapacidad">
+        <p-table [value]="selectedData.discapacidad" styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Tipo Discapacidad</th>
+              <th>Porcentaje</th>
+              <th>Numero de Carnet</th>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ data.tipoDiscapacidad }}</td>
+              <td>{{ data.porcentaje }} %</td>
+              <td>{{ data.numeroCarnet }}</td>
+
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Enfermedad Catastrofica">
+        <p-table [value]="selectedData.enfermedadCatastrofica" styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Tipo de Enfermedad</th>
+              <th>Institucion que Certifica la Enfermedad</th>
+              <th>Acargo de Persona con Discapacidad</th>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ data.tipoEnfermedad }}</td>
+              <td>{{ data.institucionCertificaEnfermedad }}</td>
+              <td>{{ data.cargoPersonaDiscapacidad == 1 ? 'Acargo de persona con discapacidad':
+                data.cargoPersonaDiscapacidad == 2 ? 'sin persona acargo': 'N/A' }}</td>
+
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Familiares">
+        <p-table [value]="selectedData.familiarLaboraotraEntidadPublica" styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>nombre</th>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ data.nombre }}</td>
+
+
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Estudios en Curso">
+        <p-table [value]="selectedData.estudiosenCursos" styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'min-width': '50rem' }" [ngStyle]="{ 'zoom': '0.70' }">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo De Titulo</th>
+              <th>Numero De Horas</th>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ data.nombre }}</td>
+              <td>{{ data.tipoDeTitulo }} %</td>
+              <td>{{ data.numeroDeHoras }}</td>
+
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <!-- <p-tabPanel [disabled]="true" header="Header IV"> </p-tabPanel> -->
+    </p-tabView>
+
+  </ng-template>
+
+</p-dialog>
+
+<!-- Dialog para mostrar imagen completa -->
+<p-dialog header="Ver Foto de Perfil" class="custom-dialog " [(visible)]="modal" [modal]="true" (onHide)="cerrarModal()"
+  [draggable]="true" [resizable]="true" [style]="{ width: '34rem', minHeight: '90vh'}">
+  <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+
+    <img [src]="selected.imagen ? selected.imagen : '/assets/img/usuario.png'" class="imagen-full" />
+
+  </ng-template>
+</p-dialog>
+
+
+<app-global-confirm-dialog></app-global-confirm-dialog>
