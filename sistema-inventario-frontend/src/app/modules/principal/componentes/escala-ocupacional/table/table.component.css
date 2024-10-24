@@ -1,9 +1,0 @@
-.bold-text {
-    font-weight: bold;
-}
-
-.botones {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
