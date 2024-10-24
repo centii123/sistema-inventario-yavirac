@@ -1,0 +1,40 @@
+services:
+  db:
+    image:  postgres
+    environment:
+      - POSTGRES_DB=Inventario
+      - POSTGRES_USER=yavirac
+      - POSTGRES_PASSWORD=yaviracAplication
+    ports:
+      - '5433:5432'
+    volumes:
+      - my-db:/var/lib/postgresql/data
+    networks:
+      - desarrollo
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U yavirac -d Inventario'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  app:
+    image: proyecto:1
+    build:
+      context: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/Inventario
+      DB_USER_NAME: yavirac
+      DB_PASSWORD: yaviracAplication
+    ports:
+      - '8080:8080'
+    networks:
+      - desarrollo
+
+volumes:
+  my-db:
+
+networks:
+  desarrollo:
+    driver: bridge
