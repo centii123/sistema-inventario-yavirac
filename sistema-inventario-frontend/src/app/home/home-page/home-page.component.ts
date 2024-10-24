@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
-  templateUrl:'./home-page.component.html',
+  templateUrl: './home-page.component.html',
   styleUrls: ['./../styles/global-page.css']
 })
 export class HomePageComponent {
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
   header = false;
 
   dropdownHandler() {
@@ -46,7 +46,7 @@ export class HomePageComponent {
     }
   }
 
-  async cerrarSesion(){
+  async cerrarSesion() {
     sessionStorage.removeItem('token')
 
     await this.router.navigate(['/']);

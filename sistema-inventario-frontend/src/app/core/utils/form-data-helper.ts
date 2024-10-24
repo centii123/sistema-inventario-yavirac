@@ -1,4 +1,4 @@
- // Ajusta la ruta según tu estructura de proyecto
+// Ajusta la ruta según tu estructura de proyecto
 
 import { Persona } from "src/app/modules/principal/componentes/model/persona";
 

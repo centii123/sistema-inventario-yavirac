@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/core/http/api-prefix.interceptor';
 import { Subscription } from 'rxjs';
 import { Table } from 'primeng/table';
 import { CrudService } from '../../service/crud.service';
-import { BienesService } from '../../service/bienes.service';  
+import { BienesService } from '../../service/bienes.service';
 import { Bienes } from '../../model/bienes';
 import { GlobalConfirmDialogComponent } from 'src/app/shared/global-confirm-dialog/global-confirm-dialog.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, OnDestroy {  
+export class TableComponent implements OnInit, OnDestroy {
   modalEye: boolean = false;
   selectedData!: Bienes | any;
   @Input() list: Bienes[] = [];
@@ -27,17 +27,17 @@ export class TableComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private crudService: CrudService, 
-    private bienesService: BienesService,  
-    private apiService: ApiService, 
+    private crudService: CrudService,
+    private bienesService: BienesService,
+    private apiService: ApiService,
     private messageService: MessageService,
-    private route: ActivatedRoute 
-  ) {}
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.route.queryParams.subscribe(params => {
-        const infraestructuraId = params['infraestructura'];; 
+        const infraestructuraId = params['infraestructura'];;
         if (infraestructuraId) {
           this.getBienesByInfraestructuraId(infraestructuraId);
         }
@@ -51,7 +51,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   getBienesByInfraestructuraId(id: number): void {
     this.loading = true;
-    this.list = []; 
+    this.list = [];
     this.subscriptions.add(
       this.bienesService.getBienesByInfraestructuraId(id).subscribe(
         (data) => {
@@ -63,7 +63,7 @@ export class TableComponent implements OnInit, OnDestroy {
           console.error('Error al obtener bienes:', error);
           this.loading = false;
         }
-      )      
+      )
     );
   }
 
@@ -140,7 +140,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   cancel() {
     this.modalEye = false;
-    this.selectedData = null; 
+    this.selectedData = null;
   }
 
   openModal(data: Bienes) {
@@ -150,6 +150,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.modalEye = false;
-    this.selectedData = null; 
+    this.selectedData = null;
   }
 }

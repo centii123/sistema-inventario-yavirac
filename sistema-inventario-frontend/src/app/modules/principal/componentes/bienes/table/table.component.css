@@ -2,20 +2,20 @@
     font-weight: bold;
 }
 
-.botones{
-    display: flex; 
-    justify-content: space-between; 
+.botones {
+    display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.ancho-list{
+.ancho-list {
     width: 250px;
 }
 
-.ancho-list-spanded{
+.ancho-list-spanded {
     width: 500px;
 }
-.text-wrap{
+
+.text-wrap {
     word-wrap: break-word;
 }
-

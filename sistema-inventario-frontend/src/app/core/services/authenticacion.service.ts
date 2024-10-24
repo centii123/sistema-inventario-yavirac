@@ -11,7 +11,7 @@ export class AuthenticacionService {
 
     constructor(private apiService: ApiService) { }
 
-     authenticacion() {
+    authenticacion() {
         return this.apiService.get(this.Url)
     }
 
