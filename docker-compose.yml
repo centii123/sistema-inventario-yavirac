@@ -19,7 +19,7 @@ services:
   app:
     image: proyecto:1
     build:
-      context: .
+      context: ./sistema-inventario-backend
     depends_on:
       db:
         condition: service_healthy
@@ -29,6 +29,13 @@ services:
       DB_PASSWORD: yaviracAplication
     ports:
       - '8080:8080'
+    networks:
+      - desarrollo
+  frontend:
+    build:
+      context: ./sistema-inventario-frontend
+    ports:
+      - "80:80"
     networks:
       - desarrollo
 
